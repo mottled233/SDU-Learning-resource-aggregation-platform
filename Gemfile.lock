@@ -215,6 +215,7 @@ DEPENDENCIES
   jbuilder (= 2.4.1)
   jquery-rails (= 4.1.1)
   listen (= 3.0.8)
+  minitest (~> 5.10, != 5.10.2)
   minitest-reporters (= 1.1.9)
   pg (= 0.18.4)
   puma (= 3.4.0)

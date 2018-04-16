@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     # constants
     NAME_FORMAT = /\A[\w]+\z/
-    NICK_FORMAT = /\A[\S]+\Z/
+    NICK_FORMAT = /\A[\u4e00-\u9fa5a-zA-Z0-9]+\Z/
     EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     PHONE_NUMBER_FORMAT = /\A[0-9]{11}\z/
     
@@ -16,7 +16,7 @@ class User < ApplicationRecord
     
     validates :nickname, presence: {message: "昵称不能为空"},
                         length: {in: 1..20, message: "昵称长度必须为1-20字之间"},
-                        format: {with: NAME_FORMAT, message: "昵称含非法字符"},
+                        format: {with: NICK_FORMAT, message: "昵称含非法字符"},
                         uniqueness: {message: "昵称已被使用"}
                         
     validates :password, presence: {message: "密码不能为空"},
@@ -31,7 +31,7 @@ class User < ApplicationRecord
                         uniqueness: {case_sensitive: false ,message: "手机号已被使用"}
                         
     validates :user_role, presence: true,
-                        exclusion: { in: %w(student teacher admin)}
+                        exclusion: { in: [:student,:teacher,:admin], message: "无法识别的用户角色"}
                         
     # attributes
     has_secure_password
