@@ -40,9 +40,10 @@ GEM
       tzinfo (~> 1.1)
     ansi (1.5.0)
     arel (7.1.4)
-    autoprefixer-rails (8.2.0)
+    autoprefixer-rails (8.3.0)
       execjs
     bcrypt (3.1.11)
+    bcrypt (3.1.11-x86-mingw32)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -66,6 +67,7 @@ GEM
     faker (1.6.6)
       i18n (~> 0.5)
     ffi (1.9.23)
+    ffi (1.9.23-x86-mingw32)
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -114,10 +116,13 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    nokogiri (1.8.2-x86-mingw32)
+      mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (0.18.4)
+    pg (0.18.4-x86-mingw32)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -181,6 +186,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.12)
+    sqlite3 (1.3.12-x86-mingw32)
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -189,6 +195,8 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2018.4)
+      tzinfo (>= 1.0.0)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
     web-console (3.1.1)
@@ -202,6 +210,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   bcrypt (= 3.1.11)
@@ -226,6 +235,7 @@ DEPENDENCIES
   spring-watcher-listen (= 2.0.0)
   sqlite3 (= 1.3.12)
   turbolinks (= 5.0.1)
+  tzinfo-data
   uglifier (= 3.0.0)
   web-console (= 3.1.1)
   will_paginate (= 3.1.0)
