@@ -2,8 +2,10 @@
 
 student1:
   username: nick
-  nickname: 梁惠欣
+  nickname: 小明
   user_role: student
   email: 631061840@qq.com
   phone_number: 17864154861
+  password_digest: <%= User.digest('123456') %>
+  
 

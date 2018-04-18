@@ -1,0 +1,20 @@
+<% provide(:title, '登录') %>
+<h1>登录</h1>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(:session, url: login_path) do |f| %>
+            
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control'%>
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control'%>
+            <%= f.label :remember_me, class: "checkbox inline" do %>
+                <%= f.check_box :remember_me %>
+                <span>记住登录</span>
+            <% end %>
+            <%= f.submit "登录", class: "btn btn-primary" %>
+        <% end %>
+        
+        <p>新用户? <%= link_to "点击这里注册", "#"%></p>
+    </div>
+</div>

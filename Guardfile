@@ -4,7 +4,8 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
   watch('test/test_helper.rb') { 'test' }
   watch('config/routes.rb') { integration_tests }
   watch(%r{^app/models/(.*?)\.rb$}) do |matches|
-    "test/models/#{matches[1]}_test.rb"
+    ["test/models/#{matches[1]}_test.rb",
+    integration_tests()]
   end
   watch(%r{^app/controllers/(.*?)_controller\.rb$}) do |matches|
     resource_tests(matches[1])
@@ -13,8 +14,13 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
     ["test/controllers/#{matches[1]}_controller_test.rb"] +
     integration_tests(matches[1])
   end
+  watch(%r{^app/views/layouts/.*\.html\.erb$}) {integration_tests}
+  watch(%r{^app/views/shared/.*\.html\.erb$}) {integration_tests}
   watch(%r{^app/helpers/(.*?)_helper\.rb$}) do |matches|
     integration_tests(matches[1])
+  end
+  watch(%r{^test/fixtures/(.*?)\.yml$}) do |matches|
+    "test/models/#{matches[1][0..-2]}_test.rb"
   end
   watch('app/views/layouts/application.html.erb') do
     ['test/integration/site_layout_test.rb','test/controllers/static_pages_controller_test.rb']
@@ -29,15 +35,12 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
   watch('app/controllers/account_activations_controller.rb') do
     'test/integration/users_signup_test.rb'
   end
-  watch(%r{app/views/users/*}) do
-    resource_tests('users') +
-    ['test/integration/microposts_interface_test.rb']
-  end
+
 end
 # Returns the integration tests corresponding to the given resource.
 def integration_tests(resource = :all)
   if resource == :all
-    Dir["test/integration/*"]
+    [Dir["test/integration/*"],Dir["test/controllers/*"]]
   else
     Dir["test/integration/#{resource}_*.rb"]
   end
