@@ -13,16 +13,16 @@
             Account <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to "Profile", "#" %></li>
-            <li><%= link_to "Settings", "#" %></li>
+            <li><%= link_to "个人空间", "#" %></li>
+            <li><%= link_to "设置", "#" %></li>
             <li class="divider"></li>
             <li>
-            <%= link_to "Log out", "#"%>
+            <%= link_to "登出", logout_path%>
             </li>
           </ul>
           </li>
         <% else %>
-          <li><%= link_to "Log in", "#" %></li>
+          <li><%= link_to "登录", login_path %></li>
         <% end %>
       </ul>
     </nav>
