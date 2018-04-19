@@ -32,3 +32,7 @@ end
 group :production do
   gem 'pg', '0.18.4'
 end
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
