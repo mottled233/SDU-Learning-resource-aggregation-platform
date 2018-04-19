@@ -1,0 +1,52 @@
+<%= form_for(knowledge) do |f| %>
+  <% if knowledge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(knowledge.errors.count, "error") %> prohibited this knowledge from being saved:</h2>
+
+      <ul>
+      <% knowledge.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :course_id %>
+    <%= f.text_field :course_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type %>
+    <%= f.text_field :type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+  </div>
+
+  <div class="field">
+    <%= f.label :good %>
+    <%= f.number_field :good %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bad %>
+    <%= f.number_field :bad %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reply %>
+    <%= f.text_field :reply %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

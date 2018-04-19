@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418125412) do
+ActiveRecord::Schema.define(version: 20180419140725) do
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
     t.string   "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dept_courses", force: :cascade do |t|
+    t.integer  "dept_id"
+    t.string   "course_id"
+    t.string   "integer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,6 +32,26 @@ ActiveRecord::Schema.define(version: 20180418125412) do
     t.string   "Course_ID_belong"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "knowledges", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.string   "type"
+    t.string   "content"
+    t.integer  "good"
+    t.integer  "bad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_knowledges_on_course_id"
+    t.index ["user_id"], name: "index_knowledges_on_user_id"
+  end
+
+  create_table "teaching_relationships", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
