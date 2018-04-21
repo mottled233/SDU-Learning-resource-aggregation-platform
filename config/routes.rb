@@ -1,19 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :keywords
-  resources :departments
- resources :departments
-  get 'departments/new'
 
-  get 'departments/show'
-
-  get 'departments/create'
-
-  get 'departments/edit'
-
-  get 'departments/update'
-
-  get 'keywords/new'
 
   root 'static_pages#home'
   
@@ -45,5 +32,24 @@ Rails.application.routes.draw do
   
   get 'knowledges/question_new' =>'knowledges#question_new',:via=>[:get,:post]
 # end:scx's routes
+
+# start:wzy's routes
+  resources :keywords
+  resources :departments
+  get 'departments/new'
+
+  get 'departments/show'
+
+  get 'departments/create'
+
+  get 'departments/edit'
+
+  get 'departments/update'
+
+  get 'keywords/new'
+  
+  resources :admins
+  get 'admins/own_space'
+# end:wzy's routes
 
 end
