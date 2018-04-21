@@ -3,6 +3,9 @@ gem 'rails', '5.0.1'
 gem 'faker', '1.6.6'
 gem 'will_paginate', '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
+gem 'twitter-bootstrap-rails'
+gem 'therubyracer'
+gem 'less-rails'
 gem 'bcrypt', '3.1.11'
 gem 'bootstrap-sass', '3.3.6'
 gem 'puma', '3.4.0'
@@ -12,6 +15,8 @@ gem 'coffee-rails', '4.2.1'
 gem 'jquery-rails', '4.1.1'
 gem 'turbolinks', '5.0.1'
 gem 'jbuilder', '2.4.1'
+gem 'tzinfo-data', platforms: [:x64_mingw, :mingw, :mswin]
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 group :development, :test do
   gem 'sqlite3', '1.3.12'
   gem 'byebug', '9.0.0', platform: :mri
