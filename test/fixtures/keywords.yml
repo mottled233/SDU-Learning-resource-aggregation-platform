@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  Course_ID_belong: MyString
+  course: 
 
 two:
   name: MyString
-  Course_ID_belong: MyString
+  course: 

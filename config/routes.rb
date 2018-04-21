@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :keywords
   resources :departments
  resources :departments
   get 'departments/new'
