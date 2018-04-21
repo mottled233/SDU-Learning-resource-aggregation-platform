@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  knowledge: one
+  content: MyString
+  user: one
+  reply: 
+  good: 1
+
+two:
+  knowledge: two
+  content: MyString
+  user: two
+  reply: 
+  good: 1

@@ -1,4 +1,25 @@
 <h1>问题发布</h1>
 <div class="release_question">
-   
+  <%= form_for @user, url: users_path, method: :post do |f| %>
+    <div class="input-area">
+        <p>问题标题:</p>
+        <%= f.text_field :title, class: "form-control", placeholder: "标题" %>
+    </div>
+    
+    <div class="input-area">
+        <p>问题内容:</p>
+        <%= f.text_field :content, class: "form-control", placeholder: "内容" %>
+    </div>
+    
+    <div class="input-area">
+        <p>标签:</p>
+        <%@keywords.each do|key| %>
+            <input type="checkbox" name="token" value=<%=key%>><%=key%><br>
+        <%end%>
+    </div>
+    
+    <div class="input-area">
+        <button type="submit">发布</button>
+    </div>
+    
 </div>

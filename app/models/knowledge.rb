@@ -1,7 +1,7 @@
 class Knowledge < ApplicationRecord
   belongs_to :course
   belongs_to :user
-  has_many:reply
+  has_many:replies
   def self.inherited(child)
       child.instance_eval do
         def model_name
