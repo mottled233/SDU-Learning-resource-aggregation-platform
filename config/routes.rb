@@ -33,13 +33,13 @@ Rails.application.routes.draw do
   # 为了能匹配到knowledges/question_new,更细粒度的控制
   get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
 
-  get 'courses/:id/home' 
+  get 'courses/:id/home' => 'courses#:id#home'
 
-  get 'courses/:id/blog'
+  get 'courses/:id/blog'=> 'courses#:id#blog'
 
-  get 'courses/:id/question'
+  get 'courses/:id/question'=> 'courses#:id#question'
 
-  get 'courses/:id/resource'
+  get 'courses/:id/resource'=> 'courses#:id#resource'
   
   get 'knowledges/question_new' =>'knowledges#question_new',:via=>[:get,:post]
 # end:scx's routes
