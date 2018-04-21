@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
- 
+ resources :departments
   get 'departments/new'
 
   get 'departments/show'
@@ -27,21 +27,27 @@ Rails.application.routes.draw do
  
 # start:scx's routes
  resources :courses do
-    resources :knowledges, :except => [:show]
+   resources :knowledges,:except => [:show] do
+    # get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
+    collection do
+      get 'question_new'
+    end
+   end
+   member do
+    get 'home'
+    get 'blog'
+    get 'question'
+    get 'resource'
+   end
+ 
+   # 为了能匹配到knowledges/question_new,更细粒度的控制
+  #get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
+  
+  # get 'knowledges/question_new' =>'knowledges#question_new',:via=>[:get,:post]
+  
  end    
   
-  # 为了能匹配到knowledges/question_new,更细粒度的控制
-  get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
-
-  get 'courses/:id/home' => 'courses#:id#home'
-
-  get 'courses/:id/blog'=> 'courses#:id#blog'
-
-  get 'courses/:id/question'=> 'courses#:id#question'
-
-  get 'courses/:id/resource'=> 'courses#:id#resource'
-  
-  get 'knowledges/question_new' =>'knowledges#question_new',:via=>[:get,:post]
+ 
 # end:scx's routes
 
 end

@@ -2,7 +2,7 @@ class KnowledgesController < ApplicationController
   before_action :set_knowledge, only: [:show, :edit, :update, :destroy]
 
   def question_new
-    @keywords = Keyword.where(:course=>@course.id).all
+    @keywords = Keyword.where(:course=>@course).all
   end
 
 

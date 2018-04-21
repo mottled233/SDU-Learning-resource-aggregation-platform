@@ -29,6 +29,7 @@ class CoursesController < ApplicationController
 
   def question
     @question = Knowledge.get_all_entry('Question')
+    @courses = set_course
   end
 
   def blog
