@@ -12,8 +12,16 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     get login_path
     assert_template 'sessions/new'
     post login_path params: @user_form
-    assert_template 'users/show'
-    assert_not flash.empty?
+    assert log_in?
+    
   end
   
+  test "login user with incorrect information" do
+    get login_path
+    assert_template 'sessions/new'
+    post login_path params: {session: {username: @user.username, password: "wrong password"}}
+    assert_redirected_to login_path
+    follow_redirect!
+    assert_not flash.empty?
+  end
 end

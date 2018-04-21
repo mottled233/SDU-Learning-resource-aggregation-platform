@@ -1,4 +1,5 @@
 module ApplicationHelper
+    include SessionsHelper
     
     def full_title(page_title = '')
         base_title = "山东大学资源聚合平台"
