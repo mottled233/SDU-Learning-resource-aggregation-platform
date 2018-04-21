@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
- 
+  resources :departments
+ resources :departments
   get 'departments/new'
 
   get 'departments/show'
