@@ -1,0 +1,38 @@
+<%= render 'courses/header'%>
+
+<div class="question-new">
+  <button>
+    <%=link_to "我要发布",knowledges_question_new_path,method: :get%>
+  </button>
+</div>
+
+<div class="question-list">
+  <ul>
+    <%@question.each do|q| %>
+      <li>
+<!--        the view of each question-->
+        <div class = "question-block">
+            <div class="question-content">
+              <p><%= q.content%></p>
+            </div>
+            <div class="question-info">
+              <p><%= q.user_id%>&nbsp;<%= q.time%>&nbsp;<%= q.good%>&nbsp;<%= q.bad%>&nbsp;</p>
+<!--              <button class="evaluate-button" id="good-button" formaction="">-->
+                <%=button_to "good",course_pages_question_path(ev_type:'good',q_id:q.id)%>
+<!--              </button>-->
+<!--              <button class="evaluate-button" id="bad-button">-->
+
+<!--              </button>-->
+            </div>
+            <div class="question-reply">
+              <p><%= q.user_id %>&nbsp;<%= q.time %>&nbsp;<%= q.good %>&nbsp;<%= q.bad %>&nbsp;</p>
+            </div>
+        </div>
+        <div class="question-alternation">
+          <p>     </p>
+          <p>     </p>
+        </div>
+      </li>
+    <%end %>
+  </ul>
+</div>

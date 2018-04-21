@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_name: MyString
+  knowledge: 
+  teacher: 
+  teacher_relationship: 
+  department: one
+
+two:
+  course_name: MyString
+  knowledge: 
+  teacher: 
+  teacher_relationship: 
+  department: two

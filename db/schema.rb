@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420083142) do
+
+ActiveRecord::Schema.define(version: 20180421011057) do
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "course_name"
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["department_id"], name: "index_courses_on_department_id"
+  end
+
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
@@ -19,10 +29,39 @@ ActiveRecord::Schema.define(version: 20180420083142) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dept_courses", force: :cascade do |t|
+    t.integer  "dept_id"
+    t.string   "course_id"
+    t.string   "integer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "keywords", force: :cascade do |t|
     t.string  "name"
     t.integer "course_id"
     t.index ["course_id"], name: "index_keywords_on_course_id"
+  end
+
+  create_table "teaching_relationships", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "knowledges", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.string   "type"
+    t.string   "content"
+    t.integer  "good"
+    t.integer  "bad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "title"
+    t.index ["course_id"], name: "index_knowledges_on_course_id"
+    t.index ["user_id"], name: "index_knowledges_on_user_id"
   end
 
   create_table "teaching_relationships", force: :cascade do |t|
