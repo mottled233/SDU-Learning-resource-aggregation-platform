@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20180421011057) do
 
   create_table "courses", force: :cascade do |t|
@@ -20,21 +19,10 @@ ActiveRecord::Schema.define(version: 20180421011057) do
     t.datetime "updated_at",    null: false
     t.index ["department_id"], name: "index_courses_on_department_id"
   end
-=======
-ActiveRecord::Schema.define(version: 20180420083142) do
->>>>>>> 972dc7e194e1e5f56615208fb63cd8ab16684a20
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
     t.string   "summary"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "dept_courses", force: :cascade do |t|
-    t.integer  "dept_id"
-    t.string   "course_id"
-    t.string   "integer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,16 +33,10 @@ ActiveRecord::Schema.define(version: 20180420083142) do
     t.index ["course_id"], name: "index_keywords_on_course_id"
   end
 
-  create_table "teaching_relationships", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "knowledges", force: :cascade do |t|
     t.integer  "course_id"
     t.integer  "user_id"
+    t.integer  "reply_id"
     t.string   "type"
     t.string   "content"
     t.integer  "good"
@@ -63,6 +45,7 @@ ActiveRecord::Schema.define(version: 20180420083142) do
     t.datetime "updated_at", null: false
     t.string   "title"
     t.index ["course_id"], name: "index_knowledges_on_course_id"
+    t.index ["reply_id"], name: "index_knowledges_on_reply_id"
     t.index ["user_id"], name: "index_knowledges_on_user_id"
   end
 
