@@ -38,6 +38,16 @@ class User < ApplicationRecord
     attr_accessor :remember_token
     
     # association
+    has_many :creatings, class_name: :Knowledge, inverse_of: :creator
+    
+    has_and_belongs_to_many :courses
+    has_and_belongs_to_many :focus_contents,
+        class_name: :Knowledge,
+        foreign_key: :user_id
+        association_foreign_key: :knowledge_id;
+    
+    
+    
     
     # class methods
     def User.digest(string)

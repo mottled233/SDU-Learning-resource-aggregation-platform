@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TeachingRelationshipTest < ActiveSupport::TestCase
+class KeywordRelationshipTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
