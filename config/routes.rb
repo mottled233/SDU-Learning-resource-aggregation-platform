@@ -26,27 +26,38 @@ Rails.application.routes.draw do
  
  
 # start:scx's routes
- resources :courses do
-   resources :knowledges,:except => [:show] do
-    # get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
-    collection do
-      get 'question_new'
-    end
-   end
-   member do
-    get 'home'
-    get 'blog'
-    get 'question'
-    get 'resource'
-   end
+ # resources :courses do
+ #   resources :knowledges,:except => [:show] do
+ #    get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
+ #    collection do
+ #      get 'question_new'
+ #    end
+ #   end
+ #   member do
+ #    get 'home'
+ #    get 'blog'
+ #    get 'question'
+ #    get 'resource'
+ #   end
  
-   # 为了能匹配到knowledges/question_new,更细粒度的控制
-  #get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
+ #   # 为了能匹配到knowledges/question_new,更细粒度的控制
+ #  #get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
   
-  # get 'knowledges/question_new' =>'knowledges#question_new',:via=>[:get,:post]
+ #  # get 'knowledges/question_new' =>'knowledges#question_new',:via=>[:get,:post]
   
- end    
-  
+ # end    
+
+ resources :courses
+ resources :questions
+ resources :blogs
+ resources :resources
+ 
+
+ get "/courses/:course_id/questions", to: "courses#questions_index", as: "course_questions"
+ get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
+ get "/courses/:course_id/resources", to: "courses#resources_index", as: "course_resources"
+
+
  
 # end:scx's routes
 
