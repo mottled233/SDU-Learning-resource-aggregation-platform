@@ -10,28 +10,112 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418153326) do
+ActiveRecord::Schema.define(version: 20180423040628) do
+
+  create_table "course_department_associations", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["course_id"], name: "index_course_department_associations_on_course_id"
+    t.index ["department_id"], name: "index_course_department_associations_on_department_id"
+  end
+
+  create_table "course_keyword_associations", force: :cascade do |t|
+    t.integer  "knowledge_id"
+    t.integer  "keyword_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["keyword_id"], name: "index_course_keyword_associations_on_keyword_id"
+    t.index ["knowledge_id"], name: "index_course_keyword_associations_on_knowledge_id"
+  end
+
+  create_table "course_knowledge_associations", force: :cascade do |t|
+    t.integer  "knowledge_id"
+    t.integer  "course_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["course_id"], name: "index_course_knowledge_associations_on_course_id"
+    t.index ["knowledge_id"], name: "index_course_knowledge_associations_on_knowledge_id"
+  end
+
+  create_table "course_user_associations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_user_associations_on_course_id"
+    t.index ["user_id"], name: "index_course_user_associations_on_user_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "course_name"
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["department_id"], name: "index_courses_on_department_id"
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
-    t.string   "summary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "dept_courses", force: :cascade do |t|
-    t.integer  "dept_id"
-    t.string   "course_id"
-    t.string   "integer"
+  create_table "focus_knowledge_associations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["knowledge_id"], name: "index_focus_knowledge_associations_on_knowledge_id"
+    t.index ["user_id"], name: "index_focus_knowledge_associations_on_user_id"
+  end
+
+  create_table "keyword_knowledge_associations", force: :cascade do |t|
+    t.integer  "knowledge_id"
+    t.integer  "keyword_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["keyword_id"], name: "index_keyword_knowledge_associations_on_keyword_id"
+    t.index ["knowledge_id"], name: "index_keyword_knowledge_associations_on_knowledge_id"
+  end
+
+  create_table "keyword_relationships", force: :cascade do |t|
+    t.integer  "higher_id"
+    t.integer  "lower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["higher_id"], name: "index_keyword_relationships_on_higher_id"
+    t.index ["lower_id"], name: "index_keyword_relationships_on_lower_id"
   end
 
   create_table "keywords", force: :cascade do |t|
     t.string   "name"
-    t.string   "Course_ID_belong"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "knowledges", force: :cascade do |t|
+    t.integer  "creator_id"
+    t.integer  "topic_id"
+    t.string   "title"
+    t.string   "type"
+    t.string   "content"
+    t.string   "attachment"
+    t.integer  "good"
+    t.integer  "bad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "notify_type"
+    t.integer  "notify_entity_id"
+    t.string   "entity_type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "teaching_relationships", force: :cascade do |t|

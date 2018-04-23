@@ -1,0 +1,21 @@
+<%=render '/courses/header'%>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>课程名称:</strong>
+  <%= @course.course_name %>
+</p>
+
+<p>
+  <strong>任课老师:</strong>
+  <%= @course.teachers %>
+</p>
+
+<p>
+  <strong>开课院系:</strong>
+  <%= @course.department %>
+</p>
+
+<div>
+  <p>精品推荐</p>
+</div>

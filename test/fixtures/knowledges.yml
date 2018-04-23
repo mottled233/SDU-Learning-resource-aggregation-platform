@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course: one
+  user: one
+  type: 
+  content: MyString
+  good: 1
+  bad: 1
+  reply: 
+
+two:
+  course: two
+  user: two
+  type: 
+  content: MyString
+  good: 1
+  bad: 1
+  reply: 

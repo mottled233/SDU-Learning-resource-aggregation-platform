@@ -1,2 +1,5 @@
-<h1>Departments#new</h1>
-<p>Find me in app/views/departments/new.html.erb</p>
+<h1>New Department</h1>
+
+<%= render 'form', department: @department %>
+
+<%= link_to 'Back', departments_path %>

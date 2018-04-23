@@ -43,7 +43,7 @@ GEM
     autoprefixer-rails (8.3.0)
       execjs
     bcrypt (3.1.11)
-    bcrypt (3.1.11-x86-mingw32)
+    bcrypt (3.1.11-x64-mingw32)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -68,7 +68,7 @@ GEM
     faker (1.6.6)
       i18n (~> 0.5)
     ffi (1.9.23)
-    ffi (1.9.23-x86-mingw32)
+    ffi (1.9.23-x64-mingw32)
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -125,13 +125,17 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+<<<<<<< HEAD
     nokogiri (1.8.2-x86-mingw32)
+=======
+    nokogiri (1.8.2-x64-mingw32)
+>>>>>>> course_part
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (0.18.4)
-    pg (0.18.4-x86-mingw32)
+    pg (0.18.4-x64-mingw32)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -196,7 +200,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.12)
-    sqlite3 (1.3.12-x86-mingw32)
+    sqlite3 (1.3.12-x64-mingw32)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -228,7 +232,7 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
+  x64-mingw32
 
 DEPENDENCIES
   bcrypt (= 3.1.11)
