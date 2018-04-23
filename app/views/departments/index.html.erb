@@ -1,4 +1,18 @@
-<p id="notice"><%= notice %></p>
+
+
+<% provide(:title, '专业管理') %>
+<div id="container"> 
+    <!--headerleft --> 
+    <div id="header">
+        
+    </div> 
+    <div id="left">
+        <%= render :partial => "admins/row_nav" %>
+    </div> 
+
+    <div id="right"> 
+        
+        <p id="notice"><%= notice %></p>
 
 <h1>Departments</h1>
 
@@ -25,3 +39,7 @@
 <br>
 
 <%= link_to 'New Department', new_department_path %>
+        
+       
+    </div> 
+</div> 

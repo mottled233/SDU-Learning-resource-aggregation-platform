@@ -49,7 +49,10 @@ Rails.application.routes.draw do
   get 'keywords/new'
   
   resources :admins
-  get 'admins/own_space'
+  get 'admins/department_manage'
+  get 'admins/own_space' => 'admins#own_space'
+  get 'admins/row_nav' => 'admins#row_nav'
+  get 'admins/ajaxtest' => 'admins#ajaxtest'
 # end:wzy's routes
 
 end

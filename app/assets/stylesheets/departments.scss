@@ -1,3 +1,14 @@
 // Place all the styles related to the departments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.left {
+        float: left;
+        width: 300px;
+        height: 300px;
+        background-color: red;
+      }
+      .right {
+        background-color: orange;
+        margin-left: 310px;
+        height: 300px;
+      }
