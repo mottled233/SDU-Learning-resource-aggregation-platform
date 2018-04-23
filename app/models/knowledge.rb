@@ -26,4 +26,10 @@ class Knowledge < ApplicationRecord
   def Knowledge.get_all_entry(entry_type)
     Knowledge.where(:type => entry_type).all
   end
+  
+  # instance method
+  def get_followers
+    followers
+  end
+  
 end
