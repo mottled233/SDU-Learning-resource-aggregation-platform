@@ -3,6 +3,4 @@ class Reply < Knowledge
     class_name: :Knowledge,
     foreign_key: :topic_id,
     inverse_of: :replies
-    
-    
 end

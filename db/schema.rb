@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 20180423040628) do
   end
 
   create_table "course_keyword_associations", force: :cascade do |t|
-    t.integer  "knowledge_id"
+    t.integer  "course_id"
     t.integer  "keyword_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_keyword_associations_on_course_id"
     t.index ["keyword_id"], name: "index_course_keyword_associations_on_keyword_id"
-    t.index ["knowledge_id"], name: "index_course_keyword_associations_on_knowledge_id"
   end
 
   create_table "course_knowledge_associations", force: :cascade do |t|
@@ -50,10 +50,8 @@ ActiveRecord::Schema.define(version: 20180423040628) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
-    t.integer  "department_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["department_id"], name: "index_courses_on_department_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "departments", force: :cascade do |t|
@@ -116,13 +114,6 @@ ActiveRecord::Schema.define(version: 20180423040628) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["user_id"], name: "index_notifications_on_user_id"
-  end
-
-  create_table "teaching_relationships", force: :cascade do |t|
-    t.integer  "teacher_id"
-    t.integer  "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
