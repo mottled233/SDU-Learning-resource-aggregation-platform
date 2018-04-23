@@ -39,13 +39,13 @@ class User < ApplicationRecord
     
     # association
     has_many :creatings, class_name: :Knowledge, inverse_of: :creator
+    has_many :notifications
     
-    has_and_belongs_to_many :courses
-    has_and_belongs_to_many :focus_contents,
-        class_name: :Knowledge,
-        foreign_key: :user_id
-        association_foreign_key: :knowledge_id;
+    has_many :course_user_associations, dependent: :destroy
+    has_many :selected_courses, through: :course_user_associations, source: :course
     
+    has_many :focus_knowledge_associations, dependent: :destroy
+    has_many :focus_contents, through: :focus_knowledge_associations
     
     
     

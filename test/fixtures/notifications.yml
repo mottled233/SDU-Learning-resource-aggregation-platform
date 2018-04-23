@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  notify_type: MyString
+  notify_entity_id: 1
+  entity_type: MyString
+
+two:
+  user: two
+  notify_type: MyString
+  notify_entity_id: 1
+  entity_type: MyString
