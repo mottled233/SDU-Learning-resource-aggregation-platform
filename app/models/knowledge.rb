@@ -28,7 +28,7 @@ class Knowledge < ApplicationRecord
     Knowledge.where(:type => entry_type).all
   end
   
-<<<<<<< HEAD
+
   #选取最佳资源
   def Knowledge.chooseBestKnowledge(course,num)
     if course.nil?
@@ -41,11 +41,11 @@ class Knowledge < ApplicationRecord
       best_knowledge = course.knowledges.order(good: :desc)[0..num-1]
     end
   end
-=======
+
   # instance method
   def get_followers
     followers
   end
   
->>>>>>> 03c6d3a7cbf22475428692c3212a59b5c77b81b0
+
 end
