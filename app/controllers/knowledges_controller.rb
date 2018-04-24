@@ -1,13 +1,6 @@
 class KnowledgesController < ApplicationController
   before_action :set_knowledge, only: [:show, :edit, :update, :destroy]
 
-  def question_new
-    @keywords = Keyword.where(:course=>@course.id).all
-  end
-
-
-
-
   # GET /knowledges
   # GET /knowledges.json
   def index
@@ -21,7 +14,8 @@ class KnowledgesController < ApplicationController
 
   # GET /knowledges/new
   def new
-    @knowledge = [params:type].new
+    @course =  Course.find(params[:course_id])
+    @keywords = Keyword.where(:course=>@course).all
   end
   # GET /knowledges/1/edit
   def edit

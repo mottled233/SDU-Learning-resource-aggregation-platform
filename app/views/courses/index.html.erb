@@ -8,7 +8,7 @@
       <th>Course name</th>
       <th>Knowledge</th>
       <th>Teacher</th>
-      <th>Teacher relationship</th>
+      <!--<th>Teacher relationship</th>-->
       <th>Department</th>
       <th colspan="3"></th>
     </tr>
@@ -18,9 +18,9 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.course_name %></td>
-        <td><%= course.knowledge %></td>
-        <td><%= course.teacher %></td>
-        <td><%= course.teacher_relationship %></td>
+        <td><%= course.knowledges %></td>
+        <td><%#= course.teacher %></td>
+        <td><%#= course.teacher_relationship %></td>
         <td><%= course.department %></td>
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>

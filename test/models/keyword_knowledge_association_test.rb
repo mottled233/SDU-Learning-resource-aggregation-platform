@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DeptCourseTest < ActiveSupport::TestCase
+class KeywordKnowledgeAssociationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

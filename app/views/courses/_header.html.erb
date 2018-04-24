@@ -3,10 +3,10 @@
   <div class="nav-section">
     <nav>
       <ul>
-        <li><%= link_to "主页", home_course_path(:id) %></li>
-        <li><%= link_to "专栏区", blog_course_path(:id) %></li>
-        <li><%= link_to "问题区", question_course_path(:id) %></li>
-        <li><%= link_to "资源区",  resource_course_path(:id)%></li>
+        <li><%= link_to "主页", course_path(:id=>@course) %></li>
+        <li><%= link_to "专栏区", course_blogs_path(:course_id=>@course) %></li>
+        <li><%= link_to "问题区", course_questions_path(:course_id=>@course) %></li>
+        <li><%= link_to "资源区",  course_resources_path(:course_id=>@course)%></li>
       </ul>
     </nav>
   </div>

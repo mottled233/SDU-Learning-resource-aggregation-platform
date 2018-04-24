@@ -29,6 +29,7 @@ class CoursesController < ApplicationController
 
   def question
     @question = Knowledge.get_all_entry('Question')
+    @courses = set_course
   end
 
   def blog
@@ -73,10 +74,10 @@ class CoursesController < ApplicationController
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course }
+        # format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        # format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -90,6 +91,22 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def questions_index
+    @course = Course.find(params[:course_id])
+    @question = Knowledge.get_all_entry('Question')
+    # debugger
+  end
+  
+  def blogs_index
+    
+  end
+  
+  def resources_index
+    
+  
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -101,4 +118,5 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:course_name, :knowledge, :teacher, :teacher_relationship, :department_id)
     end
+    
 end
