@@ -10,4 +10,7 @@ class Course < ApplicationRecord
   
   has_many :course_knowledge_associations, dependent: :destroy
   has_many :knowledges, through: :course_knowledge_associations
+  
+  
+  
 end

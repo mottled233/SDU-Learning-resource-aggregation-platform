@@ -99,13 +99,13 @@ class CoursesController < ApplicationController
   end
   
   def blogs_index
-    
+    @course = Course.find(params[:course_id])
+    @question = Knowledge.get_all_entry('Blogs')
   end
   
   def resources_index
-    
-  
-    
+    @course = Course.find(params[:course_id])
+    @question = Knowledge.get_all_entry('Resources')
   end
 
   private
