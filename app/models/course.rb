@@ -1,4 +1,5 @@
 class Course < ApplicationRecord
+  # associations
   has_many :course_department_associations, dependent: :destroy
   has_many :departments, through: :course_department_associations
   
@@ -10,4 +11,12 @@ class Course < ApplicationRecord
   
   has_many :course_knowledge_associations, dependent: :destroy
   has_many :knowledges, through: :course_knowledge_associations
+  
+
+  # instance methods
+  def get_followers
+    users.where(user_role: :student)
+  end
+
+  
 end

@@ -1,13 +1,13 @@
+
 <header>
-  <h1>这里是导航</h1>
-  <div class="nav-section">
-    <nav>
-      <ul>
-        <li><%= link_to "主页", course_path(:id=>@course) %></li>
-        <li><%= link_to "专栏区", course_blogs_path(:course_id=>@course) %></li>
-        <li><%= link_to "问题区", course_questions_path(:course_id=>@course) %></li>
-        <li><%= link_to "资源区",  course_resources_path(:course_id=>@course)%></li>
+<div class="container navigation">
+	<div class="row nav">
+			<ul class="nav nav-tabs">
+				<li <%= yield(:home) %>><%= link_to "主页", course_path(:id=>@course) %></li>
+        <li <%= yield(:blog) %>><%= link_to "专栏区", course_blogs_path(:course_id=>@course) %></li>
+        <li <%= yield(:question) %>><%= link_to "问题区", course_questions_path(:course_id=>@course) %></li>
+        <li <%= yield(:resource) %>><%= link_to "资源区",  course_resources_path(:course_id=>@course)%></li>
       </ul>
-    </nav>
-  </div>
+	</div>
+</div>  
 </header>
