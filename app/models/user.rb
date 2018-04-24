@@ -39,7 +39,7 @@ class User < ApplicationRecord
     
     # association
     has_many :creatings, class_name: :Knowledge, inverse_of: :creator
-    has_many :notifications
+    has_many :notifications, dependent: :destroy
     
     has_many :course_user_associations, dependent: :destroy
     has_many :selected_courses, through: :course_user_associations, source: :course
