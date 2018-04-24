@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20180421095204) do
-=======
 ActiveRecord::Schema.define(version: 20180423040628) do
->>>>>>> a7178c160befe5ed10fb5e0ce759abaf5c1b494d
 
   create_table "course_department_associations", force: :cascade do |t|
     t.integer  "course_id"
@@ -93,15 +89,10 @@ ActiveRecord::Schema.define(version: 20180423040628) do
 
   create_table "keywords", force: :cascade do |t|
     t.string   "name"
-<<<<<<< HEAD
     t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_keywords_on_course_id"
-=======
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
->>>>>>> a7178c160befe5ed10fb5e0ce759abaf5c1b494d
   end
 
   create_table "knowledges", force: :cascade do |t|
