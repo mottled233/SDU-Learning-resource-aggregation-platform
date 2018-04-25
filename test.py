@@ -45,7 +45,7 @@ class CSDNSpider:
         articles = json.loads(result)['articles']
         self.save_articles(articles)
 
-        for i in range(100):
+        for i in range(1000):
             request = requests.get(self.crawl_url.format(type='more', category='home', offset=offset),
                                    cookies=cookies)
             result = request.text
