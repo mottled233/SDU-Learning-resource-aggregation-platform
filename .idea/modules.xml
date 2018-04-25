@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SDU-Learning-resource-aggregation-platform.iml" filepath="$PROJECT_DIR$/.idea/SDU-Learning-resource-aggregation-platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/resource_aggregation.iml" filepath="$PROJECT_DIR$/.idea/resource_aggregation.iml" />
     </modules>
   </component>
 </project>

@@ -1,3 +1,0 @@
-class Question < Knowledge
-
-end
