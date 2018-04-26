@@ -74,6 +74,10 @@ Rails.application.routes.draw do
   get 'admins/own_space' => 'admins#own_space'
   get 'admins/row_nav' => 'admins#row_nav'
   get 'admins/ajaxtest' => 'admins#ajaxtest'
+  
+  # get 'departments/create_course_association' => 'departments#create_course_association'
+  post "/departments/:id/create_course_association", to: "departments#create_course_association", as: "departments/create_course_association"
+  get "/departments/:id/newcourseass", to: "departments#newcourseass", as: "departments/newcourseass"
 # end:wzy's routes
 
 end

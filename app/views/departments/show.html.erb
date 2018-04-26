@@ -1,30 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>专业名称:</strong>
   <%= @department.name %>
 </p>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
+      <th>下属课程</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @course_department_associations = @department.course_department_associations
+    <% @course_department_associations = @department.course_department_associations %>
     <% @course_department_associations.each do |associations| %>
+      <% @course = associations.course %>
       <tr>
-        <td><%= associations.name %></td>
-        <td><%= link_to 'Show', department %></td>
-        <td><%= link_to 'Edit', edit_department_path(department) %></td>
-        <td><%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= @course.id %></td> 
+        <td><%= @course.course_name %></td>
+        <!--<td><%#= link_to 'Show', department %></td>-->
+        <!--<td><%#= link_to 'Edit', edit_department_path(department) %></td>-->
+        <td><%= link_to '删除关联', "#", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+<%= link_to '编辑课程名', edit_department_path(@department) %> |
+<%= link_to '新建关联', departments_newcourseass_path(@department) %> |
+<%= link_to 'Back', departments_path %> 

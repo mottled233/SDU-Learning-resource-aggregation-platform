@@ -1,0 +1,30 @@
+
+<%= form_for(@course_department_associations, opration = {url: departments_create_course_association_path}) do |f| %>
+  <% if @course_department_associations.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_department_associations.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% @course_department_associations.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= @department.name %>  
+    <br />
+    <%= f.label :courseID %>
+    <%= f.text_field :course %>
+    <%= f.hidden_field :department, :value => @department.to_key%>
+
+    
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

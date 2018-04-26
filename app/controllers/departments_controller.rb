@@ -60,6 +60,36 @@ class DepartmentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def newcourseass
+    @department = Department.find(params[:id])
+    @course_department_associations = @department.course_department_associations.new()
+  end
+  
+  def create_course_association
+    @department = Department.find(params[:course_department_association][:department])
+    @course = Course.find(params[:course_department_association][:course])
+    
+    has_that_ass = CourseDepartmentAssociation.where("department_id = ? AND course_id =?" ,:department,:course).empty?
+    @department_course_relationship = @department.course_department_associations.new
+    @department_course_relationship.course = @course
+
+    
+    respond_to do |format|
+      if has_that_ass
+        format.html { redirect_to @department, notice: 'Has That Department Course Association.' }
+        format.json { render :show, status: :created, location: @department }
+      else
+        if @department_course_relationship.save
+          format.html { redirect_to @department, notice: 'Department Course Association was successfully created.' }
+          format.json { render :show, status: :created, location: @department }
+        else
+          format.html { render :new }
+          format.json { render json: @department.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
