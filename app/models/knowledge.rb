@@ -12,6 +12,12 @@ class Knowledge < ApplicationRecord
   
   has_many :focus_knowledge_associations
   has_many :followers, through: :focus_knowledge_associations
+  
+  has_many :like_user_associations, class_name: :GoodAssociation, dependent: :destroy
+  has_many :like_users, through: :like_user_associations, source: :user
+  
+  has_many :unlike_user_associations, class_name: :BadAssociation, dependent: :destroy
+  has_many :unlike_users, through: :unlike_user_associations, source: :user
 
   
   # class method
