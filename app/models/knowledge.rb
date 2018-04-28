@@ -47,5 +47,8 @@ class Knowledge < ApplicationRecord
     followers
   end
   
+  def getReplies
+    replies = Reply.where(:topic => self.id).all
+  end
 
 end

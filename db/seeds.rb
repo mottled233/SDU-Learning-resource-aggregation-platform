@@ -12,6 +12,7 @@ course = Course.create(course_name: 'rails')
 keyword_down = Keyword.create(name:'frame')
 keyword_up = Keyword.create(name:'Ruby')
 question = Question.create(creator:student,title:'firstKnowledge',type:'Question',content:'hhhhh',good:0,bad:0)
+question2 = Question.create(creator:student,title:'secondQuestion',type:'Question',content:'qwrqwtwetewrte',good:0,bad:0)
 reply_up = Reply.create(creator:student,title:'firstReply',type:'Reply',content:'bbbbbb',good:0,bad:0)
 reply_down = Reply.create(creator:student,title:'SecondReply',type:'Reply',content:'cccccc',good:0,bad:0)
 # replies<=>knowledges
@@ -40,6 +41,9 @@ course_keyword_relationships.save
 course_knowledge_relationships = question.course_knowledge_associations.create
 course_knowledge_relationships.course = course
 course_knowledge_relationships.save
+course_knowledge_relationships2 = question2.course_knowledge_associations.create
+course_knowledge_relationships2.course = course
+course_knowledge_relationships2.save
 # keyword<=>knowledge
 keyword_knowledge_relationships = question.keyword_knowledge_associations.create
 keyword_knowledge_relationships.keyword = keyword_down

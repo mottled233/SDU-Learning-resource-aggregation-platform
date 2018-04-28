@@ -57,8 +57,11 @@ Rails.application.routes.draw do
  get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
  get "/courses/:course_id/resources", to: "courses#resources_index", as: "course_resources"
 
-
- 
+ get "questions/new",to: "questions#new",as:"question_new"
+# 评论
+ get 'knowledges/reply_show',to: "knowledges#reply_show",as: "reply_show"
+# 点赞/踩
+ match "/courses/:course_id/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
 # end:scx's routes
 
 end

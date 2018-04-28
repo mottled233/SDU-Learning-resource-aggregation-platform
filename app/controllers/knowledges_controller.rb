@@ -15,7 +15,6 @@ class KnowledgesController < ApplicationController
   # GET /knowledges/new
   def new
     @course =  Course.find(params[:course_id])
-    @keywords = Keyword.where(:course=>@course).all
   end
   # GET /knowledges/1/edit
   def edit
@@ -61,6 +60,21 @@ class KnowledgesController < ApplicationController
       format.html { redirect_to knowledges_url, notice: 'Knowledge was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_evalute
+    knowledge = Knowledge.find(params[:k_id])
+    type = params[:type]
+    if type.eql?("good")
+      knowledge.update(good: knowledge.good+1)
+    end
+    if type.eql?("bad")
+      knowledge.update(bad: knowledge.bad+1)
+    end
+  end
+
+  def reply_show
+    # @replies = Reply.where(:topic => params[:topic_id]).all
   end
 
   private
