@@ -64,4 +64,5 @@ Rails.application.routes.draw do
  match "/courses/:course_id/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
 # end:scx's routes
 
+ get '/test', to: 'static_pages#test'
 end
