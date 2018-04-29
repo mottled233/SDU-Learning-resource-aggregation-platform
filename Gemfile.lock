@@ -125,8 +125,8 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-    
-
+    nokogiri (1.8.2-x64-mingw32)
+      mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
