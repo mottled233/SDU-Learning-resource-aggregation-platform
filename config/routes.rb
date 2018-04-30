@@ -61,7 +61,9 @@ Rails.application.routes.draw do
 # 评论
  get 'knowledges/reply_show',to: "knowledges#reply_show",as: "reply_show"
 # 点赞/踩
- match "/courses/:course_id/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
+ match "/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
+ match '/questions/focus/ajax', to: 'knowledges#focus',as: "focus", via: :get
+ match '/questions/unfocus/ajax', to: 'knowledges#unfocus',as: "unfocus", via: :get
 # end:scx's routes
 
 end
