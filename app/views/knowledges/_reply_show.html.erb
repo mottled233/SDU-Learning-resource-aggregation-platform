@@ -1,0 +1,26 @@
+<div class="container">
+    <%firstLayer = q.getReplies%>
+    <%firstLayer.each do|reply|%>
+        <div class="panel-heading">
+           <%="#{reply.creator.username}回复#{reply.topic.creator.username}:"%>
+        </div>
+        <div class="panel-body">
+            <p><%= reply.content %></p>
+        </div>
+        <div class="panel-footer" >
+            <p style="text-align:justify;width:300px;display:inline">发布时间:<%= reply.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
+            <div id="add_evalute" style="display:inline">
+                 <%= render :partial => "knowledges/comments", :locals => { :q => q } %>  
+            </div>
+            <div style="display:inline">
+               <a class="ping"><%= reply.getReplies.size%> 条评论</a>&nbsp;
+               <div class="reply" style="display:none" style="float:left">
+                 <%= render :partial => "knowledges/reply_show", :locals => { :q => reply } %>  
+               </div>
+            </div>
+            </p>
+          </div>
+    <%end%>
+</div>
+
+

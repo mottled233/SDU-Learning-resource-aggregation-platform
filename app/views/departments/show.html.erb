@@ -22,7 +22,7 @@
         <td><%= @course.course_name %></td>
         <!--<td><%#= link_to 'Show', department %></td>-->
         <!--<td><%#= link_to 'Edit', edit_department_path(department) %></td>-->
-        <td><%= link_to '删除关联', "#", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '删除关联', departments_deleteCourseDeptAss_path(@department,@course), data: { confirm: 'Are you sure????' } %></td>
       </tr>
     <% end %>
   </tbody>

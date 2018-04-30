@@ -61,6 +61,18 @@ class DepartmentsController < ApplicationController
     end
   end
   
+  def deleteCourseDeptAss
+    @department = set_department
+    @courseAss = @department.course_department_associations.where("course_id =?",params[:cid])
+    CourseDepartmentAssociation.delete(@courseAss.first.id)
+    
+    respond_to do |format|
+      format.html { redirect_to @department, notice: 'DepartmentCourseAss was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+    
+  end
+  
   def newcourseass
     @department = Department.find(params[:id])
     @course_department_associations = @department.course_department_associations.new()
@@ -70,18 +82,18 @@ class DepartmentsController < ApplicationController
     @department = Department.find(params[:course_department_association][:department])
     @course = Course.find(params[:course_department_association][:course])
     
-    has_that_ass = CourseDepartmentAssociation.where("department_id = ? AND course_id =?" ,:department,:course).empty?
+    has_that_ass = !CourseDepartmentAssociation.where("department_id = ? AND course_id =?" ,@department.id,@course.id).empty?
     @department_course_relationship = @department.course_department_associations.new
     @department_course_relationship.course = @course
 
     
     respond_to do |format|
       if has_that_ass
-        format.html { redirect_to @department, notice: 'Has That Department Course Association.' }
-        format.json { render :show, status: :created, location: @department }
+        format.html { redirect_to @department, notice: "Has That Department Course Association." }
+        format.json { render :show, status: :unprocessable_entity, location: @department }
       else
         if @department_course_relationship.save
-          format.html { redirect_to @department, notice: 'Department Course Association was successfully created.' }
+          format.html { redirect_to @department, notice: "Department Course Association was successfully created." }
           format.json { render :show, status: :created, location: @department }
         else
           format.html { render :new }

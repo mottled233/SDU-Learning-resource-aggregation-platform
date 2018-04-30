@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423040628) do
+ActiveRecord::Schema.define(version: 20180427152143) do
+
+  create_table "bad_associations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["knowledge_id"], name: "index_bad_associations_on_knowledge_id"
+    t.index ["user_id"], name: "index_bad_associations_on_user_id"
+  end
 
   create_table "course_department_associations", force: :cascade do |t|
     t.integer  "course_id"
@@ -37,6 +46,15 @@ ActiveRecord::Schema.define(version: 20180423040628) do
     t.datetime "updated_at",   null: false
     t.index ["course_id"], name: "index_course_knowledge_associations_on_course_id"
     t.index ["knowledge_id"], name: "index_course_knowledge_associations_on_knowledge_id"
+  end
+
+  create_table "course_speciality_associations", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "speciality_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["course_id"], name: "index_course_speciality_associations_on_course_id"
+    t.index ["speciality_id"], name: "index_course_speciality_associations_on_speciality_id"
   end
 
   create_table "course_user_associations", force: :cascade do |t|
@@ -67,6 +85,15 @@ ActiveRecord::Schema.define(version: 20180423040628) do
     t.datetime "updated_at",   null: false
     t.index ["knowledge_id"], name: "index_focus_knowledge_associations_on_knowledge_id"
     t.index ["user_id"], name: "index_focus_knowledge_associations_on_user_id"
+  end
+
+  create_table "good_associations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["knowledge_id"], name: "index_good_associations_on_knowledge_id"
+    t.index ["user_id"], name: "index_good_associations_on_user_id"
   end
 
   create_table "keyword_knowledge_associations", force: :cascade do |t|
@@ -113,9 +140,31 @@ ActiveRecord::Schema.define(version: 20180423040628) do
     t.string   "notify_type"
     t.integer  "notify_entity_id"
     t.string   "entity_type"
+    t.integer  "with_entity_id"
+    t.string   "with_entity_type"
+    t.integer  "initiator_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.boolean  "checked"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "specialities", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["department_id"], name: "index_specialities_on_department_id"
+    t.index ["name"], name: "index_specialities_on_name"
+  end
+
+  create_table "user_configs", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "courses_notification_config"
+    t.string   "knowledges_notification_config"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["user_id"], name: "index_user_configs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -128,6 +177,7 @@ ActiveRecord::Schema.define(version: 20180423040628) do
     t.string   "remember_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.datetime "last_check_time"
     t.index ["username"], name: "index_users_on_username"
   end
 

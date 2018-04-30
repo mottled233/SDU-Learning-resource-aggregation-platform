@@ -50,8 +50,11 @@ Rails.application.routes.draw do
  get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
  get "/courses/:course_id/resources", to: "courses#resources_index", as: "course_resources"
 
-
- 
+ get "questions/new",to: "questions#new",as:"question_new"
+# 评论
+ get 'knowledges/reply_show',to: "knowledges#reply_show",as: "reply_show"
+# 点赞/踩
+ match "/courses/:course_id/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
 # end:scx's routes
 
 # start:wzy's routes
@@ -64,6 +67,8 @@ Rails.application.routes.draw do
   get 'departments/create'
 
   get 'departments/edit'
+  
+ 
 
   get 'departments/update'
 
@@ -78,6 +83,8 @@ Rails.application.routes.draw do
   # get 'departments/create_course_association' => 'departments#create_course_association'
   post "/departments/:id/create_course_association", to: "departments#create_course_association", as: "departments/create_course_association"
   get "/departments/:id/newcourseass", to: "departments#newcourseass", as: "departments/newcourseass"
+  
+  get "departments/:id/deleteCourseDeptAss/:cid", to: 'departments#deleteCourseDeptAss', as: "departments/deleteCourseDeptAss"
 # end:wzy's routes
 
 end

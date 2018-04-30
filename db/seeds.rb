@@ -12,13 +12,23 @@ course = Course.create(course_name: 'rails')
 keyword_down = Keyword.create(name:'frame')
 keyword_up = Keyword.create(name:'Ruby')
 question = Question.create(creator:student,title:'firstKnowledge',type:'Question',content:'hhhhh',good:0,bad:0)
+question2 = Question.create(creator:student,title:'secondQuestion',type:'Question',content:'qwrqwtwetewrte',good:0,bad:0)
+question = Question.create(creator:student,title:'firstKnowledge',type:'Question',content:'hhhhh',good:1,bad:1)
 reply_up = Reply.create(creator:student,title:'firstReply',type:'Reply',content:'bbbbbb',good:0,bad:0)
 reply_down = Reply.create(creator:student,title:'SecondReply',type:'Reply',content:'cccccc',good:0,bad:0)
+speciality = department.specialities.create(name: 'Software Engineering')
+
+
+teacher.create_user_config
+student.create_user_config
+
 # replies<=>knowledges
 reply_up.topic = question
+reply_up.creator = student
 reply_up.save
 # replies<=>replies
 reply_down.topic = reply_up
+reply_down.creator = student
 reply_down.save
 # keyword<=>keyword
 keyword_relationship = keyword_down.higher_relationships.create
@@ -40,11 +50,18 @@ course_keyword_relationships.save
 course_knowledge_relationships = question.course_knowledge_associations.create
 course_knowledge_relationships.course = course
 course_knowledge_relationships.save
+course_knowledge_relationships2 = question2.course_knowledge_associations.create
+course_knowledge_relationships2.course = course
+course_knowledge_relationships2.save
 # keyword<=>knowledge
 keyword_knowledge_relationships = question.keyword_knowledge_associations.create
 keyword_knowledge_relationships.keyword = keyword_down
 keyword_knowledge_relationships.save
 # followers<=>knowledge
 focus_knowledge_relationships = question.focus_knowledge_associations.create
-focus_knowledge_relationships.followers = student
+focus_knowledge_relationships.follower = student
 focus_knowledge_relationships.save
+
+course_speciality_relationship = CourseSpecialityAssociation.create(course_id: course.id, speciality_id: speciality.id)
+good = GoodAssociation.create(user_id: student.id, knowledge_id: question.id)
+bad = GoodAssociation.create(user_id: teacher.id, knowledge_id: question.id)
