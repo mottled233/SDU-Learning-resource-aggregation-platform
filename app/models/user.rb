@@ -45,7 +45,7 @@ class User < ApplicationRecord
     has_many :selected_courses, through: :course_user_associations, source: :course
     
     has_many :focus_knowledge_associations, dependent: :destroy
-    has_many :focus_contents, through: :focus_knowledge_associations
+    has_many :focus_contents, through: :focus_knowledge_associations, source: :knowledge
     
     has_many :like_knowledge_associations, class_name: :GoodAssociation, dependent: :destroy
     has_many :like_knowledges, through: :like_knowledge_associations, source: :knowledge
@@ -84,7 +84,7 @@ class User < ApplicationRecord
     end
     
     def update_check_time
-       self.update_attribute(last_check_time: Time.now) 
+       self.update_attributes(last_check_time: Time.now) 
     end
     
 end

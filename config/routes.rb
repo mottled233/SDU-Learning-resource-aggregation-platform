@@ -66,4 +66,5 @@ Rails.application.routes.draw do
  match '/questions/unfocus/ajax', to: 'knowledges#unfocus',as: "unfocus", via: :get
 # end:scx's routes
 
+ get '/test', to: 'static_pages#test'
 end
