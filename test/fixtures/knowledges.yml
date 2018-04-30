@@ -2,6 +2,7 @@ questions1:
     title: "rails 怎么学？"
     type: "Question"
     content: "我想学rails，该怎么学？"
+    creator: student1
     good: 1
     bad: 0
     

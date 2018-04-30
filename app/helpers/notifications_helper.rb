@@ -72,6 +72,10 @@ module NotificationsHelper
                           Blog: true,
                           Question: true}
         end
+      else
+        course_config = {Resource: true,
+                        Blog: true,
+                        Question: true}
       end
       
       time = user.last_check_time || Time.now
@@ -100,7 +104,6 @@ module NotificationsHelper
                               notify_type: NOTIFY_TYPE_UPDATE,
                               entity_type: knowledge.type)
       end
-      
       user.update_check_time
     end
     
