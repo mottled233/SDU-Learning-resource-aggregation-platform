@@ -10,6 +10,7 @@ class KnowledgesController < ApplicationController
   # GET /knowledges/1
   # GET /knowledges/1.json
   def show
+   
   end
 
   # GET /knowledges/new

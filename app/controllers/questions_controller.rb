@@ -1,6 +1,9 @@
 require "knowledges_controller"
 
 class QuestionsController < KnowledgesController
+    def index
+        @question = Question.all
+    end
     def new
         super
         @question = Question.new
