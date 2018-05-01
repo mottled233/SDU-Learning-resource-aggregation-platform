@@ -22,7 +22,7 @@
     <p style="text-align:justify;width:300px;display:inline">author:<%= @knowledge.creator.username%><%#=link_to "#{@knowledge.creator.username}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;发布时间:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
     </p>
     <div id="add_evalute" style="display:inline">
-         <%= render :partial => "knowledges/comments", :locals => { :q => @knowledge } %>&nbsp;&nbsp;  
+         <%= render :partial => "knowledges/comments", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
     </div>
      <div id="focus" style="display:inline">
          <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  

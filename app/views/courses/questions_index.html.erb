@@ -20,8 +20,8 @@
               </div>
               <div class="panel-footer" >
                 <p style="text-align:justify;width:300px;display:inline">author:<%= q.creator.username%>&nbsp;&nbsp;&nbsp;发布时间:<%= q.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
-                <div id="add_evalute" style="display:inline">
-                     <%= render :partial => "knowledges/comments", :locals => { :q => q } %>  
+                <div id="add_evalute-<%= q.id%>" style="display:inline">
+                      <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>    
                 </div>
                 <div style="display:inline">
                    <a class="ping"><%= q.getReplies.size%> 条评论</a>&nbsp;
