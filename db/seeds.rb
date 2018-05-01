@@ -59,7 +59,7 @@ keyword_knowledge_relationships.keyword = keyword_down
 keyword_knowledge_relationships.save
 # followers<=>knowledge
 focus_knowledge_relationships = question.focus_knowledge_associations.create
-focus_knowledge_relationships.follower = student
+focus_knowledge_relationships.user = student
 focus_knowledge_relationships.save
 
 course_speciality_relationship = CourseSpecialityAssociation.create(course_id: course.id, speciality_id: speciality.id)
