@@ -1,4 +1,14 @@
-
+<script>
+	function changecolor(id)
+	{
+		for (var i=1;i<=2;++i)
+		{
+			document.getElementById(i.toString()+id.charAt(1)).style.color='#777';
+		}
+		if (id.charAt(0)=="1")
+			return;//UNDONE HERE
+	}
+</script>
 <div class="jumbotron" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>)">
 	<h1 style="color:white;">山东大学资源聚合平台</h1>
 	<p>

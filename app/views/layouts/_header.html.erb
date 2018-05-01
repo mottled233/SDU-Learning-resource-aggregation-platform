@@ -4,6 +4,27 @@
   <%= link_to "山东大学资源聚合平台", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          
+          <form class="navbar-form navbar-left">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button id="search-dropdown" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">课程<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">课程</a></li>
+              <li><a href="#">专栏</a></li>
+              <li><a href="#">资源</a></li>
+              <li><a href="#">用户</a></li>
+            </ul>
+          </div>
+          <input type="text" class="form-control">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">搜索</button>
+          </span>
+        </div>
+      </form>
+          
+        </li>
         <li><%= link_to "首页", "#" %></li>
         <li><%= link_to "通知", "#" %></li>
         <% if log_in? %>
