@@ -25,7 +25,7 @@
          <%= render :partial => "knowledges/comments", :locals => { :q => @knowledge } %>&nbsp;&nbsp;  
     </div>
      <div id="focus" style="display:inline">
-         <%=link_to "关注", { :controller => 'controller_name',:action => 'action_name' },:remote => true%>&nbsp;&nbsp;
+         <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  
     </div>
     <div style="display:inline">
        <a class="ping"><%= @knowledge.getReplies.size%> 条评论</a>&nbsp;

@@ -3,13 +3,3 @@
 <%= link_to "踩:#{q.bad}", add_evalute_path(:k_id => q.id,:type => 'bad'),:method => :post,  :remote => true %>
 
 
-<%like = knowledge.like_users.where(:id => current_user).first %>
-<% if focus %>
-  <%= link_to unfocus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}" do %>
-    <span>已关注</span>
-  <% end %>
-<% else %>
-  <%= link_to focus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}" do %>
-    <span>关注</span>
-  <% end %>
-<% end %>

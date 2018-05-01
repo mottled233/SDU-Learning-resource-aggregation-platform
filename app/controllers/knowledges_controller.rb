@@ -80,7 +80,7 @@ class KnowledgesController < ApplicationController
   def focus
     @knowledge = Knowledge.find(params[:tempknowledge])
     focus_knowledge_relationships = @knowledge.focus_knowledge_associations.create
-    focus_knowledge_relationships.follower = User.find(params[:tempuser])
+    focus_knowledge_relationships.user = User.find(params[:tempuser])
     focus_knowledge_relationships.save  
     respond_to do |format|
         format.js {}
