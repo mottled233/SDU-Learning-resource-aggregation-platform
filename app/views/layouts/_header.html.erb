@@ -260,21 +260,36 @@
 							</ul>
 						</li>
 						
+						<%unless log_in?%>
+						<!-- start: Login Dropdown -->
+							<li class="dropdown">
+								<a class="btn dropdown-toggle" data-toggle="dropdown" href="<%= login_path %>">
+									<i class="halflings-icon white user"></i> 登录
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="<%= login_path%>"><i class="halflings-icon user"></i> 登录</a></li>
+									<li><a href="<%= reg_path%>"><i class="halflings-icon off"></i> 注册</a></li>
+								</ul>
+							</li>
+						<!-- end: Login Dropdown -->
+						<%else%>
 						<!-- start: User Dropdown -->
-						<li class="dropdown">
-							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i> Dennis Ji
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown-menu-title">
- 									<span>Account Settings</span>
-								</li>
-								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-								<li><a href="login.html"><i class="halflings-icon off"></i> Logout</a></li>
-							</ul>
-						</li>
+							<li class="dropdown">
+								<a class="btn dropdown-toggle" data-toggle="dropdown" href="<%= user_path(current_user)%>">
+									<i class="halflings-icon white user"></i> <%= current_user.name%>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="dropdown-menu-title">
+	 									<span>用户</span>
+									</li>
+									<li><a href="#"><i class="halflings-icon user"></i> 个人空间</a></li>
+									<li><a href="login.html"><i class="halflings-icon off"></i> 登出</a></li>
+								</ul>
+							</li>
 						<!-- end: User Dropdown -->
+						<%end%>
 					</ul>
 				</div>
 				<!-- end: Header Menu -->

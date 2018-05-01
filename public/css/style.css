@@ -3012,5 +3012,18 @@ ul.messagesList li span.date {
 	padding: 2px 5px;
 }
 .navbar .brand{
-	font-size: 35px;
+	padding-top: 13px;
+	font-size: 30px;
+}
+.wb:hover {
+	background-color: #F5F5F5;
+	
+}
+
+footer { 
+    position: absolute;
+    bottom: 0;
+    width: 97.9%;
+    height:30px; 
+    text-align:center; 
 }
