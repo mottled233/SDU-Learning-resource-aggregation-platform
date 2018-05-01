@@ -1,20 +1,23 @@
 <% provide(:title, '资源聚合平台后台') %>
-<div id="container"> 
+<div id="container-fluid-full"> 
     <!--headerleft --> 
-    <div id="header">
-        
-    </div> 
-    <div id="left">
-        <%= render :partial => "admins/row_nav" %>
-    </div> 
+    <div id="row-fluid">
+      <div id="header">
+          
+      </div> 
+  
+      <!--<div id="sidebar-left" class="span2">-->
+      <%= render :partial => "admins/row_nav" %>
+      <!--</div> -->
+  
 
-    <div id="right"> 
-        
-            <div id="taskform">
+      <div id="content" class="span10">
+        <div id="taskform">
+          欢迎你 管理员
+        </div>
 
-            </div>
-
-            <!--<%= link_to "button", admins_ajaxtest_path, remote: true %>-->
-       
-    </div> 
+      </div> 
+    </div>
 </div> 
+
+<div class="clearfix"></div>

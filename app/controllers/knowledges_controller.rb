@@ -14,7 +14,7 @@ class KnowledgesController < ApplicationController
 
   # GET /knowledges/new
   def new
-    @course =  Course.find(params[:course_id])
+     @courses =  Course.all
   end
   # GET /knowledges/1/edit
   def edit
@@ -76,7 +76,26 @@ class KnowledgesController < ApplicationController
   def reply_show
     # @replies = Reply.where(:topic => params[:topic_id]).all
   end
-
+  
+  def focus
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    focus_knowledge_relationships = @knowledge.focus_knowledge_associations.create
+    focus_knowledge_relationships.user = User.find(params[:tempuser])
+    focus_knowledge_relationships.save  
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  def unfocus
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.followers.destroy(User.find(params[:tempuser]))
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_knowledge

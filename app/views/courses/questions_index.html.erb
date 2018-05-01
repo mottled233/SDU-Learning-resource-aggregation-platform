@@ -30,8 +30,8 @@
                    </div>
                 </div>
                  <div id="focus" style="display:inline">
-                     <%=link_to "关注",'#'%>
-                </div>
+                      <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => q }%>  
+                 </div>
                 </p>
               </div>
               <div class="panel-footer">

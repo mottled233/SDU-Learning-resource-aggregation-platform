@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427152143) do
+ActiveRecord::Schema.define(version: 20180501100833) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["knowledge_id"], name: "index_bad_associations_on_knowledge_id"
+    t.index ["user_id", "knowledge_id"], name: "unique_index_on_ba", unique: true
     t.index ["user_id"], name: "index_bad_associations_on_user_id"
   end
 
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.integer  "department_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["course_id", "department_id"], name: "unique_index_on_cda", unique: true
     t.index ["course_id"], name: "index_course_department_associations_on_course_id"
     t.index ["department_id"], name: "index_course_department_associations_on_department_id"
   end
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.integer  "keyword_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id", "keyword_id"], name: "unique_index_on_ckeya", unique: true
     t.index ["course_id"], name: "index_course_keyword_associations_on_course_id"
     t.index ["keyword_id"], name: "index_course_keyword_associations_on_keyword_id"
   end
@@ -44,6 +47,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.integer  "course_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["course_id", "knowledge_id"], name: "unique_index_on_cka", unique: true
     t.index ["course_id"], name: "index_course_knowledge_associations_on_course_id"
     t.index ["knowledge_id"], name: "index_course_knowledge_associations_on_knowledge_id"
   end
@@ -53,6 +57,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.integer  "speciality_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["course_id", "speciality_id"], name: "unique_index_on_csa", unique: true
     t.index ["course_id"], name: "index_course_speciality_associations_on_course_id"
     t.index ["speciality_id"], name: "index_course_speciality_associations_on_speciality_id"
   end
@@ -63,6 +68,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_course_user_associations_on_course_id"
+    t.index ["user_id", "course_id"], name: "index_course_user_associations_on_user_id_and_course_id", unique: true
     t.index ["user_id"], name: "index_course_user_associations_on_user_id"
   end
 
@@ -84,6 +90,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["knowledge_id"], name: "index_focus_knowledge_associations_on_knowledge_id"
+    t.index ["user_id", "knowledge_id"], name: "unique_index_on_fka", unique: true
     t.index ["user_id"], name: "index_focus_knowledge_associations_on_user_id"
   end
 
@@ -93,6 +100,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["knowledge_id"], name: "index_good_associations_on_knowledge_id"
+    t.index ["user_id", "knowledge_id"], name: "unique_index_on_ga", unique: true
     t.index ["user_id"], name: "index_good_associations_on_user_id"
   end
 
@@ -101,6 +109,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.integer  "keyword_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["keyword_id", "knowledge_id"], name: "unique_index_on_kka", unique: true
     t.index ["keyword_id"], name: "index_keyword_knowledge_associations_on_keyword_id"
     t.index ["knowledge_id"], name: "index_keyword_knowledge_associations_on_knowledge_id"
   end
@@ -110,6 +119,7 @@ ActiveRecord::Schema.define(version: 20180427152143) do
     t.integer  "lower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["higher_id", "lower_id"], name: "unique_index_on_keya", unique: true
     t.index ["higher_id"], name: "index_keyword_relationships_on_higher_id"
     t.index ["lower_id"], name: "index_keyword_relationships_on_lower_id"
   end

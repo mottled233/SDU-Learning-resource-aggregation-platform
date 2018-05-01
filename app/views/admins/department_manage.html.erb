@@ -1,17 +1,23 @@
 <% provide(:title, '专业管理') %>
-<div id="container"> 
+<div id="container-fluid-full"> 
     <!--headerleft --> 
-    <div id="header">
-        
-    </div> 
-    <div id="left">
-        <%= render :partial => "admins/row_nav" %>
-    </div> 
+    <div id="row-fluid">
+      <div id="header">
+          
+      </div> 
+  
+      <!--<div id="sidebar-left" class="span2">-->
+      <%= render :partial => "admins/row_nav" %>
+      <!--</div> -->
+  
 
-    <div id="right"> 
-        
-        <%= render :partial => "departments/form" %>
-        
-       
-    </div> 
+      <div id="content" class="span10">
+        <div id="content" class="span10">
+            <%= render :partial => "departments/form" %>
+        </div>
+
+      </div> 
+    </div>
 </div> 
+<div class="clearfix"></div>
+

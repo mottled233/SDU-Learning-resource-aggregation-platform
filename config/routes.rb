@@ -54,9 +54,12 @@ Rails.application.routes.draw do
 # 评论
  get 'knowledges/reply_show',to: "knowledges#reply_show",as: "reply_show"
 # 点赞/踩
- match "/courses/:course_id/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
+ match "/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
+ match '/questions/focus/ajax', to: 'knowledges#focus',as: "focus", via: :get
+ match '/questions/unfocus/ajax', to: 'knowledges#unfocus',as: "unfocus", via: :get
 # end:scx's routes
 
+ get '/test', to: 'static_pages#test'
 # start:wzy's routes
   resources :keywords
   resources :departments
@@ -74,11 +77,15 @@ Rails.application.routes.draw do
 
   get 'keywords/new'
   
-  resources :admins
+  get '/admins/edit', to: 'admins#edit', as: "admin_edit"
+  post '/admins/update', to: 'admins#update', as: "adminUpdate"
   get 'admins/department_manage'
   get 'admins/own_space' => 'admins#own_space'
   get 'admins/row_nav' => 'admins#row_nav'
   get 'admins/ajaxtest' => 'admins#ajaxtest'
+  
+  get 'admins/form_edit' => 'admins#form_edit'
+  resources :admins
   
   # get 'departments/create_course_association' => 'departments#create_course_association'
   post "/departments/:id/create_course_association", to: "departments#create_course_association", as: "departments/create_course_association"

@@ -1,33 +1,54 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>专业名称:</strong>
-  <%= @department.name %>
-</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>下属课程</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+<div id="container-fluid-full"> 
+    <!--headerleft --> 
+    <div id="row-fluid">
+      <div id="header">
+          
+      </div> 
+  
+      <!--<div id="sidebar-left" class="span2">-->
+      <%= render :partial => "admins/row_nav" %>
+      <!--</div> -->
+  
 
-  <tbody>
-    <% @course_department_associations = @department.course_department_associations %>
-    <% @course_department_associations.each do |associations| %>
-      <% @course = associations.course %>
-      <tr>
-        <td><%= @course.id %></td> 
-        <td><%= @course.course_name %></td>
-        <!--<td><%#= link_to 'Show', department %></td>-->
-        <!--<td><%#= link_to 'Edit', edit_department_path(department) %></td>-->
-        <td><%= link_to '删除关联', departments_deleteCourseDeptAss_path(@department,@course), data: { confirm: 'Are you sure????' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div id="content" class="span10">
+        <p id="notice"><%= notice %></p>
 
-<%= link_to '编辑课程名', edit_department_path(@department) %> |
-<%= link_to '新建关联', departments_newcourseass_path(@department) %> |
-<%= link_to 'Back', departments_path %> 
+        <p>
+          <strong>专业名称:</strong>
+          <%= @department.name %>
+        </p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>下属课程</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @course_department_associations = @department.course_department_associations %>
+            <% @course_department_associations.each do |associations| %>
+              <% @course = associations.course %>
+              <tr>
+                <td><%= @course.id %></td> 
+                <td><%= @course.course_name %></td>
+                <!--<td><%#= link_to 'Show', department %></td>-->
+                <!--<td><%#= link_to 'Edit', edit_department_path(department) %></td>-->
+                <td><%= link_to '删除关联', departments_deleteCourseDeptAss_path(@department,@course), data: { confirm: 'Are you sure????' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+        <%= link_to '编辑课程名', edit_department_path(@department) %> |
+        <%= link_to '新建关联', departments_newcourseass_path(@department) %> |
+        <%= link_to 'Back', departments_path %> 
+
+      </div> 
+    </div>
+</div> 
+
+<div class="clearfix"></div>

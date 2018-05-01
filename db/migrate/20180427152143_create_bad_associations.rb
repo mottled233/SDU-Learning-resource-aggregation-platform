@@ -5,5 +5,6 @@ class CreateBadAssociations < ActiveRecord::Migration[5.0]
       t.belongs_to :knowledge, foreign_key: true, index: true
       t.timestamps
     end
+    
   end
 end

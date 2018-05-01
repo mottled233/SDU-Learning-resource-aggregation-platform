@@ -8,12 +8,13 @@
 department = Department.create(name:'software')
 teacher = User.create(username:'aaa',user_role:'teacher',nickname:'ttt',email:'m17864154809@163.com',phone_number:'13156141371',password:'123456')
 student = User.create(username:'hello',user_role:'student',nickname:'hhh',email:'123@163.com',phone_number:'17864154809',password:'12345678')
+admin = User.create(username:'admin',user_role:'admin',nickname:'tempadmin',email:'w-z-y1997@163.com',phone_number:'17864154856',password:'123456')
 course = Course.create(course_name: 'rails')
 keyword_down = Keyword.create(name:'frame')
 keyword_up = Keyword.create(name:'Ruby')
 question = Question.create(creator:student,title:'firstKnowledge',type:'Question',content:'hhhhh',good:0,bad:0)
 question2 = Question.create(creator:student,title:'secondQuestion',type:'Question',content:'qwrqwtwetewrte',good:0,bad:0)
-question = Question.create(creator:student,title:'firstKnowledge',type:'Question',content:'hhhhh',good:1,bad:1)
+question3 = Question.create(creator:student,title:'firstKnowledge',type:'Question',content:'hhhhh',good:1,bad:1)
 reply_up = Reply.create(creator:student,title:'firstReply',type:'Reply',content:'bbbbbb',good:0,bad:0)
 reply_down = Reply.create(creator:student,title:'SecondReply',type:'Reply',content:'cccccc',good:0,bad:0)
 speciality = department.specialities.create(name: 'Software Engineering')
@@ -59,7 +60,7 @@ keyword_knowledge_relationships.keyword = keyword_down
 keyword_knowledge_relationships.save
 # followers<=>knowledge
 focus_knowledge_relationships = question.focus_knowledge_associations.create
-focus_knowledge_relationships.follower = student
+focus_knowledge_relationships.user = student
 focus_knowledge_relationships.save
 
 course_speciality_relationship = CourseSpecialityAssociation.create(course_id: course.id, speciality_id: speciality.id)
