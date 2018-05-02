@@ -1,0 +1,3 @@
+<%q = Knowledge.find(q.id)%>
+<%= link_to "赞:#{q.good}", add_evalute_path(:k_id => q.id,:type => 'good'),:method => :post,  :remote => true %>
+<%= link_to "踩:#{q.bad}", add_evalute_path(:k_id => q.id,:type => 'bad'),:method => :post,  :remote => true %>

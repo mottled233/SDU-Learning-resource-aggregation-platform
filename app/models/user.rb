@@ -38,6 +38,23 @@ class User < ApplicationRecord
     attr_accessor :remember_token
     
     # association
+    has_many :creatings, class_name: :Knowledge, inverse_of: :creator
+    has_many :notifications, dependent: :destroy
+    
+    has_many :course_user_associations, dependent: :destroy
+    has_many :selected_courses, through: :course_user_associations, source: :course
+    
+    has_many :focus_knowledge_associations, dependent: :destroy
+    has_many :focus_contents, through: :focus_knowledge_associations, source: :knowledge
+    
+    has_many :like_knowledge_associations, class_name: :GoodAssociation, dependent: :destroy
+    has_many :like_knowledges, through: :like_knowledge_associations, source: :knowledge
+    
+    has_many :unlike_knowledge_associations, class_name: :BadAssociation, dependent: :destroy
+    has_many :unlike_knowledges, through: :unlike_knowledge_associations, source: :knowledge
+
+    has_one :user_config    
+    
     
     # class methods
     def User.digest(string)
@@ -64,6 +81,10 @@ class User < ApplicationRecord
     def remembered?(remember_token)
         return unless remember_digest
         BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    end
+    
+    def update_check_time
+       self.update_attributes(last_check_time: Time.now) 
     end
     
 end

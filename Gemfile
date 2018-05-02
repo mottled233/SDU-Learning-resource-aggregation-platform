@@ -3,6 +3,9 @@ gem 'rails', '5.0.1'
 gem 'faker', '1.6.6'
 gem 'will_paginate', '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
+gem 'twitter-bootstrap-rails'
+gem 'therubyracer'
+gem 'less-rails'
 gem 'bcrypt', '3.1.11'
 gem 'bootstrap-sass', '3.3.6'
 gem 'puma', '3.4.0'
@@ -37,4 +40,3 @@ end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-

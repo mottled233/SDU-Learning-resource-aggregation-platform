@@ -1,0 +1,66 @@
+<% provide(:home, 'class=active') %>
+<% provide(:boutique_num, "5") %>
+<%=render '/courses/header'%>
+<div class="content">
+    <div class="course-info">
+      <h3>课程简介</h3>
+      <p>
+        <strong>课程名称:</strong>
+        <%= @course.course_name %>
+      </p>
+      
+      <p>
+        <strong>任课老师:</strong>
+        <% @course.users.each do|teacher| %>
+           <%= teacher.username %>&nbsp
+        <% end %>
+      </p>
+      
+      <p>
+        <strong>开课院系:</strong>
+         <% @course.departments.each do|department| %>
+           <%= department.name %>&nbsp
+        <% end %>
+      </p>
+    </div>
+    
+    <div class="boutique">
+      <h3>精品推荐</h3>
+      <% best_list = Knowledge.chooseBestKnowledge(@course, 5)%>
+      <% row = best_list.size/3+1%>
+      <% last_col = best_list.size%3%>
+      <div class="boutique-content">
+        <% for i in 1..row-1%>
+          <div class="row">
+            <% for j in 1..3%>
+              <div class="col-sm-6 col-md-3">
+                   <div class="thumbnail">
+                       <%= image_tag("Knowledge.png")%>
+                      <div class="caption">
+                          <% cur=best_list[(i-1)*3+j-1]%>
+                          <% cur_path = "/#{cur.type}s/#{cur.id}".downcase%>
+                          <p><%= link_to cur.title,cur_path%></p>
+                      </div>
+                   </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+       <div class="row">
+          <% for j in 1..last_col%>
+            <div class="col-sm-6 col-md-3">
+                 <div class="thumbnail">
+                    <%= image_tag("Knowledge.png")%>
+                    <div class="caption">
+                          <% cur=best_list[(row-1)*3+j-1]%>
+                          <% cur_path = "/#{cur.type}s/#{cur.id}".downcase%>
+                          <p><%= link_to cur.title,cur_path%></p>
+                    </div>
+                 </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</div>
+

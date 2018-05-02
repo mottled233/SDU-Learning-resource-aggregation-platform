@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+ resources :departments
   get 'departments/new'
 
   get 'departments/show'
@@ -22,4 +24,45 @@ Rails.application.routes.draw do
   resources :users
   post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
  
+ 
+# start:scx's routes
+ # resources :courses do
+ #   resources :knowledges,:except => [:show] do
+ #    get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
+ #    collection do
+ #      get 'question_new'
+ #    end
+ #   end
+ #   member do
+ #    get 'home'
+ #    get 'blog'
+ #    get 'question'
+ #    get 'resource'
+ #   end
+ 
+ #   # 为了能匹配到knowledges/question_new,更细粒度的控制
+ #  #get 'knowledges/:id'=>'knowledges#show',constraints:{id:/\d+/}
+  
+ #  # get 'knowledges/question_new' =>'knowledges#question_new',:via=>[:get,:post]
+  
+ # end    
+
+ resources :courses
+ resources :questions
+ resources :blogs
+ resources :resources
+ 
+
+ get "/courses/:course_id/questions", to: "courses#questions_index", as: "course_questions"
+ get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
+ get "/courses/:course_id/resources", to: "courses#resources_index", as: "course_resources"
+
+ get "questions/new",to: "questions#new",as:"question_new"
+# 评论
+ get 'knowledges/reply_show',to: "knowledges#reply_show",as: "reply_show"
+# 点赞/踩
+ match "/courses/:course_id/questions", to: "knowledges#add_evalute", as: "add_evalute", via: :post
+# end:scx's routes
+
+ get '/test', to: 'static_pages#test'
 end
