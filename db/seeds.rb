@@ -64,5 +64,5 @@ focus_knowledge_relationships.user = student
 focus_knowledge_relationships.save
 
 course_speciality_relationship = CourseSpecialityAssociation.create(course_id: course.id, speciality_id: speciality.id)
-good = GoodAssociation.create(user_id: student.id, knowledge_id: question.id)
-bad = GoodAssociation.create(user_id: teacher.id, knowledge_id: question.id)
+# good = GoodAssociation.create(user_id: student.id, knowledge_id: question.id)
+# bad = GoodAssociation.create(user_id: teacher.id, knowledge_id: question.id)
