@@ -1,4 +1,7 @@
 class DepartmentsController < ApplicationController
+  before_action :confirm_logged_in, only: [:show, :edit, :update, :destroy, :create, :deleteCourseDeptAss, :newcourseass, :create_course_association]
+  before_action :confirm_is_admin, only: [:own_space, :edit, :update]
+    
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
   # GET /departments
@@ -79,14 +82,19 @@ class DepartmentsController < ApplicationController
   end
   
   def create_course_association
-    @department = Department.find(params[:course_department_association][:department])
+    has_that_dept = !Department.where("id=?",params[:course_department_association][:department]).empty?
     has_that_course = !Course.where("id=?",params[:course_department_association][:course]).empty?
+    @redirect_path = params[:course_department_association][:path]
     if !has_that_course
       respond_to do |format|
-        format.html { redirect_to @department, notice: "No that course." }
-        format.json { render json: @department.errors, status: :unprocessable_entity, location: @department }
+        format.html { redirect_to @redirect_path, notice: "No that course." }
       end
+    elsif !has_that_dept
+      respond_to do |format|
+        format.html { redirect_to @redirect_path, notice: "No that department." }
+      end  
     else
+      @department = Department.find(params[:course_department_association][:department])
       @course = Course.find(params[:course_department_association][:course])
       
       has_that_ass = !CourseDepartmentAssociation.where("department_id = ? AND course_id =?" ,@department.id,@course.id).empty?
@@ -96,15 +104,12 @@ class DepartmentsController < ApplicationController
       
       respond_to do |format|
         if has_that_ass
-          format.html { redirect_to @department, notice: "Has That Department Course Association." }
-          format.json { render json: @department.errors, status: :unprocessable_entity, location: @department }
+          format.html { redirect_to @redirect_path, notice: "Has That Department Course Association." }
         else
           if @department_course_relationship.save
-            format.html { redirect_to @department, notice: "Department Course Association was successfully created." }
-            format.json { render :show, status: :created, location: @department }
+            format.html { redirect_to @redirect_path, notice: "Department Course Association was successfully created." }
           else
             format.html { render :new }
-            format.json { render json: @department.errors, status: :unprocessable_entity }
           end
         end
       end

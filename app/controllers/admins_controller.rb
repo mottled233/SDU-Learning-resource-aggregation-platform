@@ -1,5 +1,7 @@
 class AdminsController < ApplicationController
-    before_action :confirm_is_admin, only: [:destroy]
+    before_action :confirm_logged_in, only: [:own_space, :edit, :update]
+
+    before_action :confirm_is_admin, only: [:own_space, :edit, :update]
     
 
     

@@ -78,6 +78,11 @@ Rails.application.routes.draw do
   get "/departments/:id/newcourseass", to: "departments#newcourseass", as: "departments/newcourseass"
   
   get "departments/:id/deleteCourseDeptAss/:cid", to: 'departments#deleteCourseDeptAss', as: "departments/deleteCourseDeptAss"
+  
+  get "courses/:id/course_departments_index", to: "courses#course_departments_index", as: "courses/course_departments_index"
+  
+  # post "/courses/:id/create_course_association", to: "courses#create_course_association", as: "departments/create_course_association"
+  get "/courses/:id/newdeptass", to: "courses#newdeptass", as: "courses/newdeptass"
 # end:wzy's routes
 
 end

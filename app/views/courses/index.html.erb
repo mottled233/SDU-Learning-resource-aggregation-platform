@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Course name</th>
-      <th>Knowledge</th>
+      <!--<th>Knowledge</th>-->
       <th>Teacher</th>
       <!--<th>Teacher relationship</th>-->
       <th>Department</th>
@@ -18,10 +18,10 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.course_name %></td>
-        <td><%= course.knowledges %></td>
-        <td><%#= course.teacher %></td>
-        <td><%#= course.teacher_relationship %></td>
-        <td><%= course.department %></td>
+        <!--<td><%#= course.knowledges %></td>-->
+        <td><%= link_to '授课教师', "#" %></td>
+        <!--<td><%#= course.teacher_relationship %></td>-->
+        <td><%= link_to '所属学院',courses_course_departments_index_path(course) %></td>
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>

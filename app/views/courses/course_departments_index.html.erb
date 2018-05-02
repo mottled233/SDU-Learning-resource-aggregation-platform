@@ -1,0 +1,54 @@
+
+
+<div id="container-fluid-full"> 
+    <!--headerleft --> 
+    <div id="row-fluid">
+      <div id="header">
+          
+      </div> 
+  
+      <!--<div id="sidebar-left" class="span2">-->
+      <%= render :partial => "admins/row_nav" %>
+      <!--</div> -->
+  
+
+      <div id="content" class="span10">
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <strong>课程名称:</strong>
+          <%= @course.course_name %>
+        </p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>所属学院</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            
+            <% @cd_ass.each do |associations| %>
+              <% @department = associations.department %>
+              <tr>
+                <td><%= @department.id %></td> 
+                <td><%= @department.name %></td>
+                <!--<td><%#= link_to 'Show', department %></td>-->
+                <!--<td><%#= link_to 'Edit', edit_department_path(department) %></td>-->
+                <td><%= link_to '删除关联', departments_deleteCourseDeptAss_path(@department,@course), data: { confirm: 'Are you sure????' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+        <!--<%#= link_to '编辑课程名', edit_department_path(@department) %> |-->
+        <%= link_to '新建关联', courses_newdeptass_path(@course) %> |
+        <%= link_to 'Back', courses_path %> 
+
+      </div> 
+    </div>
+</div> 
+
+<div class="clearfix"></div>
