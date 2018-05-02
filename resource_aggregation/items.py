@@ -23,3 +23,5 @@ class csdn_item(scrapy.Item):
     user_link = scrapy.Field()
     # 文章阅读量
     view_number = scrapy.Field()
+    # 爬取的时间
+    spider_time = scrapy.Field()
