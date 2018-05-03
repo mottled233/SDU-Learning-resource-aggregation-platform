@@ -83,6 +83,13 @@ Rails.application.routes.draw do
   
   # post "/courses/:id/create_course_association", to: "courses#create_course_association", as: "departments/create_course_association"
   get "/courses/:id/newdeptass", to: "courses#newdeptass", as: "courses/newdeptass"
+  
+  get "keywords/:hid/destory_high_association/:lid", to: 'keywords#destory_high_association', as: "keywords/destory_high_association"
+  get "keywords/:hid/destory_low_association/:lid", to: 'keywords#destory_low_association', as: "keywords/destory_low_association"
+  
+  post "/keywords/create_association", to: "keywords#create_association", as: "keywords/create_association"
+  get "newkeywordass", to: "keywords#newkeywordass", as: "keywords/newkeywordass"
+  
 # end:wzy's routes
 
 end
