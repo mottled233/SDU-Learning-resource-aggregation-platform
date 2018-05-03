@@ -47,7 +47,7 @@ class csdn_index_spider(scrapy.Spider):
             yield scrapy.Request(article['url'], headers=header, meta={'category': category, 'article': article},
                                  callback=self.save_article)
 
-        if not self.count[category] == 500:
+        if not self.count[category] == 100:
             url = self.crawl_url.format(type=self.types[0], category=category, offset=0)
             yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse,
                                  dont_filter=True)
