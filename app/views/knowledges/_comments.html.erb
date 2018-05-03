@@ -2,14 +2,29 @@
 
 <%like = knowledge.like_users.where(:id => current_user).first %>
 <%unlike = knowledge.unlike_users.where(:id => current_user).first %>
-<% %>
+
 <% if like %>
-  <%= link_to "已赞:#{knowledge.good}",good_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
-  <%= link_to "踩:#{knowledge.bad}", good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+  <% if log_in?%>
+    <%= link_to "已赞:#{knowledge.good}",good_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
+    <%= link_to "踩:#{knowledge.bad}", good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+  <%else%>
+    <%= link_to "已赞", login_path(:message => "请先登录")%>
+    <%= link_to "踩", login_path(:message => "请先登录")%>
+  <%end%>
 <% elsif unlike %>
-  <%= link_to "赞:#{knowledge.good}",good_add_bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
-  <%= link_to "已踩:#{knowledge.bad}", bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+  <% if log_in?%>
+    <%= link_to "赞:#{knowledge.good}",good_add_bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
+    <%= link_to "已踩:#{knowledge.bad}", bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+  <%else%>
+    <%= link_to "赞", login_path(:message => "请先登录")%>
+    <%= link_to "已踩", login_path(:message => "请先登录")%>
+  <%end%>
 <% else%>
-  <%= link_to "赞:#{knowledge.good}",good_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
-  <%= link_to "踩:#{knowledge.bad}", bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+ <% if log_in?%>
+    <%= link_to "赞:#{knowledge.good}",good_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
+    <%= link_to "踩:#{knowledge.bad}", bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+  <%else%>
+    <%= link_to "赞", login_path(:message => "请先登录")%>
+    <%= link_to "踩", login_path(:message => "请先登录")%>
+  <%end%>
 <% end %>
