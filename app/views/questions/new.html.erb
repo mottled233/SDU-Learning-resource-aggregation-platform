@@ -1,2 +1,9 @@
 
 <%= render 'form', question: @question %>
+<button>
+    <%if params[:course_id].nil?%>
+        <%= link_to '返回', questions_path %>
+    <%else%>
+        <%= link_to '返回', course_questions_path(params[:course_id]) %>
+    <%end%>
+</button>

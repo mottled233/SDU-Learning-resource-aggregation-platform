@@ -1,3 +1,15 @@
-<%q = Knowledge.find(q.id)%>
-<%= link_to "赞:#{q.good}", add_evalute_path(:k_id => q.id,:type => 'good'),:method => :post,  :remote => true %>
-<%= link_to "踩:#{q.bad}", add_evalute_path(:k_id => q.id,:type => 'bad'),:method => :post,  :remote => true %>
+<% knowledge = Knowledge.find(knowledge)%>
+
+<%like = knowledge.like_users.where(:id => current_user).first %>
+<%unlike = knowledge.unlike_users.where(:id => current_user).first %>
+<% %>
+<% if like %>
+  <%= link_to "已赞:#{knowledge.good}",good_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
+  <%= link_to "踩:#{knowledge.bad}", good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+<% elsif unlike %>
+  <%= link_to "赞:#{knowledge.good}",good_add_bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
+  <%= link_to "已踩:#{knowledge.bad}", bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+<% else%>
+  <%= link_to "赞:#{knowledge.good}",good_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
+  <%= link_to "踩:#{knowledge.bad}", bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+<% end %>

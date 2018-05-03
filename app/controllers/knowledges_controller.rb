@@ -10,11 +10,12 @@ class KnowledgesController < ApplicationController
   # GET /knowledges/1
   # GET /knowledges/1.json
   def show
+   
   end
 
   # GET /knowledges/new
   def new
-    @course =  Course.find(params[:course_id])
+     @courses =  Course.all
   end
   # GET /knowledges/1/edit
   def edit
@@ -62,21 +63,93 @@ class KnowledgesController < ApplicationController
     end
   end
 
-  def add_evalute
-    knowledge = Knowledge.find(params[:k_id])
-    type = params[:type]
-    if type.eql?("good")
-      knowledge.update(good: knowledge.good+1)
-    end
-    if type.eql?("bad")
-      knowledge.update(bad: knowledge.bad+1)
-    end
-  end
-
   def reply_show
     # @replies = Reply.where(:topic => params[:topic_id]).all
   end
-
+  
+  def focus
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    focus_knowledge_relationships = @knowledge.focus_knowledge_associations.create
+    focus_knowledge_relationships.user = User.find(params[:tempuser])
+    focus_knowledge_relationships.save  
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  def unfocus
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.followers.destroy(User.find(params[:tempuser]))
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  # 点赞/踩
+  def good_add
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    GoodAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:good => @knowledge.good+1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def bad_add
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    BadAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:bad => @knowledge.bad+1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def good_sub
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.like_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:good => @knowledge.good-1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def bad_sub
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.unlike_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:bad => @knowledge.bad-1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def good_add_bad_sub
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    GoodAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:good => @knowledge.good+1)
+    @knowledge.unlike_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:bad => @knowledge.bad-1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def good_sub_bad_add
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.like_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:good => @knowledge.good-1)
+    BadAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:bad => @knowledge.bad+1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_knowledge

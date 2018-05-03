@@ -1,8 +1,7 @@
 <% provide(:question, 'class=active') %>
-<%= render 'courses/header'%>
 <div class="question-new">
   <button id="newButton" type="button" class="btn btn-primary">
-    <%=link_to "我要发布",question_new_path(:course_id => @course.id),method: :get%>
+    <%=link_to "我要发布",question_new_path,method: :get%>
   </button>
 </div>
 <div class="question-list">
@@ -13,7 +12,7 @@
           <div class = "panel panel-default">
               <div class="panel-heading">
                 <h3><%=link_to "标题:#{q.title}",question_path(q.id)%></h3>
-                 <div>
+                <div>
                   <strong>所属课程:</strong>
                   <% q.courses.each do|course| %>
                            <%= course.course_name %>&nbsp
