@@ -3,9 +3,7 @@ import json
 import time
 
 import re
-import requests
 import scrapy
-from readability.readability import Document
 from scrapy.loader import ItemLoader
 
 from resource_aggregation.items import csdn_index_item
@@ -15,18 +13,13 @@ header = {
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9',
     'Connection': 'keep-alive',
-    'Host': 'www.csdn.net',
-    'Referer': 'https://www.csdn.net',
+    'Host': 'blog.csdn.net',
+    'Referer': 'https://blog.csdn.net',
     'server': 'openresty',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
     'X-Requested-With': 'XMLHttpRequest'
 }
 
-
-def get_article_content(url):
-    result = requests.get(url)
-    readable_article = Document(result.text).summary()
-    return readable_article
 
 class csdn_index_spider(scrapy.Spider):
     name = "csdn_index_spider"
@@ -51,22 +44,29 @@ class csdn_index_spider(scrapy.Spider):
         print('记录爬取次数: {}'.format(self.count))
 
         for article in articles:
-            item = csdn_index_item()
-            item["article_type"] = category
-            item["created_time"] = article['created_at']
-            item["nick_name"] = article['nickname']
-            item["article_title"] = article['title']
-            item["article_link"] = article['url']
-            item["user_link"] = article['user_url']
-            item["view_number"] = article['views']
-            item["spider_time"] = datetime.datetime.now()
-            item['article_content'] = get_article_content(article['url'])
-            yield item
+            yield scrapy.Request(article['url'], headers=header, meta={'category': category, 'article': article},
+                                 callback=self.save_article)
 
         if not self.count[category] == 500:
             url = self.crawl_url.format(type=self.types[0], category=category, offset=0)
             yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse,
                                  dont_filter=True)
+
+    def save_article(self, response):
+        category = response.meta.get('category')
+        article = response.meta.get('article')
+
+        item = csdn_index_item()
+        item["article_type"] = category
+        item["created_time"] = article['created_at']
+        item["nick_name"] = article['nickname']
+        item["article_title"] = article['title']
+        item["article_link"] = article['url']
+        item["user_link"] = article['user_url']
+        item["view_number"] = article['views']
+        item["spider_time"] = datetime.datetime.now()
+        item['article_content'] = response.css('#article_content').extract_first('')
+        yield item
 
     # 首先访问csdn主页，获取cookie
     def start_requests(self):
@@ -95,25 +95,33 @@ class csdn_user_articles_spider(scrapy.Spider):
         if len(articles) == 0:
             return
         for article in articles:
-            article_info = article.css('.info-box')
             article_url = article.css('.text-truncate a::attr(href)').extract_first('')
-
-            view_number = re.match('.*(\d)', article_info.css('.read-num').extract_first())
-            item_loader = ItemLoader(item=csdn_index_item(), selector=article)
-            item_loader.add_value('article_type', 'personal')
-            item_loader.add_css('article_title', '.text-truncate a::text')
-            item_loader.add_value('article_link', article_url)
-            item_loader.add_value('view_number', view_number.group(1))
-            item_loader.add_value('created_time', article_info.css('.date::text').extract_first())
-            item_loader.add_value('spider_time', datetime.datetime.now())
-            item_loader.add_value('nick_name', response.css('.user-info .name a::text').extract_first())
-            item_loader.add_value('user_link', response.css('.user-info .name a::attr(href)').extract_first())
-            item_loader.add_value('article_content',get_article_content(article_url))
-            article_item = item_loader.load_item()
-            yield article_item
+            yield scrapy.Request(url=article_url, headers=header, meta={'article': article, 'pre_response': response},
+                                 callback=self.save_article)
 
         url = response.url
         page_number = int(url[url.rfind('/') + 1:])
         url = url[0:url.rfind('/') + 1]
         url += str(page_number + 1)
         yield scrapy.Request(url=url, callback=self.parse)
+
+    def save_article(self, response):
+        pre_response = response.meta.get('pre_response')
+        article = response.meta.get('article')
+
+        article_info = article.css('.info-box')
+        article_url = article.css('.text-truncate a::attr(href)').extract_first('')
+
+        view_number = re.match('.*(\d)', article_info.css('.read-num').extract_first())
+        item_loader = ItemLoader(item=csdn_index_item(), selector=article)
+        item_loader.add_value('article_type', 'personal')
+        item_loader.add_css('article_title', '.text-truncate a::text')
+        item_loader.add_value('article_link', article_url)
+        item_loader.add_value('view_number', view_number.group(1))
+        item_loader.add_value('created_time', article_info.css('.date::text').extract_first())
+        item_loader.add_value('spider_time', datetime.datetime.now())
+        item_loader.add_value('nick_name', pre_response.css('.user-info .name a::text').extract_first())
+        item_loader.add_value('user_link', pre_response.css('.user-info .name a::attr(href)').extract_first())
+        item_loader.add_css('article_content', '#article_content')
+        article_item = item_loader.load_item()
+        yield article_item

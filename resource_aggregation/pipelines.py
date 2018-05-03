@@ -7,8 +7,15 @@
 
 import MySQLdb
 import MySQLdb.cursors
+import requests
+import time
+from readability import Document
 from twisted.enterprise import adbapi
 
+# def get_article_content(url):
+#     result = requests.get(url)
+#     readable_article = Document(result.text).summary()
+#     return readable_article
 
 class MysqlTwistedPipeline(object):
     def __init__(self, dbpool):
@@ -32,7 +39,17 @@ class MysqlTwistedPipeline(object):
         query = self.dbpool.runInteraction(self.do_insert, item)
 
     def do_insert(self, cursor, item):
-        insert_sql = "INSERT INTO csdn_articles (article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+        insert_sql = "INSERT INTO csdn_articles (article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+
+        # try:
+        #     item['article_content'] = get_article_content(item['article_link'])
+        # except Exception as e:
+        #     print('==========================================','出错啦','======================================')
+        #     print(e)
+        #     print('==========================================','尝试进行重试','======================================')
+        #     time.sleep(1)
+        #     item['article_content'] = get_article_content(item['article_link'])
+
         try:
             cursor.execute(insert_sql, (
                 item['article_type'], item['created_time'], item['nick_name'],

@@ -17,7 +17,7 @@ from scrapy.cmdline import execute
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
-# execute(["scrapy", "crawl", "csdn_user_articles_spider", "-a", "test=a,b,c"])
+execute(["scrapy", "crawl", "csdn_index_spider", "-a", "user_id=cscmaker"])
 
 # 爬取csdn首页
 def csdn_index_job():
@@ -60,4 +60,4 @@ def run():
         time.sleep(1)
 
 
-run()
+# run()
