@@ -8,6 +8,18 @@ from scrapy.loader import ItemLoader
 
 from resource_aggregation.items import csdn_index_item
 
+header = {
+    'Accept': 'application/json',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'zh-CN,zh;q=0.9',
+    'Connection': 'keep-alive',
+    'Host': 'www.csdn.net',
+    'Referer': 'https://www.csdn.net',
+    'server': 'openresty',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+    'X-Requested-With': 'XMLHttpRequest'
+}
+
 
 class csdn_index_spider(scrapy.Spider):
     name = "csdn_index_spider"
@@ -18,17 +30,6 @@ class csdn_index_spider(scrapy.Spider):
     types = ['more']
     home_url = "https://blog.csdn.net/"
     crawl_url = "https://blog.csdn.net/api/articles?type={type}&category={category}&shown_offset={offset}"
-    header = {
-        'Accept': 'application/json',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept-Language': 'zh-CN,zh;q=0.9',
-        'Connection': 'keep-alive',
-        'Host': 'www.csdn.net',
-        'Referer': 'https://www.csdn.net',
-        'server': 'openresty',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
-        'X-Requested-With': 'XMLHttpRequest'
-    }
 
     count = {'news': 0, 'ai': 0, 'cloud': 0, 'blockchain': 0, 'db': 0, 'career': 0, 'game': 0, 'engineering': 0,
              'web': 0, 'mobile': 0,
@@ -56,35 +57,30 @@ class csdn_index_spider(scrapy.Spider):
 
         if not self.count[category] == 500:
             url = self.crawl_url.format(type=self.types[0], category=category, offset=0)
-            yield scrapy.Request(url, headers=self.header, meta={'category': category}, callback=self.parse,
+            yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse,
                                  dont_filter=True)
 
     # 首先访问csdn主页，获取cookie
     def start_requests(self):
-        yield scrapy.Request(self.home_url, headers=self.header, callback=self.get_offset)
+        yield scrapy.Request(self.home_url, headers=header, callback=self.get_offset)
 
     # 获取offset
     def get_offset(self, response):
         for category in self.categories:
             url = self.crawl_url.format(type=self.types[0], category=category, offset=int(time.time() * 1000000))
-            yield scrapy.Request(url, headers=self.header, meta={'category': category}, callback=self.parse)
+            yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse)
 
 
 class csdn_user_articles_spider(scrapy.Spider):
     name = "csdn_user_articles_spider"
     allowed_domains = ["blog.csdn.net"]
-    start_urls = ['https://blog.csdn.net/c10WTiybQ1Ye3/article/list/1']
-    header = {
-        'Accept': 'application/json',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept-Language': 'zh-CN,zh;q=0.9',
-        'Connection': 'keep-alive',
-        'Host': 'www.csdn.net',
-        'Referer': 'https://www.csdn.net',
-        'server': 'openresty',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
-        'X-Requested-With': 'XMLHttpRequest'
-    }
+
+    def __init__(self, user_id=None, *args, **kwargs):
+        super(csdn_user_articles_spider, self).__init__(*args, **kwargs)
+        user_ids = user_id.split(',')
+        base_url = 'https://blog.csdn.net/%s/article/list/1'
+        for i in user_ids:
+            self.start_urls.append(base_url % i)
 
     def parse(self, response):
         articles = response.css('.article-list .article-item-box')
@@ -107,7 +103,7 @@ class csdn_user_articles_spider(scrapy.Spider):
             yield article_item
 
         url = response.url
-        page_number = int(url[url.rfind('/')+1:])
-        url = url[0:url.rfind('/')+1]
+        page_number = int(url[url.rfind('/') + 1:])
+        url = url[0:url.rfind('/') + 1]
         url += str(page_number + 1)
         yield scrapy.Request(url=url, callback=self.parse)
