@@ -48,3 +48,7 @@ class csdn_index_item(scrapy.Item):
     spider_time = scrapy.Field(
         output_processor=TakeFirst()
     )
+    # 文章内容
+    article_content = scrapy.Field(
+        output_processor=TakeFirst()
+    )

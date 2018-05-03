@@ -3,7 +3,9 @@ import json
 import time
 
 import re
+import requests
 import scrapy
+from readability.readability import Document
 from scrapy.loader import ItemLoader
 
 from resource_aggregation.items import csdn_index_item
@@ -20,6 +22,11 @@ header = {
     'X-Requested-With': 'XMLHttpRequest'
 }
 
+
+def get_article_content(url):
+    result = requests.get(url)
+    readable_article = Document(result.text).summary()
+    return readable_article
 
 class csdn_index_spider(scrapy.Spider):
     name = "csdn_index_spider"
@@ -53,6 +60,7 @@ class csdn_index_spider(scrapy.Spider):
             item["user_link"] = article['user_url']
             item["view_number"] = article['views']
             item["spider_time"] = datetime.datetime.now()
+            item['article_content'] = get_article_content(article['url'])
             yield item
 
         if not self.count[category] == 500:
@@ -88,17 +96,19 @@ class csdn_user_articles_spider(scrapy.Spider):
             return
         for article in articles:
             article_info = article.css('.info-box')
+            article_url = article.css('.text-truncate a::attr(href)').extract_first('')
 
             view_number = re.match('.*(\d)', article_info.css('.read-num').extract_first())
             item_loader = ItemLoader(item=csdn_index_item(), selector=article)
             item_loader.add_value('article_type', 'personal')
             item_loader.add_css('article_title', '.text-truncate a::text')
-            item_loader.add_css('article_link', '.text-truncate a::attr(href)')
+            item_loader.add_value('article_link', article_url)
             item_loader.add_value('view_number', view_number.group(1))
             item_loader.add_value('created_time', article_info.css('.date::text').extract_first())
             item_loader.add_value('spider_time', datetime.datetime.now())
             item_loader.add_value('nick_name', response.css('.user-info .name a::text').extract_first())
             item_loader.add_value('user_link', response.css('.user-info .name a::attr(href)').extract_first())
+            item_loader.add_value('article_content',get_article_content(article_url))
             article_item = item_loader.load_item()
             yield article_item
 

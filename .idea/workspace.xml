@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="94e86117-5a0d-4a74-ab75-9e12657834f0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/main.py" afterPath="$PROJECT_DIR$/resource_aggregation/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/items.py" afterPath="$PROJECT_DIR$/resource_aggregation/items.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/pipelines.py" afterPath="$PROJECT_DIR$/resource_aggregation/pipelines.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" afterPath="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +38,8 @@
       <file leaf-file-name="csdn_spider.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="107" column="35" lean-forward="true" selection-start-line="107" selection-start-column="35" selection-end-line="107" selection-end-column="35" />
+            <state relative-caret-position="655">
+              <caret line="99" column="12" lean-forward="true" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -49,7 +50,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="956">
+            <state relative-caret-position="391">
               <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
               <folding>
                 <element signature="e#24#40#0" expanded="true" />
@@ -72,11 +73,11 @@
       <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+            <state relative-caret-position="641">
+              <caret line="39" column="57" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="57" />
               <folding>
                 <element signature="e#194#208#0" expanded="true" />
-                <marker date="1525314294540" expanded="true" signature="1098:1255" ph="INSERT INTO csdn_articles... " />
+                <marker date="1525329207864" expanded="true" signature="1098:1271" ph="INSERT INTO csdn_articles... " />
               </folding>
             </state>
           </provider>
@@ -97,8 +98,8 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="1080">
+              <caret line="52" column="36" lean-forward="true" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
               <folding>
                 <element signature="e#153#166#0" expanded="true" />
               </folding>
@@ -143,9 +144,9 @@
         <option value="$PROJECT_DIR$/scrapy.cfg" />
         <option value="$PROJECT_DIR$/resource_aggregation/settings.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/csdnSpider.py" />
+        <option value="$PROJECT_DIR$/resource_aggregation/main.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/pipelines.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/items.py" />
-        <option value="$PROJECT_DIR$/resource_aggregation/main.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" />
       </list>
     </option>
@@ -645,7 +646,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930845" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32821077" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32821077" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -708,7 +709,8 @@
     <MESSAGE value="爬取csdn首页基本完成，期待更好的解决方法" />
     <MESSAGE value="优化爬取csdn首页，可以无限爬取" />
     <MESSAGE value="完成爬取摸个用户的所有博客" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成爬取摸个用户的所有博客" />
+    <MESSAGE value="完成定时爬取以及课添加用户id爬取用户的所有文章" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成定时爬取以及课添加用户id爬取用户的所有文章" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -775,7 +777,7 @@
           <caret line="31" column="36" lean-forward="false" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
           <folding>
             <element signature="e#194#208#0" expanded="true" />
-            <marker date="1525314294540" expanded="true" signature="1098:1255" ph="INSERT INTO csdn_articles... " />
+            <marker date="1525329207864" expanded="true" signature="1098:1271" ph="INSERT INTO csdn_articles... " />
           </folding>
         </state>
       </provider>
@@ -1044,16 +1046,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#153#166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/spiders/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-960">
@@ -1080,17 +1072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding>
-            <element signature="e#194#208#0" expanded="true" />
-            <marker date="1525314294540" expanded="true" signature="1098:1255" ph="INSERT INTO csdn_articles... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resource_aggregation/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -1101,7 +1082,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="956">
+        <state relative-caret-position="391">
           <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
           <folding>
             <element signature="e#24#40#0" expanded="true" />
@@ -1110,10 +1091,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="39" column="57" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="57" />
+          <folding>
+            <element signature="e#194#208#0" expanded="true" />
+            <marker date="1525329207864" expanded="true" signature="1098:1271" ph="INSERT INTO csdn_articles... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="52" column="36" lean-forward="true" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+          <folding>
+            <element signature="e#153#166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="107" column="35" lean-forward="true" selection-start-line="107" selection-start-column="35" selection-end-line="107" selection-end-column="35" />
+        <state relative-caret-position="655">
+          <caret line="99" column="12" lean-forward="true" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

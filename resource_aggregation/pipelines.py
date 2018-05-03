@@ -32,11 +32,12 @@ class MysqlTwistedPipeline(object):
         query = self.dbpool.runInteraction(self.do_insert, item)
 
     def do_insert(self, cursor, item):
-        insert_sql = "INSERT INTO csdn_articles (article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+        insert_sql = "INSERT INTO csdn_articles (article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
         try:
             cursor.execute(insert_sql, (
                 item['article_type'], item['created_time'], item['nick_name'],
-                item['article_title'], item['article_link'], item['user_link'], item['view_number'],item['spider_time']))
+                item['article_title'], item['article_link'], item['user_link'], item['view_number'],
+                item['spider_time'],item['article_content']))
 
         except Exception as e:
             print(e)
