@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94e86117-5a0d-4a74-ab75-9e12657834f0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/main.py" afterPath="$PROJECT_DIR$/resource_aggregation/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,29 +35,42 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="42" column="18" lean-forward="false" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+            <state relative-caret-position="1231">
+              <caret line="75" column="54" lean-forward="false" selection-start-line="75" selection-start-column="54" selection-end-line="75" selection-end-column="54" />
               <folding>
                 <element signature="e#24#40#0" expanded="true" />
-                <marker date="1525362163011" expanded="true" signature="766:780" ph="SELECT * FRO... csdn_users" />
-                <marker date="1525362163011" expanded="true" signature="766:809" ph="SELECT * FRO... custom_spider" />
-                <marker date="1525362163011" expanded="true" signature="1406:1436" ph="SELECT user_... csdn_users" />
+                <marker date="1525362612456" expanded="true" signature="766:780" ph="SELECT * FRO... csdn_users" />
+                <marker date="1525362612456" expanded="true" signature="766:809" ph="SELECT * FRO... custom_spider" />
+                <marker date="1525362612456" expanded="true" signature="1406:1436" ph="SELECT user_... csdn_users" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="custom_spider.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="custom_spider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+            <state relative-caret-position="288">
+              <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
               <folding>
                 <element signature="e#24#71#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="24">
+                <caret line="1" column="1" lean-forward="false" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -104,6 +117,7 @@
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/main.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -720,7 +734,8 @@
     <MESSAGE value="提取文章大体内容" />
     <MESSAGE value="修改提取文章内容方法，加快爬取速度" />
     <MESSAGE value="修改配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改配置" />
+    <MESSAGE value="初始化动态配置爬虫" />
+    <option name="LAST_COMMIT_MESSAGE" value="初始化动态配置爬虫" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -746,16 +761,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1134,25 +1139,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="42" column="18" lean-forward="false" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
+        <state relative-caret-position="288">
+          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
           <folding>
-            <element signature="e#24#40#0" expanded="true" />
-            <marker date="1525362163011" expanded="true" signature="766:780" ph="SELECT * FRO... csdn_users" />
-            <marker date="1525362163011" expanded="true" signature="766:809" ph="SELECT * FRO... custom_spider" />
-            <marker date="1525362163011" expanded="true" signature="1406:1436" ph="SELECT user_... csdn_users" />
+            <element signature="e#24#71#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="24">
+            <caret line="1" column="1" lean-forward="false" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+        <state relative-caret-position="1231">
+          <caret line="75" column="54" lean-forward="false" selection-start-line="75" selection-start-column="54" selection-end-line="75" selection-end-column="54" />
           <folding>
-            <element signature="e#24#71#0" expanded="true" />
+            <element signature="e#24#40#0" expanded="true" />
+            <marker date="1525362612456" expanded="true" signature="766:780" ph="SELECT * FRO... csdn_users" />
+            <marker date="1525362612456" expanded="true" signature="766:809" ph="SELECT * FRO... custom_spider" />
+            <marker date="1525362612456" expanded="true" signature="1406:1436" ph="SELECT user_... csdn_users" />
           </folding>
         </state>
       </provider>

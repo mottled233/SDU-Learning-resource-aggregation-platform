@@ -73,7 +73,7 @@ def csdn_user_article_task():
 
 
 def run():
-    schedule.every(8).hour.do(csdn_index_task)  # 每8小时爬取一次
+    schedule.every(10).hour.do(csdn_index_task)  # 每10小时爬取一次
     schedule.every(3).day.at("02:00").do(csdn_user_article_task)  # 每三天凌晨两点爬取一次
 
     while True:
