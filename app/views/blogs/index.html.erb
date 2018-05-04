@@ -1,22 +1,22 @@
-<% provide(:question, 'class=active') %>
-<div class="question-new">
+<% provide(:blog, 'class=active') %>
+<div class="blog-new">
   <button id="newButton" type="button" class="btn btn-primary">
-    <% if log_in?%>
-       <%=link_to "我要发布",question_new_path,method: :get%>
+     <% if log_in?%>
+       <%=link_to "我要发布",blog_new_path,method: :get%>
     <%else%>
        <%= link_to "我要发布", login_path(:message => "请先登录")%>
     <%end%>
   </button>
 </div>
-<div class="question-list">
+<div class="blog-list">
   <ul class="list-group">
-    <%if !@question.nil?%>
-      <%@question.each do|q| %>
+    <%if @blog.nil?%>
+      <%@blog.each do|q| %>
         <div class="container">
           <li class="list-group-item">
             <div class = "panel panel-default">
                 <div class="panel-heading">
-                  <h3><%=link_to "标题:#{q.title}",question_path(q.id)%></h3>
+                  <h3><%=link_to "标题:#{q.title}",blog_path(q.id)%></h3>
                   <div>
                     <strong>所属课程:</strong>
                     <% q.courses.each do|course| %>

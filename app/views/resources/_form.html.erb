@@ -1,9 +1,9 @@
 <h1>问题发布</h1>
-<div class="release_question">
-  <%= form_for :question,:url => { :controller=>"questions",:action => "create"}, method: :post do |f| %>
+<div class="release_resource">
+  <%= form_for :resource,:url => { :controller=>"resources",:action => "create"}, method: :post do |f| %>
   <%if !current_user.nil?%>
     <%= f.hidden_field:creator_id , :value => current_user.id %>
-    <%= f.hidden_field:type,:value => 'Question' %>
+    <%= f.hidden_field:type,:value => 'Resource' %>
   <%end%>
   <div class="field">
     <%= f.label :title %>
@@ -12,6 +12,10 @@
   <div class="field">
     <%= f.label :content %>
     <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment %>  
   </div>
   <p>相关课程：</p>
   <% for course in @courses %>  
