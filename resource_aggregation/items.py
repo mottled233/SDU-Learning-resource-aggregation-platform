@@ -14,7 +14,7 @@ def trim(value):
     return strip(value)
 
 
-class csdn_index_item(scrapy.Item):
+class article_item(scrapy.Item):
     # 作品类型
     article_type = scrapy.Field(
         output_processor=TakeFirst()

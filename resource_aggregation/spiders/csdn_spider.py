@@ -6,7 +6,7 @@ import re
 import scrapy
 from scrapy.loader import ItemLoader
 
-from resource_aggregation.items import csdn_index_item
+from resource_aggregation.items import article_item
 
 header = {
     'Accept': 'application/json',
@@ -56,7 +56,7 @@ class csdn_index_spider(scrapy.Spider):
         category = response.meta.get('category')
         article = response.meta.get('article')
 
-        item = csdn_index_item()
+        item = article_item()
         item["article_type"] = category
         item["created_time"] = article['created_at']
         item["nick_name"] = article['nickname']
@@ -113,7 +113,7 @@ class csdn_user_articles_spider(scrapy.Spider):
         article_url = article.css('.text-truncate a::attr(href)').extract_first('')
 
         view_number = re.match('.*(\d)', article_info.css('.read-num').extract_first())
-        item_loader = ItemLoader(item=csdn_index_item(), selector=article)
+        item_loader = ItemLoader(item=article_item(), selector=article)
         item_loader.add_value('article_type', 'personal')
         item_loader.add_css('article_title', '.text-truncate a::text')
         item_loader.add_value('article_link', article_url)
