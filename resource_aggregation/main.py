@@ -3,10 +3,12 @@ import threading
 import time
 
 import schedule
+from MySQLdb import cursors
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
 from resource_aggregation import settings
+from resource_aggregation.spiders.custom_spider import CustomSpiderSpider
 
 __author__ = 'lmy'
 
@@ -32,16 +34,17 @@ dbparams = dict(
 # 运行动态可配置爬虫
 def custom_spider():
     db = MySQLdb.connect(**dbparams)
-    cursor = db.cursor()
+    cursor = db.cursor(cursorclass=cursors.DictCursor)
     cursor.execute('SELECT * FROM custom_spider WHERE enabled=1')
     rules = cursor.fetchall()
 
     process = CrawlerProcess(get_project_settings())
+    db.close()
     for rule in rules:
-        process.crawl(custom_spider,rule)
+        process.crawl(CustomSpiderSpider,rule)
+        pass
 
     process.start()
-    db.close()
 
 
 # 爬取csdn首页
@@ -56,12 +59,12 @@ def csdn_user_article_job():
     # 从数据库中获取需要爬取的用户的id
 
     db = MySQLdb.connect(**dbparams)
-    cursor = db.cursor()
+    cursor = db.cursor(cursorclass=cursors.DictCursor)
     cursor.execute('SELECT user_id FROM csdn_users')
     data = cursor.fetchone()
+    db.close()
     execute(["scrapy", "crawl", "csdn_user_articles_spider", "-a", "user_id=%s" % data['user_id']])
 
-    db.close()
 
 
 def csdn_index_task():
@@ -87,4 +90,6 @@ def run():
 #        以下为函数执行            #
 ###################################
 
-run()
+# run()
+
+custom_spider()

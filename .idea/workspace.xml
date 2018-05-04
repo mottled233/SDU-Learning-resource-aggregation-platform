@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="94e86117-5a0d-4a74-ab75-9e12657834f0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/items.py" afterPath="$PROJECT_DIR$/resource_aggregation/items.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" afterPath="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/main.py" afterPath="$PROJECT_DIR$/resource_aggregation/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py" afterPath="$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +20,7 @@
     <SUITE FILE_PATH="coverage/resource_aggregation$main.coverage" NAME="main Coverage Results" MODIFIED="1524633922447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/resource_aggregation$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1524636009973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SDU_Learning_resource_aggregation_platform$csdn_spider__1_.coverage" NAME="csdn_spider (1) Coverage Results" MODIFIED="1525330153837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/resource_aggregation/spiders" />
-    <SUITE FILE_PATH="coverage/SDU_Learning_resource_aggregation_platform$main.coverage" NAME="main Coverage Results" MODIFIED="1525342322366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SDU_Learning_resource_aggregation_platform$main.coverage" NAME="main Coverage Results" MODIFIED="1525422003628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/SDU_Learning_resource_aggregation_platform$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1524657222538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -39,21 +38,36 @@
       <file leaf-file-name="custom_spider.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+            <state relative-caret-position="641">
+              <caret line="53" column="57" lean-forward="true" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
               <folding>
-                <element signature="e#24#53#0" expanded="true" />
+                <element signature="e#24#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crawl.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/spiders/crawl.py">
+      <file leaf-file-name="task.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/twisted/internet/task.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+            <state relative-caret-position="251">
+              <caret line="671" column="0" lean-forward="false" selection-start-line="671" selection-start-column="0" selection-end-line="671" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="64" column="14" lean-forward="false" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
+              <folding>
+                <element signature="e#24#40#0" expanded="true" />
+                <marker date="1525415953416" expanded="true" signature="898:912" ph="SELECT * FRO... csdn_users" />
+                <marker date="1525415953416" expanded="true" signature="898:941" ph="SELECT * FRO... custom_spider" />
+                <marker date="1525415953416" expanded="true" signature="1586:1616" ph="SELECT user_... csdn_users" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,6 +86,8 @@
       <find>execute</find>
       <find>article_type</find>
       <find>WEBSERVICE_ENABLED</find>
+      <find>update</find>
+      <find>update_settings</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,9 +113,9 @@
         <option value="$PROJECT_DIR$/resource_aggregation/pipelines.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/settings.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" />
-        <option value="$PROJECT_DIR$/resource_aggregation/main.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/resource_aggregation/items.py" />
+        <option value="$PROJECT_DIR$/resource_aggregation/main.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py" />
       </list>
     </option>
@@ -719,7 +735,8 @@
     <MESSAGE value="修改配置" />
     <MESSAGE value="初始化动态配置爬虫" />
     <MESSAGE value="更新readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新readme" />
+    <MESSAGE value="动态配置爬虫雏形" />
+    <option name="LAST_COMMIT_MESSAGE" value="动态配置爬虫雏形" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -728,6 +745,11 @@
           <url>file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py</url>
           <line>55</line>
           <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -740,22 +762,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="48" />
+      <option name="time" value="53" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="31" column="36" lean-forward="false" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-          <folding>
-            <element signature="e#194#208#0" expanded="true" />
-            <marker date="1525336057762" expanded="true" signature="1311:1487" ph="INSERT INTO csdn_articles... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
@@ -797,13 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/MySQLdb/cursors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1326">
-          <caret line="211" column="44" lean-forward="false" selection-start-line="211" selection-start-column="44" selection-end-line="211" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -979,14 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/spiders/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-960">
-          <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/MySQLdb/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -1024,14 +1020,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/twisted/internet/task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="671" column="0" lean-forward="false" selection-start-line="671" selection-start-column="0" selection-end-line="671" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/twisted/internet/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -1044,14 +1032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="134" column="29" lean-forward="false" selection-start-line="134" selection-start-column="29" selection-end-line="134" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1083,19 +1063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="e#24#40#0" expanded="true" />
-            <marker date="1525362612456" expanded="true" signature="766:780" ph="SELECT * FRO... csdn_users" />
-            <marker date="1525362612456" expanded="true" signature="766:809" ph="SELECT * FRO... custom_spider" />
-            <marker date="1525362612456" expanded="true" signature="1406:1436" ph="SELECT user_... csdn_users" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resource_aggregation/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-161">
@@ -1106,44 +1073,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/linkextractors/lxmlhtml.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="112" column="44" lean-forward="false" selection-start-line="112" selection-start-column="44" selection-end-line="112" selection-end-column="44" />
+        <state relative-caret-position="271">
+          <caret line="112" column="43" lean-forward="true" selection-start-line="112" selection-start-column="43" selection-end-line="112" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/linkextractors/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="50" column="44" lean-forward="false" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="44" />
+        <state relative-caret-position="-209">
+          <caret line="75" column="25" lean-forward="false" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/MySQLdb/connections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="262" column="59" lean-forward="true" selection-start-line="262" selection-start-column="45" selection-end-line="262" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/MySQLdb/cursors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="576" column="16" lean-forward="false" selection-start-line="576" selection-start-column="6" selection-end-line="576" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672">
+          <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/spiders/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/spiders/crawl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+        <state relative-caret-position="306">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="64" column="14" lean-forward="false" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
+          <folding>
+            <element signature="e#24#40#0" expanded="true" />
+            <marker date="1525415953416" expanded="true" signature="898:912" ph="SELECT * FRO... csdn_users" />
+            <marker date="1525415953416" expanded="true" signature="898:941" ph="SELECT * FRO... custom_spider" />
+            <marker date="1525415953416" expanded="true" signature="1586:1616" ph="SELECT user_... csdn_users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/twisted/internet/task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="671" column="0" lean-forward="false" selection-start-line="671" selection-start-column="0" selection-end-line="671" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        <state relative-caret-position="641">
+          <caret line="53" column="57" lean-forward="true" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
           <folding>
-            <element signature="e#24#53#0" expanded="true" />
+            <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
