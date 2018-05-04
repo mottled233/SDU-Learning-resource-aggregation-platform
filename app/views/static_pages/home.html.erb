@@ -1,28 +1,31 @@
 <script>
 	function changecolor(id)
 	{
+		id=id.toString();
 		for (var i=1;i<=2;++i)
 		{
-			document.getElementById(i.toString()+id.charAt(1)).style.color='#777';
+			document.getElementById(i.toString()+id.substring(1,2)).style.color='#777';
 		}
-		if (id.charAt(0)=="1")
-			return;//UNDONE HERE
+		if (id.substring(0,1)=="1")
+			document.getElementById("1"+id.substring(1,2)).style.color="#33F";
+		else if (id.substring(0,1)=="2")
+			document.getElementById("2"+id.substring(1,2)).style.color="#F33";
 	}
 </script>
 <div class="jumbotron" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>)">
 	<h1 style="color:white;">山东大学资源聚合平台</h1>
 	<p>
-		<div class="btn-group">
+		<div class="btn-group dropdown">
 		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-		    学院 <span class="caret"></span>
+		    学院 <span class="caret"></a>
 		  </button>
 		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 		    <li><a href="#">学院A</a></li>
 		    <li><a href="#">学院B</a></li>
 		  </ul>
 		</div>
-		<div class="btn-group">
-		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		<div class="btn-group dropdown">
+		  <button class="btn dropdown-toggle" data-toggle="dropdown">
 		    专业 <span class="caret"></span>
 		  </button>
 		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
@@ -30,8 +33,8 @@
 		    <li><a href="#">专业B</a></li>
 		  </ul>
 		</div>
-		<div class="btn-group">
-		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		<div class="btn-group dropdown">
+		  <button class="btn dropdown-toggle" data-toggle="dropdown">
 		   课程 <span class="caret"></span>
 		  </button>
 		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
@@ -45,7 +48,12 @@
 	</p>
 </div>
 <div class="projects-header page-header">
-	<h1><span class="icon-edit" aria-hidden="true"></span>&nbsp;&nbsp;专栏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><span class="icon-time" aria-hidden="true"></span> 新 /&nbsp;<span class="icon-fire" aria-hidden="true"></span> 热 </small></h1>
+	<h1><span class="icon-edit" aria-hidden="true"></span>&nbsp;&nbsp;专栏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<small>
+			<span id="11" onclick="changecolor(11);" style="color:#33F"><span class="icon-time" aria-hidden="true"></span> 新 </span>/&nbsp;
+			<span id="21" onclick="changecolor(21);"><span class="icon-fire" aria-hidden="true"></span> 热 </span>
+		</small>
+	</h1>
 </div>
 <div class="row">
 	<div class="span3">
@@ -103,7 +111,11 @@
 	
 </div>
 <div class="projects-header page-header">
-	<h1><span class="icon-hdd" aria-hidden="true"></span>&nbsp;&nbsp;资源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><span class="icon-time" aria-hidden="true"></span> 新 /&nbsp;<span class="icon-fire" aria-hidden="true"></span> 热 </small></h1>
+	<h1><span class="icon-hdd" aria-hidden="true"></span>&nbsp;&nbsp;资源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<small>
+		<span id="12" onclick="changecolor(12);" style="color:#33F"><span class="icon-time" aria-hidden="true"></span> 新 </span>/&nbsp;
+		<span id="22" onclick="changecolor(22);"><span class="icon-fire" aria-hidden="true"></span> 热 </span>
+	</small>
 </div>
 <div class="row">
 	<div class="span3">
