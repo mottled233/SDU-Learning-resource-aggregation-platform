@@ -121,6 +121,46 @@ class KeywordsController < ApplicationController
       end
     end
   end
+  
+  def attachtocourse
+    @keyword = Keyword.find(params[:id])
+    @keyword_course_association = @keyword.course_keyword_associations.new()
+  end
+  
+  def create_course_keyword_ass
+    has_that_keyword = !Keyword.where("id=?",params[:course_keyword_association][:keyword_id]).empty?
+    has_that_course = !Course.where("id=?",params[:course_keyword_association][:course_id]).empty?
+    @redirect_path = params[:course_keyword_association][:path]
+    if !has_that_keyword
+      respond_to do |format|
+        format.html { redirect_to @redirect_path, notice: "指定关键字不存在." }
+      end
+    elsif !has_that_course
+      respond_to do |format|
+        format.html { redirect_to @redirect_path, notice: "指定课程不存在." }
+      end  
+    else
+      @keyword = Keyword.find(params[:course_keyword_association][:keyword_id])
+      @course = Course.find(params[:course_keyword_association][:course_id])
+      
+      has_that_ass = !CourseKeywordAssociation.where("course_id = ? AND keyword_id =?" ,@course.id,@keyword.id).empty?
+      @keyword_course_association = @keyword.course_keyword_associations.new()
+      @keyword_course_association.course = @course
+
+      
+      respond_to do |format|
+        if has_that_ass
+          format.html { redirect_to @redirect_path, notice: "关联已存在." }
+        else
+          if @keyword_course_association.save
+            format.html { redirect_to @redirect_path, notice: "成功创建." }
+          else
+            format.html { render :new }
+          end
+        end
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

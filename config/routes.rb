@@ -101,6 +101,8 @@ Rails.application.routes.draw do
   post "/keywords/create_association", to: "keywords#create_association", as: "keywords/create_association"
   get "newkeywordass", to: "keywords#newkeywordass", as: "keywords/newkeywordass"
   
+  get "attachtocourse/:id", to: "keywords#attachtocourse", as: "keywords/attachtocourse"
+  post "create_course_keyword_ass", to: "keywords#create_course_keyword_ass", as: "keywords/create_course_keyword_ass"
 # end:wzy's routes
 
 end
