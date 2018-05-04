@@ -74,10 +74,13 @@ def csdn_index_task():
 def csdn_user_article_task():
     threading.Thread(target=csdn_user_article_job).start()
 
+def custom_spider_task():
+    threading.Thread(target=custom_spider).start()
 
 def run():
     schedule.every(10).hour.do(csdn_index_task)  # 每10小时爬取一次
     schedule.every(3).day.at("02:00").do(csdn_user_article_task)  # 每三天凌晨两点爬取一次
+    schedule.every(2).week.do(custom_spider_task)
 
     while True:
         schedule.run_pending()
@@ -90,6 +93,6 @@ def run():
 #        以下为函数执行            #
 ###################################
 
-# run()
+run()
 
-custom_spider()
+# custom_spider()

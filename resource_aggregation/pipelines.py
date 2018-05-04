@@ -39,7 +39,7 @@ class MysqlTwistedPipeline(object):
         query = self.dbpool.runInteraction(self.do_insert, item)
 
     def do_insert(self, cursor, item):
-        insert_sql = "INSERT INTO csdn_articles (article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        insert_sql = "INSERT INTO articles (article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
         # try:
         #     item['article_content'] = get_article_content(item['article_link'])
