@@ -3,5 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include UsersHelper
   include NotificationsHelper
+  add_flash_types :warning, :success, :danger
 
 end

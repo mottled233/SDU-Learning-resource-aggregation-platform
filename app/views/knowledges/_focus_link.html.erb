@@ -1,0 +1,14 @@
+<%focus = knowledge.followers.where(:id => current_user).first %>
+<% if focus %>
+  <% if log_in?%>
+    <%= link_to "已关注",unfocus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}"  %>
+  <%else%>
+    <%= link_to "已关注", login_path(:message => "请先登录")%>
+  <%end%>
+<% else %>
+  <% if log_in?%>
+    <%= link_to "关注",focus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}"  %>
+  <%else%>
+    <%= link_to "关注", login_path(:message => "请先登录")%>
+  <%end%>
+<% end %>

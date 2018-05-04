@@ -33,6 +33,8 @@ class CoursesController < ApplicationController
   end
 
   def blog
+    @blog = Knowledge.get_all_entry('Question')
+    @courses = set_course
   end
 
   def resource
@@ -93,12 +95,12 @@ class CoursesController < ApplicationController
   
   def blogs_index
     @course = Course.find(params[:course_id])
-    @question = Knowledge.get_all_entry('Blogs')
+    @blog = Knowledge.get_all_entry('Blog')
   end
   
   def resources_index
     @course = Course.find(params[:course_id])
-    @question = Knowledge.get_all_entry('Resources')
+    @resource = Knowledge.get_all_entry('Resource')
   end
 
   private

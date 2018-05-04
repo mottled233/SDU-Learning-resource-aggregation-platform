@@ -1,24 +1,18 @@
-<% provide(:blog, 'class=active') %>
-<%= render 'courses/header'%>
-<div class="blog-new">
+<% provide(:question, 'class=active') %>
+<div class="question-new">
   <button id="newButton" type="button" class="btn btn-primary">
-    <% if log_in?%>
-       <%=link_to "我要发布",blog_new_path(:course_id => @course.id),method: :get%>
-    <%else%>
-       <%= link_to "我要发布", login_path(:message => "请先登录")%>
-    <%end%>
-   
+    <%=link_to "我要发布",question_new_path,method: :get%>
   </button>
 </div>
-<div class="blog-list">
+<div class="question-list">
   <ul class="list-group">
-    <%@blog.each do|q| %>
+    <%@question.each do|q| %>
       <div class="container">
         <li class="list-group-item">
           <div class = "panel panel-default">
               <div class="panel-heading">
-                <h3><%=link_to "标题:#{q.title}",blog_path(q.id)%></h3>
-                 <div>
+                <h3><%=link_to "标题:#{q.title}",question_path(q.id)%></h3>
+                <div>
                   <strong>所属课程:</strong>
                   <% q.courses.each do|course| %>
                            <%= course.course_name %>&nbsp
@@ -35,7 +29,7 @@
                       <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>    
                 </div>
                 <div id="answer-<%= q.id%>" style="display:inline">
-                    <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
+                  <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
                 </div>
                 <div style="display:inline">
                    <a class="ping"><%= q.getReplies.size%> 条评论</a>&nbsp;
@@ -67,12 +61,6 @@
       $.each($(".ping"),function(){
             $(this).bind("click",function(){
                   $(this).parent().children(".reply").slideToggle();
-            });
-      });
-      
-      $.each($(".answer-show-button"),function(){
-            $(this).bind("click",function(){
-                  $(this).parent().children(".answer-content").slideToggle();
             });
       });
   });
