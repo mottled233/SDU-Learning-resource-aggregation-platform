@@ -18,10 +18,17 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.course_name %></td>
+<<<<<<< HEAD
         <!--<td><%#= course.knowledges %></td>-->
         <td><%= link_to '授课教师', "#" %></td>
         <!--<td><%#= course.teacher_relationship %></td>-->
         <td><%= link_to '所属学院',courses_course_departments_index_path(course) %></td>
+=======
+        <td><%= course.knowledges %></td>
+        <td><%#= course.teacher %></td>
+        <td><%#= course.teacher_relationship %></td>
+        <td><%#= course.department %></td>
+>>>>>>> 192a54672eb3be5869703799311cad5b067e1aa4
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,9 +1,9 @@
 <h1>问题发布</h1>
-<div class="release_question">
-  <%= form_for :question,:url => { :controller=>"questions",:action => "create"}, method: :post do |f| %>
+<div class="release_blog">
+  <%= form_for :blog,:url => { :controller=>"blogs",:action => "create"}, method: :post do |f| %>
   <%if !current_user.nil?%>
     <%= f.hidden_field:creator_id , :value => current_user.id %>
-    <%= f.hidden_field:type,:value => 'Question' %>
+    <%= f.hidden_field:type,:value => 'Blog' %>
   <%end%>
   <div class="field">
     <%= f.label :title %>

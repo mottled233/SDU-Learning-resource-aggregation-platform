@@ -28,6 +28,9 @@
                 <div id="add_evalute-<%= q.id%>" style="display:inline">
                       <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>    
                 </div>
+                <div id="answer-<%= q.id%>" style="display:inline">
+                  <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
+                </div>
                 <div style="display:inline">
                    <a class="ping"><%= q.getReplies.size%> 条评论</a>&nbsp;
                    <div class="reply" style="display:none" style="float:left">

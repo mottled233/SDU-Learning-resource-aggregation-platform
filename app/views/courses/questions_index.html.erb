@@ -2,7 +2,12 @@
 <%= render 'courses/header'%>
 <div class="question-new">
   <button id="newButton" type="button" class="btn btn-primary">
-    <%=link_to "我要发布",question_new_path(:course_id => @course.id),method: :get%>
+    <% if log_in?%>
+       <%=link_to "我要发布",question_new_path(:course_id => @course.id),method: :get%>
+    <%else%>
+       <%= link_to "我要发布", login_path(:message => "请先登录")%>
+    <%end%>
+   
   </button>
 </div>
 <div class="question-list">
@@ -28,6 +33,9 @@
                 <p style="text-align:justify;width:300px;display:inline">author:<%= q.creator.username%>&nbsp;&nbsp;&nbsp;发布时间:<%= q.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
                 <div id="add_evalute-<%= q.id%>" style="display:inline">
                       <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>    
+                </div>
+                <div id="answer-<%= q.id%>" style="display:inline">
+                    <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
                 </div>
                 <div style="display:inline">
                    <a class="ping"><%= q.getReplies.size%> 条评论</a>&nbsp;
@@ -59,6 +67,12 @@
       $.each($(".ping"),function(){
             $(this).bind("click",function(){
                   $(this).parent().children(".reply").slideToggle();
+            });
+      });
+      
+      $.each($(".answer-show-button"),function(){
+            $(this).bind("click",function(){
+                  $(this).parent().children(".answer-content").slideToggle();
             });
       });
   });

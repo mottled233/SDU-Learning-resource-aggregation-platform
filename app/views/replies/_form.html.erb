@@ -1,0 +1,21 @@
+<h3>回复内容</h3>
+<div class="release_reply">
+  <%= form_for :reply,:url => { :controller=>"replies",:action => "create"}, method: :post do |f| %>
+  <%if !current_user.nil?%>
+    <%= f.hidden_field:creator_id , :value => current_user.id %>
+    <%= f.hidden_field:type,:value => 'Reply' %>
+  <%end%>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+  <%= f.hidden_field :topic_id,:value => topic.id%>
+  <%= f.hidden_field:good,:value => 0 %>
+
+  <%= f.hidden_field:bad,:value => 0 %>
+
+  <div class="actions">
+    <%= f.submit "发布" %>
+  </div>
+  <% end %>
+</div>
