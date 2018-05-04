@@ -277,15 +277,15 @@
 						<!-- start: User Dropdown -->
 							<li class="dropdown">
 								<a class="btn dropdown-toggle" data-toggle="dropdown" href="<%= user_path(current_user)%>">
-									<i class="halflings-icon white user"></i> <%= current_user.name%>
+									<i class="halflings-icon white user"></i> <%= current_user.nickname%>
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
 									<li class="dropdown-menu-title">
 	 									<span>用户</span>
 									</li>
-									<li><a href="#"><i class="halflings-icon user"></i> 个人空间</a></li>
-									<li><a href="login.html"><i class="halflings-icon off"></i> 登出</a></li>
+									<li><a href="<%= user_path(current_user)%>"><i class="halflings-icon user"></i> 个人空间</a></li>
+									<li><a href="<%= logout_path%>"><i class="halflings-icon off"></i> 登出</a></li>
 								</ul>
 							</li>
 						<!-- end: User Dropdown -->

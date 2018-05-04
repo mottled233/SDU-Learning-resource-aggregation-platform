@@ -18,11 +18,12 @@ Rails.application.routes.draw do
   get '/home', to: 'static_pages#home'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  get '/reg', to: 'user#new'
+  get '/reg', to: 'users#new'
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
   
   resources :users
+  
   post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
  
  

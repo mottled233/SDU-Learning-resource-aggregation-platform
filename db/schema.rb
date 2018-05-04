@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501100833) do
+ActiveRecord::Schema.define(version: 20180504151935) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -175,6 +175,26 @@ ActiveRecord::Schema.define(version: 20180501100833) do
     t.index ["user_id"], name: "index_user_configs_on_user_id"
   end
 
+  create_table "user_follow_associations", force: :cascade do |t|
+    t.integer  "following_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["followed_id"], name: "index_user_follow_associations_on_followed_id"
+    t.index ["following_id", "followed_id"], name: "unique_index_on_uua", unique: true
+    t.index ["following_id"], name: "index_user_follow_associations_on_following_id"
+  end
+
+  create_table "user_keyword_associations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "keyword_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["keyword_id"], name: "index_user_keyword_associations_on_keyword_id"
+    t.index ["user_id", "keyword_id"], name: "unique_index_on_uka", unique: true
+    t.index ["user_id"], name: "index_user_keyword_associations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "user_role"
@@ -186,6 +206,13 @@ ActiveRecord::Schema.define(version: 20180501100833) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.datetime "last_check_time"
+    t.string   "sex"
+    t.integer  "grade"
+    t.date     "birthday"
+    t.string   "user_class"
+    t.integer  "department_id"
+    t.integer  "speciality_id"
+    t.text     "self_introduce"
     t.index ["username"], name: "index_users_on_username"
   end
 

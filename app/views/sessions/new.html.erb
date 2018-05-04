@@ -1,5 +1,9 @@
 <% provide(:title, '登录') %>
+<% if flash.empty? %>
 <div style="height:200px"></div>
+<% else %>
+<div style="height:120px"></div>
+<% end %>
 <div class="row-fluid sortable">
     <div class="span12">
         <div class="span2 offset5">
@@ -11,13 +15,13 @@
 <hr style="color:black"/>
 
 <div class="row-fluid sortable">
-    <div class="span5 offset4">
+    <div class="box-content no-content span5 offset4">
         <%= form_for(:session, url: login_path, html:{class: "form-horizontal"}) do |f| %>
             <fieldset>
                 <div class="control-group">
                     <%= f.label :username, "用户名：", class: "control-label"%>
 				  <div class="controls">
-				  	<%= f.text_field :username, class: 'input-xlarge focused'%>
+				  	<%= f.text_field :username, class: 'input-xlarge'%>
 				  </div>
 				</div>
 				<div class="control-group">
@@ -43,7 +47,7 @@
 					</div>
 					<br/>
 					<div class="center">
-	            		<p>新用户? <%= link_to "点击这里注册", "#", class: "wb"%></p>
+	            		<p>新用户? <%= link_to "点击这里注册", reg_path, class: "wb"%></p>
 	            	</div>
             	</div>
             </fieldset>

@@ -907,7 +907,7 @@ ul.messages li .message {
 	z-index: 50;
   	margin-top: -1px;
 	padding: 10px;
-	background: #fff !important;
+	background: #fff;
 }
 
 /* Vertical Bar Chart
@@ -3021,9 +3021,18 @@ ul.messagesList li span.date {
 }
 
 footer { 
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    z-index:50;
     width: 97.9%;
     height:30px; 
     text-align:center; 
+}
+
+.no-content {
+	background-color: transparent;
+}
+
+field_with_errors {
+	background-color: transparent;
 }

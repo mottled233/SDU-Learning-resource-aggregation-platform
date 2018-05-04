@@ -53,8 +53,20 @@ class User < ApplicationRecord
     has_many :unlike_knowledge_associations, class_name: :BadAssociation, dependent: :destroy
     has_many :unlike_knowledges, through: :unlike_knowledge_associations, source: :knowledge
 
-    has_one :user_config    
+    has_many :user_keyword_associations, dependent: :destroy
+    has_many :focus_keywords, through: :user_keyword_associations, source: :keyword
     
+    has_many :following_associations, class_name: :UserFollowAssociation,
+                                        dependent: :destroy,
+                                        foreign_key: :following_id
+    has_many :followed_associations, class_name: :UserFollowAssociation,
+                                        dependent: :destroy,
+                                        foreign_key: :followed_id
+    has_many :followings, through: :following_associations, source: :followed, inverse_of: :followeds
+
+    has_many :followeds, through: :followed_associations, source: :following, inverse_of: :followings
+    
+    has_one :user_config    
     
     # class methods
     def User.digest(string)
