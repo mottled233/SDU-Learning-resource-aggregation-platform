@@ -4,6 +4,9 @@ class Keyword < ApplicationRecord
   has_many :course_keyword_associations, dependent: :destroy
   has_many :courses, through: :course_keyword_associations
   
+  has_many :user_keyword_associations, dependent: :destroy
+  has_many :users, through: :user_keyword_associations
+  
   has_many :keyword_knowledge_associations, dependent: :destroy
   has_many :knowledges, through: :keyword_knowledge_associations
   

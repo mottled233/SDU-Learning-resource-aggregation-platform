@@ -1,0 +1,26 @@
+<% provide(:title, "#{@user.nickname}的个人主页") %>
+<div class="container-fluid-full">
+  <div class="row-fluid">
+    <%= render 'users/aside' %>
+      
+    <div id="content" class="span9 offset1">
+        <div class="row-fluid">
+            <div class="span3 offset1" style="padding-left:100px;border-right:5px solid red;">
+                <section class="user_info">
+                    <h1>
+                        <%= gravatar_for @user%>
+                        <%= @user.nickname %>
+                    </h1>
+                </section>
+            </div>
+            <div class="span8">
+                <h3><%= @user.nickname%></h3>
+                <hr/>
+                <p>电子邮箱：<%=@user.email%></p>
+                <p>手机号：<%=@user.phone_number%></p>
+            </div>
+            <div style="height:800px"/>
+        </div>
+    </div>
+  </div>
+</div>

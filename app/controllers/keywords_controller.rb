@@ -153,7 +153,7 @@ class KeywordsController < ApplicationController
           format.html { redirect_to @redirect_path, notice: "关联已存在." }
         else
           if @keyword_course_association.save
-            format.html { redirect_to @redirect_path, notice: "成功创建." }
+            format.html { redirect_to keyword_path(@keyword), notice: "成功创建." }
           else
             format.html { render :new }
           end

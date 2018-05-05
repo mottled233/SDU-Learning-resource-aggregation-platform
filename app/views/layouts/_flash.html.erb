@@ -1,0 +1,12 @@
+  <%unless flash.empty? %>
+    <div style="height:20px"/>
+  <%end%>
+  <div class="container">
+    
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type%>">
+        <%=message%>
+      </div>
+    <% end %>
+    
+  </div>

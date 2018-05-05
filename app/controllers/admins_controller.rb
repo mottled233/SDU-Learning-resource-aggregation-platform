@@ -13,7 +13,7 @@ class AdminsController < ApplicationController
     
     def edit
         @admin = current_user
-# @admin = User.where("username=?","admin").first
+
     end
     
     def update

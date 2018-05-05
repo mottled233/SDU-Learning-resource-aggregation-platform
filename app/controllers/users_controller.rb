@@ -13,9 +13,10 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_param)
+    @user.user_role = USER_ROLE_STUDENT
     if @user.save
       @user.create_user_config
-      flash[:success] = "欢迎, #{@user.name}!"
+      flash[:success] = "欢迎, #{@user.username}!"
       log_in @user
       remember @user
       
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
   
   private
     def user_param
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone_number, :user_role, :nickname)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :phone_number, :user_role, :nickname)
     end
     
     

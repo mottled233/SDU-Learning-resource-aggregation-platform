@@ -7,8 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 department = Department.create(name:'software')
 teacher = User.create(username:'aaa',user_role:'teacher',nickname:'ttt',email:'m17864154809@163.com',phone_number:'13156141371',password:'123456')
-student = User.create(username:'hello',user_role:'student',nickname:'hhh',email:'123@163.com',phone_number:'17864154809',password:'12345678')
-admin = User.create(username:'admin',user_role:'admin',nickname:'tempadmin',email:'w-z-y1997@163.com',phone_number:'17864154856',password:'123456')
+
+admin = User.create(username:'admin',user_role:'admin',nickname:'tempadmin',email:'w-z-y1997@163.com',phone_number:'17864154856',password:'123456',sex:"男")
+student = User.create(username:'hello',user_role:'student',nickname:'hhh',email:'123@163.com',phone_number:'17864154809',password:'12345678',sex:"男")
+student2 = User.create(username:'mottled',user_role:'student',nickname:'梁惠欣',email:'6310@163.com',phone_number:'17864154861',password:'123456',sex:"男")
 course = Course.create(course_name: 'rails')
 keyword_down = Keyword.create(name:'frame')
 keyword_up = Keyword.create(name:'Ruby')
@@ -68,3 +70,9 @@ focus_knowledge_relationships.save
 course_speciality_relationship = CourseSpecialityAssociation.create(course_id: course.id, speciality_id: speciality.id)
 # good = GoodAssociation.create(user_id: student.id, knowledge_id: question.id)
 # bad = GoodAssociation.create(user_id: teacher.id, knowledge_id: question.id)
+
+
+student.focus_keywords<<(Keyword.first)
+student2.focus_keywords<<(Keyword.first)
+
+UserFollowAssociation.create(followed_id: student2.id, following_id: student.id)

@@ -9,7 +9,13 @@ class QuestionsController < KnowledgesController
         @question = Question.new
         @keywords = Keyword.all
     end
-    
+    def show
+        questions = Question.all
+        @knowledge = questions[params[:id].to_i]
+        if @knowledge.nil?
+            @knowledge = Knowledge.find(params[:id])
+        end
+    end
     def create
         # @question = Question.new(creator: params[:creator],title: params[:title],type:'Question',content:params[:content],good:0,bad:0)
         @question = Question.new(question_params);

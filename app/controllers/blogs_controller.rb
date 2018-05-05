@@ -9,7 +9,13 @@ class BlogsController < KnowledgesController
         @blog = Blog.new
         @keywords = Keyword.all
     end
-    
+     def show
+        blogs = Blog.all
+        @knowledge = blogs[params[:id].to_i]
+        if @knowledge.nil?
+            @knowledge = Knowledge.find(params[:id])
+        end
+    end
     def create
         @blog = Blog.new(blog_params);
         @blog.save
