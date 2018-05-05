@@ -36,6 +36,14 @@ p {
     line-height: 1.7em;
 }
 
+hr {
+    background-color:grey;
+}
+
+#content {
+    background-color:transparent;
+}
+
 /* header */
 #logo {
     float: left;
@@ -54,3 +62,6 @@ p {
 .nav-fix-top {
     position:fix;
 }
+
+
+

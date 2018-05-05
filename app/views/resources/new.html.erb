@@ -1,0 +1,9 @@
+
+<%= render 'form', resource: @resource %>
+<button>
+    <%if params[:course_id].nil?%>
+        <%= link_to '返回', resources_path %>
+    <%else%>
+        <%= link_to '返回', course_resources_path(params[:course_id]) %>
+    <%end%>
+</button>

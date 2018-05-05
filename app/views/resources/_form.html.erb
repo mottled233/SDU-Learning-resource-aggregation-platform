@@ -1,0 +1,42 @@
+<h1>问题发布</h1>
+<div class="release_resource">
+  <%= form_for :resource,:url => { :controller=>"resources",:action => "create"}, method: :post do |f| %>
+  <%if !current_user.nil?%>
+    <%= f.hidden_field:creator_id , :value => current_user.id %>
+    <%= f.hidden_field:type,:value => 'Resource' %>
+  <%end%>
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment %>  
+  </div>
+  <p>相关课程：</p>
+  <% for course in @courses %>  
+  <div>  
+    <%=check_box_tag 'courses[]', course.id %> <%= course.course_name %>
+  </div>  
+  <% end %>
+  <p>标签：</p>
+  <% for keyword in @keywords %>  
+  <div>  
+    <%=check_box_tag 'keywords[]', keyword.id %> <%= keyword.name %>
+  </div>  
+  <% end %>    
+
+  <%= f.hidden_field:good,:value => 0 %>
+
+  <%= f.hidden_field:bad,:value => 0 %>
+
+  <div class="actions">
+    <%= f.submit "发布" %>
+  </div>
+<% end %>
+
+</div>

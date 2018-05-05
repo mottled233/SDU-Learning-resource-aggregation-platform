@@ -1,20 +1,58 @@
 <% provide(:title, '登录') %>
-<h1>登录</h1>
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <%= form_for(:session, url: login_path) do |f| %>
-            
-            <%= f.label :username, "用户名："%>
-            <%= f.text_field :username, class: 'form-control'%>
-            <%= f.label :password, "密码：" %>
-            <%= f.password_field :password, class: 'form-control'%>
-            <%= f.label :remember_me, class: "checkbox inline" do %>
-                <%= f.check_box :remember_me %>
-                <span>记住登录</span>
-            <% end %>
-            <%= f.submit "登录", class: "btn btn-primary" %>
+<% if flash.empty? %>
+<div style="height:200px"></div>
+<% else %>
+<div style="height:120px"></div>
+<% end %>
+<div class="row-fluid sortable">
+    <div class="span12">
+        <div class="span2 offset5">
+            <h1 class="center">登录</h1>
+        </div>
+    </div>
+</div>
+
+<hr style="color:black"/>
+
+<div class="row-fluid sortable">
+    <div class="box-content no-content span5 offset4">
+        <%= form_for(:session, url: login_path, html:{class: "form-horizontal"}) do |f| %>
+            <fieldset>
+                <div class="control-group">
+                    <%= f.label :username, "用户名：", class: "control-label"%>
+				  <div class="controls">
+				  	<%= f.text_field :username, class: 'input-xlarge'%>
+				  </div>
+				</div>
+				<div class="control-group">
+                    <%= f.label :password, "密码：", class: "control-label"%>
+				  <div class="controls">
+				  	<%= f.password_field :password, class: 'input-xlarge'%>
+				  </div>
+				</div>
+				
+				<div class="span8">
+					<div class="center offset1">
+					  	<%= f.label :remember_me, class: "checkbox inline" do %>
+					  		<%= f.check_box :remember_me %>
+	                		<span>记住登录</span>
+					  	<% end %>
+				  	</div>
+				</div>
+				<div class="span9">
+					
+				  	<br/>
+					<div class="center">
+					  	<%= f.submit "登录", class: "btn btn-primary" %>
+					</div>
+					<br/>
+					<div class="center">
+	            		<p>新用户? <%= link_to "点击这里注册", reg_path, class: "wb"%></p>
+	            	</div>
+            	</div>
+            </fieldset>
         <% end %>
+
         
-        <p>新用户? <%= link_to "点击这里注册", "#"%></p>
     </div>
 </div>
