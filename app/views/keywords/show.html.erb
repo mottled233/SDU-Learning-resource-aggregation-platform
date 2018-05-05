@@ -1,106 +1,117 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, '关键词列表') %>
+<div id="container-fluid-full"> 
 
-<p>
-  <strong>关键字:</strong>
-  <%= @keyword.name %>
-</p>
+    <div id="row-fluid">
+      <%= render :partial => "admins/row_nav" %>
+      <div id="content" class="span8">
+        <p id="notice"><%= notice %></p>
+        
+        <p>
+          <strong>关键字:</strong>
+          <%= @keyword.name %>
+        </p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>关联课程编号</th>
+              <th>课程名</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @keyword.courses.each do |course| %>
+              <tr>
+        
+                <td><%= course.id %></td> 
+                <td><%= course.course_name %></td>
+        
+        
+                <!--<td><%#= link_to 'Destroy', "#", method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+                <!--应该是由用户有没有打标签来决定的 不应该有删除功能-->
+              </tr>
+            <% end %>
+          </tbody>
+          
+        </table>
+        
+        <p>
+          <!--无内容填充-->
+          <%if @keyword.courses.empty?%>
+            <%="无关联课程"%>
+            <%end%>
+        </p>
+        <%= link_to '关联到课程...', keywords_attachtocourse_path(@keyword) %>
+        <table>
+          <thead>
+            <tr>
+              <th>上级关键字</th>
+              <th>关键字</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @keyword.highers.each do |high| %>
+              <tr>
+               
+                <td><%= high.id %></td> 
+                <td><%= high.name %></td>
+                <td><%= link_to '详情', high %></td>
+        
+                <td><%= link_to '取消上下级关联', keywords_destory_high_association_path(high,@keyword), data: { confirm: "取消关联#{high.name}=>#{@keyword.name}" } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+          
+        </table>
+        
+        <p>
+          <!--无内容填充-->
+          <%if @keyword.highers.empty?%>
+            <%="无上级关键字"%>
+            <%end%>
+        </p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>下级关键字</th>
+              <th>关键字</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            
+            <% @keyword.lowers.each do |low| %>
+              <tr>
+               
+                <td><%= low.id %></td> 
+                <td><%= low.name %></td>
+                <td><%= link_to '详情', low %></td>
+        
+                <td><%= link_to '取消上下级关联', keywords_destory_low_association_path(@keyword,low), data: { confirm: "取消关联#{@keyword.name}=>#{low.name}" } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+          
+          
+        </table>
+        
+        <p>
+          <!--无内容填充-->
+          <%if @keyword.lowers.empty?%>
+            <%="无下级关键字"%>
+            <%end%>
+        </p>
+        
+        
+        <%= link_to '编辑', edit_keyword_path(@keyword) %> |
+        <%= link_to '返回到列表', keywords_path %>
+      </div> 
+    </div>
+</div> 
 
-<table>
-  <thead>
-    <tr>
-      <th>关联课程编号</th>
-      <th>课程名</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @keyword.courses.each do |course| %>
-      <tr>
-
-        <td><%= course.id %></td> 
-        <td><%= course.course_name %></td>
-
-
-        <!--<td><%#= link_to 'Destroy', "#", method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-        <!--应该是由用户有没有打标签来决定的 不应该有删除功能-->
-      </tr>
-    <% end %>
-  </tbody>
-  
-</table>
-
-<p>
-  <!--无内容填充-->
-  <%if @keyword.courses.empty?%>
-    <%="无关联课程"%>
-    <%end%>
-</p>
-<%= link_to '关联到课程...', keywords_attachtocourse_path(@keyword) %>
-<table>
-  <thead>
-    <tr>
-      <th>上级关键字</th>
-      <th>关键字</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @keyword.highers.each do |high| %>
-      <tr>
-       
-        <td><%= high.id %></td> 
-        <td><%= high.name %></td>
-        <td><%= link_to '详情', high %></td>
-
-        <td><%= link_to '取消上下级关联', keywords_destory_high_association_path(high,@keyword), data: { confirm: "取消关联#{high.name}=>#{@keyword.name}" } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  
-</table>
-
-<p>
-  <!--无内容填充-->
-  <%if @keyword.highers.empty?%>
-    <%="无上级关键字"%>
-    <%end%>
-</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>下级关键字</th>
-      <th>关键字</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    
-    <% @keyword.lowers.each do |low| %>
-      <tr>
-       
-        <td><%= low.id %></td> 
-        <td><%= low.name %></td>
-        <td><%= link_to '详情', low %></td>
-
-        <td><%= link_to '取消上下级关联', keywords_destory_low_association_path(@keyword,low), data: { confirm: "取消关联#{@keyword.name}=>#{low.name}" } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-  
-  
-</table>
-
-<p>
-  <!--无内容填充-->
-  <%if @keyword.lowers.empty?%>
-    <%="无下级关键字"%>
-    <%end%>
-</p>
-
-
-<%= link_to '编辑', edit_keyword_path(@keyword) %> |
-<%= link_to '返回到列表', keywords_path %>
+<div class="clearfix"></div>
