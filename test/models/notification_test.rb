@@ -8,6 +8,7 @@ class NotificationTest < ActiveSupport::TestCase
     @user = users(:student1)
     @user.password = "123456"
     @question = knowledges(:questions1)
+    @question.creator = users(:student1)
     @course = courses(:rails)
   end
   

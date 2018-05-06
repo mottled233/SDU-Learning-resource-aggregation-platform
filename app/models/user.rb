@@ -63,9 +63,8 @@ class User < ApplicationRecord
                                         dependent: :destroy,
                                         foreign_key: :followed_id
     has_many :followings, through: :following_associations, source: :followed, inverse_of: :followeds
-
     has_many :followeds, through: :followed_associations, source: :following, inverse_of: :followings
-    
+
     has_one :user_config    
     
     # class methods

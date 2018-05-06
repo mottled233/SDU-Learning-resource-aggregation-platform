@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180504151935) do
+ActiveRecord::Schema.define(version: 20180505123110) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -131,16 +131,17 @@ ActiveRecord::Schema.define(version: 20180504151935) do
   end
 
   create_table "knowledges", force: :cascade do |t|
-    t.integer  "creator_id"
-    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.integer  "knowledge_id"
     t.string   "title"
     t.string   "type"
     t.string   "content"
     t.string   "attachment"
     t.integer  "good"
     t.integer  "bad"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.datetime "last_reply_at"
   end
 
   create_table "notifications", force: :cascade do |t|

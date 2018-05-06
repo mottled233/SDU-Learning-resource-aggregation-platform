@@ -1,6 +1,10 @@
 class Knowledge < ApplicationRecord
+  include KnowledgesHelper
+  # callbacks
+  before_create :default_values
+  
   # association
-  belongs_to :creator,class_name: :User, inverse_of: :creatings, foreign_key: :creator_id
+  belongs_to :creator,class_name: :User, inverse_of: :creatings, foreign_key: :user_id
   
   has_many :course_knowledge_associations
   has_many :courses, through: :course_knowledge_associations
@@ -18,7 +22,6 @@ class Knowledge < ApplicationRecord
   
   has_many :unlike_user_associations, class_name: :BadAssociation, dependent: :destroy
   has_many :unlike_users, through: :unlike_user_associations, source: :user
-
   
   # class method
   def self.inherited(child)
@@ -34,7 +37,6 @@ class Knowledge < ApplicationRecord
     Knowledge.where(:type => entry_type).all
   end
   
-
   #选取最佳资源
   def Knowledge.chooseBestKnowledge(course,num)
     if course.nil?
@@ -54,7 +56,13 @@ class Knowledge < ApplicationRecord
   end
   
   def getReplies
-    replies = Reply.where(:topic => self.id).all
+    Reply.where(:topic => self.id).all
+  end
+  
+  def default_values
+    self.last_reply_at=Time.now
+    self.good = 0
+    self.bad = 0
   end
 
 end
