@@ -572,8 +572,7 @@ border-bottom: 1px solid transparent;
   	border-bottom: 1px solid #ffffff;
 }
 
-.dropdown-menu li a,
-.dropdown-menu li{
+.dropdown-menu li a{
   	display: block;
   	padding: 7px 10px !important;
   	clear: both;
