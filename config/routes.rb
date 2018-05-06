@@ -103,12 +103,14 @@ Rails.application.routes.draw do
   get "attachtocourse/:id", to: "keywords#attachtocourse", as: "keywords/attachtocourse"
   post "create_course_keyword_ass", to: "keywords#create_course_keyword_ass", as: "keywords/create_course_keyword_ass"
   
+  get "teachers/new", to: "teachers#new", as:"teachers/new"
   get "teachers", to:"teachers#index", as: "teachers"
   get "teachers/:id", to:"teachers#show", as: "teacher"
   get "teachers/newcourseass/:id", to:"teachers#newcourseass", as: "teachers/newcourseass"
-  get "teachers/deleteCourseTeacherAss/:id", to:"teachers#deleteCourseTeacherAss", as: "teachers/deleteCourseTeacherAss"
+  get "teachers/:id/deleteCourseTeacherAss/:cid", to:"teachers#deleteCourseTeacherAss", as: "teachers/deleteCourseTeacherAss"
   # get "teachers/edit/:id", to:"teachers#edit", as: "teachers/edit"
-
+  post "/teachers/:id/create_course_association", to: "teachers#create_course_association", as: "teachers/create_course_association"
+  
 # end:wzy's routes
 
 end

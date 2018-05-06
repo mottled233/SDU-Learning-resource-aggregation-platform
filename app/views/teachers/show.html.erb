@@ -33,15 +33,15 @@
               <tr>
                 <td><%= course.id %></td> 
                 <td><%= course.course_name %></td>
-                <td><%= link_to 'Show', "#" %></td>
+                <!--<td><%#= link_to 'Show', "#" %></td>-->
                 <!--<td><%#= link_to 'Edit', edit_department_path(department) %></td>-->
-                <td><%= link_to '删除关联', teachers_deleteCourseTeacherAss_path(@teacher,@course), data: { confirm: 'Are you sure????' } %></td>
+                <td><%= link_to '删除关联', teachers_deleteCourseTeacherAss_path(@teacher,course), data: { confirm: 'Are you sure????' } %></td>
               </tr>
             <% end %>
           </tbody>
         </table>
         
-        <%= link_to '编辑教师用户信息', teachers_edit_path(@teacher) %> |
+        <%#= link_to '编辑教师用户信息', teachers_edit_path(@teacher) %>
         <%= link_to '新建关联', teachers_newcourseass_path(@teacher) %> |
         <%= link_to '返回', teachers_path %> 
 
