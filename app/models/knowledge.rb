@@ -60,7 +60,6 @@ class Knowledge < ApplicationRecord
   end
   
   def default_values
-    self.last_reply_at=Time.now
     self.good = 0
     self.bad = 0
   end
