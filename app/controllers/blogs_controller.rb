@@ -9,7 +9,7 @@ class BlogsController < KnowledgesController
         @blog = Blog.new
         @keywords = Keyword.all
     end
-     def show
+    def show
         blogs = Blog.all
         @knowledge = blogs[params[:id].to_i]
         if @knowledge.nil?

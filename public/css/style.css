@@ -304,6 +304,10 @@ h6 {
 	line-height: 12px;
 }
 
+small {
+	font-size: 85%;
+}
+
 /* Header Section
 =================================================================== */
 .navbar {
@@ -526,9 +530,9 @@ border-bottom: 1px solid transparent;
 	top: -1px;
 	left: 10px;
 	border-right: 9px solid transparent;
-	border-bottom: 9px solid #222 !important;
+	/*border-bottom: 9px solid #222 !important;*/
 	border-left: 9px solid transparent;
-	content: '';
+	content: ''
 }
 
 .dropdown-menu {
@@ -568,7 +572,8 @@ border-bottom: 1px solid transparent;
   	border-bottom: 1px solid #ffffff;
 }
 
-.dropdown-menu li a {
+.dropdown-menu li a,
+.dropdown-menu li{
   	display: block;
   	padding: 7px 10px !important;
   	clear: both;
