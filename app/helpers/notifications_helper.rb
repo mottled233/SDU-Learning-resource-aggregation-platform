@@ -12,6 +12,7 @@ module NotificationsHelper
     NOTIFY_TYPE_BAD = "bad"
     NOTIFY_TYPE_DELETED = "deleted"
     NOTIFY_TYPE_REPLY = "reply"
+    NOTIFY_TYPE_ANSWER = "answer"
     NOTIFY_TYPE_BOUTIQUED = "boutiqued"
     NOTIFY_TYPE_PASS = "pass"
     NOTIFY_TYPE_REFUSE ="refuse"
@@ -103,6 +104,33 @@ module NotificationsHelper
         generate_notification!(user, knowledge,
                               notify_type: NOTIFY_TYPE_UPDATE,
                               entity_type: knowledge.type)
+      end
+      
+      # check new replies for user's creation and following quesion
+      knowledges_need_notify = user.focus_contents.
+                                where("knowledges.type=? and knowledges.last_reply_at>?",
+                                      ENTITY_TYPE_QUESTION, time)
+      knowledges_need_notify.each do |knowledge|
+        knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
+          generate_notification!(user, knowledge,
+                                notify_type: NOTIFY_TYPE_ANSWER,
+                                entity_type: knowledge.type,
+                                initiator_id: reply.creator_id,
+                                with_entity_id: reply.id,
+                                with_entity_type: reply.type)
+        end
+      end
+      knowledges_need_notify = user.creatings.
+                                where("knowledges.last_reply_at>?", time)
+      knowledges_need_notify.each do |knowledge|
+        knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
+          generate_notification!(user, knowledge,
+                                notify_type: NOTIFY_TYPE_ANSWER,
+                                entity_type: knowledge.type,
+                                initiator_id: reply.creator_id,
+                                with_entity_id: reply.id,
+                                with_entity_type: reply.type)
+        end
       end
       user.update_check_time
     end
