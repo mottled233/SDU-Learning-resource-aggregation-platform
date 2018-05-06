@@ -32,10 +32,14 @@
 				if (document.getElementById('dropdown'+(parseInt(id)+2).toString()))
 					document.getElementById('dropdown'+(parseInt(id)+2).toString()).parentNode.style.display="none";
 			}
+			if (id=='3')
+				document.getElementById('goButton').style.display="inline";
+			else
+				document.getElementById('goButton').style.display="none";
 		}
 	}
 </script>
-<div class="jumbotron" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>)">
+<div class="hero-unit" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>)">
 	<h1 style="color:white;">山东大学资源聚合平台</h1>
 	<p>
 		<div class="btn-group dropdown" onclick="dropdownOnClick(event,1)" style="display:inline">
@@ -65,7 +69,7 @@
 		    <li>课程B</li>
 		  </ul>
 		</div>&nbsp;
-		<button type="button" class="btn btn-primary" aria-label="Left Align">
+		<button id="goButton" type="button" class="btn btn-primary" aria-label="Left Align" style="display:none">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Go
 		</button>
 	</p>
@@ -81,7 +85,7 @@
 	</small>
 	</h1>
 </div>
-<div class="row">
+<div class="row-fluid">
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
@@ -146,7 +150,7 @@
 			<%end%>
 	</small>
 </div>
-<div class="row">
+<div class="row-fluid">
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
@@ -203,7 +207,7 @@
 <div class="projects-header page-header">
 	<h1><span class="icon-user" aria-hidden="true"></span>&nbsp;&nbsp;活跃用户</h1>
 </div>
-<div class="row">
+<div class="row-fluid">
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
