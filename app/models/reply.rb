@@ -14,15 +14,15 @@ class Reply < Knowledge
     
  # instance methods 
  def after_initial
-   self.update_attribute(:last_reply_at, self.created_at)
    master = self.topic
    flag = false
    while master.type==TYPE_REPLY do
+     master.update_attribute(:last_reply_at,self.created_at)
      master = master.topic
      flag = true
    end
    unless flag&&master.type==TYPE_QUESTION
-     master.update_attribute(:last_reply_at,self.last_reply_at)
+     master.update_attribute(:last_reply_at,self.created_at)
    end
  end
 end
