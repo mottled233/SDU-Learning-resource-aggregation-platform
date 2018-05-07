@@ -2,11 +2,11 @@
 module NotificationsHelper
     # constants
     # how to use: NotificationsHelper::ENTITY_TYPE_COURSE
-    ENTITY_TYPE_COURSE = "course"
-    ENTITY_TYPE_QUESTION = "question"
-    ENTITY_TYPE_BLOG = "blog"
-    ENTITY_TYPE_RESOURCE = "resource"
-    ENTITY_TYPE_REPLY = "reply"
+    ENTITY_TYPE_COURSE = "Course"
+    ENTITY_TYPE_QUESTION = "Question"
+    ENTITY_TYPE_BLOG = "Blog"
+    ENTITY_TYPE_RESOURCE = "Resource"
+    ENTITY_TYPE_REPLY = "Reply"
     
     NOTIFY_TYPE_GOOD = "good"
     NOTIFY_TYPE_BAD = "bad"
@@ -60,7 +60,7 @@ module NotificationsHelper
           end
        end
     end
-    
+    # need to split and optimize
     def check_notification(user)
       return unless user
       
@@ -111,23 +111,26 @@ module NotificationsHelper
                                 where("knowledges.type=? and knowledges.last_reply_at>?",
                                       ENTITY_TYPE_QUESTION, time)
       knowledges_need_notify.each do |knowledge|
+        
         knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
+          
           generate_notification!(user, knowledge,
                                 notify_type: NOTIFY_TYPE_ANSWER,
                                 entity_type: knowledge.type,
-                                initiator_id: reply.creator_id,
+                                initiator_id: reply.user_id,
                                 with_entity_id: reply.id,
                                 with_entity_type: reply.type)
+          debugger
         end
       end
       knowledges_need_notify = user.creatings.
-                                where("knowledges.last_reply_at>?", time)
+                                where("knowledges.last_reply_at>? and knowledges.last_reply_at-knowledges.created_at<1", time)
       knowledges_need_notify.each do |knowledge|
         knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
           generate_notification!(user, knowledge,
                                 notify_type: NOTIFY_TYPE_ANSWER,
                                 entity_type: knowledge.type,
-                                initiator_id: reply.creator_id,
+                                initiator_id: reply.user_id,
                                 with_entity_id: reply.id,
                                 with_entity_type: reply.type)
         end

@@ -17,9 +17,8 @@ class ReplyTest < ActiveSupport::TestCase
     
     reply2 = Reply.create(knowledge_id: reply1.id, user_id: users(:student1).id,
                     title: :test_reply2,content:"hhhh",created_at: Time.now+2.hour)
-    
     assert topic.last_reply_at-reply2.created_at<1.second
-    assert_not reply2.created_at-reply1.last_reply_at<1.second
+    assert reply2.created_at-Reply.find(reply1.id).last_reply_at<1.second
   end
   
   test "should do special to Question" do
@@ -37,7 +36,7 @@ class ReplyTest < ActiveSupport::TestCase
                     title: :test_reply2,content:"hhhh",created_at: Time.now+2.hour)
     
     assert_not reply2.created_at-topic.last_reply_at<1.second
-    assert_not reply2.created_at-reply1.last_reply_at<1.second
+    assert reply2.created_at-Reply.find(reply1.id).last_reply_at<1.second
   end
   
   test "topic association should work" do
