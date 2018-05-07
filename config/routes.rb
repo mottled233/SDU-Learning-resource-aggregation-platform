@@ -110,7 +110,8 @@ Rails.application.routes.draw do
   get "teachers/:id/deleteCourseTeacherAss/:cid", to:"teachers#deleteCourseTeacherAss", as: "teachers/deleteCourseTeacherAss"
   # get "teachers/edit/:id", to:"teachers#edit", as: "teachers/edit"
   post "/teachers/:id/create_course_association", to: "teachers#create_course_association", as: "teachers/create_course_association"
-  
+  post "teachers/create", to:"teachers#create", as:"teachers/create"
+  get "teachers/destroy/:id", to: "teachers#destroy", as:"teachers/destroy"
 # end:wzy's routes
 
 end

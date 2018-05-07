@@ -28,7 +28,7 @@
                 <td><%= teacher.username %></td>
                 <td><%= teacher.nickname %></td>
                 <td><%= link_to '详情', teacher_path(teacher) %></td>
-                <td><%#= link_to '删除', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <td><%= link_to '删除', teachers_destroy_path(teacher.id), data: { confirm: 'Are you sure?' } %></td>
               </tr>
             <% end %>
           </tbody>
@@ -36,7 +36,7 @@
         
         <br>
         
-        <%= link_to '新增教师', new_keyword_path %>
+        <%= link_to '新增教师', teachers_new_path %>
       </div> 
     </div>
 </div> 

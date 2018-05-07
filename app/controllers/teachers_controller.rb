@@ -1,6 +1,8 @@
 class TeachersController < ApplicationController
 
-    
+  def new
+    @user = User.new
+  end
 
   def index
     @teachers = User.where("user_role=?",:teacher)
@@ -9,6 +11,19 @@ class TeachersController < ApplicationController
   def show
     @teacher = User.find(params[:id])
     @courses = @teacher.selected_courses
+  end
+  
+  def destroy
+      respond_to do |format|
+        
+        if User.delete(params[:id])
+          format.html { redirect_to teachers_path, notice: "Teacher was successfully deleted." }
+        else
+          format.html { redirect_to teachers_path, notice: "Unknow Error"}
+        end
+        
+      end
+    
   end
   
   # def edit
@@ -64,6 +79,26 @@ class TeachersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def create
+    @user = User.new(user_param)
+    @user.user_role = USER_ROLE_TEACHER
+    if @user.save
+      @user.create_user_config
+      flash[:success] = "创建成功, #{@user.username}!"
+      # log_in @user
+      # remember @user
+      
+      redirect_to teachers_path
+    else
+      render 'new'
+    end
+  end
 
+  private
+    def user_param
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :phone_number, :user_role, :nickname)
+    end
+    
     
 end
