@@ -5,13 +5,6 @@ Rails.application.routes.draw do
 
   get 'departments/show'
 
-  get 'departments/create'
-
-  get 'departments/edit'
-
-  get 'departments/update'
-
-  get 'keywords/new'
 
   root 'static_pages#home'
   
@@ -63,4 +56,62 @@ Rails.application.routes.draw do
 # end:scx's routes
 
  get '/test', to: 'static_pages#test'
+# start:wzy's routes
+  resources :keywords
+  resources :departments
+  get 'departments/new'
+
+  get 'departments/show'
+
+  get 'departments/create'
+
+  get 'departments/edit'
+  
+ 
+
+  get 'departments/update'
+
+  get 'keywords/new'
+  
+  get '/admins/edit', to: 'admins#edit', as: "admin_edit"
+  post '/admins/update', to: 'admins#update', as: "adminUpdate"
+  get 'admins/department_manage'
+  get 'admins/own_space' => 'admins#own_space'
+  get 'admins/row_nav' => 'admins#row_nav'
+  get 'admins/ajaxtest' => 'admins#ajaxtest'
+  
+  get 'admins/form_edit' => 'admins#form_edit'
+  resources :admins
+  
+  # get 'departments/create_course_association' => 'departments#create_course_association'
+  post "/departments/:id/create_course_association", to: "departments#create_course_association", as: "departments/create_course_association"
+  get "/departments/:id/newcourseass", to: "departments#newcourseass", as: "departments/newcourseass"
+  
+  get "departments/:id/deleteCourseDeptAss/:cid", to: 'departments#deleteCourseDeptAss', as: "departments/deleteCourseDeptAss"
+  
+  get "courses/:id/course_departments_index", to: "courses#course_departments_index", as: "courses/course_departments_index"
+  
+  # post "/courses/:id/create_course_association", to: "courses#create_course_association", as: "departments/create_course_association"
+  get "/courses/:id/newdeptass", to: "courses#newdeptass", as: "courses/newdeptass"
+  
+  get "keywords/:hid/destory_high_association/:lid", to: 'keywords#destory_high_association', as: "keywords/destory_high_association"
+  get "keywords/:hid/destory_low_association/:lid", to: 'keywords#destory_low_association', as: "keywords/destory_low_association"
+  
+  post "/keywords/create_association", to: "keywords#create_association", as: "keywords/create_association"
+  get "newkeywordass", to: "keywords#newkeywordass", as: "keywords/newkeywordass"
+  
+  get "attachtocourse/:id", to: "keywords#attachtocourse", as: "keywords/attachtocourse"
+  post "create_course_keyword_ass", to: "keywords#create_course_keyword_ass", as: "keywords/create_course_keyword_ass"
+  
+  get "teachers/new", to: "teachers#new", as:"teachers/new"
+  get "teachers", to:"teachers#index", as: "teachers"
+  get "teachers/:id", to:"teachers#show", as: "teacher"
+  get "teachers/newcourseass/:id", to:"teachers#newcourseass", as: "teachers/newcourseass"
+  get "teachers/:id/deleteCourseTeacherAss/:cid", to:"teachers#deleteCourseTeacherAss", as: "teachers/deleteCourseTeacherAss"
+  # get "teachers/edit/:id", to:"teachers#edit", as: "teachers/edit"
+  post "/teachers/:id/create_course_association", to: "teachers#create_course_association", as: "teachers/create_course_association"
+  post "teachers/create", to:"teachers#create", as:"teachers/create"
+  get "teachers/destroy/:id", to: "teachers#destroy", as:"teachers/destroy"
+# end:wzy's routes
+
 end

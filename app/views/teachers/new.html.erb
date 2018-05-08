@@ -1,0 +1,69 @@
+<% provide(:title, '新增教师') %>
+<div id="container-fluid-full"> 
+
+    <div id="row-fluid">
+      <%= render :partial => "admins/row_nav" %>
+      <div id="content" class="span8">
+        <h1>新增教师</h1>
+        <div class="row-fluid sortable">
+    <div class="box-content no-content span5 offset4">
+      <%= render 'users/error_messages'%>
+        <%= form_for(@user,opration = {url: teachers_create_path}) do |f| %>
+          <fieldset>
+            
+            <div class="control-group">
+              <%= f.label :username, "用户名：", class: "control-label"%>
+    				  <div class="controls">
+    				  	<%= f.text_field :username, class: 'input-xlarge'%>
+    				  </div>
+  				  </div>
+  				  <div class="control-group">
+              <%= f.label :nickname, "昵称：", class: "control-label"%>
+    				  <div class="controls">
+    				  	<%= f.text_field :nickname, class: 'input-xlarge'%>
+    				  </div>
+  				  </div>
+    				<div class="control-group">
+              <%= f.label :password, "密码：", class: "control-label"%>
+    				  <div class="controls">
+    				  	<%= f.password_field :password, class: 'input-xlarge'%>
+    				  </div>
+    				</div>
+    				<div class="control-group">
+              <%= f.label :password_confirmation, "确认密码：", class: "control-label"%>
+    				  <div class="controls">
+    				  	<%= f.password_field :password_confirmation, class: 'input-xlarge'%>
+    				  </div>
+    				</div>
+    				<div class="control-group">
+              <%= f.label :email, "电子邮箱：", class: "control-label"%>
+    				  <div class="controls">
+    				  	<%= f.email_field :email, class: 'input-xlarge'%>
+    				  </div>
+    				</div>
+    				<div class="control-group">
+              <%= f.label :phone_number, "手机号码：", class: "control-label"%>
+    				  <div class="controls">
+    				  	<%= f.number_field :phone_number, class: 'input-xlarge'%>
+    				  </div>
+    				</div>
+		
+    				<div class="span9">
+    				  <br/>
+    					<div class="center">
+    					  	<%= f.submit "注册", class: "btn btn-primary" %>
+    					</div>
+            </div>
+          </fieldset>
+        <% end %>
+
+        
+    </div>
+</div>
+        
+        <%= link_to 'Back', teachers_path %>
+      </div> 
+    </div>
+</div> 
+
+<div style="height:100px"></div>

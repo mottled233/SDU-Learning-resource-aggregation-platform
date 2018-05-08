@@ -1,0 +1,30 @@
+
+<%= form_for(@keywords_associations, opration = {url: keywords_create_association_path}) do |f| %>
+  <% if @keywords_associations.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@keywords_associations.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% @keywords_associations.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+
+    <%= f.label "下级关键字序号" %>
+    <%= f.text_field :lower_id %>
+
+    <%= f.label "上级关键字序号" %>
+    <%= f.text_field :higher_id %>
+
+    
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

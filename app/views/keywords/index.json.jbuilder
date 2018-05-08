@@ -1,4 +1,4 @@
 json.array!(@keywords) do |keyword|
-  json.extract! keyword, :id, :name, :course_id
+  json.extract! keyword, :id, :name, :course
   json.url keyword_url(keyword, format: :json)
 end
