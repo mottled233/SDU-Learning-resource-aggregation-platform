@@ -9,4 +9,14 @@ module ApplicationHelper
             page_title + ' — ' + base_title
         end
     end
+    
+    def time_to_chinese(time)
+        time = time.sub(/year(s)?/, "年")
+        time = time.sub(/month(s)?/, "月")
+        time = time.sub(/day(s)?/, "日")
+        time = time.sub(/hour(s)?/, "小时")
+        time = time.sub(/minute(s)?/, "分钟")
+        time = time.sub(/second(s)?/, "秒")
+        time = time.sub(/about/,"")
+    end
 end

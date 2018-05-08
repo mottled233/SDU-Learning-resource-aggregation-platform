@@ -30,7 +30,7 @@ module NotificationsHelper
       # - norrow_entity(id, type)
       # - to_text(notification)
       # - check_notification(user)
-    
+    # should be ajax in controller in iter2
     def generate_notification!(user, notify_entity, options={})
         if user && notify_entity
             notification = user.notifications.build(options)
@@ -47,9 +47,11 @@ module NotificationsHelper
     def get_notifications!(user)
         if user
             check_notification user
-            list = user.notifications
-            user.notifications.clear
-            list
+            count_new = user.notifications.where("notifications.created_at>?",
+                                  user.last_check_time).count
+            list = user.notifications.order(created_at: :desc).limit(10)
+            user.update_check_time
+            [list,count_new]
         end
     end
     
@@ -117,7 +119,7 @@ module NotificationsHelper
                         Question: true}
       end
       
-      time = user.last_check_time || Time.now
+      time = user.last_check_time || Time.now - 1.day
       
       # find all knowledge in user selected course and in user_config
       course_config = course_config.delete_if {|key, var| var.nil?||var==false}
@@ -170,7 +172,6 @@ module NotificationsHelper
                                 with_entity_type: reply.type)
         end
       end
-      user.update_check_time
     end
 
 end
