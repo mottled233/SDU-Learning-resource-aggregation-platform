@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   
   get '/home', to: 'static_pages#home'
+  post '/show_speciality', to: 'static_pages#show_speciality'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/reg', to: 'users#new'
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
  resources :blogs
  resources :resources
  resources :replies
-
  
 
 # 点赞/踩/关注
