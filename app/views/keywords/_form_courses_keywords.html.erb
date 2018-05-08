@@ -1,0 +1,30 @@
+
+<%= form_for(@keyword_course_association, opration = {url: keywords_create_course_keyword_ass_path}) do |f| %>
+  <% if @keyword_course_association.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@keyword_course_association.errors.count, "error") %> prohibited this association from being saved:</h2>
+
+      <ul>
+      <% @keyword_course_association.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+
+    <%= f.label "关键字序号" %>
+    <%= f.text_field :keyword_id %>
+
+    <%= f.label "课程序号" %>
+    <%= f.text_field :course_id %>
+
+    <%= f.hidden_field :path, :value => keywords_attachtocourse_path(@keyword)%>
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

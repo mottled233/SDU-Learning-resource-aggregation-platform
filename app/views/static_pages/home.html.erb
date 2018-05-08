@@ -1,3 +1,4 @@
+<%= csrf_meta_tags %>
 <script>
 	function changecolor(id)
 	{
@@ -26,11 +27,49 @@
 		if (tname.toLowerCase()=='li')
 		{
 			document.getElementById('dropdown'+id).innerHTML=e.target.innerHTML+' <span class="caret">';
+			document.getElementById('dropdown'+id).setAttribute("data-id",e.target.getAttribute("data-id"));
 			if (document.getElementById('dropdown'+(parseInt(id)+1).toString()))
 			{
-				document.getElementById('dropdown'+(parseInt(id)+1).toString()).parentNode.style.display="inline";
 				if (document.getElementById('dropdown'+(parseInt(id)+2).toString()))
+				{
 					document.getElementById('dropdown'+(parseInt(id)+2).toString()).parentNode.style.display="none";
+					document.getElementById('ul'+(parseInt(id)+2).toString()).innerHTML="";
+				}
+				document.getElementById('dropdown'+(parseInt(id)+1).toString()).parentNode.style.display="inline";
+					document.getElementById('ul'+(parseInt(id)+1).toString()).innerHTML="";
+				var x={};
+				x.authenticity_token=$("meta[name='csrf-token']").attr("content");
+				x.department_id=e.target.getAttribute("data-id");
+				x.specify=parseInt(id);
+				var h=new XMLHttpRequest();
+				h.open('POST','/show_speciality');
+				h.setRequestHeader('Content-Type','application/json');
+				h.onload=function()
+				{
+					console.log(h.response);
+					var o=JSON.parse(h.response);
+					console.log(o.status);
+					console.log(o.message);
+					console.log(o.data);
+					if (o.status=="200"){
+						for (i=0;i<o.count;++i)
+						{
+							var newli=document.createElement("li");
+							newli.setAttribute("data-id",o.data[i].id);
+							if (o.data[i].name)
+								newli.innerHTML=o.data[i].name;
+							else
+								newli.innerHTML=o.data[i].course_name;
+							document.getElementById('ul'+(parseInt(id)+1).toString()).appendChild(newli);
+						}
+					}
+				}
+				h.send(JSON.stringify(x));
+				console.log(JSON.stringify(x));
+
+				
+				
+				
 			}
 			if (id=='3')
 				document.getElementById('goButton').style.display="inline";
@@ -39,6 +78,7 @@
 		}
 	}
 </script>
+<%= debug(params) if Rails.env.development? %>
 <div class="hero-unit" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>)">
 	<h1 style="color:white;">山东大学资源聚合平台</h1>
 	<p>
@@ -46,16 +86,17 @@
 		  <a id="dropdown1" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 		    学院 <span class="caret"></a>
 		  </button>
-		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-		    <li>学院A</li>
-		    <li>学院B</li>
+		  <ul id="ul1" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+		  	<% @departments.each do |department| %>
+		    	<li data-id=<%= department.id %>><%= department.name %></li>
+		    <% end %>
 		  </ul>
 		</div>
 		<div class="btn-group dropdown" onclick="dropdownOnClick(event,2)" style="display:none">
 		  <button id="dropdown2" class="btn dropdown-toggle" data-toggle="dropdown">
 		    专业 <span class="caret"></span>
 		  </button>
-		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+		  <ul id="ul2" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 		    <li>专业A</li>
 		    <li>专业B</li>
 		  </ul>
@@ -64,7 +105,7 @@
 		  <button id="dropdown3" class="btn dropdown-toggle" data-toggle="dropdown">
 		   课程 <span class="caret"></span>
 		  </button>
-		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+		  <ul id="ul3" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 		    <li>课程A</li>
 		    <li>课程B</li>
 		  </ul>
@@ -74,6 +115,7 @@
 		</button>
 	</p>
 </div>
+
 <div class="projects-header page-header">
 	<h1><span class="icon-edit" aria-hidden="true"></span>&nbsp;&nbsp;专栏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<small>
@@ -89,7 +131,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>内容内容内容内容内容内容内容内容内容内容内容内容缩略内容……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,7 +144,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>内容内容内容内容内容内容内容内容内容内容内容内容缩略内容……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -115,7 +157,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>内容内容内容内容内容内容内容内容内容内容内容内容缩略内容……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -128,7 +170,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>内容内容内容内容内容内容内容内容内容内容内容内容缩略内容……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -154,7 +196,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>描述描述描述描述描述描述描述描述描述描述描述描述描述描述……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -167,7 +209,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>描述描述描述描述描述描述描述描述描述描述描述描述描述描述……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -180,7 +222,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>描述描述描述描述描述描述描述描述描述描述描述描述描述描述……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -193,7 +235,7 @@
 	<div class="span3">
 	  <div class="thumbnail">
 	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>描述描述描述描述描述描述描述描述描述描述描述描述描述描述……</p>
+	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -212,7 +254,7 @@
 	  <div class="thumbnail">
 	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
 	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 这个人并没有留下什么签名。</p>
+	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -226,7 +268,7 @@
 	  <div class="thumbnail">
 	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
 	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 这个人并没有留下什么签名。</p>
+	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -240,7 +282,7 @@
 	  <div class="thumbnail">
 	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
 	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 这个人并没有留下什么签名。</p>
+	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
@@ -254,7 +296,7 @@
 	  <div class="thumbnail">
 	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
 	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 这个人并没有留下什么签名。</p>
+	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
 	  	<p class="text-center">
 	  		<small>
 	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;

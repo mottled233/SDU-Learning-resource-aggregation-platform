@@ -102,6 +102,28 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:course_id])
     @resource = Knowledge.get_all_entry('Resource')
   end
+  
+  def course_departments_index
+    @course = Course.find(params[:id])
+    @cd_ass = @course.course_department_associations
+  end
+  
+  def newdeptass
+    @course = Course.find(params[:id])
+    @course_department_associations = @course.course_department_associations.new()
+  end
+  
+  def deleteCourseDeptAss
+    @department = set_department
+    @courseAss = @department.course_department_associations.where("course_id =?",params[:cid])
+    CourseDepartmentAssociation.delete(@courseAss.first.id)
+    
+    respond_to do |format|
+      format.html { redirect_to courses_course_departments_index_path(params[:cid]), notice: 'DepartmentCourseAss was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

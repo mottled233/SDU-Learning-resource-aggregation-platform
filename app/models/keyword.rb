@@ -1,4 +1,5 @@
 class Keyword < ApplicationRecord
+
 #   关联关系 属于某一课程
   has_many :course_keyword_associations, dependent: :destroy
   has_many :courses, through: :course_keyword_associations
@@ -20,4 +21,5 @@ class Keyword < ApplicationRecord
                                    dependent:   :destroy
                                    
   has_many :lowers, through: :lower_relationships,  source: :lower, inverse_of: :highers
+
 end

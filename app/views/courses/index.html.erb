@@ -1,35 +1,51 @@
-<p id="notice"><%= notice %></p>
+        
 
-<h1>Courses</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Course name</th>
-      <th>Knowledge</th>
-      <th>Teacher</th>
-      <!--<th>Teacher relationship</th>-->
-      <th>Department</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.course_name %></td>
-        <td><%= course.knowledges %></td>
-        <td><%#= course.teacher %></td>
-        <td><%#= course.teacher_relationship %></td>
-        <td><%#= course.department %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% provide(:title, '全部课程') %>
+<div id="container-fluid-full"> 
 
-<br>
+    <div id="row-fluid">
+      <%= render :partial => "admins/row_nav" %>
+      <div id="content" class="span8">
+        
+        <p id="notice"><%= notice %></p>
+        
+        <h1>Courses</h1>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Course name</th>
+              <!--<th>Knowledge</th>-->
+              <th>Teacher</th>
+              <!--<th>Teacher relationship</th>-->
+              <th>Department</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% @courses.each do |course| %>
+              <tr>
+                <td><%= course.course_name %></td>
+                <!--<td><%#= course.knowledges %></td>-->
+                <td><%= link_to '授课教师', "#" %></td>
+                <!--<td><%#= course.teacher_relationship %></td>-->
+                <td><%= link_to '所属学院',courses_course_departments_index_path(course) %></td>
+                <td><%= link_to 'Show', course %></td>
+                <td><%= link_to 'Edit', edit_course_path(course) %></td>
+                <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+        <br>
+        
+        <%= link_to 'New Course', new_course_path %>
+      </div> 
+    </div>
+</div> 
 
-<%= link_to 'New Course', new_course_path %>
+<div class="clearfix"></div>

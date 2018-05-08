@@ -1,0 +1,31 @@
+
+<%= form_for(@course_teacher_association, opration = {url: teachers_create_course_association_path}) do |f| %>
+  <% if @course_teacher_association.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_teacher_association.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% @course_teacher_association.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "教师姓名" %>
+    <%= @teacher.nickname %>  
+    <br />
+    <%= f.label "课程序号" %>
+    <%= f.text_field :course_id %>
+    <%= f.hidden_field :user, :value => @teacher.to_key%>
+    <%= f.hidden_field :path, :value => @teacher%> 
+
+    
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

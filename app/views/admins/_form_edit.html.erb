@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for(@admin,  opration = {url: adminUpdate_path}) do |f| %>
+
+
+  <div class="field">
+    <%= f.hidden_field :id, :value => @admin.to_key%>
+    <%= f.label "用户名" %>
+    <%= f.text_field :username , :values => @admin.username%>
+    
+    <%= f.label "昵称" %>
+    <%= f.text_field :nickname , :values => @admin.nickname%>
+    
+    <%= f.label "邮箱" %>
+    <%= f.text_field :email , :values => @admin.email%>
+    
+    <%= f.label "电话" %>
+    <%= f.text_field :phone_number , :values => @admin.phone_number%>
+    
+    <%= f.label "新密码"%>
+    <%= f.password_field :password%>
+    
+    <%= f.label "确认新密码"%>
+    <%= f.password_field :password_cofirmed%>
+    
+    <%= f.label "输入旧密码以验证身份"%>
+    <%= f.password_field :password_old%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update Admin"%>
+  </div>
+<% end %>
