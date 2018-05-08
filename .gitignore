@@ -22,3 +22,4 @@
 
 /.gitignore
 /db/schema.rb
+/git_stats/*

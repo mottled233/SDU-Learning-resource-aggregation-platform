@@ -1,4 +1,5 @@
 class Notification < ApplicationRecord
+  include NotificationsHelper
   # validates
   validates :user_id, presence: true
   validates :entity_type, presence: true
@@ -7,4 +8,10 @@ class Notification < ApplicationRecord
   
   # associations
   belongs_to :user
+  
+  # instance method
+  def to_std_model
+    
+  end
+  
 end

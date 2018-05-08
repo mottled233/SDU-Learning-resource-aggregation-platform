@@ -75,4 +75,6 @@ course_speciality_relationship = CourseSpecialityAssociation.create(course_id: c
 student.focus_keywords<<(Keyword.first)
 student2.focus_keywords<<(Keyword.first)
 
+notification1 = student2.notifications.create(notify_type: :update, notify_entity_id: question.id, entity_type: :Question)
+notification2 = student.notifications.create(notify_type: :update, notify_entity_id: question.id, entity_type: :Question)
 UserFollowAssociation.create(followed_id: student2.id, following_id: student.id)
