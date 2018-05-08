@@ -13,16 +13,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "教师姓名" %>
-    <%= @teacher.nickname %>  
+    <%= f.label "课程名" %>
+    <%= @course.course_name %>  
     <br />
-    <%= f.label "课程序号" %>
-    <%= f.text_field :course_id %>
-    <%= f.hidden_field :user, :value => @teacher.to_key%>
-    <%= f.hidden_field :goodpath, :value => teacher_path(@teacher)%> 
-    <%= f.hidden_field :badpath, :value => teachers_newcourseass_path(@teacher)%> 
-    
-    <!--teachers_newcourseass_path(params[:course_user_association][:user])-->
+    <%= f.label "教师编号" %>
+    <%= f.text_field :user %>
+    <%= f.hidden_field :course_id, :value => @course.to_key%>
+    <%= f.hidden_field :badpath, :value => courses_newteacherass_path(@course)%>
+    <%= f.hidden_field :goodpath, :value => courses_course_teachers_index_path(@course)%>
+
 
     
     
