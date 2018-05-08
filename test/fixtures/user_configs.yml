@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one: 
-    user_id: student
+    user_id: student1
     courses_notification_config: "{\"Resource\":true, \"Blog\":true, \"Question\":true}"
     knowledges_notification_config: "{\"Reply\":true}"
 

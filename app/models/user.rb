@@ -7,6 +7,7 @@ class User < ApplicationRecord
     
     # callback
     before_save {self.email.downcase!}
+    after_create :after_initial
     
     # validates
     validates :username, presence: {message: "用户名不能为空"},
@@ -22,7 +23,8 @@ class User < ApplicationRecord
     validates :password, presence: {message: "密码不能为空"},
                         length: {in: 6..20, message: "密码必须为6-20位字符"}
                         
-    validates :email, presence: {message: "电子邮件不能为空"},
+    validates :email, presence: {message:
+    "电子邮件不能为空"},
                         length: { maximum: 255 ,message: "电子邮件不能超过255字符"}, 
                         format: { with: EMAIL_FORMAT ,message: "电子邮件格式错误"},
                         uniqueness: {case_sensitive: false ,message: "电子邮件已被使用"}
@@ -96,6 +98,10 @@ class User < ApplicationRecord
     
     def update_check_time
        self.update_attributes(last_check_time: Time.now) 
+    end
+    
+    def after_initial
+        create_user_config unless !user_config.nil?
     end
     
 end

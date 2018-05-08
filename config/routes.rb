@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :users
   
   post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
+  get '/users/:id/config', to: 'users#edit_config', as:"edit_user_config"
+  post '/users/:id/config', to: 'users#update_config', as:"update_user_config"
  
  
 # start:scx's routes
