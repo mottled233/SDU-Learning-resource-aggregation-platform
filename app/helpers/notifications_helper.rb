@@ -75,11 +75,11 @@ module NotificationsHelper
           when ENTITY_TYPE_QUESTION
             Question.find(id)
           when ENTITY_TYPE_BLOG
-            BLOG.find(id)
+            Blog.find(id)
           when ENTITY_TYPE_REPLY
-            REPLY.find(id)
+            Reply.find(id)
           when ENTITY_TYPE_RESOURCE
-            RESOURCE.find(id)
+            Resource.find(id)
         end
       end
     end
@@ -172,6 +172,7 @@ module NotificationsHelper
                                 with_entity_type: reply.type)
         end
       end
+      
     end
 
 end

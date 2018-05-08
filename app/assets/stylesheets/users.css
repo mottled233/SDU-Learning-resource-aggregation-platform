@@ -28,3 +28,7 @@
 .user-info-detail-inline ul{
   display: inline-block;
 }
+
+.plain-label{
+ display: inline; 
+}

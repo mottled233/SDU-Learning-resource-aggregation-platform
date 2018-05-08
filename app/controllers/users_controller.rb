@@ -62,12 +62,12 @@ class UsersController < ApplicationController
     param = params[:user_config]
     dict = {}
     ["Resource", "Question", "Blog"].each do |ele|
-      dict[ele] = !param[("course_"+ele.downcase).to_s].nil?
+      dict[ele] = param[("course_"+ele.downcase).to_s]=="1"
     end
     result[:courses_notification_config]=dict.to_json
     # update knowledge notification config
     dict = {}
-    dict["Reply"] = !param[:knowledge_reply].nil?
+    dict["Reply"] = param[:knowledge_reply]=="1"
     result[:knowledges_notification_config]=dict.to_json
     
     if @config.update_attributes(result)
@@ -77,6 +77,7 @@ class UsersController < ApplicationController
       flash[:danger] = "更新失败，未知原因错误"
       render 'users/edit_config'
     end
+    debugger
   end
   
   private

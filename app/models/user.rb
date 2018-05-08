@@ -97,7 +97,7 @@ class User < ApplicationRecord
     end
     
     def update_check_time
-       self.update_attributes(last_check_time: Time.now) 
+       self.update_attribute(:last_check_time, Time.now) 
     end
     
     def after_initial
