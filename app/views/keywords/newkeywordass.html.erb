@@ -1,6 +1,19 @@
-<h1>New Keywords Association</h1>
 
 
-<%= render 'form_keywords', keywords_association: @keywords_association %>
+<% provide(:title, '添加关键字上下级关系') %>
+<div id="container-fluid-full"> 
 
-<%= link_to 'Back', keywords_path %>
+    <div id="row-fluid">
+      <%= render :partial => "admins/row_nav" %>
+      <div id="content" class="span8">
+        <h1>添加上下级关系</h1>
+        <hr>
+        
+        <%= render 'form_keywords', keywords_association: @keywords_association %>
+        
+        <%= link_to '返回', keywords_path %>
+      </div> 
+    </div>
+</div> 
+
+<div class="clearfix"></div>

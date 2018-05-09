@@ -25,10 +25,14 @@ class KeywordsController < ApplicationController
   # POST /keywords.json
   def create
     @keyword = Keyword.new(keyword_params)
-
+    @easterEgg = 'Enjoy your work and have a nice day! --wang ziyue'
+    @notice = ''
+    if params[:keyword][:name] == '喵喵喵'
+      @notice = @easterEgg
+    end
     respond_to do |format|
       if @keyword.save
-        format.html { redirect_to @keyword, notice: 'Keyword was successfully created.' }
+        format.html { redirect_to @keyword, notice: "Keyword was successfully created.#{@notice}" }
         format.json { render :show, status: :created, location: @keyword }
       else
         format.html { render :new }

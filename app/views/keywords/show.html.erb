@@ -6,12 +6,14 @@
       <div id="content" class="span8">
         <p id="notice"><%= notice %></p>
         
-        <p>
-          <strong>关键字:</strong>
-          <%= @keyword.name %>
-        </p>
-        
-        <table>
+        <h3>关键字</h3>
+        <h1>
+          <strong><%= @keyword.name %></strong>
+        </h1>
+        <hr>
+    <div class="row">
+      <div class="span4">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>关联课程编号</th>
@@ -43,7 +45,10 @@
             <%end%>
         </p>
         <%= link_to '关联到课程...', keywords_attachtocourse_path(@keyword) %>
-        <table>
+      </div>
+
+      <div class="span4">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>上级关键字</th>
@@ -73,8 +78,10 @@
             <%="无上级关键字"%>
             <%end%>
         </p>
-        
-        <table>
+      </div>
+      
+      <div class="span4">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>下级关键字</th>
@@ -86,6 +93,7 @@
           <tbody>
             
             <% @keyword.lowers.each do |low| %>
+
               <tr>
                
                 <td><%= low.id %></td> 
@@ -106,8 +114,11 @@
             <%="无下级关键字"%>
             <%end%>
         </p>
+      </div> 
+      
         
-        
+    </div>    
+    <hr>
         <%= link_to '编辑', edit_keyword_path(@keyword) %> |
         <%= link_to '返回到列表', keywords_path %>
       </div> 
