@@ -92,10 +92,13 @@ Rails.application.routes.draw do
   get "departments/:id/deleteCourseDeptAss/:cid", to: 'departments#deleteCourseDeptAss', as: "departments/deleteCourseDeptAss"
   
   get "courses/:id/course_departments_index", to: "courses#course_departments_index", as: "courses/course_departments_index"
-  
+  get "courses/:id/course_teachers_index", to: "courses#course_teachers_index", as: "courses/course_teachers_index"
+
   # post "/courses/:id/create_course_association", to: "courses#create_course_association", as: "departments/create_course_association"
+  get "/courses/:id/newteacherass", to:"courses#newteacherass", as: "courses/newteacherass"
   get "/courses/:id/newdeptass", to: "courses#newdeptass", as: "courses/newdeptass"
-  
+  get "/courses/:id/deleteCourseTeacherAss/:cid", to:"courses#deleteCourseTeacherAss", as: "courses/deleteCourseTeacherAss"
+
   get "keywords/:hid/destory_high_association/:lid", to: 'keywords#destory_high_association', as: "keywords/destory_high_association"
   get "keywords/:hid/destory_low_association/:lid", to: 'keywords#destory_low_association', as: "keywords/destory_low_association"
   
@@ -108,7 +111,7 @@ Rails.application.routes.draw do
   get "teachers/new", to: "teachers#new", as:"teachers/new"
   get "teachers", to:"teachers#index", as: "teachers"
   get "teachers/:id", to:"teachers#show", as: "teacher"
-  get "teachers/newcourseass/:id", to:"teachers#newcourseass", as: "teachers/newcourseass"
+  get "teachers/:id/newcourseass", to:"teachers#newcourseass", as: "teachers/newcourseass"
   get "teachers/:id/deleteCourseTeacherAss/:cid", to:"teachers#deleteCourseTeacherAss", as: "teachers/deleteCourseTeacherAss"
   # get "teachers/edit/:id", to:"teachers#edit", as: "teachers/edit"
   post "/teachers/:id/create_course_association", to: "teachers#create_course_association", as: "teachers/create_course_association"

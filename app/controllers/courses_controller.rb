@@ -113,6 +113,11 @@ class CoursesController < ApplicationController
     @course_department_associations = @course.course_department_associations.new()
   end
   
+  def newteacherass 
+    @course = Course.find(params[:id])
+    @course_teacher_association = @course.course_user_associations.new()
+  end
+  
   def deleteCourseDeptAss
     @department = set_department
     @courseAss = @department.course_department_associations.where("course_id =?",params[:cid])
@@ -124,6 +129,26 @@ class CoursesController < ApplicationController
     end
     
   end
+  
+  def deleteCourseTeacherAss
+    @teacher = @teacher = User.find(params[:id])
+    @courseAss = @teacher.course_user_associations.where("course_id =?",params[:cid])
+    CourseUserAssociation.delete(@courseAss.first.id)
+    
+    respond_to do |format|
+      format.html { redirect_to courses_course_teachers_index_path(Course.find(params[:cid])), notice: 'TeachingAss was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+  
+  def course_teachers_index
+    @course = Course.find(params[:id])
+    @teachers = @course.users.where("user_role=?","teacher")
+  end
+  
+
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
