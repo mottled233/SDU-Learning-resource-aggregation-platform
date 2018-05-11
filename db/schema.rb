@@ -126,8 +126,10 @@ ActiveRecord::Schema.define(version: 20180510132142) do
 
   create_table "keywords", force: :cascade do |t|
     t.string   "name"
+    t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_keywords_on_course_id"
   end
 
   create_table "knowledges", force: :cascade do |t|
