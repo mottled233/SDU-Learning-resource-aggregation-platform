@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_param)
-      flash[:success] = "success to update user information!"
+      flash[:success] = "成功更新用户信息！"
       redirect_to @user
     else
       render 'edit'
@@ -77,12 +77,15 @@ class UsersController < ApplicationController
       flash[:danger] = "更新失败，未知原因错误"
       render 'users/edit_config'
     end
-    debugger
   end
   
   private
     def user_param
-      params.require(:user).permit(:username, :email, :password, :password_confirmation, :phone_number, :user_role, :nickname)
+      params.require(:user).permit(:username, :email, :password,
+                                  :password_confirmation, :phone_number,
+                                  :user_role, :nickname, :birthday,
+                                  :sex, :grade, :user_class, :self_introduce,
+                                  :speciality, :department)
     end
     
     def config_param

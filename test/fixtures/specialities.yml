@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: "软件工程"
+  department: one
 
 two:
-  name: MyString
+  name: "应用数学"
+  department: two
+  

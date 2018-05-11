@@ -1,4 +1,17 @@
+class DepartmentAndSpecialityValidator < ActiveModel::Validator
+  def validate(record)
+    unless record.department.blank? || record.department =~ /^[[空,无]$]/|| d=Department.where(name: record.department)[0]
+        record.errors[:department] << "学院不存在"
+        return
+    end
+    unless record.speciality.blank? || record.department =~ /^[[空,无]$]/|| d.specialities.where(name: record.speciality)[0]
+      record.errors[:speciality] << "该学院不存在该专业"
+    end
+  end
+end
+
 class User < ApplicationRecord
+    include ActiveModel::Validations
     # constants
     NAME_FORMAT = /\A[\w]+\z/
     NICK_FORMAT = /\A[\u4e00-\u9fa5a-zA-Z0-9]+\Z/
@@ -6,10 +19,11 @@ class User < ApplicationRecord
     PHONE_NUMBER_FORMAT = /\A[0-9]{11}\z/
     
     # callback
-    before_save {self.email.downcase!}
+    before_save :before_save
     after_create :after_initial
     
     # validates
+    validates_with DepartmentAndSpecialityValidator
     validates :username, presence: {message: "用户名不能为空"},
                         length: {in: 3..20, message: "用户名长度必须为1-20字之间"},
                         format: {with: NAME_FORMAT, message: "用户名只能含英文字母，数字，下划线"},
@@ -102,6 +116,19 @@ class User < ApplicationRecord
     
     def after_initial
         create_user_config unless !user_config.nil?
+        update_attributes(sex: "保密", grade: "空", user_class: "空",
+                            department: "空", speciality: "空",
+                            self_introduce: "这个人很懒，什么都没有留下")
+    end
+    
+    def before_save
+       self.email.downcase!
+       if d = Department.find_by(name: self.department)
+            self.department_id = d.id
+            if s = Speciality.find_by(name: self.speciality)
+                self.speciality_id = s.id
+            end
+       end
     end
     
 end
