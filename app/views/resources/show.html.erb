@@ -1,42 +1,59 @@
 <p id="notice"><%= notice %></p>
-<h1><%= link_to "Resource",'#'%></h1>
-<div class="resource-new">
-  <button id="newButton" type="button" class="btn btn-primary">
-    <%=link_to "我要发布",resource_new_path,method: :get%>
-  </button>
+<div class = "container"style="margin-bottom:50px">
+    <div class="breadcrumb" style="padding:0px;margin:0px">
+        <%= link_to resources_path,:class => "quick-button-small span1" do%>
+            <i class="icon-group"></i>
+            <h5>Resource</h5>
+        <%end%>
+        <button id="newButton" type="button" class="btn btn-small btn-warning" style="width:140px;height:40px;">
+          <%=link_to resource_new_path,method: :get do%>
+              <i class="halflings-icon white edit"></i>
+              <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
+          <%end%>
+        </button>
+    </div>
 </div>
-<p>
-  <strong>所属课程:</strong>
-  <% @knowledge.courses.each do|course| %>
-           <%= course.course_name %>&nbsp
-  <% end %>
-</p>
-<h2 style="float:center"><%= @knowledge.title %></h2>
-
-
-<div class = "container" style="margin-top:100px">
-    <p>
-      <strong>Content:</strong>
-      <%= @knowledge.content %>
-    </p>
-    <div class="attachment">
-      <h3>资源链接:</h3>
-      <%= link_to "#{@knowledge.attachment}", resource_file_download_path(:r_id => @knowledge.id) %>
+<div class="box span12" style="margin-top:50px;margin-left: 200px;margin-right: auto;">
+    <div class="box-header" data-original-title="">
+		<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%= @knowledge.title %></strong></h2>
+	</div>
+    <div class="box-content">
+        <div class="page-header">
+		  <h1><%= @knowledge.title %></h1>
+	    </div>
+        <p>
+          <!--<strong>Content:</strong>-->
+          <%= @knowledge.content %>
+        </p>
+        <div class="tooltip-demo well">
+            <p>
+              <strong>所属课程:</strong>
+              <% @knowledge.courses.each do|course| %>
+                       <%= course.course_name %>&nbsp
+              <% end %>
+            </p>
+            <p><strong>资源链接<strong>:
+            <%= link_to "#{@knowledge.attachment}",resource_file_download_path(:r_id => @knowledge.id)%>
+            </p>
+            <p style="text-align:justify;width:300px;display:inline"><strong>author</strong>:<%= @knowledge.creator.username%><%#=link_to "#{@knowledge.creator.username}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;<strong>发布时间</strong>:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
+            </p>
+            <div id="add_evalute-<%=@knowledge.id%>" style="display:inline">
+                 <%= render :partial => "knowledges/comments", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
+            </div>
+             <div id="focus" style="display:inline">
+                 <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  
+            </div>
+            <div style="display:inline">
+               <a class="ping"><%= @knowledge.getAllReplies.size%> 条评论</a>&nbsp;
+               <div class="reply" style="float:left;margin-top:50px">
+                 <%= render :partial => "knowledges/reply_show", :locals => { :q => @knowledge } %>  
+               </div>
+            </div>
+		</div>
     </div>
-    <p style="text-align:justify;width:300px;display:inline">author:<%= @knowledge.creator.username%><%#=link_to "#{@knowledge.creator.username}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;发布时间:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
-    </p>
-    <div id="add_evalute" style="display:inline">
-         <%= render :partial => "knowledges/comments", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
-    </div>
-     <div id="focus" style="display:inline">
-         <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  
-    </div>
-    <div style="display:inline">
-       <a class="ping"><%= @knowledge.getReplies.size%> 条评论</a>&nbsp;
-       <div class="reply" style="float:left">
-         <%= render :partial => "knowledges/reply_show", :locals => { :q => @knowledge } %>  
-       </div>
-    </div>
+    
+    
+   
 </div>
 
     
@@ -47,5 +64,12 @@
                   $(this).parent().children(".reply").slideToggle();
             });
       });
+      
+      $.each($(".btn.btn.btn-info"),function(){
+            $(this).bind("click",function(){
+                  $(this).parent().children(".answer-content").slideToggle();
+            });
+      });
   });
 </script>
+

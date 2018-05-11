@@ -1,38 +1,54 @@
-<h1>问题发布</h1>
-<div class="release_blog">
-  <%= form_for :blog,:url => { :controller=>"blogs",:action => "create"}, method: :post do |f| %>
-  <%if !current_user.nil?%>
-    <%= f.hidden_field:creator_id , :value => current_user.id %>
-    <%= f.hidden_field:type,:value => 'Blog' %>
-  <%end%>
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+<div class="box span10" style="margin-top:50px;margin-left: 300px;margin-right: auto;">
+  <div class="box-header" data-original-title="">
+		<h2><i class="halflings-icon white edit"></i><span class="break"></span>专栏发布</h2>
+	</div>
+	<div class="box-content">
+    <%= form_for :blog,:url => { :controller=>"blogs",:action => "create"}, method: :post, html: {class: "form-horizontal"} do |f| %>
+    <fieldset>
+      <%if !current_user.nil?%>
+        <%= f.hidden_field:user_id , :value => current_user.id %>
+        <%= f.hidden_field:type,:value => 'Blog' %>
+      <%end%>
+      <div class="control-group">
+			  <label class="control-label" for="typeahead">标题</label>
+			  <div class="controls">
+        <%= f.text_field :title %>
+			  </div>
+			</div>
+      <div class="control-group hidden-phone" style="width: 1000px; height: 250px;">
+			  <label class="control-label" for="textarea2">内容</label>
+			  <div class="controls">
+				<%= f.text_area :content,class: "cleditor",id: "textarea2",style: "display: none; width: 500px; height: 197px;" %><iframe frameborder="0" src="javascript:true;" style="width: 500px; height: 197px;"></iframe>
+			  </div>
+			</div>
+  		<div class="control-group">
+			  <label class="control-label" for="typeahead">课程</label>
+        <% for course in @courses %>  
+          <label class="checkbox inline">
+    			  <div class="checker" id="uniform-inlineCheckbox1"><span class=""><%=check_box_tag 'courses[]', course.id %></span></div> <%= course.course_name %>
+    		  </label>
+        <% end %>
+      </div>
+      <div class="control-group">
+			  <label class="control-label" for="typeahead">标签</label>
+        <% for keyword in @keywords %>  
+          <label class="checkbox inline">
+    			  <div class="checker" id="uniform-inlineCheckbox1"><span class=""><%=check_box_tag 'keywords[]', keyword.id %></span></div> <%= keyword.name %>
+    		  </label>
+        <% end %>
+      </div>
+      
+      <%= f.hidden_field:good,:value => 0 %>
+    
+      <%= f.hidden_field:bad,:value => 0 %>
+    
+      <div class="form-actions" style="width:870px;text-align:center;padding-left:50px;padding-right:50px">
+        <%= f.submit "发布" ,class: "btn btn-primary"%>
+        <button type="reset" class="btn">
+          <%= link_to "返回",:back%>
+        </button>
+      </div>
+    </fieldset>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
-  <p>相关课程：</p>
-  <% for course in @courses %>  
-  <div>  
-    <%=check_box_tag 'courses[]', course.id %> <%= course.course_name %>
-  </div>  
-  <% end %>
-  <p>标签：</p>
-  <% for keyword in @keywords %>  
-  <div>  
-    <%=check_box_tag 'keywords[]', keyword.id %> <%= keyword.name %>
-  </div>  
-  <% end %>    
-
-  <%= f.hidden_field:good,:value => 0 %>
-
-  <%= f.hidden_field:bad,:value => 0 %>
-
-  <div class="actions">
-    <%= f.submit "发布" %>
-  </div>
-<% end %>
-
 </div>

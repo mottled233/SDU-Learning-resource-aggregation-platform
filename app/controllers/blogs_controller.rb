@@ -11,7 +11,7 @@ class BlogsController < KnowledgesController
     end
     def show
         blogs = Blog.all
-        @knowledge = blogs[params[:id].to_i]
+        @knowledge = blogs[params[:id].to_i-1]
         if @knowledge.nil?
             @knowledge = Knowledge.find(params[:id])
         end
@@ -38,7 +38,7 @@ class BlogsController < KnowledgesController
      private
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.require(:blog).permit(:creator_id,:title, :type,:content, :good, :bad)
+      params.require(:blog).permit(:user_id,:title, :type,:content, :good, :bad)
     end
 
 end

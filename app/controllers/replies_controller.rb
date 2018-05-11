@@ -16,13 +16,16 @@ class RepliesController < ApplicationController
             redirect_to resource_path(@reply.topic)
         elsif t.eql?('Blog')
             redirect_to blog_path(@reply.topic)
+        elsif t.eql?('Reply')
+            flash[:notice] = "评论成功"
+            redirect_to :back
         end
             
     end
      private
     # Never trust parameters from the scary internet, only allow the white list through.
     def reply_params
-      params.require(:reply).permit(:creator_id, :topic_id,:type,:content, :good, :bad)
+      params.require(:reply).permit(:user_id, :knowledge_id,:type,:content, :good, :bad)
     end
     
 end

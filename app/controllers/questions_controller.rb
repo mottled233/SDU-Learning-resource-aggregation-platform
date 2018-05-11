@@ -11,7 +11,7 @@ class QuestionsController < KnowledgesController
     end
     def show
         questions = Question.all
-        @knowledge = questions[params[:id].to_i]
+        @knowledge = questions[params[:id].to_i-1]
         if @knowledge.nil?
             @knowledge = Knowledge.find(params[:id])
         end
@@ -39,7 +39,7 @@ class QuestionsController < KnowledgesController
      private
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:creator_id,:title, :type,:content, :good, :bad)
+      params.require(:question).permit(:user_id,:title, :type,:content, :good, :bad)
     end
 
 end
