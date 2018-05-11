@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505123110) do
+ActiveRecord::Schema.define(version: 20180510132142) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -214,6 +214,8 @@ ActiveRecord::Schema.define(version: 20180505123110) do
     t.integer  "department_id"
     t.integer  "speciality_id"
     t.text     "self_introduce"
+    t.string   "department"
+    t.string   "speciality"
     t.index ["username"], name: "index_users_on_username"
   end
 

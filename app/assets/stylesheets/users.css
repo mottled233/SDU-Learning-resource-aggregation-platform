@@ -32,3 +32,13 @@
 .plain-label{
  display: inline; 
 }
+
+.user-form .user-form-controller .inline-block{
+  display: inline;
+  
+}
+
+.user-form .user-form-controller .input{
+  height: 1.8em;
+  font-size:1.2em;
+}
