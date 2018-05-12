@@ -1,9 +1,9 @@
 <div class="box span10" style="margin-top:50px;margin-left: 300px;margin-right: auto;">
   <div class="box-header" data-original-title="">
-		<h2><i class="halflings-icon white edit"></i><span class="break"></span>专栏发布</h2>
+		<h2><i class="halflings-icon white edit"></i><span class="break"></span>专栏更新</h2>
 	</div>
 	<div class="box-content">
-    <%= form_for :blog,:url => { :controller=>"blogs",:action => "create"}, method: :post, html: {class: "form-horizontal"} do |f| %>
+    <%= form_for :blog,:url => { :controller=>"blogs",:action => "update"},method: :put,html: {class: "form-horizontal"} do |f| %>
     <fieldset>
       <%if !current_user.nil?%>
         <%= f.hidden_field:user_id , :value => current_user.id %>

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
  
 # start:scx's routes
  get "/resources/file_download",to: "resources#file_download",as:"resource_file_download"
+ get "/resources/file_delete",to: "resources#file_delete",as:"resource_file_delete"
  
  get "/courses/:course_id/questions", to: "courses#questions_index", as: "course_questions"
  get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
@@ -36,7 +37,6 @@ Rails.application.routes.draw do
   
 # 评论
  get 'knowledges/reply_show',to: "knowledges#reply_show",as: "reply_show"
-
  resources :courses
  resources :questions
  resources :blogs

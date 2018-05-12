@@ -1,13 +1,13 @@
 <div class="box span10" style="margin-top:50px;margin-left: 300px;margin-right: auto;">
   <div class="box-header" data-original-title="">
-		<h2><i class="halflings-icon white edit"></i><span class="break"></span>专栏发布</h2>
+		<h2><i class="halflings-icon white edit"></i><span class="break"></span>专栏更新</h2>
 	</div>
 	<div class="box-content">
-    <%= form_for :blog,:url => { :controller=>"blogs",:action => "create"}, method: :post, html: {class: "form-horizontal"} do |f| %>
+    <%= form_for :question,:url => { :controller=>"questions",:action => "update"},method: :put,html: {class: "form-horizontal"} do |f| %>
     <fieldset>
       <%if !current_user.nil?%>
         <%= f.hidden_field:user_id , :value => current_user.id %>
-        <%= f.hidden_field:type,:value => 'Blog' %>
+        <%= f.hidden_field:type,:value => 'Question' %>
       <%end%>
       <div class="control-group">
 			  <label class="control-label" for="typeahead">标题</label>
@@ -27,7 +27,7 @@
           <label class="checkbox inline">
     			  <div class="checker" id="uniform-inlineCheckbox1">
     			    <span class="">
-    			      <%if @blog.courses.include?(course)%>
+    			      <%if @question.courses.include?(course)%>
     			        <%=check_box_tag 'courses[]', course.id,checked: :true %>
     			      <%else%>
     			        <%=check_box_tag 'courses[]', course.id%>
@@ -44,7 +44,7 @@
           <label class="checkbox inline">
     			  <div class="checker" id="uniform-inlineCheckbox1">
     			    <span class="">
-    			       <%if @blog.keywords.include?(keyword)%>
+    			       <%if @question.keywords.include?(keyword)%>
     			        <%=check_box_tag 'keywords[]', keyword.id,checked: :true %>
     			      <%else%>
     			       <%=check_box_tag 'keywords[]', keyword.id %>

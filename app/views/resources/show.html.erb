@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%if !flash[:notice].nil?%>
+    <div class="alert alert-success">
+    	<button type="button" class="close" data-dismiss="alert">×</button>
+    	<strong><%= flash[:notice]%></strong>
+    </div>
+<%end%>
 <div class = "container"style="margin-bottom:50px">
     <div class="breadcrumb" style="padding:0px;margin:0px">
         <%= link_to resources_path,:class => "quick-button-small span1" do%>
