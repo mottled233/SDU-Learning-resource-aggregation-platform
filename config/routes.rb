@@ -102,6 +102,8 @@ Rails.application.routes.draw do
   get "keywords/:hid/destory_high_association/:lid", to: 'keywords#destory_high_association', as: "keywords/destory_high_association"
   get "keywords/:hid/destory_low_association/:lid", to: 'keywords#destory_low_association', as: "keywords/destory_low_association"
   
+  get "/keywords/ajaxnames/:id", to:"keywords#ajaxnames"
+  
   post "/keywords/create_association", to: "keywords#create_association", as: "keywords/create_association"
   get "newkeywordass", to: "keywords#newkeywordass", as: "keywords/newkeywordass"
   
