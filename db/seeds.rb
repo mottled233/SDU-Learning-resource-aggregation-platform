@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 department = Department.create(name:'软件学院')
+speciality = department.specialities.create(name:'软件工程')
 teacher = User.create(username:'aaa',user_role:'teacher',nickname:'ttt',email:'m17864154809@163.com',phone_number:'13156141371',password:'123456')
 
 admin = User.create(username:'admin',user_role:'admin',nickname:'tempadmin',email:'w-z-y1997@163.com',phone_number:'17864154856',password:'123456',sex:"男")
