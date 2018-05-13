@@ -3,6 +3,7 @@ require "knowledges_controller"
 class ResourcesController < KnowledgesController
     def index
         @resource = Resource.all
+        @resource = Resource.paginate(:page => params[:page], :per_page => 4)
     end
     def new
         super
@@ -30,20 +31,38 @@ class ResourcesController < KnowledgesController
         @resource = Resource.new(resource_params);
         filename = uploadfile(params[:resource][:attachment])  
         @resource.attachment = filename  
-        @resource.save
-        keyword_list = params[:keywords];
-        keyword_list.each do |key|
-            keyword_knowledge_relationships = @resource.keyword_knowledge_associations.create
-            keyword_knowledge_relationships.keyword = Keyword.find(key)
-            keyword_knowledge_relationships.save
+        if @resource.save
+            keyword_list = params[:keywords];
+            if !keyword_list.nil?
+                keyword_list.each do |key|
+                    keyword_knowledge_relationships = @resource.keyword_knowledge_associations.create
+                    keyword_knowledge_relationships.keyword = Keyword.find(key)
+                    keyword_knowledge_relationships.save
+                end
+            else
+                b = false;
+                flash[:notice] = '无关联关键词'
+                redirect_to :back
+            end
+            course_list = params[:courses];
+            if !course_list.nil?
+                course_list.each do |c|
+                    course_knowledge_relationships = @resource.course_knowledge_associations.create
+                    course_knowledge_relationships.course = Course.find(c)
+                    course_knowledge_relationships.save
+                end
+            else
+                b = false;
+                flash[:notice] = '无关联课程'
+                redirect_to :back
+            end
+            if b
+                redirect_to resource_path(@resource)
+            end
+        else
+            flash[:notice] = '不合法的参数'
+            redirect_to :back
         end
-        course_list = params[:courses];
-        course_list.each do |c|
-            course_knowledge_relationships = @resource.course_knowledge_associations.create
-            course_knowledge_relationships.course = Course.find(c)
-            course_knowledge_relationships.save
-        end
-        redirect_to resource_path(@resource)
     end
     def update
         @resource = Resource.find(params[:id])
@@ -51,37 +70,55 @@ class ResourcesController < KnowledgesController
              filename = uploadfile(params[:resource][:attachment])  
              @resource.attachment = filename  
         end
+         b = true;
+        respond_to do |format|
           if @resource.update(resource_params)
             redirect_to resource_path(@resource)
             keyword_list = params[:keywords];
             course_list = params[:courses];
-            @resource.keywords.each do |key|
-                if !keyword_list.include?(key)
-                        @resource.keywords.delete(key);
-                end
+            if keyword_list.nil?
+                b = false;                
+                flash[:notice] = '无关联关键词'
             end
-            @resource.courses.each do |c|
-                if !course_list.include?(c)
-                        @resource.courses.delete(c);
-                end
+            if course_list.nil?
+                b = false; 
+                flash[:notice] = '无关联课程'
             end
-            if !keyword_list.nil?
-                keyword_list.each do |key|
-                    keyword_knowledge_relationships = @resource.keyword_knowledge_associations.create
-                    keyword_knowledge_relationships.keyword = Keyword.find(key)
-                    keyword_knowledge_relationships.save
+            
+            if b
+                @resource.keywords.each do |key|
+                    if !keyword_list.include?(key)
+                            @resource.keywords.delete(key);
+                    end
                 end
-            end
-            if !course_list.nil?
-                course_list.each do |c|
-                    course_knowledge_relationships = @resource.course_knowledge_associations.create
-                    course_knowledge_relationships.course = Course.find(c)
-                    course_knowledge_relationships.save
+                @resource.courses.each do |c|
+                    if !course_list.include?(c)
+                            @resource.courses.delete(c);
+                    end
                 end
+                if !keyword_list.nil?
+                    keyword_list.each do |key|
+                        keyword_knowledge_relationships = @resource.keyword_knowledge_associations.create
+                        keyword_knowledge_relationships.keyword = Keyword.find(key)
+                        keyword_knowledge_relationships.save
+                    end
+                end
+                if !course_list.nil?
+                    course_list.each do |c|
+                        
+                        course_knowledge_relationships = @resource.course_knowledge_associations.create
+                        course_knowledge_relationships.course = Course.find(c)
+                        course_knowledge_relationships.save
+                    end
+                end
+            else
+                format.html { render :edit } and return
             end
           else
-            format.html { render :edit }
+             flash[:notice] = '不合法的参数'
+             format.html { render :edit } and return
           end
+        end
         
     end
     def file_download  
