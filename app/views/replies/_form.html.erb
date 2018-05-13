@@ -1,21 +1,19 @@
-<h3>回复内容</h3>
-<div class="release_reply">
+<div class="release_reply" style="display:inline">
   <%= form_for :reply,:url => { :controller=>"replies",:action => "create"}, method: :post do |f| %>
   <%if !current_user.nil?%>
-    <%= f.hidden_field:creator_id , :value => current_user.id %>
+    <%= f.hidden_field:user_id , :value => current_user.id %>
     <%= f.hidden_field:type,:value => 'Reply' %>
   <%end%>
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
-  <%= f.hidden_field :topic_id,:value => topic.id%>
+  <div class="control-group success" style="display:inline;">
+    <%= f.text_field :content,:id => "inputSuccess",style: "width:600px;margin-top:10px"%>
+	</div>
+  <%= f.hidden_field :knowledge_id,:value => topic.id%>
   <%= f.hidden_field:good,:value => 0 %>
 
   <%= f.hidden_field:bad,:value => 0 %>
 
-  <div class="actions">
-    <%= f.submit "发布" %>
+  <div class="action" style="display:inline;">
+    <%= f.submit "发布" ,class: "btn btn-success"%>
   </div>
   <% end %>
 </div>

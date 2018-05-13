@@ -1,9 +1,2 @@
 
 <%= render 'form', blog: @blog %>
-<button>
-    <%if params[:course_id].nil?%>
-        <%= link_to '返回', blogs_path %>
-    <%else%>
-        <%= link_to '返回', course_blogs_path(params[:course_id]) %>
-    <%end%>
-</button>

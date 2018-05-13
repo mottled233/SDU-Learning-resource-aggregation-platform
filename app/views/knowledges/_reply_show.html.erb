@@ -1,9 +1,9 @@
 <div class="container">
-    <%firstLayer = q.getReplies%>
-    <%firstLayer.each do|reply|%>
-        <div class="panel-heading">
-           <%="#{reply.creator.username}回复#{reply.topic.creator.username}:"%>
-        </div>
+    <%layer = q.getAllReplies%>
+    <%layer.each do|reply|%>
+    <div class="box span10">
+    	<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%="#{reply.creator.username}   回复   #{reply.topic.creator.username}:"%></h2>
+        <div class="box-content">
         <div class="panel-body">
             <p><%= reply.content %></p>
         </div>
@@ -12,17 +12,16 @@
             <div id="add_evalute-<%= reply.id%>" style="display:inline">
                  <%= render :partial => "knowledges/comments", :locals => { :knowledge => reply } %>  
             </div>
+            <div style="display:inline">
+               <%= reply.getAllReplies.size%> 条评论&nbsp;
+            </div>
             <div id="answer-<%= reply.id%>" style="display:inline">
                 <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => reply } %> 
             </div>
-            <div style="display:inline">
-               <a class="ping"><%= reply.getReplies.size%> 条评论</a>&nbsp;
-               <div class="reply" style="display:none" style="float:left">
-                 <%= render :partial => "knowledges/reply_show", :locals => { :q => reply } %>  
-               </div>
-            </div>
             </p>
           </div>
+        </div>
+    </div>
     <%end%>
 </div>
 
