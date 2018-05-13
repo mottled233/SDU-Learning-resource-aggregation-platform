@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'searches/index'
+
+  get 'searches/result'
+
  resources :departments
   get 'departments/new'
 
