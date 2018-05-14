@@ -199,7 +199,7 @@ class User < ApplicationRecord
         knowledges_need_notify.each do |knowledge|
           knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
             generate_notification!(knowledge,
-                                  notify_type: NOTIFY_TYPE_ANSWER,
+                                  notify_type: NOTIFY_TYPE_REPLY,
                                   entity_type: knowledge.type,
                                   initiator_id: reply.user_id,
                                   with_entity_id: reply.id,

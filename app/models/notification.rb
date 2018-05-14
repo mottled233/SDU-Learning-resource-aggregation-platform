@@ -39,6 +39,13 @@ class Notification < ApplicationRecord
       %Q{用户"#{User.find(initiator_id).nickname}"回答了您关注的问题"#{entity.title}"。}
     when NOTIFY_TYPE_UPDATE
       %Q{您关注的资源"#{entity.title}"更新了。}
+    when NOTIFY_TYPE_REPLY
+      if entity.type==ENTITY_TYPE_REPLY
+        str = "回复"
+      else
+        str = entity.title
+      end
+      %Q{用户"#{User.find(initiator_id).nickname}"回复了您的发表的"#{str}"。}
     else
       %Q{通知类型：#{notify_type}。}
     end

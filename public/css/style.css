@@ -3040,3 +3040,7 @@ footer {
 field_with_errors {
 	background-color: transparent;
 }
+
+a:hover {
+    background-color: transparent;
+}

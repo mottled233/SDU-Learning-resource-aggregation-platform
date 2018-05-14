@@ -25,4 +25,16 @@ class Reply < Knowledge
      master.update_attribute(:last_reply_at,self.created_at)
    end
  end
+ 
+ def ancestor
+  master = self.topic
+  while master.type==TYPE_REPLY do
+    master = master.topic
+  end
+  master
+ end
+ 
+ def to_path
+  self.ancestor.to_path
+ end
 end

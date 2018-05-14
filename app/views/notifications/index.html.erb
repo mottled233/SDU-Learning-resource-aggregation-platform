@@ -15,21 +15,23 @@
                <hr style="background-color:grey"/> 
             </div>
         </div>
+        
         <% @notifications.each do |notification|%>
-        <div class="row-fluid ">
-            <div class="row-fluid span8">
-                <%=notification.notify_type%>
+        <div class="row-fluid">
+            <div class="row-fluid span7 offset1">
+                <%=to_html notification%>
+                <hr style="background-color:grey"/>
             </div>
         </div>
         <% end %>
         <div class="row-fluid ">
             <div class="row-fluid span8 center">
-                <%= will_paginate @notifications %>
+                <%= will_paginate %>
             </div>
         </div>
-        
+        <div style="height:500px"/>
     <% if @notifications.count<5 %>
-        <div style="height:700px"/>
+        <div style="height:500px"/>
     <% end %>
     </div>
   </div>
