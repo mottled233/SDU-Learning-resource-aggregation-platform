@@ -139,9 +139,10 @@ class User < ApplicationRecord
     end
     
     # 返回用户的notification列表，同时更新检查时间，并提供分页功能。
-    def get_notify! page=1, per_page=10
+    def get_notify! page=1, per_page=10, notify_type="all"
+        type = notify_type_group(notify_type)
         self.update_check_time
-        self.notifications.order(created_at: :desc).paginate(page: page,per_page: per_page)
+        self.notifications.where(notify_type: type).order(created_at: :desc).paginate(page: page,per_page: per_page)
     end
     
       # 为用户创造一个notification的辅助方法
@@ -154,7 +155,7 @@ class User < ApplicationRecord
     end
     
     def update_notification
-        course_config = self.config_config
+        course_config = self.course_config
         time = self.last_check_time || Time.now - 1.day
         
         # check courses user has followed

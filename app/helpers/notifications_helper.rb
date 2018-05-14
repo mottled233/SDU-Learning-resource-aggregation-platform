@@ -31,7 +31,19 @@ module NotificationsHelper
       # - check_notification(user)
     # should be ajax in controller in iter2
     
-    
+    def notify_type_group(notify_type)
+      case notify_type.to_s
+      when "focus_contents"
+          [NOTIFY_TYPE_UPDATE, NOTIFY_TYPE_ANSWER]
+      when "my"
+          [NOTIFY_TYPE_REPLY, NOTIFY_TYPE_BOUTIQUED, NOTIFY_TYPE_GOOD,
+            NOTIFY_TYPE_BAD, NOTIFY_TYPE_PASS, NOTIFY_TYPE_REFUSE]
+      else
+          [NOTIFY_TYPE_GOOD, NOTIFY_TYPE_BAD, NOTIFY_TYPE_DELETED,
+            NOTIFY_TYPE_REPLY, NOTIFY_TYPE_ANSWER, NOTIFY_TYPE_BOUTIQUED,
+            NOTIFY_TYPE_PASS, NOTIFY_TYPE_REFUSE, NOTIFY_TYPE_UPDATE, NOTIFY_TYPE_NEW]
+      end
+    end
 
     
     
