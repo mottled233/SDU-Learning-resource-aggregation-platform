@@ -25,6 +25,12 @@ reply_up = Reply.create(creator:student,title:'firstReply',type:'Reply',content:
 reply_down = Reply.create(creator:student,title:'SecondReply',type:'Reply',content:'cccccc',good:0,bad:0)
 speciality = department.specialities.create(name: 'Software Engineering')
 
+# Create 100 blogs & resources
+(1..100).each do |i|
+  blogs = Knowledge.create(creator:student,title:"Blog "+i.to_s,type:'Blog',content:i.to_s*60,good:rand(0..200),bad:rand(0..200))
+  
+end
+
 # replies<=>knowledges
 reply_up.topic = question
 reply_up.creator = student
