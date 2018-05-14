@@ -9,14 +9,23 @@
 <li><a href="<%= edit_user_config_path(current_user)%>"><i class="icon-cogs"></i><span class="hidden-tablet"> 个人设置</span></a></li>
 <hr/>
 <li>
-	<% if @uncheck_notifications>0 %>
-		<a class="dropmenu" href="#"><i class="icon-bell"></i><span class="hidden-tablet"> 消息通知</span><span class="label label-important" style="margin-left:30px"> <%=new_count%> </span></a>
-	<% else %>
-		<a class="dropmenu" href="#"><i class="icon-bell"></i><span class="hidden-tablet"> 消息通知</span></a>
+	<%= link_to "#", class: "dropmenu" do%>
+	<i class="icon-bell"></i><span class="hidden-tablet"> 消息通知</span>
+		<% if @uncheck_notifications>0 %>
+			<span class="label label-important" style="margin-left:30px"> <%=new_count%> </span>
+		<% end %>
 	<% end %>
 	<ul>
-		<li><a class="submenu" href="submenu.html"><i class="icon-star"></i><span class="hidden-tablet"> 关注资源</span></a></li>
-		<li><a class="submenu" href="submenu2.html"><i class="icon-signin"></i><span class="hidden-tablet"> 回复我的</span></a></li>
+		<li>
+			<%= link_to notifications_path(current_user.id, page: 1, per_page: 20, notify_type: "focus_contents"), class: :submenu do%>
+			<i class="icon-star"></i><span class="hidden-tablet"> 关注资源</span>
+			<% end %>
+		</li>
+		<li>
+			<%= link_to notifications_path(current_user.id, page: 1, per_page: 20, notify_type: "my"), class: :submenu do%>
+			<i class="icon-star"></i><span class="hidden-tablet"> 我的通知</span>
+			<% end %>
+		</li>
 	</ul>	
 </li>
 <li><a class="submenu" href="submenu3.html"><i class="icon-magnet"></i><span class="hidden-tablet"> 关注的用户</span></a></li>
