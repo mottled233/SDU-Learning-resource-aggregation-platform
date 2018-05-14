@@ -27,8 +27,12 @@ speciality = department.specialities.create(name: 'Software Engineering')
 
 # Create 100 blogs & resources
 (1..100).each do |i|
-  blogs = Knowledge.create(creator:student,title:"Blog "+i.to_s,type:'Blog',content:i.to_s*60,good:rand(0..200),bad:rand(0..200))
-  
+  blogs = Blog.create(creator:student,title:"Blog "+i.to_s,type:'Blog',content:i.to_s*60,good:rand(0..200),bad:rand(0..200))
+  blogs.created_at = blogs.created_at - rand(0..1000)
+  blogs.save
+  resources = Resource.create(creator:student,title:"Resource "+i.to_s,type:'Resource',content:i.to_s*60,good:rand(0..200),bad:rand(0..200))
+  resources.created_at = resources.created_at - rand(0..1000)
+  resources.save
 end
 
 # replies<=>knowledges

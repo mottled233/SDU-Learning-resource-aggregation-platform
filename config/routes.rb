@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # 非资源路由
   get '/home', to: 'static_pages#home'
   post '/show_speciality', to: 'static_pages#show_speciality'
+  post '/home_change', to: 'static_pages#home_change'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/reg', to: 'users#new'
