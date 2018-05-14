@@ -11,6 +11,7 @@ class DepartmentAndSpecialityValidator < ActiveModel::Validator
 end
 
 class User < ApplicationRecord
+    include NotificationsHelper
     include ActiveModel::Validations
     # constants
     NAME_FORMAT = /\A[\w]+\z/
@@ -35,7 +36,7 @@ class User < ApplicationRecord
                         uniqueness: {message: "昵称已被使用"}
                         
     validates :password, presence: {message: "密码不能为空"},
-                        length: {in: 6..20, message: "密码必须为6-20位字符"}
+                        length: {in: 6..20, message: "密码必须为6-20位字符"}, on: :create
                         
     validates :email, presence: {message:
     "电子邮件不能为空"},
@@ -129,6 +130,101 @@ class User < ApplicationRecord
                 self.speciality_id = s.id
             end
        end
+    end
+    
+    # 返回未检查的notification的数目
+    def uncheck_notifications_count
+        notifications.where("notifications.created_at>?",
+                      self.last_check_time).count
+    end
+    
+    # 返回用户的notification列表，同时更新检查时间，并提供分页功能。
+    def get_notify! page=1, per_page=10
+        self.update_check_time
+        self.notifications.order(created_at: :desc).paginate(page: page,per_page: per_page)
+    end
+    
+      # 为用户创造一个notification的辅助方法
+    def generate_notification!(notify_entity, options={})
+        if notify_entity
+            notification = self.notifications.build(options)
+            notification.notify_entity_id = notify_entity.id
+            notification.save
+        end
+    end
+    
+    def update_notification
+        course_config = self.config_config
+        time = self.last_check_time || Time.now - 1.day
+        
+        # check courses user has followed
+        self.selected_courses.each do |course|
+          knowledges_need_notify = course.knowledges.where(type: course_config.keys).where(
+                                  "knowledges.created_at>?",time)
+                  
+          knowledges_need_notify.each do |knowledge|
+            generate_notification!(course,
+                                  notify_type: NOTIFY_TYPE_NEW,
+                                  entity_type: ENTITY_TYPE_COURSE,
+                                  with_entity_id: knowledge.id,
+                                  with_entity_type: knowledge.type)
+          end
+        end
+        
+        # check knowledges user has followed
+        knowledges_need_notify = self.focus_contents.where("knowledges.updated_at>?",time)
+        knowledges_need_notify.each do |knowledge|
+          generate_notification!(knowledge,
+                                notify_type: NOTIFY_TYPE_UPDATE,
+                                entity_type: knowledge.type)
+        end
+        
+        # check new replies for user's creation and following quesion
+        knowledges_need_notify = self.focus_contents.
+                                  where("knowledges.type=? and knowledges.last_reply_at>?",
+                                        ENTITY_TYPE_QUESTION, time)
+        knowledges_need_notify.each do |knowledge|
+          knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
+            generate_notification!(knowledge,
+                                  notify_type: NOTIFY_TYPE_ANSWER,
+                                  entity_type: knowledge.type,
+                                  initiator_id: reply.user_id,
+                                  with_entity_id: reply.id,
+                                  with_entity_type: reply.type)
+          end
+        end
+        knowledges_need_notify = self.creatings.
+                                  where("knowledges.last_reply_at>? and knowledges.last_reply_at-knowledges.created_at<1", time)
+        knowledges_need_notify.each do |knowledge|
+          knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
+            generate_notification!(knowledge,
+                                  notify_type: NOTIFY_TYPE_ANSWER,
+                                  entity_type: knowledge.type,
+                                  initiator_id: reply.user_id,
+                                  with_entity_id: reply.id,
+                                  with_entity_type: reply.type)
+          end
+        end
+        
+    end
+    
+    # get user's config, if it is nil, set all option to default.
+    def course_config
+        if self.user_config
+          if self.user_config.courses_notification_config
+            config = JSON::parse(self.user_config.courses_notification_config)
+          else
+            config = {Resource: true,
+                            Blog: true,
+                            Question: true}
+          end
+        else
+          config = {Resource: true,
+                          Blog: true,
+                          Question: true}
+        end
+        # find all knowledge in user selected course and in user_config
+        config.delete_if {|key, var| var.nil?||var==false}
     end
     
 end

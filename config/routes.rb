@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   
+  # 非资源路由
   get '/home', to: 'static_pages#home'
   post '/show_speciality', to: 'static_pages#show_speciality'
   get '/login', to: 'sessions#new'
@@ -15,16 +16,24 @@ Rails.application.routes.draw do
   get '/reg', to: 'users#new'
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
+<<<<<<< HEAD
   get '/search', to: 'searches#index'
-  resources :users
+=======
   
+  # 用户资源相关路由
+>>>>>>> 5f46be9919b6ef564322b7c1d9d7779e774508d4
+  resources :users
   post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
   get '/users/:id/config', to: 'users#edit_config', as:"edit_user_config"
   post '/users/:id/config', to: 'users#update_config', as:"update_user_config"
+  # 用户通知
+  get '/users/:id/notifications', to: 'notifications#index', as: "notifications"
+  
  
  
 # start:scx's routes
  get "/resources/file_download",to: "resources#file_download",as:"resource_file_download"
+ get "/resources/file_delete",to: "resources#file_delete",as:"resource_file_delete"
  
  get "/courses/:course_id/questions", to: "courses#questions_index", as: "course_questions"
  get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
@@ -36,7 +45,6 @@ Rails.application.routes.draw do
   
 # 评论
  get 'knowledges/reply_show',to: "knowledges#reply_show",as: "reply_show"
-
  resources :courses
  resources :questions
  resources :blogs

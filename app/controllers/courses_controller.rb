@@ -2,7 +2,6 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
 
-  
   # GET /courses
   # GET /courses.json
   def index
@@ -89,18 +88,20 @@ class CoursesController < ApplicationController
   
   def questions_index
     @course = Course.find(params[:course_id])
-    @question = Knowledge.get_all_entry('Question')
-    # debugger
+    @question = Question.all
+    @question = Question.paginate(:page => params[:page], :per_page => 2)
   end
   
   def blogs_index
     @course = Course.find(params[:course_id])
-    @blog = Knowledge.get_all_entry('Blog')
+    @blog = Blog.all
+    @blog = Blog.paginate(:page => params[:page], :per_page => 2)
   end
   
   def resources_index
     @course = Course.find(params[:course_id])
-    @resource = Knowledge.get_all_entry('Resource')
+    @resource = Resource.all
+    @resource = Resource.paginate(:page => params[:page], :per_page => 2)
   end
   
   def course_departments_index

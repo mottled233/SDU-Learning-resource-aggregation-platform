@@ -58,7 +58,21 @@ class Knowledge < ApplicationRecord
   def getReplies
     Reply.where(:topic => self.id).all
   end
-  
+
+  def getAllReplies
+    layer = self.getReplies
+    list = Array.new
+    layer.each do |r| 
+        list << r
+        if !r.getReplies.nil?
+            templ = r.getAllReplies
+            list = list+templ
+        end
+    end
+    list = list.sort_by{ |created_at| created_at }.reverse
+    return list
+  end
+
   def default_values
     self.good = 0
     self.bad = 0

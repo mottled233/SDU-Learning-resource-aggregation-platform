@@ -1,14 +1,27 @@
 <%focus = knowledge.followers.where(:id => current_user).first %>
 <% if focus %>
   <% if log_in?%>
-    <%= link_to "已关注",unfocus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}"  %>
+    <%= link_to unfocus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}" do %>
+      <i class="icon-heart">
+      </i>
+        <p style="display:inline"><strong>已关注</strong></p>
+    <%end%>
   <%else%>
-    <%= link_to "已关注", login_path(:message => "请先登录")%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-heart"></i>
+      <p style="display:inline"><strong>已关注</strong></p>
+    <%end%>
   <%end%>
 <% else %>
   <% if log_in?%>
-    <%= link_to "关注",focus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}"  %>
+    <%= link_to focus_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "focus_content-#{knowledge.id}" do%>
+      <i class="icon-heart-empty"></i>     
+      <p style="display:inline"><strong>关注</strong></p>
+    <%end%>
   <%else%>
-    <%= link_to "关注", login_path(:message => "请先登录")%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-heart-empty"></i>
+      <p style="display:inline"><strong>关注</strong></p>
+    <%end%>
   <%end%>
 <% end %>

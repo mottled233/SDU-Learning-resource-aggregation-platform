@@ -19,6 +19,8 @@ class KnowledgesController < ApplicationController
   end
   # GET /knowledges/1/edit
   def edit
+    @courses =  Course.all
+    @keywords = Keyword.all
   end
 
   # POST /knowledges

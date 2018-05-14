@@ -1,12 +1,13 @@
 <div class="answer-grid">
-    <button class="answer-show-button">
+    <button class="btn btn-info">
         <% if log_in?%>
-          回复
+          评论
         <%else%>
-           <%= link_to "回复", login_path(:message => "请先登录")%>
+           <%= link_to "评论", login_path(:message => "请先登录")%>
         <%end%>
     </button>
-    <div class = "answer-content"  style="display:none">
+    <div class="blank" style="height:10px"></div>
+    <div class = "answer-content"  style="display:none;width:700px;margin-right:400px">
           <%@reply = Reply.new%>
           <%= render :partial => 'replies/form',:locals => { :topic => knowledge },reply: @reply%>
     </div>

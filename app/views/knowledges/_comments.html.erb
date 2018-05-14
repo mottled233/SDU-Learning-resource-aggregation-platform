@@ -5,26 +5,62 @@
 
 <% if like %>
   <% if log_in?%>
-    <%= link_to "已赞:#{knowledge.good}",good_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
-    <%= link_to "踩:#{knowledge.bad}", good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+    <%= link_to good_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  do%>
+      <i class="icon-thumbs-up"></i>
+      <p style="display:inline"><strong>已赞</strong>:<%= knowledge.good%></p>
+    <%end%>
+    <%= link_to good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  do%>
+      <i class="icon-thumbs-down"></i>
+      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>
+    <%end%>
   <%else%>
-    <%= link_to "已赞", login_path(:message => "请先登录")%>
-    <%= link_to "踩", login_path(:message => "请先登录")%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-thumbs-up"></i>
+      <p style="display:inline"><strong>已赞</strong>:<%= knowledge.good%></p>
+    <%end%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-thumbs-down"></i>
+      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>
+    <%end%>
   <%end%>
 <% elsif unlike %>
   <% if log_in?%>
-    <%= link_to "赞:#{knowledge.good}",good_add_bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
-    <%= link_to "已踩:#{knowledge.bad}", bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+    <%= link_to good_add_bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  do%>
+      <i class="icon-thumbs-up"></i>
+      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>
+    <%end%>
+    <%= link_to bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  do%>
+      <i class="icon-thumbs-down"></i>
+      <p style="display:inline"><strong>已踩</strong>:<%= knowledge.bad%></p>
+    <%end%>
   <%else%>
-    <%= link_to "赞", login_path(:message => "请先登录")%>
-    <%= link_to "已踩", login_path(:message => "请先登录")%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-thumbs-up"></i>
+      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>
+    <%end%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-thumbs-down"></i>
+      <p style="display:inline"><strong>已踩</strong>:<%= knowledge.bad%></p>
+    <%end%>
   <%end%>
 <% else%>
  <% if log_in?%>
-    <%= link_to "赞:#{knowledge.good}",good_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  %>
-    <%= link_to "踩:#{knowledge.bad}", bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  %>
+    <%= link_to good_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  do%>
+      <i class="icon-thumbs-up"></i>
+      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>
+    <%end%>
+    <%= link_to bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
+      <i class="icon-thumbs-down"></i>
+      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>
+    <%end%>
   <%else%>
-    <%= link_to "赞", login_path(:message => "请先登录")%>
-    <%= link_to "踩", login_path(:message => "请先登录")%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-thumbs-up"></i>
+      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>
+    <%end%>
+    <%= link_to login_path(:message => "请先登录") do%>
+      <i class="icon-thumbs-down"></i>
+      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>
+    <%end%>
   <%end%>
 <% end %>

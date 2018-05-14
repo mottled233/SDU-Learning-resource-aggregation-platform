@@ -49,6 +49,11 @@ class UsersController < ApplicationController
     
   end
   
+  def contents_notify
+    @user = User.find(params[:id])
+    @notifications = nil
+  end
+  
   def edit_config
     @user = User.find(params[:id])
     @config = @user.user_config

@@ -1,9 +1,9 @@
 <div class="box span10" style="margin-top:50px;margin-left: 500px;margin-right: 500px;">
   <div class="box-header" data-original-title="">
-		<h2><i class="halflings-icon white edit"></i><span class="break"></span>资源发布</h2>
+		<h2><i class="halflings-icon white edit"></i><span class="break"></span>专栏更新</h2>
 	</div>
 	<div class="box-content">
-    <%= form_for :resource,:url => { :controller=>"resources",:action => "create"}, method: :post, html: {class: "form-horizontal"} do |f| %>
+    <%= form_for :resource,:url => { :controller=>"resources",:action => "update"},method: :put,html: {class: "form-horizontal"} do |f| %>
     <fieldset>
       <%if !current_user.nil?%>
         <%= f.hidden_field:user_id , :value => current_user.id %>
@@ -24,16 +24,32 @@
 			<div class="control-group">
 			  <label class="control-label" for="fileInput">File input</label>
 			  <div class="controls">
-				<div class="uploader" id="uniform-fileInput">
-				  <%= f.file_field :attachment %>
-				  <span class="filename" style="user-select: none;">No file selected</span><span class="action" style="user-select: none;">Choose File</span></div>
-			  </div>
+        <%if @knowledge.attachment.nil?%>
+  				<div class="uploader" id="uniform-fileInput">
+  				  <%= f.file_field :attachment %>
+  				  <span class="filename" style="user-select: none;">No file selected</span><span class="action" style="user-select: none;">Choose File</span></div>
+  			  </div>
+			  <%else%>
+			  <div>
+  				  <%= link_to "#{@knowledge.attachment}",resource_file_download_path(:r_id => @knowledge.id)%>
+  				  <span class="action" style="user-select: none;"><%= link_to "delete file",resource_file_delete_path(:r_id => @knowledge.id)%></span></div>
+  			 </div>
+			  <%end%>
 			</div>
   		<div class="control-group">
 			  <label class="control-label" for="typeahead">课程</label>
         <% for course in @courses %>  
           <label class="checkbox inline">
-    			  <div class="checker" id="uniform-inlineCheckbox1"><span class=""><%=check_box_tag 'courses[]', course.id %></span></div> <%= course.course_name %>
+    			  <div class="checker" id="uniform-inlineCheckbox1">
+    			    <span class="">
+    			      <%if @resource.courses.include?(course)%>
+    			        <%=check_box_tag 'courses[]', course.id,checked: :true %>
+    			      <%else%>
+    			        <%=check_box_tag 'courses[]', course.id%>
+    			      <%end%>
+    			    </span>
+    			   </div>
+    			   <%= course.course_name %>
     		  </label>
         <% end %>
       </div>
@@ -41,7 +57,17 @@
 			  <label class="control-label" for="typeahead">标签</label>
         <% for keyword in @keywords %>  
           <label class="checkbox inline">
-    			  <div class="checker" id="uniform-inlineCheckbox1"><span class=""><%=check_box_tag 'keywords[]', keyword.id %></span></div> <%= keyword.name %>
+    			  <div class="checker" id="uniform-inlineCheckbox1">
+    			    <span class="">
+    			       <%if @resource.keywords.include?(keyword)%>
+    			        <%=check_box_tag 'keywords[]', keyword.id,checked: :true %>
+    			      <%else%>
+    			       <%=check_box_tag 'keywords[]', keyword.id %>
+    			      <%end%>
+    			      
+    			      </span>
+    			      </div> 
+    			      <%= keyword.name %>
     		  </label>
         <% end %>
       </div>

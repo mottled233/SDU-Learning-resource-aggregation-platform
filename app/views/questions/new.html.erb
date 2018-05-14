@@ -1,9 +1,7 @@
-
+<%if !flash[:notice].nil?%>
+    <div class="alert alert-success">
+    	<button type="button" class="close" data-dismiss="alert">×</button>
+    	<strong><%= flash[:notice]%></strong>
+    </div>
+<%end%>
 <%= render 'form', question: @question %>
-<button>
-    <%if params[:course_id].nil?%>
-        <%= link_to '返回', questions_path %>
-    <%else%>
-        <%= link_to '返回', course_questions_path(params[:course_id]) %>
-    <%end%>
-</button>
