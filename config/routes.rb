@@ -16,12 +16,9 @@ Rails.application.routes.draw do
   get '/reg', to: 'users#new'
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
-<<<<<<< HEAD
   get '/search', to: 'searches#index'
-=======
   
   # 用户资源相关路由
->>>>>>> 5f46be9919b6ef564322b7c1d9d7779e774508d4
   resources :users
   post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
   get '/users/:id/config', to: 'users#edit_config', as:"edit_user_config"
