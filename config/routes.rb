@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'searches/index'
-
-  get 'searches/result'
-
  resources :departments
   get 'departments/new'
 
@@ -19,7 +15,7 @@ Rails.application.routes.draw do
   get '/reg', to: 'users#new'
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
-  
+  get '/search', to: 'searches#index'
   resources :users
   
   post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
