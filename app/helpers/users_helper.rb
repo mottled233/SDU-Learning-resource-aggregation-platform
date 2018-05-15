@@ -22,7 +22,7 @@ module UsersHelper
     
     
     def confirm_access
-      unless params[:id] == current_user.id.to_s
+      unless log_in? && params[:id] == current_user.id.to_s
         flash[:danger] = "您没有权限执行此操作。"
         redirect_to home_path
       end

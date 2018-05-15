@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   
+  # 非资源路由
   get '/home', to: 'static_pages#home'
   post '/show_speciality', to: 'static_pages#show_speciality'
   get '/login', to: 'sessions#new'
@@ -16,11 +17,14 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
   
+  # 用户资源相关路由
   resources :users
-  
   post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
   get '/users/:id/config', to: 'users#edit_config', as:"edit_user_config"
   post '/users/:id/config', to: 'users#update_config', as:"update_user_config"
+  # 用户通知
+  get '/users/:id/notifications', to: 'notifications#index', as: "notifications"
+  
  
  
 # start:scx's routes

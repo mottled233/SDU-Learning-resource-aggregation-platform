@@ -30,14 +30,14 @@
         </div>
         <div class="row-fluid user-info-detail offset1">
             <div class="span4">
-                <p>性别：<%= "男"%></p>
-                <p>年级：<%= "2015"%>级</p>
-                <p>学院：<%= "软件学院"%></p>
+                <p>性别：<%= @user.sex %></p>
+                <p>年级：<%= "#{@user.grade}级" if @user.grade!=0%></p>
+                <p>学院：<%= @user.department %></p>
             </div>
             <div class="span4">
-                <p>年龄：<%= "21"%></p>
-                <p>班级：<%= "4"%>班</p>
-                <p>专业：<%= "软件工程"%></p>
+                <p>年龄：<%= Time.now.year - @user.birthday.year if @user.birthday%></p>
+                <p>班级：<%= "#{@user.user_class}班" if @user.user_class!="空"%></p>
+                <p>专业：<%= @user.speciality %></p>
                 
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="span8">
                 <p>个人介绍：</p>
                 <p>
-                    <%="这个人很懒，还没有自我介绍"%>
+                    <%=@user.self_introduce%>
                 </p>
             </div>
         </div>

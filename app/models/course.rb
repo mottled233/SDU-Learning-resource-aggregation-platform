@@ -20,6 +20,10 @@ class Course < ApplicationRecord
   def get_followers
     users.where(user_role: :student)
   end
+  
+  def to_path
+    "courses/#{self.id}"
+  end
 
   
 end
