@@ -49,7 +49,7 @@
 										<% notifications.each do |notification| %>
                     	<li>
                         <a href="#">
-												<span class="icon blue"><i class="icon-user"></i></span>
+												
 												<span class="message"><%= notification.to_text %></span>
 												<span class="time"><%= time_to_chinese(time_ago_in_words(notification.created_at)) %>前</span> 
                         </a>
