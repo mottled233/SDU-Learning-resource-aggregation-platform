@@ -141,6 +141,9 @@ Rails.application.routes.draw do
   get 'specialities/update'
 
   resources :specialities
+  
+  get "teachers/teachers_space/:id", to: "teachers#teachers_space", as:"teachers/teachers_space"
+  get "teachers/detials/:id", to: "teachers#detials", as:"teachers/detials"
 # end:wzy's routes
 
 end

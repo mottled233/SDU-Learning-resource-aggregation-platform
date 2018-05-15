@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
 
+  before_action :confirm_is_teacher, only: [:teachers_space]
   def new
     @user = User.new
   end
@@ -93,6 +94,19 @@ class TeachersController < ApplicationController
     else
       render 'new'
     end
+  end
+  
+  def teachers_space
+    @teacher = User.find(params[:id])
+    @courses = @teacher.selected_courses
+    @user = @teacher
+  end
+  
+  def detials
+    @course = Course.find(params[:id])
+    @students = @course.users.where("user_role=?","student")
+    @teacher = current_user
+    @user = current_user
   end
 
   private

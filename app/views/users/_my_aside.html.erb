@@ -34,3 +34,11 @@
 <li><a class="submenu" href="submenu3.html"><i class="icon-calendar"></i><span class="hidden-tablet"> 我的课程</span></a></li>
 <li><a href="form.html"><i class="icon-rss"></i><span class="hidden-tablet"> 我发布的资源</span></a></li>
 <li><a href="form.html"><i class="icon-map-marker"></i><span class="hidden-tablet"> 知识图谱</span></a></li>
+<%if @user.user_role == "teacher"%>
+	<hr/>
+	<li><a href="<%= teachers_teachers_space_path(@user.id)%>"><i class="icon-cog"></i><span class="hidden-tablet"> 教师管理后台</span></a></li>
+<%end%>
+<%if @user.user_role == "admin"%>
+	<hr/>
+	<li><a href="<%= admins_own_space_path%>"><i class="icon-cog"></i><span class="hidden-tablet"> 平台管理后台</span></a></li>
+<%end%>
