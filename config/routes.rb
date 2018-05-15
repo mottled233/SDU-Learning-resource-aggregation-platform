@@ -11,11 +11,14 @@ Rails.application.routes.draw do
   # 非资源路由
   get '/home', to: 'static_pages#home'
   post '/show_speciality', to: 'static_pages#show_speciality'
+  post '/home_change', to: 'static_pages#home_change'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/reg', to: 'users#new'
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
+  get '/search', to: 'searches#index', as:"searches_index"
+  get '/search/res', to: 'searches#result', as:"searches_result"
   
   # 用户资源相关路由
   resources :users
