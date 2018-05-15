@@ -32,6 +32,8 @@ class Notification < ApplicationRecord
     entity = norrow_notify_entity
     with_entity = norrow_with_entity
     
+    return "该提醒对应资源已被删除" unless entity && with_entity 
+    
     case notify_type
     when NOTIFY_TYPE_NEW
       %Q{您关注的课程"#{entity.course_name}"更新了新的资源"#{with_entity.title}"。}
@@ -54,18 +56,23 @@ class Notification < ApplicationRecord
   # class methods
   def Notification.norrow_entity(id, type)
     if id && type
-      case type
-        when ENTITY_TYPE_COURSE
-          Course.find(id)
-        when ENTITY_TYPE_QUESTION
-          Question.find(id)
-        when ENTITY_TYPE_BLOG
-          Blog.find(id)
-        when ENTITY_TYPE_REPLY
-          Reply.find(id)
-        when ENTITY_TYPE_RESOURCE
-          Resource.find(id)
+      begin
+        case type
+          when ENTITY_TYPE_COURSE
+            Course.find(id)
+          when ENTITY_TYPE_QUESTION
+            Question.find(id)
+          when ENTITY_TYPE_BLOG
+            Blog.find(id)
+          when ENTITY_TYPE_REPLY
+            Reply.find(id)
+          when ENTITY_TYPE_RESOURCE
+            Resource.find(id)
+        end
+      rescue
+        false
       end
+        
     end
   end
   

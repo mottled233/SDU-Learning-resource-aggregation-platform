@@ -18,4 +18,8 @@ class StaticPagesController < ApplicationController
       format.json {render json:{'status'=>'200','message'=>'OK','data'=>@speciality,'count'=>@speciality.size,'specify'=>params["specify"]}};
     end
   end
+  
+  def unfinished
+    
+  end
 end

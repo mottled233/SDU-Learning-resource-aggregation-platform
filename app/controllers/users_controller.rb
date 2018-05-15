@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   require "json"
   
   before_action :confirm_logged_in, only: [:index, :edit, :update]
-  before_action :confirm_access, only: [:edit, :update]
+  before_action :confirm_access, only: [:edit, :update, :edit_config, :update_config]
   before_action :confirm_is_admin, only: [:destroy]
   
   def new
@@ -77,12 +77,27 @@ class UsersController < ApplicationController
     
     if @config.update_attributes(result)
       flash[:success] = "更新设置成功！"
-      redirect_to edit_user_config_path(@user)
+      redirect_to edit_config_user_path(@user)
     else
       flash[:danger] = "更新失败，未知原因错误"
       render 'users/edit_config'
     end
   end
+  
+  def followings
+    @user = User.find(params[:id])
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @followings = @user.followings.paginate(page: page, per_page: per_page)
+  end
+    
+  def followeds
+    @user = User.find(params[:id])
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @followeds = @user.followeds.paginate(page: page, per_page: per_page)
+  end
+  
   
   private
     def user_param

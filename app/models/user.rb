@@ -181,9 +181,7 @@ class User < ApplicationRecord
         end
         
         # check new replies for user's creation and following quesion
-        knowledges_need_notify = self.focus_contents.
-                                  where("knowledges.type=? and knowledges.last_reply_at>?",
-                                        ENTITY_TYPE_QUESTION, time)
+        knowledges_need_notify = self.focus_contents.where("knowledges.type=? and knowledges.last_reply_at>?",ENTITY_TYPE_QUESTION, time)
         knowledges_need_notify.each do |knowledge|
           knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
             generate_notification!(knowledge,
@@ -207,6 +205,16 @@ class User < ApplicationRecord
           end
         end
         
+        #check focus users new creating,no include answer or relpy, need to optimize:
+        f_user_ids = self.following_ids
+        knowledges_need_notify = Knowledge.where("knowledges.user_id IN (?) and knowledges.created_at>? and knowledges.type<>?",f_user_ids, time, "Reply")
+        knowledges_need_notify.each do |knowledge|
+          generate_notification!(knowledge,
+                                notify_type: NOTIFY_TYPE_FOCUS_USER_NEW,
+                                entity_type: knowledge.type,
+                                initiator_id: knowledge.user_id)
+        end
+        
     end
     
     # get user's config, if it is nil, set all option to default.
@@ -227,5 +235,10 @@ class User < ApplicationRecord
         # find all knowledge in user selected course and in user_config
         config.delete_if {|key, var| var.nil?||var==false}
     end
+    
+    def to_path
+      "users/#{self.id}"
+    end
+    
     
 end

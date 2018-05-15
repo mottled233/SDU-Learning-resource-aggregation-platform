@@ -1,0 +1,56 @@
+<% provide(:title, "通知列表") %>
+<div class="container-fluid-full">
+  <div class="row-fluid">
+    <%= render 'users/aside' %>
+    <div id="content" class="span8">
+        <div class="row-fluid">
+        <%= render 'layouts/flash' %>
+        </div>
+        <div class="row-fluid offset1">
+            <h1>通知列表</h1>
+            
+        </div>
+        <div class="row-fluid ">
+            <div class="span8">
+               <hr style="background-color:grey"/> 
+            </div>
+        </div>
+        
+        <% @followings.each do |following|%>
+        <div class="row-fluid">
+            <div class="row-fluid span7 offset1">
+              <div class="span3">
+                  <%=link_to user_path(following.id) do%>
+                  <%= gravatar_for following, size: 80, style: "display:inline-block"%>
+                  <% end %>
+                  <%=link_to following.nickname, user_path(following.id), style:"padding-left: 20px"%>
+              </div>
+              <div class="span3" style="padding-top:30px">
+                  <%=link_to "粉丝: #{following.followeds.count}", followeds_user_path(following.id), style:"padding-right: 30px"%>
+                  
+                  <%=link_to "关注: #{following.followings.count}", followings_user_path(following.id)%>
+                  
+              </div>
+              <div class="span1 offset6" style="margin-top:-30px">
+                  <%=link_to "+关注","#",class:"btn btn-primary"%>
+              </div>
+              
+            </div>
+            
+        </div>
+        <div class="row-fluid span7">
+            <hr style="background-color:grey"/>
+        </div>
+        <% end %>
+        <div class="row-fluid ">
+            <div class="row-fluid span8 center">
+                <%= will_paginate @followings%>
+            </div>
+        </div>
+        <div style="height:500px"/>
+    <% if @followings.count<5 %>
+        <div style="height:500px"/>
+    <% end %>
+    </div>
+  </div>
+</div>
