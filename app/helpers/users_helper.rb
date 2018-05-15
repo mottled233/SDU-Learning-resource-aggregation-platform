@@ -5,10 +5,10 @@ module UsersHelper
     USER_ROLE_TEACHER = "teacher"
     
     # methods
-    def gravatar_for(user, options = { size: 80})
+    def gravatar_for(user, options = { size: 80, style:""})
         gravatar_id = Digest::MD5::hexdigest((user.email).downcase)
         gravatar_url = "https://secure.gravatar.com/avatar/#{user.username}?s=#{options[:size]}"
-        image_tag(gravatar_url, alt: user.username, class:"gravatar")
+        image_tag(gravatar_url, alt: user.username, class:"gravatar", style: options[:style])
     end
     
     
@@ -22,7 +22,8 @@ module UsersHelper
     
     
     def confirm_access
-      unless log_in? && params[:id] == current_user.id.to_s
+      id = params[:id] || params[:user_id]
+      unless log_in? && id == current_user.id.to_s
         flash[:danger] = "您没有权限执行此操作。"
         redirect_to home_path
       end

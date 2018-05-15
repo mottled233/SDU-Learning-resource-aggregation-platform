@@ -25,6 +25,23 @@ reply_up = Reply.create(creator:student,title:'firstReply',type:'Reply',content:
 reply_down = Reply.create(creator:student,title:'SecondReply',type:'Reply',content:'cccccc',good:0,bad:0)
 speciality = department.specialities.create(name: 'Software Engineering')
 
+# Create 100 blogs & resources
+content = "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。";
+(1..100).each do |i|
+  good = rand(0..200)
+  bad = rand(0..200)
+  blogs = Blog.create(creator:student,title:"Blog "+i.to_s,type:'Blog',content:content,good:good,bad:bad)
+  blogs.good = rand(0..200)
+  blogs.bad = rand(0..200)
+  blogs.created_at = blogs.created_at - rand(0..1000)
+  blogs.save
+  resources = Resource.create(creator:student,title:"Resource "+i.to_s,type:'Resource',content:content,good:rand(0..200),bad:rand(0..200))
+  resources.good = rand(0..200)
+  resources.bad = rand(0..200) 
+  resources.created_at = resources.created_at - rand(0..1000)
+  resources.save
+end
+
 # replies<=>knowledges
 reply_up.topic = question
 reply_up.creator = student

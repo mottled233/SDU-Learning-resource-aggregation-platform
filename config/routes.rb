@@ -11,19 +11,26 @@ Rails.application.routes.draw do
   # 非资源路由
   get '/home', to: 'static_pages#home'
   post '/show_speciality', to: 'static_pages#show_speciality'
+  post '/home_change', to: 'static_pages#home_change'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/reg', to: 'users#new'
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
+  get '/unfinish', to: 'static_pages#unfinished'
+  get '/search', to: 'searches#index', as:"searches_index"
+  get '/search/res', to: 'searches#result', as:"searches_result"
   
   # 用户资源相关路由
-  resources :users
-  post '/users/delete/:id', to: 'users#destroy', as:"delete_user"
-  get '/users/:id/config', to: 'users#edit_config', as:"edit_user_config"
-  post '/users/:id/config', to: 'users#update_config', as:"update_user_config"
-  # 用户通知
-  get '/users/:id/notifications', to: 'notifications#index', as: "notifications"
+  resources :users do
+    get 'config', on: :member,to:"users#edit_config", as:"edit_config"
+    post 'config', on: :member, to: 'users#update_config', as:"update_config"
+    get 'followings', on: :member
+    get 'followeds', on: :member
+    post '/users/delete/:id', on: :member, to: 'users#destroy', as:"delete_user"
+    # 用户通知
+    resources :notifications, only: [:index]
+  end
   
  
  

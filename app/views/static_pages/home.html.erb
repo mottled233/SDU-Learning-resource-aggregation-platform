@@ -1,84 +1,5 @@
 <%= csrf_meta_tags %>
-<script>
-	function changecolor(id)
-	{
-		id=id.toString();
-		for (var i=1;i<=3;++i)
-		{
-			if (document.getElementById(i.toString()+id.substring(1,2)))
-				document.getElementById(i.toString()+id.substring(1,2)).style.color='#777';
-		}
-		if (id.substring(0,1)=="1")
-			document.getElementById("1"+id.substring(1,2)).style.color="#33F";
-		else if (id.substring(0,1)=="2")
-			document.getElementById("2"+id.substring(1,2)).style.color="#F33";
-		else if (id.substring(0,1)=="3")
-			document.getElementById("3"+id.substring(1,2)).style.color="#3F3";
-	}
-	function dropdownOnClick(e,id)
-	{
-		var targ
-		if (e.target) targ = e.target;
-			else if (e.srcElement) targ = e.srcElement;
-		if (targ.nodeType == 3) // defeat Safari bug
-  		targ = targ.parentNode;
-		var tname;
-		tname=targ.tagName;
-		if (tname.toLowerCase()=='li')
-		{
-			document.getElementById('dropdown'+id).innerHTML=e.target.innerHTML+' <span class="caret">';
-			document.getElementById('dropdown'+id).setAttribute("data-id",e.target.getAttribute("data-id"));
-			if (document.getElementById('dropdown'+(parseInt(id)+1).toString()))
-			{
-				if (document.getElementById('dropdown'+(parseInt(id)+2).toString()))
-				{
-					document.getElementById('dropdown'+(parseInt(id)+2).toString()).parentNode.style.display="none";
-					document.getElementById('ul'+(parseInt(id)+2).toString()).innerHTML="";
-				}
-				document.getElementById('dropdown'+(parseInt(id)+1).toString()).parentNode.style.display="inline";
-					document.getElementById('ul'+(parseInt(id)+1).toString()).innerHTML="";
-				var x={};
-				x.authenticity_token=$("meta[name='csrf-token']").attr("content");
-				x.department_id=e.target.getAttribute("data-id");
-				x.specify=parseInt(id);
-				var h=new XMLHttpRequest();
-				h.open('POST','/show_speciality');
-				h.setRequestHeader('Content-Type','application/json');
-				h.onload=function()
-				{
-					console.log(h.response);
-					var o=JSON.parse(h.response);
-					console.log(o.status);
-					console.log(o.message);
-					console.log(o.data);
-					if (o.status=="200"){
-						for (i=0;i<o.count;++i)
-						{
-							var newli=document.createElement("li");
-							newli.setAttribute("data-id",o.data[i].id);
-							if (o.data[i].name)
-								newli.innerHTML=o.data[i].name;
-							else
-								newli.innerHTML=o.data[i].course_name;
-							document.getElementById('ul'+(parseInt(id)+1).toString()).appendChild(newli);
-						}
-					}
-				}
-				h.send(JSON.stringify(x));
-				console.log(JSON.stringify(x));
-
-				
-				
-				
-			}
-			if (id=='3')
-				document.getElementById('goButton').style.display="inline";
-			else
-				document.getElementById('goButton').style.display="none";
-		}
-	}
-</script>
-<%= debug(params) if Rails.env.development? %>
+<% provide(:onload, 'onload=load()') %>
 <div class="hero-unit" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>)">
 	<h1 style="color:white;">山东大学资源聚合平台</h1>
 	<p>
@@ -115,198 +36,200 @@
 		</button>
 	</p>
 </div>
-
-<div class="projects-header page-header">
-	<h1><span class="icon-edit" aria-hidden="true"></span>&nbsp;&nbsp;专栏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<small>
-		<span id="11" onclick="changecolor(11);" style="color:#33F"><span class="icon-time" aria-hidden="true"></span> 新 </span>
-		/&nbsp;<span id="21" onclick="changecolor(21);"><span class="icon-fire" aria-hidden="true"></span> 热 </span>
-		<%if log_in?%>
-			/&nbsp;<span id="31" onclick="changecolor(31);"><span class="icon-thumbs-up" aria-hidden="true"></span> 荐 </span>
-		<%end%>
-	</small>
-	</h1>
-</div>
-<div class="row-fluid">
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
-	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
-	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
-	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
-	</div>
+<div style="margin:10px;">
 	
-</div>
-<div class="projects-header page-header">
-	<h1><span class="icon-hdd" aria-hidden="true"></span>&nbsp;&nbsp;资源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<small>
-		<span id="12" onclick="changecolor(12);" style="color:#33F"><span class="icon-time" aria-hidden="true"></span> 新 </span>
-		/&nbsp;<span id="22" onclick="changecolor(22);"><span class="icon-fire" aria-hidden="true"></span> 热 </span>
+	<div class="projects-header page-header">
+		<h1><span class="icon-edit" aria-hidden="true"></span>&nbsp;&nbsp;专栏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<small>
+			<span id="11" onclick="changecolor(11);" style="color:#33F"><span class="icon-time" aria-hidden="true"></span> 新 </span>
+			/&nbsp;<span id="21" onclick="changecolor(21);"><span class="icon-fire" aria-hidden="true"></span> 热 </span>
 			<%if log_in?%>
-			/&nbsp;<span id="32" onclick="changecolor(32);"><span class="icon-thumbs-up" aria-hidden="true"></span> 荐 </span>
+				/&nbsp;<span id="31" onclick="changecolor(31);"><span class="icon-thumbs-up" aria-hidden="true"></span> 荐 </span>
 			<%end%>
-	</small>
-</div>
-<div class="row-fluid">
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
+		</small>
+		</h1>
 	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
+	<div class="row-fluid" id="row1">
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-comment"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
+		
 	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
+	<div class="projects-header page-header">
+		<h1><span class="icon-hdd" aria-hidden="true"></span>&nbsp;&nbsp;资源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<small>
+			<span id="12" onclick="changecolor(12);" style="color:#33F"><span class="icon-time" aria-hidden="true"></span> 新 </span>
+			/&nbsp;<span id="22" onclick="changecolor(22);"><span class="icon-fire" aria-hidden="true"></span> 热 </span>
+				<%if log_in?%>
+				/&nbsp;<span id="32" onclick="changecolor(32);"><span class="icon-thumbs-up" aria-hidden="true"></span> 荐 </span>
+				<%end%>
+		</small>
 	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
-	  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-calendar"></span>2018-02-31
-				</small>
-			</p>
-	  </div>
+	<div class="row-fluid" id="row2">
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<h2><a href="#">标题标题</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 离散数学 </small></h2>
+		  	<p>滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-download-alt"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-thumbs-up"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-calendar"></span>2018-02-31
+					</small>
+				</p>
+		  </div>
+		</div>
 	</div>
-</div>
-<div class="projects-header page-header">
-	<h1><span class="icon-user" aria-hidden="true"></span>&nbsp;&nbsp;活跃用户</h1>
-</div>
-<div class="row-fluid">
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-comment"></span> 72
-				</small>
-			</p>
-	  </div>
+	<div class="projects-header page-header">
+		<h1><span class="icon-user" aria-hidden="true"></span>&nbsp;&nbsp;活跃用户</h1>
 	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-comment"></span> 72
-				</small>
-			</p>
-	  </div>
+	<div class="row-fluid" id="row3">
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
+		  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
+		  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-comment"></span> 72
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
+		  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
+		  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-comment"></span> 72
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
+		  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
+		  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-comment"></span> 72
+					</small>
+				</p>
+		  </div>
+		</div>
+		<div class="span3">
+		  <div class="thumbnail">
+		  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
+		  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
+		  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+		  	<p class="text-center">
+		  		<small>
+		  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
+		  			<span class="icon-comment"></span> 72
+					</small>
+				</p>
+		  </div>
+		</div>
+		
 	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-comment"></span> 72
-				</small>
-			</p>
-	  </div>
-	</div>
-	<div class="span3">
-	  <div class="thumbnail">
-	  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-	  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-	  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-	  	<p class="text-center">
-	  		<small>
-	  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-	  			<span class="icon-comment"></span> 72
-				</small>
-			</p>
-	  </div>
-	</div>
-	
 </div>
 <br />
 <br />
