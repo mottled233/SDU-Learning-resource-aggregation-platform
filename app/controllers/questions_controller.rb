@@ -17,11 +17,9 @@ class QuestionsController < KnowledgesController
         @keywords = Keyword.all
     end
     def show
-        questions = Question.all
-        @knowledge = questions[params[:id].to_i-1]
-        if @knowledge.nil?
-            @knowledge = Knowledge.find(params[:id])
-        end
+        @knowledge = Knowledge.find(params[:id])
+        @knowledge.visit_count = @knowledge.visit_count+1
+        @knowledge.save
     end
      def edit
         @question = Question.find(params[:id])

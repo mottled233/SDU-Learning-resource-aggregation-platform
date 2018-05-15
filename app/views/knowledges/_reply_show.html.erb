@@ -10,7 +10,7 @@
         <%curlayer = layer[6*curindex...6*curindex+6]%>
         <%curlayer.each do|reply|%>
             <div class="box span10">
-            	<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%="#{reply.creator.username}   回复   #{reply.topic.creator.username}:"%></strong></h2>
+            	<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%="#{reply.creator.nickname}   回复   #{reply.topic.creator.nickname}:"%></strong></h2>
                 <div class="box-content">
                 <div class="panel-body">
                     <p><%= reply.content %></p>

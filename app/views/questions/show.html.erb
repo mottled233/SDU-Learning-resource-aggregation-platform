@@ -6,7 +6,7 @@
 <%end%>
 <div class = "container"style="margin-bottom:50px">
     <div class="breadcrumb" style="padding:0px;margin:0px">
-        <%= link_to questions_path,:class => "quick-button-small span1" do%>
+        <%= link_to  :back,:class => "quick-button-small span1" do%>
             <i class="icon-group"></i>
             <h5>Question</h5>
         <%end%>
@@ -21,6 +21,15 @@
 <div class="box span12" style="margin-top:50px;margin-left: 400px;margin-right: 400px;margin-bottom:70px">
     <div class="box-header" data-original-title="">
 		<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%= @knowledge.title %></strong></h2>
+        <%if !log_in?%>
+                <%= link_to "修改",login_path%>
+                <%= link_to "删除",login_path%>
+	    <%elsif current_user?(@knowledge.creator)%>
+	        <%= link_to "修改",edit_question_path(@knowledge)%>
+	        <%= link_to '删除',question_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
+	    <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-@knowledge.courses) != current_user.selected_courses%>
+	        <%= link_to '删除',question_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
+	    <%end%>
 	</div>
     <div class="box-content">
         <div class="page-header">
@@ -37,7 +46,7 @@
                        <%= course.course_name %>&nbsp
               <% end %>
             </p>
-            <p style="text-align:justify;width:300px;display:inline"><strong>author</strong>:<%= @knowledge.creator.username%><%#=link_to "#{@knowledge.creator.username}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;<strong>发布时间</strong>:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
+            <p style="text-align:justify;width:300px;display:inline"><strong>author</strong>:<%= @knowledge.creator.nickname%><%#=link_to "#{@knowledge.creator.nickname}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;<strong>发布时间</strong>:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
             </p>
             <div id="add_evalute-<%=@knowledge.id%>" style="display:inline">
                  <%= render :partial => "knowledges/comments", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  

@@ -137,10 +137,12 @@ ActiveRecord::Schema.define(version: 20180510132142) do
     t.string   "type"
     t.string   "content"
     t.string   "attachment"
-    t.integer  "good"
-    t.integer  "bad"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "good",           default: 0
+    t.integer  "bad",            default: 0
+    t.integer  "visit_count",    default: 0
+    t.integer  "download_count", default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.datetime "last_reply_at"
   end
 

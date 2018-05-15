@@ -11,11 +11,9 @@ class ResourcesController < KnowledgesController
         @keywords = Keyword.all
     end
      def show
-        resources = Resource.all
-        @knowledge = resources[params[:id].to_i-1]
-        if @knowledge.nil?
-            @knowledge = Knowledge.find(params[:id])
-        end
+        @knowledge = Knowledge.find(params[:id])
+        @knowledge.visit_count = @knowledge.visit_count+1
+        @knowledge.save
     end
      def edit
         @resource = Resource.find(params[:id])
@@ -29,6 +27,7 @@ class ResourcesController < KnowledgesController
     end
     def create
         @resource = Resource.new(resource_params);
+        b = true;
         filename = uploadfile(params[:resource][:attachment])  
         @resource.attachment = filename  
         if @resource.save
@@ -123,6 +122,8 @@ class ResourcesController < KnowledgesController
     end
     def file_download  
         resource = Resource.find(params[:r_id])  
+        resource.download_count = resource.download_count+1
+        resource.save
         send_file "#{Rails.root}/public/upload/#{resource[:attachment]}"
     end  
     def file_delete  

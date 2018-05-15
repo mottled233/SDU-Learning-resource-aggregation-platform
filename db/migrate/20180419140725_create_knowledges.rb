@@ -9,8 +9,11 @@ class CreateKnowledges < ActiveRecord::Migration[5.0]
       t.string :content
       t.string :attachment
       
-      t.integer :good
-      t.integer :bad
+      t.integer :good,default: 0
+      t.integer :bad,default: 0
+
+      t.integer :visit_count,default: 0
+      t.integer :download_count,default: 0
 
       t.timestamps
     end
