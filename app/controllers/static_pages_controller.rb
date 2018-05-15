@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
         @speciality = Speciality.select("id,name").where("department_id=?",selected_department);
       else
         selected_department = params["department_id"];
-        @speciality = Speciality.find_by(id:selected_department).courses.select('course_name');
+        @speciality = Speciality.find_by(id:selected_department).courses.select('course_name','id');
       end
       format.json {render json:{'status'=>'200','message'=>'OK','data'=>@speciality,'count'=>@speciality.size,'specify'=>params["specify"]}};
     end
