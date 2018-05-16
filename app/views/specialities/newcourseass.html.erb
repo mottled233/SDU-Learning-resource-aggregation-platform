@@ -1,6 +1,6 @@
         
 
-<% provide(:title, '添加学院下属课程') %>
+<% provide(:title, '添加专业下属课程') %>
 <div id="container-fluid-full"> 
 
     <div id="row-fluid">
@@ -9,9 +9,9 @@
         <h1>添加学院下属课程</h1>
         <hr>
         
-        <%= render 'form_dept_course', course_department_association: @course_department_association %>
+        <%= render 'form_spec_course', course_speciality_association: @course_speciality_association %>
         
-        <%= link_to '返回', departments_path %>
+        <%= link_to '返回', specialities_path %>
       </div> 
     </div>
 </div> 

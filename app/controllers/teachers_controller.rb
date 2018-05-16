@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
 
+  before_action :confirm_is_teacher, only: [:teachers_space]
   def new
     @user = User.new
   end
@@ -35,9 +36,9 @@ class TeachersController < ApplicationController
   end
   
   def create_course_association
-    has_that_teacher = !User.where("id=?",params[:course_user_association][:user]).empty?
+    has_that_teacher = !User.where("id=? AND user_role=?",params[:course_user_association][:user], "teacher").empty?
     has_that_course = !Course.where("id=?",params[:course_user_association][:course_id]).empty?
-    @redirect_path = teachers_newcourseass_path(params[:course_user_association][:user])
+    @redirect_path = params[:course_user_association][:badpath]
     if !has_that_course
       respond_to do |format|
         format.html { redirect_to @redirect_path, notice: "No that course." }
@@ -60,7 +61,7 @@ class TeachersController < ApplicationController
           format.html { redirect_to @redirect_path, notice: "Has That Teaching Association." }
         else
           if @course_teacher_association.save
-            format.html { redirect_to teacher_path(@teacher), notice: "Teacher Course Association was successfully created." }
+            format.html { redirect_to params[:course_user_association][:goodpath], notice: "Teacher Course Association was successfully created." }
           else
             format.html { render :new }
           end
@@ -93,6 +94,19 @@ class TeachersController < ApplicationController
     else
       render 'new'
     end
+  end
+  
+  def teachers_space
+    @teacher = User.find(params[:id])
+    @courses = @teacher.selected_courses
+    @user = @teacher
+  end
+  
+  def detials
+    @course = Course.find(params[:id])
+    @students = @course.users.where("user_role=?","student")
+    @teacher = current_user
+    @user = current_user
   end
 
   private

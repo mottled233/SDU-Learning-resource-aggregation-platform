@@ -6,12 +6,12 @@
     <div id="row-fluid">
       <%= render :partial => "admins/row_nav" %>
       <div id="content" class="span8">
-        <h1>New Keywords Association</h1>
+        <h1>关联到课程</h1>
         
         
         <%= render 'form_courses_keywords', course_keyword_association: @keyword_course_association %>
         
-        <%= link_to 'Back', keyword_path(@keyword) %>
+        <%= link_to '返回', keyword_path(@keyword) %>
       </div> 
     </div>
 </div> 

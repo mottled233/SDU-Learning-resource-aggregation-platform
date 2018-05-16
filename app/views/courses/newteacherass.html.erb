@@ -1,15 +1,15 @@
-<% provide(:title, '新建教授关系') %>
+<% provide(:title, '添加授课教师') %>
 <div id="container-fluid-full"> 
 
     <div id="row-fluid">
       <%= render :partial => "admins/row_nav" %>
       <div id="content" class="span8">
-        <h1>为教师添加教授课程</h1>
-        
-        
+        <h1>添加授课教师</h1>
+      
+        <p id="notice"><%= notice %></p>
         <%= render 'form_teacher_course', course_teacher_association: @course_teacher_association %>
         
-        <%= link_to '返回', teacher_path(@teacher) %>
+        <%= link_to '返回', courses_course_teachers_index_path(@course) %>
       </div> 
     </div>
 </div> 

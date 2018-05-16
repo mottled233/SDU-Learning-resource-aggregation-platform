@@ -19,12 +19,28 @@
 
     <%= f.label "课程序号" %>
     <%= f.text_field :course_id %>
-
+    <div id="course_name">
+      <%= render :partial => "keywords/names", :locals => {:course_id => course_keyword_association[:course_id]}%>
+    </div>
     <%= f.hidden_field :path, :value => keywords_attachtocourse_path(@keyword)%>
     
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "确认" , class: "btn btn-small btn-primary"%>
   </div>
 <% end %>
+
+<script>
+  $(function(){  
+  
+    $('#course_keyword_association_course_id').bind('input propertychange', function() {
+      var course_id = $(this).val()
+      $.get("/keywords/ajaxnames/"+course_id,
+      function(data,status){
+    // alert("数据: " + data + "\n状态: " + status);
+  }); 
+    }); 
+  });
+  
+</script>

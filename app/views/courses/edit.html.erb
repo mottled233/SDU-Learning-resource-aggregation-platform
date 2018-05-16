@@ -1,6 +1,22 @@
-<h1>Editing Course</h1>
 
-<%= render 'form', course: @course %>
 
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>
+<% provide(:title, '编辑课程名称') %>
+<div id="container-fluid-full"> 
+
+    <div id="row-fluid">
+      <%= render :partial => "admins/row_nav" %>
+      <div id="content" class="span8">
+        <h1>编辑课程名称</h1>
+        <hr>
+        
+
+        <%= render 'form', course: @course %>
+     
+        
+        <%= link_to '详情', @course %> |
+        <%= link_to '返回', courses_path %>
+      </div> 
+    </div>
+</div> 
+
+<div class="clearfix"></div>

@@ -10,12 +10,13 @@
         <p id="notice"><%= notice %></p>
         
         <h1>全部关键字</h1>
+        <hr>
         
-        <table>
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>序号</th>
-              <th>关键字名</th>
+              <th>关键字</th>
               <!--<th>Course</th>-->
               <th colspan="3"></th>
             </tr>
@@ -28,7 +29,7 @@
                 <td><%= keyword.name %></td>
                 <!--<td><%#= link_to '已关联课程',"#" %></td>-->
                 <td><%= link_to '详情', keyword %></td>
-                <td><%= link_to '编辑关键字名', edit_keyword_path(keyword) %></td>
+                <td><%= link_to '编辑', edit_keyword_path(keyword) %></td>
                 <td><%= link_to '删除', keyword, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
             <% end %>
@@ -38,7 +39,7 @@
         <br>
         
         <%= link_to '新建关键字', new_keyword_path %> |
-        <%= link_to '新建上下级关联', keywords_newkeywordass_path %>
+        <%= link_to '添加上下级关系', keywords_newkeywordass_path %>
       </div> 
     </div>
 </div> 

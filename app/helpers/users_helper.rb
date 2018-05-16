@@ -37,4 +37,11 @@ module UsersHelper
       end
     end
     
+    def confirm_is_teacher
+      unless current_user.user_role == "teacher"
+        flash[:danger] = "您没有权限执行此操作。"
+        redirect_to home_path
+      end
+    end
+    
 end
