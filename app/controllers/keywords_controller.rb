@@ -168,16 +168,9 @@ class KeywordsController < ApplicationController
   end
   
   def ajaxnames
-
     @course_id = params[:id]
-    # @course_name = Course.find(@course_id).course_name
     respond_to do |format|
-      # if @course_id
         format.js{}
-      #   format.json { render json: @course_name  , status: :success}
-      # else
-      #   format.json { render json: @course_name, status: :unprocessable_entity }
-      # end
     end
   end
 
