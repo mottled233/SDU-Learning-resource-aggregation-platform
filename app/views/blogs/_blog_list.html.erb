@@ -5,6 +5,7 @@
       <div class="box span12" style="margin-left:150px">
         <div class="box-header">
 			<h2><i class="halflings-icon white white tasks"></i><span class="break">&nbsp;<%=link_to "#{q.title}",blog_path(q.id),style: "color:white"%></span></h2>
+		    <%#debugger%>
             <span><p style="text-align:justify;float:right;display:inline;color:white"><strong>By:</strong><%= q.creator.nickname%>&nbsp;&nbsp;&nbsp;发布时间:<%= q.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp;</span>
 		    <%if current_user.nil?%>
                 <%= link_to "修改",login_path%>

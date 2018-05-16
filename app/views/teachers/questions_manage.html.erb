@@ -1,0 +1,22 @@
+<% provide(:title, "#{@course.course_name}—问答管理") %>
+<div id="container-fluid-full"> 
+
+    <div id="row-fluid">
+      <%= render :partial => "users/aside" %>
+      <div id="content" class="span8">
+        <p id="notice"><%= notice %></p>
+        
+        <h1><%=@course.course_name%>—全部问答</h1>
+        <hr>
+        
+        <%= render :partial => "questions/question_list", :locals => { :questions => @question } %>
+        
+        <hr>
+        <%= link_to '返回',  teachers_teachers_space_path(@teacher.id) %>
+      </div>
+    </div>
+    
+    
+</div> 
+
+<div class="clearfix"></div>

@@ -140,7 +140,7 @@ Rails.application.routes.draw do
 
   get 'specialities/edit'
   
-   post "/specialities/:id/create_course_association", to: "specialities#create_course_association", as: "specialities/create_course_association"
+  post "/specialities/:id/create_course_association", to: "specialities#create_course_association", as: "specialities/create_course_association"
   get "/specialities/:id/newcourseass", to: "specialities#newcourseass", as: "specialities/newcourseass"
   
   get "specialities/:id/deleteCourseDeptAss/:cid", to: 'specialities#deleteCourseDeptAss', as: "specialities/deleteCourseDeptAss"
@@ -151,6 +151,11 @@ Rails.application.routes.draw do
   
   get "teachers/teachers_space/:id", to: "teachers#teachers_space", as:"teachers/teachers_space"
   get "teachers/detials/:id", to: "teachers#detials", as:"teachers/detials"
+  get "teachers/:tid/questions_manage/:cid", to: "teachers#questions_manage", as:"teachers/questions_manage"
+  get "teachers/:tid/blogs_manage/:cid", to: "teachers#blogs_manage", as:"teachers/blogs_manage"
+  get "teachers/:tid/resources_manage/:cid", to: "teachers#resources_manage", as:"teachers/resources_manage"
+
+
 # end:wzy's routes
 
 end

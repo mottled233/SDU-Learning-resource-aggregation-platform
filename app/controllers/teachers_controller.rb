@@ -108,6 +108,30 @@ class TeachersController < ApplicationController
     @teacher = current_user
     @user = current_user
   end
+  
+  def questions_manage
+    @teacher = User.find(params[:tid])
+    @user = @teacher
+    @course = Course.find(params[:cid])
+    @question = @course.knowledges.where("type=?","Question")
+    @question = @question.paginate(:page => params[:page], :per_page => 2)
+  end
+  
+  def blogs_manage
+    @teacher = User.find(params[:tid])
+    @user = @teacher
+    @course = Course.find(params[:cid])
+    @blog = @course.knowledges.where("type=?","Blog")
+    @blog = @blog.paginate(:page => params[:page], :per_page => 2)
+  end
+  
+  def resources_manage
+    @teacher = User.find(params[:tid])
+    @user = @teacher
+    @course = Course.find(params[:cid])
+    @resource = @course.knowledges.where("type=?","Resource")
+    @resource = @resource.paginate(:page => params[:page], :per_page => 2)
+  end
 
   private
     def user_param
