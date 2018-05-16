@@ -1,48 +1,12 @@
 <% provide(:blog, 'class=active') %>
-<%if !flash[:notice].nil?%>
-    <div class="alert alert-success">
-    	<button type="button" class="close" data-dismiss="alert">×</button>
-    	<strong><%= flash[:notice]%></strong>
-    </div>
-<%end%>
-<div class = "container"style="margin-bottom:50px">
-    <div class="breadcrumb" style="padding:0px;margin:0px">
-        <button id="newButton" type="button" class="btn btn-small btn-warning" style="width:140px;height:40px;margin-left:500px">
-           <% if log_in?%>
-             <%=link_to blog_new_path,method: :get do%>
-               <i class="halflings-icon white edit"></i>
-               <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
-             <%end%>
-          <%else%>
-             <%= link_to login_path(:message => "请先登录") do%>
-                <i class="halflings-icon white edit"></i>
-                <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
-             <%end%>
-          <%end%>
-        </button>        
-    </div>
-</div>
+<% provide(:write_path, blog_new_path) %>
 
- <%= render :partial => "blog_list", :locals => { :blogs => @blog } %> 
-<script type="text/javascript">
-  $(document).ready(function(){
-      $.each($(".ping"),function(){
-            $(this).bind("click",function(){
-                  $(this).parent().children(".reply").slideToggle();
-            });
-      });
-      
-      $.each($(".btn.btn-info"),function(){
-            $(this).bind("click",function(){
-                  $(this).parent().children(".answer-content").slideToggle();
-            });
-      });
-       $.each($(".seeMore"),function(){
-            $(this).bind("click",function(){
-                  $(this).css('display','none'); 
-                  $(this).parent().next().slideToggle();
-            });
-      });
-  });
-</script>
+<%= render :partial => "knowledges/notice" %> 
+<%= render :partial => "knowledges/write" %> 
+
+
+<%= render :partial => "blog_list", :locals => { :blogs => @blog } %> 
+
+<%= render :partial => "knowledges/script" %> 
+
 
