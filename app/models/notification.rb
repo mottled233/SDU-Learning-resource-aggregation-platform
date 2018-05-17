@@ -32,7 +32,7 @@ class Notification < ApplicationRecord
     entity = norrow_notify_entity
     with_entity = norrow_with_entity
     
-    return "该提醒对应资源已被删除" unless entity && with_entity 
+    return "该提醒对应资源已被删除" unless entity || with_entity 
     
     case notify_type
     when NOTIFY_TYPE_NEW
@@ -68,6 +68,8 @@ class Notification < ApplicationRecord
             Reply.find(id)
           when ENTITY_TYPE_RESOURCE
             Resource.find(id)
+          when ENTITY_TYPE_USER
+            User.find(id)
         end
       rescue
         false

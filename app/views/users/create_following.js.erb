@@ -1,0 +1,3 @@
+<% if @result %>
+    $("#focus_btn<%=@index%>").html("<%= escape_javascript(render partial: "users/focus_btn", locals: {index: @index, following: @following})%>");
+<% end %>

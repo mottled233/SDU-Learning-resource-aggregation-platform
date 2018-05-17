@@ -15,12 +15,18 @@
                 </section>
             </div>
             <div class="span3 user-info-digest">
-                <h3><%= @user.nickname%></h3>
+                <div>
+                    <h3><%= @user.nickname%></h3>
+                    <%= link_to "关注:#{@user.followings.count}", followings_user_path(@user), class: :focus_link%>
+                    <%= link_to "粉丝:#{@user.followeds.count}", followeds_user_path(@user), class: :focus_link%>
+                    <div id="focus_btn0" style="padding-left:10px;display:inline-block">
+                        <%= render partial: "users/focus_btn", locals: {index: 0, following: @user}%>
+                    </div>
+                </div>
                 <hr/>
                 <p>电子邮箱：<%=@user.email%></p>
                 <p>手机号：<%=@user.phone_number%></p>
             </div>
-            
         </div>
         <div class="row-fluid ">
             <div class="span8">

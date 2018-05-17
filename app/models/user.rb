@@ -146,11 +146,13 @@ class User < ApplicationRecord
     end
     
       # 为用户创造一个notification的辅助方法
-    def generate_notification!(notify_entity, options={})
-        if notify_entity
+    def generate_notification!(options={})
+        if options[:notify_entity]
             notification = self.notifications.build(options)
             notification.notify_entity_id = notify_entity.id
             notification.save
+        elsif options[:notify_entity_id]
+          notification = self.notifications.create(options)
         end
     end
     
@@ -164,7 +166,7 @@ class User < ApplicationRecord
                                   "knowledges.created_at>?",time)
                   
           knowledges_need_notify.each do |knowledge|
-            generate_notification!(course,
+            generate_notification!(notify_entity: course,
                                   notify_type: NOTIFY_TYPE_NEW,
                                   entity_type: ENTITY_TYPE_COURSE,
                                   with_entity_id: knowledge.id,
@@ -175,7 +177,7 @@ class User < ApplicationRecord
         # check knowledges user has followed
         knowledges_need_notify = self.focus_contents.where("knowledges.updated_at>?",time)
         knowledges_need_notify.each do |knowledge|
-          generate_notification!(knowledge,
+          generate_notification!(notify_entity: knowledge,
                                 notify_type: NOTIFY_TYPE_UPDATE,
                                 entity_type: knowledge.type)
         end
@@ -184,7 +186,7 @@ class User < ApplicationRecord
         knowledges_need_notify = self.focus_contents.where("knowledges.type=? and knowledges.last_reply_at>?",ENTITY_TYPE_QUESTION, time)
         knowledges_need_notify.each do |knowledge|
           knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
-            generate_notification!(knowledge,
+            generate_notification!(notify_entity: knowledge,
                                   notify_type: NOTIFY_TYPE_ANSWER,
                                   entity_type: knowledge.type,
                                   initiator_id: reply.user_id,
@@ -196,7 +198,7 @@ class User < ApplicationRecord
                                   where("knowledges.last_reply_at>? and knowledges.last_reply_at-knowledges.created_at<1", time)
         knowledges_need_notify.each do |knowledge|
           knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
-            generate_notification!(knowledge,
+            generate_notification!(notify_entity: knowledge,
                                   notify_type: NOTIFY_TYPE_REPLY,
                                   entity_type: knowledge.type,
                                   initiator_id: reply.user_id,
@@ -209,10 +211,18 @@ class User < ApplicationRecord
         f_user_ids = self.following_ids
         knowledges_need_notify = Knowledge.where("knowledges.user_id IN (?) and knowledges.created_at>? and knowledges.type<>?",f_user_ids, time, "Reply")
         knowledges_need_notify.each do |knowledge|
-          generate_notification!(knowledge,
+          generate_notification!(notify_entity: knowledge,
                                 notify_type: NOTIFY_TYPE_FOCUS_USER_NEW,
                                 entity_type: knowledge.type,
                                 initiator_id: knowledge.user_id)
+        end
+        
+        #check if there new followeds
+        associations = self.followed_associations.where("user_follow_associations.created_at>?", time)
+        associations.each do |association|
+          generate_notification!(notify_entity_id: association.following_id,
+                                 notify_type: NOTIFY_TYPE_NEW_FOLLOWED,
+                                 entity_type: ENTITY_TYPE_USER)
         end
         
     end
@@ -237,7 +247,7 @@ class User < ApplicationRecord
     end
     
     def to_path
-      "users/#{self.id}"
+      "/users/#{self.id}"
     end
     
     

@@ -84,6 +84,29 @@ class UsersController < ApplicationController
     end
   end
   
+  def create_following
+    @user = User.find(params[:id])
+    @following = User.find(params[:following])
+    @result = @user.followings<<@following
+    @index = params[:index]
+    respond_to do |format|
+      format.html { render "show" }
+      format.js
+    end
+  end
+  
+  def delete_following
+    @user = User.find(params[:id])
+    @following = User.find(params[:following])
+    @index = params[:index]
+    @result = UserFollowAssociation.find_by(following: @user, followed: @following).destroy
+    
+    respond_to do |format|
+      format.html {render("show")}
+      format.js
+    end
+  end
+  
   def followings
     @user = User.find(params[:id])
     page = params[:page] || 1
@@ -111,5 +134,7 @@ class UsersController < ApplicationController
     def config_param
       params.require(:user_config).permit(:course_blog, :course_resource, :course_question, :knowledge_reply)
     end
+    
+
     
 end

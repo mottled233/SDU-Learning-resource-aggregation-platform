@@ -1,4 +1,4 @@
-<% provide(:title, "通知列表") %>
+<% provide(:title, "粉丝列表") %>
 <div class="container-fluid-full">
   <div class="row-fluid">
     <%= render 'users/aside' %>
@@ -16,8 +16,8 @@
             </div>
         </div>
         
-        <% @followeds.each do |followed|%>
-        <div class="row-fluid">
+        <% @followeds.each_with_index do |followed, index|%>
+        <div class="row-fluid" data-index="<%= index%>">
             <div class="row-fluid span7 offset1">
               <div class="span3">
                   <%=link_to user_path(followed.id) do%>
@@ -31,8 +31,8 @@
                   <%=link_to "关注: #{followed.followings.count}", followings_user_path(followed.id)%>
                   
               </div>
-              <div class="span1 offset6" style="margin-top:-30px">
-                  <%=link_to "+关注","#",class:"btn btn-primary"%>
+              <div id="focus_btn<%=index%>" class="span1 offset6" style="margin-top:-30px">
+                <%= render partial: "users/focus_btn", locals: {index: index, following: followed} %>
               </div>
               
             </div>
@@ -54,3 +54,4 @@
     </div>
   </div>
 </div>
+

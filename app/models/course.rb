@@ -22,7 +22,7 @@ class Course < ApplicationRecord
   end
   
   def to_path
-    "courses/#{self.id}"
+    "/courses/#{self.id}"
   end
 
   

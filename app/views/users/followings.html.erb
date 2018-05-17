@@ -16,7 +16,7 @@
             </div>
         </div>
         
-        <% @followings.each do |following|%>
+        <% @followings.each_with_index do |following,index|%>
         <div class="row-fluid">
             <div class="row-fluid span7 offset1">
               <div class="span3">
@@ -31,8 +31,8 @@
                   <%=link_to "关注: #{following.followings.count}", followings_user_path(following.id)%>
                   
               </div>
-              <div class="span1 offset6" style="margin-top:-30px">
-                  <%=link_to "+关注","#",class:"btn btn-primary"%>
+              <div id="focus_btn<%=index%>" class="span1 offset6" style="margin-top:-30px">
+                <%= render partial: "users/focus_btn", locals: {index: index, following: following} %>
               </div>
               
             </div>
@@ -54,3 +54,4 @@
     </div>
   </div>
 </div>
+

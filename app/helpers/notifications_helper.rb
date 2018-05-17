@@ -6,6 +6,7 @@ module NotificationsHelper
   ENTITY_TYPE_BLOG = "Blog"
   ENTITY_TYPE_RESOURCE = "Resource"
   ENTITY_TYPE_REPLY = "Reply"
+  ENTITY_TYPE_USER = "User"
   
   NOTIFY_TYPE_GOOD = "good"
   NOTIFY_TYPE_BAD = "bad"
@@ -18,6 +19,7 @@ module NotificationsHelper
   NOTIFY_TYPE_UPDATE = "update"
   NOTIFY_TYPE_NEW = "new"
   NOTIFY_TYPE_FOCUS_USER_NEW = "focus_user_new"
+  NOTIFY_TYPE_NEW_FOLLOWED = "new_followed"
   
   NOTIFY_MAX_RESERVE = 50
     
@@ -27,12 +29,12 @@ module NotificationsHelper
         [NOTIFY_TYPE_UPDATE, NOTIFY_TYPE_ANSWER, NOTIFY_TYPE_FOCUS_USER_NEW]
     when "my"
         [NOTIFY_TYPE_REPLY, NOTIFY_TYPE_BOUTIQUED, NOTIFY_TYPE_GOOD,
-          NOTIFY_TYPE_BAD, NOTIFY_TYPE_PASS, NOTIFY_TYPE_REFUSE]
+          NOTIFY_TYPE_BAD, NOTIFY_TYPE_PASS, NOTIFY_TYPE_REFUSE, NOTIFY_TYPE_NEW_FOLLOWED]
     else
         [NOTIFY_TYPE_GOOD, NOTIFY_TYPE_BAD, NOTIFY_TYPE_DELETED,
           NOTIFY_TYPE_REPLY, NOTIFY_TYPE_ANSWER, NOTIFY_TYPE_BOUTIQUED,
           NOTIFY_TYPE_PASS, NOTIFY_TYPE_REFUSE, NOTIFY_TYPE_UPDATE,
-          NOTIFY_TYPE_NEW, NOTIFY_TYPE_FOCUS_USER_NEW]
+          NOTIFY_TYPE_NEW, NOTIFY_TYPE_FOCUS_USER_NEW, NOTIFY_TYPE_NEW_FOLLOWED]
     end
   end
     
@@ -42,7 +44,7 @@ module NotificationsHelper
   def to_html notification
     @entity = notification.norrow_notify_entity
     @with_entity = notification.norrow_with_entity
-    unless (@entity && @with_entity)
+    unless (@entity || @with_entity)
       return (content_tag :div do
         concat "该提醒对应知识已经无效"
         notify_time notification
@@ -60,6 +62,8 @@ module NotificationsHelper
         type_reply_html notification
       when NOTIFY_TYPE_FOCUS_USER_NEW
         type_focus_user_new_html notification
+      when NOTIFY_TYPE_NEW_FOLLOWED
+        type_new_followed_html notification
       else
         concat(%Q{通知类型：#{notify_type}。})
       end
@@ -165,6 +169,17 @@ module NotificationsHelper
       end
     )
     
+  end
+  
+  def type_new_followed_html notification
+    entity = notification.norrow_notify_entity
+    concat(
+      content_tag(:p, style:"font-size:1.4em") do
+        concat "用户 "
+        concat(link_to "#{entity.nickname}", entity.to_path, class:"underline")
+        concat " 关注了您。"
+      end
+    )
   end
   
   def notify_time notification
