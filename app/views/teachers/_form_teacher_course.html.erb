@@ -19,13 +19,16 @@
     <%= f.label "课程序号" %>
     <%= f.text_field :course_id %>
     <%= f.hidden_field :user, :value => @teacher.to_key%>
-    <%= f.hidden_field :path, :value => @teacher%> 
+    <%= f.hidden_field :goodpath, :value => teacher_path(@teacher)%> 
+    <%= f.hidden_field :badpath, :value => teachers_newcourseass_path(@teacher)%> 
+    
+    <!--teachers_newcourseass_path(params[:course_user_association][:user])-->
 
     
     
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "确认" , class: "btn btn-small btn-primary"%>
   </div>
 <% end %>

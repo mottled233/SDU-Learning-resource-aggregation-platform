@@ -1,0 +1,26 @@
+<% provide(:title, '新增学院') %>
+
+<div id="container-fluid-full"> 
+    <!--headerleft --> 
+    <div id="row-fluid">
+      <div id="header">
+          
+      </div> 
+  
+      <!--<div id="sidebar-left" class="span2">-->
+      <%= render :partial => "admins/row_nav" %>
+      <!--</div> -->
+  
+
+      <div id="content" class="span10">
+        <h1>新增专业</h1>
+        <hr>
+
+        <%= render 'form', speciality: @speciality %>
+        
+        <%= link_to '返回', specialities_path %>
+
+      </div> 
+    </div>
+</div> 
+<div class="clearfix"></div>

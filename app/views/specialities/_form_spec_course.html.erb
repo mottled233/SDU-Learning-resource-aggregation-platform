@@ -1,0 +1,31 @@
+
+<%= form_for(@course_speciality_association, opration = {url: specialities_create_course_association_path}) do |f| %>
+  <% if @course_speciality_association.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_speciality_association.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% @course_speciality_association.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label '专业名' %>
+    <%= @speciality.name %>  
+    <br />
+    <%= f.label '课程编号' %>
+    <%= f.text_field :course %>
+    <%= f.hidden_field :speciality, :value => @speciality.to_key%>
+    <%= f.hidden_field :path, :value => speciality_path(@speciality.to_key)%> 
+
+    
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit "确认" , class: "btn btn-small btn-primary"%>
+  </div>
+<% end %>

@@ -6,10 +6,12 @@
 		<ul class="nav nav-tabs nav-stacked main-menu">
 			<li><div style="height:50px"/></li>
 			<li><a href="<%= departments_path%>"><i class="icon-building"></i><span class="hidden-tablet"> 学院管理</span></a></li>
+			<li><a href="<%= specialities_path%>"><i class="icon-sitemap"></i><span class="hidden-tablet"> 专业管理</span></a></li>
 			<li><a href="<%= courses_path%>"><i class="icon-book"></i><span class="hidden-tablet"> 课程管理</span></a></li>
 			<li><a href="<%= keywords_path%>"><i class="icon-tag"></i><span class="hidden-tablet"> 关键词管理</span></a></li>
 			<li><a href="<%= teachers_path%>"><i class="icon-group"></i><span class="hidden-tablet"> 教师管理</span></a></li>
-			<li><a href="<%= admin_edit_path%>"><i class="icon-user"></i><span class="hidden-tablet"> 修改账户</span></a></li>
+			<!--<li><a href="<%#= admin_edit_path%>"><i class="icon-user"></i><span class="hidden-tablet"> 修改账户</span></a></li>-->
+			<li><a href="<%= user_path(current_user.id)%>"><i class="icon-user"></i><span class="hidden-tablet"> 返回</span></a></li>
 		</ul>
 	</div>
 </div>

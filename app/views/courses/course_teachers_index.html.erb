@@ -1,0 +1,59 @@
+<% provide(:title, '授课教师') %>
+
+<div id="container-fluid-full"> 
+    <!--headerleft --> 
+    <div id="row-fluid">
+      <div id="header">
+          
+      </div> 
+  
+
+      <%= render :partial => "admins/row_nav" %>
+
+  
+
+      <div id="content" class="span10">
+        <p id="notice"><%= notice %></p>
+
+        
+          <h3>课程</h3>
+          <h1>
+            <strong><%= @course.course_name %></strong>
+          </h1>
+          <hr>
+          
+        
+        
+        <table class="table table-hover">
+          <h3>授课教师</h3>
+          <thead>
+            <tr>
+              <th>教师序号</th>
+              <th>教师姓名</th>
+              <th colspan="1"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            
+            <% @teachers.each do |teacher| %>
+              <tr>
+                <td><%= teacher.id %></td> 
+                <td><%= teacher.nickname %></td>
+                <!--<td><%#= link_to 'Show', department %></td>-->
+                <!--<td><%#= link_to 'Edit', edit_department_path(department) %></td>-->
+                <td><%= link_to '删除关联', courses_deleteCourseTeacherAss_path(teacher,@course), data: { confirm: 'Are you sure????' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        
+        <!--<%#= link_to '编辑课程名', edit_department_path(@department) %> |-->
+        <%= link_to '新建关联', courses_newteacherass_path(@course) %> |
+        <%= link_to '返回', courses_path %> 
+
+      </div> 
+    </div>
+</div> 
+
+<div class="clearfix"></div>

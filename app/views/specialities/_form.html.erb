@@ -1,0 +1,26 @@
+<%= form_for speciality, class: "form-inline" do |f| %>
+  <% if speciality.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(speciality.errors.count, "error") %> prohibited this speciality from being saved:</h2>
+
+      <ul>
+      <% speciality.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label '专业名' %>
+    <%= f.text_field :name %>
+    
+    <%= f.label '所属学院序号' %>
+    <%= f.text_field :department_id %>
+
+  </div>
+
+  <div class="actions">
+    <%= f.submit "确认", class: "btn btn-small btn-primary"%>
+  </div>
+<% end %>

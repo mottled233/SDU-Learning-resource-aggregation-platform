@@ -1,4 +1,4 @@
-
+<% provide(:title, '学院详情') %>
 
 <div id="container-fluid-full"> 
     <!--headerleft --> 
@@ -15,16 +15,20 @@
       <div id="content" class="span10">
         <p id="notice"><%= notice %></p>
 
-        <p>
-          <strong>专业名称:</strong>
-          <%= @department.name %>
-        </p>
+        <h3>学院</h3>
+        <h1>
+          <strong><%= @department.name %></strong>
+          
+        </h1>
+        <hr>
         
-        <table>
+        <table class="table table-hover">
+          <h3>下属课程</h3>
           <thead>
             <tr>
-              <th>下属课程</th>
-              <th colspan="2"></th>
+              <th>课程序号</th>
+              <th>课程名</th>
+              <th colspan="1"></th>
             </tr>
           </thead>
         
@@ -45,7 +49,7 @@
         
         <%= link_to '编辑学院名', edit_department_path(@department) %> |
         <%= link_to '新建关联', departments_newcourseass_path(@department) %> |
-        <%= link_to 'Back', departments_path %> 
+        <%= link_to '返回', departments_path %> 
 
       </div> 
     </div>

@@ -10,6 +10,7 @@ class KeywordsController < ApplicationController
   # GET /keywords/1
   # GET /keywords/1.json
   def show
+    
   end
 
   # GET /keywords/new
@@ -25,10 +26,14 @@ class KeywordsController < ApplicationController
   # POST /keywords.json
   def create
     @keyword = Keyword.new(keyword_params)
-
+    # @easterEgg = 'Enjoy your work and have a nice day! --wang ziyue'
+    @notice = 'Keyword was successfully created.'
+    if params[:keyword][:name] == '好累'
+      @notice = @easterEgg
+    end
     respond_to do |format|
       if @keyword.save
-        format.html { redirect_to @keyword, notice: 'Keyword was successfully created.' }
+        format.html { redirect_to @keyword, notice: "#{@notice}" }
         format.json { render :show, status: :created, location: @keyword }
       else
         format.html { render :new }
@@ -159,6 +164,13 @@ class KeywordsController < ApplicationController
           end
         end
       end
+    end
+  end
+  
+  def ajaxnames
+    @course_id = params[:id]
+    respond_to do |format|
+        format.js{}
     end
   end
 

@@ -1,0 +1,16 @@
+<div class = "container-fluid-full"style="margin-bottom:50px">
+    <div class="span4"></div>
+    <button id="newButton" type="button" class="btn btn-small btn-warning" style="width:268px;height:40px;border-radius:16px!important;">
+       <% if log_in?%>
+         <%=link_to yield(:write_path),method: :get do%>
+           <i class="halflings-icon white edit"></i>
+           <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
+         <%end%>
+      <%else%>
+         <%= link_to login_path(:message => "请先登录") do%>
+            <i class="halflings-icon white edit"></i>
+            <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
+         <%end%>
+      <%end%>
+    </button>        
+</div>

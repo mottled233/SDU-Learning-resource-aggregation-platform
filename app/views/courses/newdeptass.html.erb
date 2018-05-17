@@ -1,15 +1,16 @@
-<% provide(:title, '添加课程学院关联') %>
+<% provide(:title, '关联课程到学院') %>
 <div id="container-fluid-full"> 
 
     <div id="row-fluid">
       <%= render :partial => "admins/row_nav" %>
       <div id="content" class="span8">
-        <h1>New Department Course Association</h1>
+        <h1>关联课程到学院</h1>
+        <hr>
       
         <p id="notice"><%= notice %></p>
         <%= render 'form_dept_course', course_department_association: @course_department_association %>
         
-        <%= link_to 'Back', courses_course_departments_index_path(@course) %>
+        <%= link_to '返回', courses_course_departments_index_path(@course) %>
       </div> 
     </div>
 </div> 

@@ -11,16 +11,26 @@
       <div id="content" class="span8">
         <p id="notice"><%= notice %></p>
 
-        <p>
-          <strong>教师用户名:</strong>
-          <%= @teacher.username %>
-        </p>
-        <p>
-          <strong>教师姓名:</strong>
-          <%= @teacher.nickname %>
-        </p>
+      <div class="row">
+        <div class="span3">
+          <h3>教师用户名：</h3>
+          <h1>
+            <strong><%= @teacher.username %></strong>
+          </h1>
+          
+        </div>
+        <div class="span3">
+          <h3>教师姓名：</h3>
+          <h1>
+            <strong><%= @teacher.nickname %></strong>
+          </h1>
+          
+        </div>
+        <div class="span6"></div>
+      </div>
+      <hr>
         
-        <table>
+        <table class="table table-hover">
           <thead>
             <tr>
               <th>教授课程</th>

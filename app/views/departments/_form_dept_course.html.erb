@@ -13,10 +13,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label '学院名' %>
     <%= @department.name %>  
     <br />
-    <%= f.label :courseID %>
+    <%= f.label '课程编号' %>
     <%= f.text_field :course %>
     <%= f.hidden_field :department, :value => @department.to_key%>
     <%= f.hidden_field :path, :value => @department%> 
@@ -26,6 +26,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "确认" , class: "btn btn-small btn-primary"%>
   </div>
 <% end %>

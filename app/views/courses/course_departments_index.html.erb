@@ -7,24 +7,28 @@
           
       </div> 
   
-      <!--<div id="sidebar-left" class="span2">-->
+
       <%= render :partial => "admins/row_nav" %>
-      <!--</div> -->
+
   
 
       <div id="content" class="span10">
         <p id="notice"><%= notice %></p>
 
-        <p>
-          <strong>课程名称:</strong>
-          <%= @course.course_name %>
-        </p>
+
+        <h3>课程</h3>
+        <h1>
+          <strong><%= @course.course_name %></strong>
+          </h1>
+        <hr>
         
-        <table>
+        <table class="table table-hover">
+          <h3>所属学院</h3>
           <thead>
             <tr>
-              <th>所属学院</th>
-              <th colspan="2"></th>
+              <th>学院序号</th>
+              <th>学院名称</th>
+              <th colspan="1"></th>
             </tr>
           </thead>
         
@@ -45,7 +49,7 @@
         
         <!--<%#= link_to '编辑课程名', edit_department_path(@department) %> |-->
         <%= link_to '新建关联', courses_newdeptass_path(@course) %> |
-        <%= link_to 'Back', courses_path %> 
+        <%= link_to '返回', courses_path %> 
 
       </div> 
     </div>

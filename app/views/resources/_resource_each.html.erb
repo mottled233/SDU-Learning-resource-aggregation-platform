@@ -1,0 +1,70 @@
+<div class="box span10">
+        <div class="box-header">
+			<h2><i class="halflings-icon white white tasks"></i><span class="break">&nbsp;<%=link_to "#{q.title}",resource_path(q.id),style: "color:white"%></span></h2>
+            <span><p style="text-align:justify;float:right;display:inline;color:white"><strong>By:</strong><%= q.creator.nickname%>&nbsp;&nbsp;&nbsp;发布时间:<%= q.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp;</span>
+	        <%if !log_in?%>
+                <%= link_to "修改",login_path%>
+                <%= link_to "删除",login_path%>
+		    <%elsif current_user?(q.creator)%>
+		        <%= link_to "修改",edit_resource_path(q)%>
+		        <%= link_to '删除',resource_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
+		    <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-q.courses) != current_user.selected_courses%>
+		        <%= link_to '删除',resource_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
+		    <%end%>
+		</div>
+		<div class="box-content">
+                <div class="container">
+                    <div class = "panel panel-default">
+                        <div class="panel-head">
+                        </div>
+                        <div class="panel-body">
+                          <%if q.content.length>50%>
+                              <p><%= "#{q.content[0...50]}..." %></p>
+                          <%else%>
+                              <p><%= q.content %></p>
+                          <%end%>
+                        </div>
+                        <div class="panel-footer">
+                            <div style="margin-bottom:10px">
+                            <strong>所属课程:</strong>
+                            <% q.courses.each do|course| %>
+                                     <span class="label label-success"><%= course.course_name %>&nbsp;</span>
+                            <% end %>
+                            </div>
+                          <div style="margin-bottom:10px">
+                              <strong>所属课程:</strong>
+                              <%= link_to "#{q.attachment}", resource_file_download_path(:r_id => q.id) %>
+                          </div>
+                          <div id="add_evalute-<%= q.id%>" style="display:inline">
+                                <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>    
+                          </div>
+                           <div id="focus" style="display:inline">
+                                <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => q }%>  
+                           </div>
+                           <div style="display:inline">
+                             <a class="ping"><%= q.getAllReplies.size%> 条评论</a>&nbsp;
+                             <div class="reply" style="display:none;margin-left:50px" style="float:left">
+                               <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
+                             </div>
+                          </div>
+                         
+                          </p>
+                        </div>
+                        <div class="panel-footer">
+                          <h4 style="display: inline;">标签：</h4>
+                            <%q.keywords.each do|k|%>
+                            <span class="label label-info">
+                              &nbsp;<%= k.name%>&nbsp;
+                            </span>
+                            <%end%>
+                        </div>
+                        <div class="blank" style="height:20px"></div>
+                    </div>
+              </div>
+    		 <div id="answer-<%= q.id%>" style="display:inline;float:right">
+                <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
+             </div>
+             <div class="blank" style="height:30px"></div>
+    		</div>
+    	</div>
+    	<div class="blank" style="height:50px"></div>

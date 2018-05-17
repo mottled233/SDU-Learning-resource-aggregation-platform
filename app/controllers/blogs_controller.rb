@@ -17,6 +17,8 @@ class BlogsController < KnowledgesController
     end
     def show
         @knowledge = Knowledge.find(params[:id])
+        @knowledge.visit_count = @knowledge.visit_count+1
+        @knowledge.save
     end
     def edit
         @blog = Blog.find(params[:id])

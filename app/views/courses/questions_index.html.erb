@@ -31,7 +31,16 @@
       <div class="box span12" style="margin-left:150px">
         <div class="box-header">
 			<h2><i class="halflings-icon white white tasks"></i><span class="break">&nbsp;<%=link_to "#{q.title}",question_path(q.id),style: "color:white"%></span></h2>
-            <span><p style="text-align:justify;float:right;display:inline;color:white"><strong>By:</strong><%= q.creator.username%>&nbsp;&nbsp;&nbsp;发布时间:<%= q.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp;</span>
+            <span><p style="text-align:justify;float:right;display:inline;color:white"><strong>By:</strong><%= q.creator.nickname%>&nbsp;&nbsp;&nbsp;发布时间:<%= q.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp;</span>
+		    <%if !log_in?%>
+                <%= link_to "修改",login_path%>
+                <%= link_to "删除",login_path%>
+		    <%elsif current_user?(q.creator)%>
+		        <%= link_to "修改",edit_question_path(q)%>
+		        <%= link_to '删除',question_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
+		    <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-q.courses) != current_user.selected_courses%>
+		        <%= link_to '删除',question_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
+		    <%end%>
 		</div>
 		<div class="box-content">
                 <div class="container">
