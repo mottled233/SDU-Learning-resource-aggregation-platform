@@ -36,7 +36,6 @@ class Knowledge < ApplicationRecord
   def Knowledge.get_all_entry(entry_type)
     Knowledge.where(:type => entry_type).all
   end
-  
   #选取最佳资源
   def Knowledge.chooseBestKnowledge(course,num)
     if course.nil?
@@ -78,4 +77,5 @@ class Knowledge < ApplicationRecord
     self.bad = 0
   end
 
+  
 end
