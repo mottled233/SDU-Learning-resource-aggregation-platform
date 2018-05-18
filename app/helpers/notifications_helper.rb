@@ -80,9 +80,9 @@ module NotificationsHelper
     concat(
       content_tag(:p, style:"font-size:1.4em") do
         concat "您关注的课程"
-        concat(link_to "#{entity.name}", entity.to_path, class:"underline")
+        concat(link_to "《#{entity.name}》", entity.to_path, class:"underline")
         concat " 更新了新的资源： "
-        concat(link_to "#{with_entity.title}", with_entity.to_path, class:"underline")
+        concat(link_to "《#{with_entity.title}》", with_entity.to_path, class:"underline")
       end
     )
       
@@ -96,7 +96,7 @@ module NotificationsHelper
         concat "用户 "
         concat(link_to "#{User.find(notification.initiator_id).nickname}", user_path(notification.initiator_id), class:"underline")
         concat " 回答了您关注的问题 "
-        concat(link_to "#{entity.title}", question_path(entity.id), class:"underline")
+        concat(link_to "《#{entity.title}》", question_path(entity.id), class:"underline")
         concat ":"
       end
     )
@@ -117,8 +117,8 @@ module NotificationsHelper
     
     concat(
       content_tag(:p, style:"font-size:1.4em") do
-        concat "您关注的资源"
-        concat(link_to "#{entity.title}", entity.to_path, class:"underline")
+        concat "您关注的资源 "
+        concat(link_to "《#{entity.title}》", entity.to_path, class:"underline")
         concat " 更新了。"
       end
     )
@@ -135,12 +135,12 @@ module NotificationsHelper
         user = User.find(notification.initiator_id)
         concat(link_to "#{user.nickname}", user_path(notification.initiator_id), class:"underline")
         if entity.type==ENTITY_TYPE_REPLY
-          concat " 回复了您在 "
-          concat(link_to "#{entity.ancestor.title}", entity.to_path, class:"underline")
-          concat " 下的回复"
+          concat " 回复了您在"
+          concat(link_to "《#{entity.ancestor.title}》", entity.to_path, class:"underline")
+          concat "下的回复"
         else
-          concat " 回复了您发表的 "
-          concat(link_to "#{entity.title}", entity.to_path, class:"underline")
+          concat " 回复了您发表的"
+          concat(link_to "《#{entity.title}》", entity.to_path, class:"underline")
         end
         concat ":"
       end
@@ -165,7 +165,7 @@ module NotificationsHelper
         concat "您关注的用户 "
         concat(link_to "#{user.nickname}", user.to_path, class:"underline")
         concat " 发布了新的资源： "
-        concat(link_to "#{entity.title}", entity.to_path, class:"underline")
+        concat(link_to "《#{entity.title}》", entity.to_path, class:"underline")
       end
     )
     

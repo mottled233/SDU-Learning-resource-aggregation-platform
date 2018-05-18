@@ -28,7 +28,11 @@ Rails.application.routes.draw do
     get 'followings', on: :member
     get 'followeds', on: :member
     get 'create_following', on: :member
+    get 'selected_courses', on: :member
+    get 'select_course', on: :member
+    get 'unselect_course', on: :member
     get 'delete_following', on: :member
+    get 'creatings', on: :member
     post '/users/delete/:id', on: :member, to: 'users#destroy', as:"delete_user"
     # 用户通知
     resources :notifications, only: [:index]

@@ -1,4 +1,4 @@
-<% provide(:title, "通知列表") %>
+<% provide(:title, "关注用户列表") %>
 <div class="container-fluid-full">
   <div class="row-fluid">
     <%= render 'users/aside' %>
@@ -7,7 +7,7 @@
         <%= render 'layouts/flash' %>
         </div>
         <div class="row-fluid offset1">
-            <h1>通知列表</h1>
+            <h1>关注用户列表</h1>
             
         </div>
         <div class="row-fluid ">
@@ -47,7 +47,7 @@
                 <%= will_paginate @followings%>
             </div>
         </div>
-        <div style="height:500px"/>
+        <div style="height:700px"/>
     <% if @followings.count<5 %>
         <div style="height:500px"/>
     <% end %>

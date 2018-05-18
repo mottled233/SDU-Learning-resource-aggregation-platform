@@ -7,14 +7,18 @@
         <h2><i class="  halflings-icon white book" style="color:white"></i><span class="break"></span>课程简介</h2>
       </div>
       <div class="box-content">
-        <p>
-          <strong>课程名称:</strong>
-          <%= @course.course_name %>
-        </p>
-        
+        <div>
+          <p style="display:inline-block">
+            <strong>课程名称:</strong>
+            <%= @course.course_name %>
+          </p>
+          <div id="focus_btn0" class="" style="padding-left:20px;margin-top:-30px;display:inline-block">
+            <%= render partial: "users/select_course_btn", locals: {user: current_user, index: 0, course: @course} %>
+          </div>
+        </div>
         <p>
           <strong>任课老师:</strong>
-          <% @course.users.each do|teacher| %>
+          <% @course.users.where(user_role: :teacher).each do|teacher| %>
              <%= teacher.username %>&nbsp
           <% end %>
         </p>
