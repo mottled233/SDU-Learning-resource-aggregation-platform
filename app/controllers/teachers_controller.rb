@@ -133,6 +133,12 @@ class TeachersController < ApplicationController
     @resource = @resource.paginate(:page => params[:page], :per_page => 2)
   end
 
+  def ajaxnames
+    @teacher_id = params[:id]
+    respond_to do |format|
+        format.js{}
+    end
+  end
   private
     def user_param
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :phone_number, :user_role, :nickname)

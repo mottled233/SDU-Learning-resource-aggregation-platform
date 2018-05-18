@@ -147,7 +147,12 @@ class CoursesController < ApplicationController
     @teachers = @course.users.where("user_role=?","teacher")
   end
   
-
+  def ajaxnames
+    @course_id = params[:id]
+    respond_to do |format|
+        format.js{}
+    end
+  end
   
 
 

@@ -1,0 +1,20 @@
+<span>课程名</span>
+<h3>
+    <strong>
+    <%if !course_id.nil?%>
+    <%  if !Course.where("id=?",course_id).empty?%>
+    <%    course = Course.find(course_id)%>
+            <span>
+                <%= course.course_name%>
+            </span>
+    <%  else%>
+            <span>
+                无此课程
+            </span>
+    <%  end%>
+    <%else%>
+        <span>
+        </span>
+    <%end%>
+    </strong>
+</h3>

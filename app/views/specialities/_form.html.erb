@@ -15,12 +15,34 @@
     <%= f.label '专业名' %>
     <%= f.text_field :name %>
     
-    <%= f.label '所属学院序号' %>
-    <%= f.text_field :department_id %>
+    
 
+    <div class ='row'>
+      <div class = 'span3'>
+        <%= f.label '所属学院序号' %>
+        <%= f.text_field :department_id %>
+      </div>
+        <div class = 'span3 'id="department_name">
+          
+          <%= render :partial => "departments/names", :locals => {:department_id => speciality[:department_id]}%>
+        </div>
+        <div class='span6'></div>
+    </div>
   </div>
 
   <div class="actions">
     <%= f.submit "确认", class: "btn btn-small btn-primary"%>
   </div>
 <% end %>
+
+<script>
+  $(function(){  
+  
+    $('#speciality_department_id').bind('input propertychange', function() {
+      var department_id = $(this).val()
+      $.get("/departments/ajaxnames/"+department_id,
+      function(data,status){}); 
+    }); 
+  });
+  
+</script>

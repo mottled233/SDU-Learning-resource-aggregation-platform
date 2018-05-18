@@ -1,0 +1,12 @@
+<%= form_tag(searches_result_url,method:"GET") do%>
+  <div style="text-align:center;margin:10%">
+    <h1>Search</h1>
+    <div class="field">
+      <%= text_field :key,params[0], class: 'form-control'%>
+    </div>
+    <div class="actions">
+      <%= submit_tag "搜索" , class: "btn btn-primary" %>
+    </div>
+    
+  </div>
+<% end %>

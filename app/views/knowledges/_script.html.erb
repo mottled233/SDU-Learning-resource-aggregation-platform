@@ -8,7 +8,15 @@
       
       $.each($(".btn.btn-info"),function(){
             $(this).bind("click",function(){
+                  // float = $(this).parent().parent().css("float")
+                  // if(float == "left"){
+                  //       $(this).parent().parent().css("float","right")
+                  // }
+                  // else if(float == "right"){
+                  //       $(this).parent().parent().css("float","left")
+                  // }
                   $(this).parent().children(".answer-content").slideToggle();
+                 
             });
       });
        $.each($(".seeMore"),function(){

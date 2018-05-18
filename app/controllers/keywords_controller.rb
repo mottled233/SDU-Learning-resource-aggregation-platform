@@ -167,8 +167,24 @@ class KeywordsController < ApplicationController
     end
   end
   
-  def ajaxnames
-    @course_id = params[:id]
+
+  
+  def ajaxkeywordname
+    @keyword_id = params[:id]
+    respond_to do |format|
+        format.js{}
+    end
+  end
+  
+  def ajaxkeywordnamelow
+    @keyword_id = params[:id]
+    respond_to do |format|
+        format.js{}
+    end
+  end
+  
+  def ajaxkeywordnamehigh
+    @keyword_id = params[:id]
     respond_to do |format|
         format.js{}
     end

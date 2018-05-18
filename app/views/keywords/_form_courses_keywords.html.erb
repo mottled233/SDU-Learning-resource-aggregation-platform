@@ -14,13 +14,28 @@
 
   <div class="field">
 
-    <%= f.label "关键字序号" %>
-    <%= f.text_field :keyword_id %>
-
-    <%= f.label "课程序号" %>
-    <%= f.text_field :course_id %>
-    <div id="course_name">
-      <%= render :partial => "keywords/names", :locals => {:course_id => course_keyword_association[:course_id]}%>
+    <div class ='row'>
+      <div class = 'span3'>
+        <%= f.label "关键字序号" %>
+        <%= f.text_field :keyword_id %>
+      </div>
+        <div class = 'span3 'id="keyword_name">
+          
+          <%= render :partial => "keywords/keywordname", :locals => {:keyword_id => course_keyword_association[:keyword_id]}%>
+        </div>
+        <div class='span6'></div>
+    </div>
+    
+    <div class ='row'>
+      <div class = 'span3'>
+        <%= f.label "课程序号" %>
+        <%= f.text_field :course_id %>
+      </div>
+        <div class = 'span3 'id="course_name">
+          
+          <%= render :partial => "courses/names", :locals => {:course_id => course_keyword_association[:course_id]}%>
+        </div>
+        <div class='span6'></div>
     </div>
     <%= f.hidden_field :path, :value => keywords_attachtocourse_path(@keyword)%>
     
@@ -36,7 +51,19 @@
   
     $('#course_keyword_association_course_id').bind('input propertychange', function() {
       var course_id = $(this).val()
-      $.get("/keywords/ajaxnames/"+course_id,
+      $.get("/courses/ajaxnames/"+course_id,
+      function(data,status){}); 
+    }); 
+  });
+  
+</script>
+
+<script>
+  $(function(){  
+  
+    $('#course_keyword_association_keyword_id').bind('input propertychange', function() {
+      var keyword_id = $(this).val()
+      $.get("/keywords/ajaxkeywordname/"+keyword_id,
       function(data,status){}); 
     }); 
   });
