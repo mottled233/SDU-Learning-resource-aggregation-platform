@@ -1,0 +1,20 @@
+<span>学院名</span>
+<h3>
+    <strong>
+    <%if !department_id.nil?%>
+    <%  if !Department.where("id=?",department_id).empty?%>
+    <%    department = Department.find(department_id)%>
+            <span>
+                <%= department.name%>
+            </span>
+    <%  else%>
+            <span>
+                无此学院
+            </span>
+    <%  end%>
+    <%else%>
+        <span>
+        </span>
+    <%end%>
+    </strong>
+</h3>
