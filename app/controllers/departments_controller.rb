@@ -115,6 +115,13 @@ class DepartmentsController < ApplicationController
       end
     end
   end
+  
+  def ajaxnames
+    @department_id = params[:id]
+    respond_to do |format|
+        format.js{}
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -16,8 +16,19 @@
     <%= f.label "课程名" %>
     <%= @course.course_name %>  
     <br />
-    <%= f.label "学院编号" %>
-    <%= f.text_field :department %>
+
+    
+    <div class ='row'>
+      <div class = 'span3'>
+        <%= f.label "学院编号" %>
+        <%= f.text_field :department %>
+      </div>
+        <div class = 'span3 'id="department_name">
+          
+          <%= render :partial => "departments/names", :locals => {:department_id => @course_department_associations[:department]}%>
+        </div>
+        <div class='span6'></div>
+    </div>
     <%= f.hidden_field :course, :value => @course.to_key%>
     <%= f.hidden_field :path, :value => courses_newdeptass_path%>
 
@@ -29,3 +40,15 @@
     <%= f.submit "确认" , class: "btn btn-small btn-primary"%>
   </div>
 <% end %>
+
+<script>
+  $(function(){  
+  
+    $('#course_department_association_department').bind('input propertychange', function() {
+      var department_id = $(this).val()
+      $.get("/departments/ajaxnames/"+department_id,
+      function(data,status){}); 
+    }); 
+  });
+  
+</script>

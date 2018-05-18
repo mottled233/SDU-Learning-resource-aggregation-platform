@@ -16,8 +16,17 @@
     <%= f.label "教师姓名" %>
     <%= @teacher.nickname %>  
     <br />
-    <%= f.label "课程序号" %>
-    <%= f.text_field :course_id %>
+    <div class ='row'>
+      <div class = 'span3'>
+        <%= f.label "课程序号" %>
+        <%= f.text_field :course_id %>
+      </div>
+        <div class = 'span3 'id="course_name">
+          
+          <%= render :partial => "courses/names", :locals => {:course_id => @course_teacher_association[:course_id]}%>
+        </div>
+        <div class='span6'></div>
+    </div>
     <%= f.hidden_field :user, :value => @teacher.to_key%>
     <%= f.hidden_field :goodpath, :value => teacher_path(@teacher)%> 
     <%= f.hidden_field :badpath, :value => teachers_newcourseass_path(@teacher)%> 
@@ -32,3 +41,15 @@
     <%= f.submit "确认" , class: "btn btn-small btn-primary"%>
   </div>
 <% end %>
+
+<script>
+  $(function(){  
+  
+    $('#course_user_association_course_id').bind('input propertychange', function() {
+      var course_id = $(this).val()
+      $.get("/courses/ajaxnames/"+course_id,
+      function(data,status){}); 
+    }); 
+  });
+  
+</script>
