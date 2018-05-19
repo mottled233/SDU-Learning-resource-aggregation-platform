@@ -63,6 +63,96 @@ hr {
     position:fix;
 }
 
+.shadow-box {
+    background-color:white;
+    box-shadow: 2px 1px 2px #BFBFBF;
+}
+
+.normal-hr{
+    height:1px;
+    border:none;
+    border-top:1px solid #000;
+    opacity:0.3;
+    margin:5px;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.inline{
+    display: inline;
+}
+
+.no-hover:hover{
+    text-decoration:none;
+}
+
+.blog-intro{
+    margin-top:-5px;
+    padding-top:7px;
+    padding-left:2px;
+}
+
+.blog-intro .intro-title{
+    margin-left:20px;
+}
+
+.blog-intro a{
+    padding-top:3px;
+}
 
 
+.blog-intro img{
+    padding-bottom:4px;
+}
 
+.blog-intro p{
+    font-size:1.2em;
+    margin: 0;
+}
+
+.blog-content{
+    padding-left:20px;
+    display:table;
+    margin-bottom:10px;
+}
+
+.blog-content .cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.blog-content .digest-text p{
+    font-size:1.1em;
+    
+    color:#888;
+}
+
+.bad_btn{
+    width:70%;
+    height:25px;
+    background-color: #d6d6d6;
+    margin-top:5px;
+    font-size:1.2em;
+    border-radius:3px;
+}
+
+.good_btn{
+    width:70%;
+    height:25px;
+    background-color: #d6d6d6;
+    margin-bottom:5px;
+    border-radius:2px;
+    font-size:1.2em;
+    border-radius:3px;
+}
+
+.like_value{
+    width:70%;
+    height:25px;
+    background-color: #d6d6d6;
+    margin-bottom:5px;
+    font-size:1.2em;
+    border-radius:3px;
+}

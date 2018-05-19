@@ -2,6 +2,12 @@ class Knowledge < ApplicationRecord
   include KnowledgesHelper
   # callbacks
   before_create :default_values
+  def default_values
+    self.good = 0
+    self.bad = 0
+    self.visit_count=0
+    self.download_count=0
+  end
   
   # association
   belongs_to :creator,class_name: :User, inverse_of: :creatings, foreign_key: :user_id
@@ -78,13 +84,8 @@ class Knowledge < ApplicationRecord
       digest = digest[0,length]+"..."
     end
   end
+  
 
-  def default_values
-    self.good = 0
-    self.bad = 0
-    self.visit_count=0
-    self.download_count=0
-  end
   
   def chinese_type
     case self.type
@@ -98,6 +99,6 @@ class Knowledge < ApplicationRecord
       "回复"  
     end
   end
-
+  
   
 end

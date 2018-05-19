@@ -1,4 +1,4 @@
-<% if course.in?(user.selected_courses)
+<% if user && course.in?(user.selected_courses)
 %>
   <%=link_to "取消关注", unselect_course_user_path(id: current_user.id, course: course.id, index: index), remote:true, class:"delete-following btn red btn-primary"%>
 <% else %>

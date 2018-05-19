@@ -1,8 +1,13 @@
-<% provide(:question, 'class=active') %>
+<% provide(:blog, 'class=active') %>
 <% provide(:write_path, blog_new_path(:course_id => @course.id)) %>
 <%= render 'courses/header'%>
 <%= render :partial => "knowledges/notice" %> 
 <%= render :partial => "knowledges/write" %>
+<div class="blog-page-content row-fluid">
+    <div class="span8 offset2">
+        <%= render "blogs/aside"%>
+        <%= render :partial => "blogs/blog_list", :locals => { :blogs => @blog } %>
+    </div>
+</div>
 
-<%= render :partial => "blogs/blog_list", :locals => { :blogs => @blog } %>
 <%= render :partial => "knowledges/script" %>

@@ -95,7 +95,7 @@ class CoursesController < ApplicationController
   def blogs_index
     @course = Course.find(params[:course_id])
     @blog = Blog.all
-    @blog = Blog.paginate(:page => params[:page], :per_page => 2)
+    @blog = Blog.paginate(:page => params[:page], :per_page => 10)
   end
   
   def resources_index
