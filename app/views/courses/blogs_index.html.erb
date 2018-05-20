@@ -2,10 +2,10 @@
 <% provide(:write_path, blog_new_path(:course_id => @course.id)) %>
 <%= render 'courses/header'%>
 <%= render :partial => "knowledges/notice" %> 
-<%= render :partial => "knowledges/write" %>
+
 <div class="blog-page-content row-fluid">
     <div class="span8 offset2">
-        <%= render "blogs/aside"%>
+        <%= render :partial => "aside",:locals => { :course => @course }%>
         <%= render :partial => "blogs/blog_list", :locals => { :blogs => @blog } %>
     </div>
 </div>

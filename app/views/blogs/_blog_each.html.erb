@@ -8,7 +8,6 @@
             </div>
             <hr class="normal-hr" style="margin:2px 0 5px"/>
             <div class="blog-intro row-fluid">
-                
                 <div class="span10" style="padding-left:13px">
                     <%= link_to user_path(q.creator), class:"no-hover user-intro" do%>
                         <%= gravatar_for q.creator, size:20%>
@@ -29,7 +28,7 @@
                     
                 </div>
                 <div class="span2">
-                    <span class="intro-title">浏览：<%=q.visit_count%>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span class="intro-title" style="margin-left:0px">浏览：<%=q.visit_count%>&nbsp;&nbsp;</span>
                 </div>
             </div>
             
@@ -53,23 +52,13 @@
         
     
     <div class="row-fluid">
-            <div class="blog-content">
-                
+        <div class="span12">
+            <div class="blog-content" style="width:95%;">
                 <div class = "span10" style="margin-top:10px">
-                    <div class="inline-block center cell" style="width:10%">
-                        <%=link_to "#" do%>
-                        <div class="good_btn">
-                            <span class="label" style="background-color:#d6d6d6">▲</span>
+                    <div class="inline-block center cell" style="width:90px">
+                        <div id="add_evalute-<%= q.id%>" style="display:inline">
+                           <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>
                         </div>
-                        <% end %>
-                        <div class="like_value">
-                            <span class="label" style="background-color:#d6d6d6">111<span>
-                        </div>
-                        <%=link_to "#" do%>
-                        <div class="bad_btn">
-                            <span class="label" style="background-color:#d6d6d6">▼</span>
-                        </div>
-                        <% end %>
                     </div>
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
@@ -85,6 +74,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
     <div class="row-fluid">
         <hr class="normal-hr" style=""/>
@@ -95,13 +85,10 @@
             <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => q }%>&nbsp;&nbsp;  
         </div>
         <div style="display:inline">
-            <a class="ping"><%= num = q.getAllReplies.size%> 条评论</a>&nbsp;&nbsp;
-            <%if num>0%>
-                <div class="reply" style="display:none;" style="float:left;">
-                    <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
-                    
-                </div>
-            <%end%>
+            <a class="ping"><%= q.getAllReplies.size%> 条评论</a>&nbsp;&nbsp;
+            <div class="reply" style="display:none;" style="float:left;">
+                <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
+            </div>
         </div>
         <div id="focus" style="display:inline">
             <% unless q.last_reply_at.nil? %>
@@ -110,8 +97,8 @@
         </div>
     </div>
     <!--<div class="row-fluid">-->
-    <!--    <div id="answer-<%= q.id%>" class="span11" style="display:inline;margin-left:20px;margin-bottom:10px">-->
-    <!--        <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> -->
+    <!--    <div id="answer-<%#= q.id%>" class="span11" style="display:inline;margin-left:20px;margin-bottom:10px">-->
+    <!--        <%#= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> -->
     <!--    </div>-->
     <!--</div>-->
     

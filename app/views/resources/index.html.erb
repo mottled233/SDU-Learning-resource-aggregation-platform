@@ -1,12 +1,13 @@
 <% provide(:resource, 'class=active') %>
 <% provide(:write_path, resource_new_path) %>
-
-<%= render :partial => "knowledges/notice" %> 
+<div class="notice-show">
+    <%= render :partial => "knowledges/notice" %> 
+</div>
 <%= render :partial => "knowledges/write" %> 
 
-
-<%= render :partial => "resource_list", :locals => { :resources => @resource } %> 
-
+<div class="span10 offset2">
+    <%= render :partial => "resource_list", :locals => { :resources => @resource } %> 
+</div>
 <%= render :partial => "knowledges/script" %> 
 
 

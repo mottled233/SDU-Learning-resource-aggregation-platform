@@ -2,65 +2,96 @@
 
 <%like = knowledge.like_users.where(:id => current_user).first %>
 <%unlike = knowledge.unlike_users.where(:id => current_user).first %>
-
-<% if like %>
-  <% if log_in?%>
-    <%= link_to good_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  do%>
-      <i class="icon-thumbs-up"></i>
-      <p style="display:inline"><strong>已赞</strong>:<%= knowledge.good%></p>&nbsp;&nbsp;
+  <% if like %>
+    <% if log_in?%>
+      <%=link_to good_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}" do%>
+        <div class="good_btn">
+            <span class="label" style="background-color:#d6d6d6">▲</span>
+        </div>
+      <% end %>
+        <div class="like_value">
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%><span>
+        </div>
+      <%=link_to good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
+        <div class="bad_btn">
+            <span class="label" style="background-color:#d6d6d6">▼</span>
+        </div>
+      <% end %>
+    <%else%>
+      <%=link_to login_path(:message => "请先登录") do%>
+        <div class="good_btn">
+            <span class="label" style="background-color:#d6d6d6">▲</span>
+        </div>
+      <% end %>
+        <div class="like_value">
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%><span>
+        </div>
+      <%=link_to login_path(:message => "请先登录") do%>
+        <div class="bad_btn">
+            <span class="label" style="background-color:#d6d6d6">▼</span>
+        </div>
+      <% end %>
     <%end%>
-    <%= link_to good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  do%>
-      <i class="icon-thumbs-down"></i>
-      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>&nbsp;&nbsp;
+  <% elsif unlike %>
+    <% if log_in?%>
+      <%=link_to good_add_bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}" do%>
+        <div class="good_btn">
+            <span class="label" style="background-color:#d6d6d6">▲</span>
+        </div>
+      <% end %>
+        <div class="like_value">
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%><span>
+        </div>
+      <%=link_to bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
+        <div class="bad_btn">
+            <span class="label" style="background-color:#d6d6d6">▼</span>
+        </div>
+      <% end %>
+    <%else%>
+      <%=link_to login_path(:message => "请先登录") do%>
+        <div class="good_btn">
+            <span class="label" style="background-color:#d6d6d6">▲</span>
+        </div>
+      <% end %>
+        <div class="like_value">
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%><span>
+        </div>
+      <%=link_to login_path(:message => "请先登录") do%>
+        <div class="bad_btn">
+            <span class="label" style="background-color:#d6d6d6">▼</span>
+        </div>
+      <% end %>
     <%end%>
-  <%else%>
-    <%= link_to login_path(:message => "请先登录") do%>
-      <i class="icon-thumbs-up"></i>
-      <p style="display:inline"><strong>已赞</strong>:<%= knowledge.good%></p>&nbsp;&nbsp;
+  <% else%>
+   <% if log_in?%>
+      <%=link_to good_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}" do%>
+        <div class="good_btn">
+            <span class="label" style="background-color:#d6d6d6">▲</span>
+        </div>
+      <% end %>
+        <div class="like_value">
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%><span>
+        </div>
+      <%=link_to bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
+        <div class="bad_btn">
+            <span class="label" style="background-color:#d6d6d6">▼</span>
+        </div>
+      <% end %>
+    <%else%>
+      <%=link_to login_path(:message => "请先登录") do%>
+        <div class="good_btn">
+            <span class="label" style="background-color:#d6d6d6">▲</span>
+        </div>
+      <% end %>
+        <div class="like_value">
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%><span>
+        </div>
+      <%=link_to login_path(:message => "请先登录") do%>
+        <div class="bad_btn">
+            <span class="label" style="background-color:#d6d6d6">▼</span>
+        </div>
+      <% end %>
     <%end%>
-    <%= link_to login_path(:message => "请先登录") do%>
-      <i class="icon-thumbs-down"></i>
-      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>&nbsp;&nbsp;
-    <%end%>
-  <%end%>
-<% elsif unlike %>
-  <% if log_in?%>
-    <%= link_to good_add_bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  do%>
-      <i class="icon-thumbs-up"></i>
-      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>&nbsp;&nbsp;
-    <%end%>
-    <%= link_to bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}"  do%>
-      <i class="icon-thumbs-down"></i>
-      <p style="display:inline"><strong>已踩</strong>:<%= knowledge.bad%></p>&nbsp;&nbsp;
-    <%end%>
-  <%else%>
-    <%= link_to login_path(:message => "请先登录") do%>
-      <i class="icon-thumbs-up"></i>
-      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>&nbsp;&nbsp;
-    <%end%>
-    <%= link_to login_path(:message => "请先登录") do%>
-      <i class="icon-thumbs-down"></i>
-      <p style="display:inline"><strong>已踩</strong>:<%= knowledge.bad%></p>&nbsp;&nbsp;
-    <%end%>
-  <%end%>
-<% else%>
- <% if log_in?%>
-    <%= link_to good_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "good-#{knowledge.id}"  do%>
-      <i class="icon-thumbs-up"></i>
-      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>&nbsp;&nbsp;
-    <%end%>
-    <%= link_to bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
-      <i class="icon-thumbs-down"></i>
-      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>&nbsp;&nbsp;
-    <%end%>
-  <%else%>
-    <%= link_to login_path(:message => "请先登录") do%>
-      <i class="icon-thumbs-up"></i>
-      <p style="display:inline"><strong>赞</strong>:<%= knowledge.good%></p>&nbsp;&nbsp;
-    <%end%>
-    <%= link_to login_path(:message => "请先登录") do%>
-      <i class="icon-thumbs-down"></i>
-      <p style="display:inline"><strong>踩</strong>:<%= knowledge.bad%></p>&nbsp;&nbsp;
-    <%end%>
-  <%end%>
-<% end %>
+  <% end %>
+  
+  

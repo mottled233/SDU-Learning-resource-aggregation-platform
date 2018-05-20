@@ -1,1 +1,2 @@
 $("#focus_content-<%= @knowledge.id%>").html("<%= escape_javascript(render(:partial => "focus_link",  :locals => { :knowledge => @knowledge })) %>");
+$(".notice-show").html("<%= escape_javascript(render(:partial => "notice",  :locals => { :notice => "已取消关注" })) %>");

@@ -45,7 +45,7 @@
             <p style="text-align:justify;width:300px;display:inline"><strong>author</strong>:<%= @knowledge.creator.nickname%><%#=link_to "#{@knowledge.creator.nickname}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;<strong>发布时间</strong>:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
             </p>
             <div id="add_evalute-<%=@knowledge.id%>" style="display:inline">
-                 <%= render :partial => "knowledges/comments", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
+                 <%= render :partial => "knowledges/comments_show", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
             </div>
              <div id="focus" style="display:inline">
                  <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  
@@ -58,9 +58,6 @@
             </div>
              
 		</div>
-		<div id="answer-<%=  @knowledge.id%>" style="display:inline;">
-            <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge =>  @knowledge } %> 
-         </div>
          <div class="blank" style="height:30px"></div>
     </div>
 </div>

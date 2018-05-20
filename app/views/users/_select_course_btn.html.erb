@@ -1,6 +1,14 @@
 <% if user && course.in?(user.selected_courses)
 %>
-  <%=link_to "取消关注", unselect_course_user_path(id: current_user.id, course: course.id, index: index), remote:true, class:"delete-following btn red btn-primary"%>
+  <%if current_user.nil?%>
+    <%=link_to "取消关注", login_path(:message => "请先登录")%>
+  <%else%>
+    <%=link_to "取消关注", unselect_course_user_path(id: current_user.id, course: course.id, index: index), remote:true, class:"delete-following btn red btn-primary"%>
+  <%end%>
 <% else %>
-  <%=link_to "关注课程", select_course_user_path(id: current_user.id, course: course.id, index: index), remote:true, class:"create-following btn btn-primary"%>
+  <%if current_user.nil?%>
+    <%=link_to "关注课程", login_path(:message => "请先登录")%>
+  <%else%>
+    <%=link_to "关注课程", select_course_user_path(id: current_user.id, course: course.id, index: index), remote:true, class:"create-following btn btn-primary"%>
+  <%end%>
 <% end %>

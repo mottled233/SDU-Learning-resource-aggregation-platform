@@ -38,6 +38,11 @@
     <% if !(curindex == floors)%>
         <a class="seeMore" style="float:right">查看更多</a>
     <%end%>
+    <div class="span12 offset1">
+        <div id="answer-<%= q.id%>" style="display:inline;height:50px">
+            <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
+        </div>
+    </div>
     </div>
     <%end%>
 </div>

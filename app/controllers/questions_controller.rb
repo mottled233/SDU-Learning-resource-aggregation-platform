@@ -1,12 +1,12 @@
 require "knowledges_controller"
-require 'will_paginate' 
-
+require 'will_paginate/array'
 class QuestionsController < KnowledgesController
     def index
         @question = Question.all
-        @question = Question.paginate(:page => params[:page], :per_page => 4)
+        @question = @question.sort_by{ |created_at| created_at }.reverse
+        @question = @question.paginate(:page => params[:page], :per_page => 4)
     end
-     def destroy
+    def destroy
         @question = Question.find(params[:id])
         @question.destroy
         redirect_to :back
@@ -21,7 +21,7 @@ class QuestionsController < KnowledgesController
         @knowledge.visit_count = @knowledge.visit_count+1
         @knowledge.save
     end
-     def edit
+    def edit
         @question = Question.find(params[:id])
         @courses =  Course.all
         @keywords = Keyword.all
@@ -114,7 +114,7 @@ class QuestionsController < KnowledgesController
           end
         end
     end
-     private
+private
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:user_id,:title, :type,:content, :good, :bad)

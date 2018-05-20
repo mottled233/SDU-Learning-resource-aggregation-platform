@@ -2,7 +2,12 @@
 <% provide(:write_path, question_new_path(:course_id => @course.id)) %>
 <%= render 'courses/header'%>
 <%= render :partial => "knowledges/notice" %> 
-<%= render :partial => "knowledges/write" %>
 
-<%= render :partial => "questions/question_list", :locals => { :questions => @question } %>
+<div class="question-page-content row-fluid">
+    <div class="span8 offset2">
+        <%= render :partial => "aside",:locals => { :course => @course }%>
+        <%= render :partial => "questions/question_list", :locals => { :questions => @question } %>
+    </div>
+</div>
+
 <%= render :partial => "knowledges/script" %>

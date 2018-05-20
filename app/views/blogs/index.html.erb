@@ -1,12 +1,13 @@
 <% provide(:blog, 'class=active') %>
 <% provide(:write_path, blog_new_path) %>
-
-<%= render :partial => "knowledges/notice" %> 
+<div class="notice-show">
+    <%= render :partial => "knowledges/notice" %> 
+</div>
 <%= render :partial => "knowledges/write" %> 
 
-
-<%= render :partial => "blog_list", :locals => { :blogs => @blog } %> 
-
+<div class="span10 offset2">
+    <%= render :partial => "blog_list", :locals => { :blogs => @blog } %> 
+</div>
 <%= render :partial => "knowledges/script" %> 
 
 

@@ -1,9 +1,10 @@
 require "knowledges_controller"
-
+require 'will_paginate/array'
 class ResourcesController < KnowledgesController
     def index
         @resource = Resource.all
-        @resource = Resource.paginate(:page => params[:page], :per_page => 4)
+        @resource = @resource.sort_by{ |created_at| created_at }.reverse
+        @resource = @resource.paginate(:page => params[:page], :per_page => 4)
     end
     def new
         super

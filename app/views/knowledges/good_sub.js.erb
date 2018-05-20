@@ -1,1 +1,2 @@
 $("#add_evalute-<%= @knowledge.id%>").html("<%= escape_javascript(render(:partial => "comments",  :locals => { :knowledge => @knowledge })) %>");
+$(".notice-show").html("<%= escape_javascript(render(:partial => "notice",  :locals => { :notice => "已取消赞" })) %>");
