@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
-
+  
+  before_action :confirm_logged_in, only: [:destroy, :course_department_associations, :newdeptass, :newteacherass, :deleteCourseDeptAss, :deleteCourseTeacherAss]
+  before_action :confirm_is_admin, only: [:destroy, :course_department_associations, :newdeptass, :newteacherass, :deleteCourseDeptAss, :deleteCourseTeacherAss]
 
   # GET /courses
   # GET /courses.json

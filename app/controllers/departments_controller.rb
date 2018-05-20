@@ -1,6 +1,6 @@
 class DepartmentsController < ApplicationController
-  before_action :confirm_logged_in, only: [:show, :edit, :update, :destroy, :create, :deleteCourseDeptAss, :newcourseass, :create_course_association]
-  before_action :confirm_is_admin, only: [:own_space, :edit, :update]
+  before_action :confirm_logged_in
+  before_action :confirm_is_admin
     
   before_action :set_department, only: [:show, :edit, :update, :destroy]
 
