@@ -3,6 +3,6 @@ class Resource< Knowledge
     
     # instance methods
     def to_path
-      "resources/#{id}"
+      "/resources/#{id}"
     end
 end

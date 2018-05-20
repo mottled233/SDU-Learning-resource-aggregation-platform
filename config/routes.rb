@@ -28,7 +28,11 @@ Rails.application.routes.draw do
     get 'followings', on: :member
     get 'followeds', on: :member
     get 'create_following', on: :member
+    get 'selected_courses', on: :member
+    get 'select_course', on: :member
+    get 'unselect_course', on: :member
     get 'delete_following', on: :member
+    get 'creatings', on: :member
     post '/users/delete/:id', on: :member, to: 'users#destroy', as:"delete_user"
     # 用户通知
     resources :notifications, only: [:index]
@@ -67,6 +71,12 @@ Rails.application.routes.draw do
  match '/bad_sub/ajax', to: 'knowledges#bad_sub',as: "bad_sub", via: :get
  match '/good_add_bad_sub/ajax', to: 'knowledges#good_add_bad_sub',as: "good_add_bad_sub", via: :get
  match '/good_sub_bad_add/ajax', to: 'knowledges#good_sub_bad_add',as: "good_sub_bad_add", via: :get
+ match '/good_add_show/ajax', to: 'knowledges#good_add_show',as: "good_add_show", via: :get
+ match '/bad_add_show/ajax', to: 'knowledges#bad_add_show',as: "bad_add_show", via: :get
+ match '/good_sub_show/ajax', to: 'knowledges#good_sub_show',as: "good_sub_show", via: :get
+ match '/bad_sub_show/ajax', to: 'knowledges#bad_sub_show',as: "bad_sub_show", via: :get
+ match '/good_add_bad_sub_show/ajax', to: 'knowledges#good_add_bad_sub_show',as: "good_add_bad_sub_show", via: :get
+ match '/good_sub_bad_add_show/ajax', to: 'knowledges#good_sub_bad_add_show',as: "good_sub_bad_add_show", via: :get
  
 # end:scx's routes
 
@@ -114,8 +124,8 @@ Rails.application.routes.draw do
 
   get "keywords/:hid/destory_high_association/:lid", to: 'keywords#destory_high_association', as: "keywords/destory_high_association"
   get "keywords/:hid/destory_low_association/:lid", to: 'keywords#destory_low_association', as: "keywords/destory_low_association"
-  
-  get "/keywords/ajaxnames/:id", to:"keywords#ajaxnames"
+
+
   
   post "/keywords/create_association", to: "keywords#create_association", as: "keywords/create_association"
   get "newkeywordass", to: "keywords#newkeywordass", as: "keywords/newkeywordass"
@@ -157,6 +167,12 @@ Rails.application.routes.draw do
   get "teachers/:tid/blogs_manage/:cid", to: "teachers#blogs_manage", as:"teachers/blogs_manage"
   get "teachers/:tid/resources_manage/:cid", to: "teachers#resources_manage", as:"teachers/resources_manage"
 
+  get "/teachers/ajaxnames/:id", to:"teachers#ajaxnames" 
+  get "/departments/ajaxnames/:id", to:"departments#ajaxnames"  
+  get "/courses/ajaxnames/:id", to:"courses#ajaxnames"
+  get "/keywords/ajaxkeywordname/:id", to:"keywords#ajaxkeywordname"
+  get "/keywords/ajaxkeywordnamelow/:id", to:"keywords#ajaxkeywordnamelow"
+  get "/keywords/ajaxkeywordnamehigh/:id", to:"keywords#ajaxkeywordnamehigh"
 
 # end:wzy's routes
 

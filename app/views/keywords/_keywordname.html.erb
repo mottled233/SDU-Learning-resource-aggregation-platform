@@ -1,0 +1,20 @@
+<span>关键字</span>
+<h3>
+    <strong>
+    <%if !keyword_id.nil?%>
+    <%  if !Keyword.where("id=?",keyword_id).empty?%>
+    <%    keyword = Keyword.find(keyword_id)%>
+            <span>
+                <%= keyword.name%>
+            </span>
+    <%  else%>
+            <span>
+                无此关键字
+            </span>
+    <%  end%>
+    <%else%>
+        <span>
+        </span>
+    <%end%>
+    </strong>
+</h3>

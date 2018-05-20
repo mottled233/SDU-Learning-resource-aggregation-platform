@@ -16,7 +16,7 @@ class NotificationTest < ActiveSupport::TestCase
   test "could generate notification" do
     count = @user.notifications.count
     
-    @user.generate_notification! @question, entity_type: ENTITY_TYPE_QUESTION,
+    @user.generate_notification! notify_entity: @question, entity_type: ENTITY_TYPE_QUESTION,
                           notify_type: NOTIFY_TYPE_UPDATE
                           
     assert_equal count+1, @user.notifications.count
@@ -26,7 +26,7 @@ class NotificationTest < ActiveSupport::TestCase
   test "should not overflow" do
     count = NOTIFY_MAX_RESERVE+1
     count.times do
-          @user.generate_notification! @question, entity_type: ENTITY_TYPE_QUESTION,
+          @user.generate_notification! notify_entity: @question, entity_type: ENTITY_TYPE_QUESTION,
                           notify_type: NOTIFY_TYPE_UPDATE
     end                
     assert_equal NOTIFY_MAX_RESERVE, @user.notifications.count

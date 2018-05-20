@@ -14,12 +14,31 @@
 
   <div class="field">
 
-    <%= f.label "下级关键字序号" %>
-    <%= f.text_field :lower_id %>
 
-    <%= f.label "上级关键字序号" %>
-    <%= f.text_field :higher_id %>
+    <div class ='row'>
+      <div class = 'span3'>
+        <%= f.label "下级关键字序号" %>
+        <%= f.text_field :lower_id %>
+      </div>
+        <div class = 'span3 'id="lower_keyword_name">
+          
+          <%= render :partial => "keywords/keywordname", :locals => {:keyword_id => @keywords_associations[:lower_id]}%>
+        </div>
+        <div class='span6'></div>
+    </div>
 
+
+    <div class ='row'>
+      <div class = 'span3'>
+        <%= f.label "上级关键字序号" %>
+        <%= f.text_field :higher_id %>
+      </div>
+        <div class = 'span3 'id="higher_keyword_name">
+          
+          <%= render :partial => "keywords/keywordname", :locals => {:keyword_id => @keywords_associations[:higher_id]}%>
+        </div>
+        <div class='span6'></div>
+    </div>
     
     
   </div>
@@ -28,3 +47,27 @@
     <%= f.submit "确认" , class: "btn btn-small btn-primary"%>
   </div>
 <% end %>
+
+<script>
+  $(function(){  
+  
+    $('#keyword_relationship_higher_id').bind('input propertychange', function() {
+      var keyword_id = $(this).val()
+      $.get("/keywords/ajaxkeywordnamehigh/"+keyword_id,
+      function(data,status){}); 
+    }); 
+  });
+  
+</script>
+
+<script>
+  $(function(){  
+  
+    $('#keyword_relationship_lower_id').bind('input propertychange', function() {
+      var keyword_id = $(this).val()
+      $.get("/keywords/ajaxkeywordnamelow/"+keyword_id,
+      function(data,status){}); 
+    }); 
+  });
+  
+</script>

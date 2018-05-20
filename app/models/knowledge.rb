@@ -2,6 +2,12 @@ class Knowledge < ApplicationRecord
   include KnowledgesHelper
   # callbacks
   before_create :default_values
+  def default_values
+    self.good = 0
+    self.bad = 0
+    self.visit_count=0
+    self.download_count=0
+  end
   
   # association
   belongs_to :creator,class_name: :User, inverse_of: :creatings, foreign_key: :user_id
@@ -36,7 +42,6 @@ class Knowledge < ApplicationRecord
   def Knowledge.get_all_entry(entry_type)
     Knowledge.where(:type => entry_type).all
   end
-  
   #选取最佳资源
   def Knowledge.chooseBestKnowledge(course,num)
     if course.nil?
@@ -72,10 +77,28 @@ class Knowledge < ApplicationRecord
     list = list.sort_by{ |created_at| created_at }.reverse
     return list
   end
-
-  def default_values
-    self.good = 0
-    self.bad = 0
+  
+  def digest(length=50)
+    digest = self.content
+    if digest.length>length
+      digest = digest[0,length]+"..."
+    end
   end
+  
 
+  
+  def chinese_type
+    case self.type
+    when TYPE_QUESTION
+      "讨论"
+    when TYPE_BLOG
+      "专栏"
+    when TYPE_RESOURCE
+      "资源"
+    when TYPE_REPLY
+      "回复"  
+    end
+  end
+  
+  
 end

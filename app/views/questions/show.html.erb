@@ -1,20 +1,22 @@
 <% provide(:write_path, question_new_path) %>
-
+<% provide(:reply_size, 'box span9 offset1') %>
 <%= render :partial => "knowledges/notice" %> 
 <%= render :partial => "knowledges/write" %> 
 
-<div class="box span12" style="margin-top:50px;margin-left: 400px;margin-right: 400px;margin-bottom:70px">
+<div class="box span12 offset2">
     <div class="box-header" data-original-title="">
 		<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%= @knowledge.title %></strong></h2>
-		<%if !log_in?%>
+		<div style="float:right;font-size:17px;color:white">
+    		<%if !log_in?%>
                 <%= link_to "修改",login_path%>
                 <%= link_to "删除",login_path%>
-	    <%elsif current_user?(@knowledge.creator)%>
-	        <%= link_to "修改",edit_question_path(@knowledge)%>
-	        <%= link_to '删除',question_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
-	    <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-@knowledge.courses) != current_user.selected_courses%>
-	        <%= link_to '删除',question_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
-	    <%end%>
+    	    <%elsif current_user?(@knowledge.creator)%>
+    	        <%= link_to "修改",edit_question_path(@knowledge)%>
+    	        <%= link_to '删除',question_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
+    	    <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-@knowledge.courses) != current_user.selected_courses%>
+    	        <%= link_to '删除',question_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
+    	    <%end%>
+	    </div>
 	</div>
     <div class="box-content">
         <div class="page-header">
@@ -43,7 +45,7 @@
             <p style="text-align:justify;width:300px;display:inline"><strong>author</strong>:<%= @knowledge.creator.nickname%><%#=link_to "#{@knowledge.creator.nickname}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;<strong>发布时间</strong>:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
             </p>
             <div id="add_evalute-<%=@knowledge.id%>" style="display:inline">
-                 <%= render :partial => "knowledges/comments", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
+                 <%= render :partial => "knowledges/comments_show", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
             </div>
              <div id="focus" style="display:inline">
                  <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  
@@ -51,14 +53,11 @@
             <div style="display:inline">
                <a class="ping"><%= @knowledge.getAllReplies.size%> 条评论</a>&nbsp;
                <div class="reply" style="float:left;margin-top:50px">
-                 <%= render :partial => "knowledges/reply_show", :locals => { :q => @knowledge } %>  
+                 <%= render :partial => "knowledges/reply_show2", :locals => { :q => @knowledge } %>  
                </div>
             </div>
              
 		</div>
-		<div id="answer-<%=  @knowledge.id%>" style="display:inline;float:right">
-            <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge =>  @knowledge } %> 
-         </div>
          <div class="blank" style="height:30px"></div>
     </div>
 </div>

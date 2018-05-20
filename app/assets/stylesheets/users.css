@@ -49,3 +49,14 @@
   height: 1.8em;
   font-size:1.2em;
 }
+
+.creating-title{
+  font-size:1.3em;
+  color:black;
+}
+
+.digest{
+  padding: 15px 0;
+  font-size:1.1em;
+  color:grey;
+}

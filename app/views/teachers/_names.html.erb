@@ -1,0 +1,20 @@
+<span>教师名</span>
+<h3>
+    <strong>
+    <%if !teacher_id.nil?%>
+    <%  if !User.where("id=? AND user_role=?",teacher_id,"teacher").empty?%>
+    <%    teacher = User.find(teacher_id)%>
+            <span>
+                <%= teacher.nickname%>
+            </span>
+    <%  else%>
+            <span>
+                无此教师
+            </span>
+    <%  end%>
+    <%else%>
+        <span>
+        </span>
+    <%end%>
+    </strong>
+</h3>

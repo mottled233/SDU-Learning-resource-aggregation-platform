@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   require "json"
+  include KnowledgesHelper
   
   before_action :confirm_logged_in, only: [:index, :edit, :update]
   before_action :confirm_access, only: [:edit, :update, :edit_config, :update_config]
@@ -119,6 +120,46 @@ class UsersController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     @followeds = @user.followeds.paginate(page: page, per_page: per_page)
+  end
+  
+  def selected_courses
+    @user = User.find(params[:id])
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @courses = @user.selected_courses.paginate(page: page, per_page: per_page)
+  end
+  
+  def select_course
+    @user = User.find(params[:id])
+    @course = Course.find(params[:course])
+    @result = @user.selected_courses<<@course
+    @index = params[:index]
+    respond_to do |format|
+      format.html { render "show" }
+      format.js
+    end
+  end
+  
+  def unselect_course
+    @user = User.find(params[:id])
+    @course = Course.find(params[:course])
+    @index = params[:index]
+    
+    # @result = UserCourseAssociation.find_by(user: @user, course: @course).destroy
+    @result = @user.selected_courses.delete(@course)
+    
+    respond_to do |format|
+      format.html {render("show")}
+      format.js
+    end
+  end
+  
+  def creatings
+    @user = User.find(params[:id])
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    query = params[:type] || [TYPE_QUESTION, TYPE_BLOG, TYPE_RESOURCE]
+    @creatings = @user.creatings.where(type: query).paginate(page: page, per_page: per_page)
   end
   
   

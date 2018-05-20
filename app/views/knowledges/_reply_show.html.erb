@@ -1,4 +1,4 @@
-<div class="container">
+<div class="box span10 offset1" style="margin-left:55px">
     <%layer = q.getAllReplies%>
     <%floors = layer.size/6%>
     <% for curindex in 0..floors%>
@@ -7,33 +7,42 @@
     <%else%>
         <div id="floor-<%=curindex%>" style="display:none" class="span10">
     <%end%>
+    
         <%curlayer = layer[6*curindex...6*curindex+6]%>
+        <div class="row-fluid" style="height:30px"></div>
         <%curlayer.each do|reply|%>
-            <div class="box span10">
-            	<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%="#{reply.creator.nickname}   回复   #{reply.topic.creator.nickname}:"%></strong></h2>
-                <div class="box-content">
-                <div class="panel-body">
-                    <p><%= reply.content %></p>
-                </div>
-                <div class="panel-footer" >
-                    <p style="text-align:justify;width:300px;display:inline">发布时间:<%= reply.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
-                    <div id="add_evalute-<%= reply.id%>" style="display:inline">
-                         <%= render :partial => "knowledges/comments", :locals => { :knowledge => reply } %>  
+            <div class="row-fluid">
+                <div class="box span14 offset1"%>
+                	<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%=link_to "#{reply.creator.nickname}",user_path(reply.creator)%>&nbsp;回复:&nbsp;<%=link_to "#{reply.topic.creator.nickname}:",user_path(reply.topic.creator)%></strong></h2>
+                    <div class="box-content">
+                    <div class="panel-body">
+                        <p><%= reply.content %></p>
                     </div>
-                    <div style="display:inline">
-                       <%= reply.getAllReplies.size%> 条评论&nbsp;
+                    <div class="panel-footer" >
+                        <p style="text-align:justify;width:300px;display:inline">发布时间:<%= reply.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
+                        <div id="add_evalute-<%= reply.id%>" style="display:inline">
+                             <%= render :partial => "knowledges/comments", :locals => { :knowledge => reply } %>  
+                        </div>
+                        <div style="display:inline">
+                           <%= reply.getAllReplies.size%> 条评论&nbsp;
+                        </div>
+                        <div id="answer-<%= reply.id%>" style="display:inline">
+                            <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => reply } %> 
+                        </div>
+                        </p>
+                      </div>
                     </div>
-                    <div id="answer-<%= reply.id%>" style="display:inline">
-                        <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => reply } %> 
-                    </div>
-                    </p>
-                  </div>
                 </div>
             </div>
         <%end%>
     <% if !(curindex == floors)%>
         <a class="seeMore" style="float:right">查看更多</a>
     <%end%>
+    <div class="span12 offset1">
+        <div id="answer-<%= q.id%>" style="display:inline;height:50px">
+            <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
+        </div>
+    </div>
     </div>
     <%end%>
 </div>

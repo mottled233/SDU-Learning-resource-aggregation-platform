@@ -1,0 +1,61 @@
+<div class="span3 shadow-box offset1" style="height:800px">
+    <button id="newButton" type="button" class="btn btn-small btn-warning" style="margin-left:40px;width:150px;height:30px;border-radius:16px!important;">
+       <% if log_in?%>
+         <%=link_to yield(:write_path),method: :get do%>
+           <i class="halflings-icon white edit"></i>
+           <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
+         <%end%>
+      <%else%>
+         <%= link_to login_path(:message => "请先登录") do%>
+            <i class="halflings-icon white edit"></i>
+            <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
+         <%end%>
+      <%end%>
+    </button>
+    
+    <div class="span8" style="margin-left:40px;margin-top:30px">
+      <div class="box-header">
+        <h2><i class="  halflings-icon white book" style="color:white"></i><span class="break"></span>课程简介</h2>
+      </div>
+      <div class="box-content" style="margin-top:20px;padding-left:20px">
+        <div>
+          <p style="display:inline-block">
+            <strong>课程名称:</strong>
+            <%= @course.course_name %>
+          </p>
+        </div>
+        <p>
+          <strong>任课老师:</strong>
+          <%t_list = @course.users.where(user_role: :teacher)%>
+          <% if t_list.size>2%>
+              <% t_list[0..2].each do|teacher| %>
+                 <%= teacher.username %>&nbsp;
+              <% end %>
+              <p style="display:inline">...</p>
+          <%else%>
+              <% t_list.each do|teacher| %>
+                 <%= teacher.username %>&nbsp;
+              <% end %>
+          <%end%>
+        </p>
+        
+        <p>
+          <strong>开课院系:</strong>
+              <%c_list = @course.departments%>
+              <% if c_list.size>2%>
+                  <% c_list[0..2].each do|department| %>
+                     <%= department.name %>&nbsp;
+                  <% end %>
+                  <p style="display:inline">...</p>
+              <%else%>
+                  <% c_list.each do|department| %>
+                     <%= department.name %>&nbsp;
+                  <% end %>
+              <%end%>
+        </p>
+      </div>
+      <div id="focus_btn0" class="" style="padding-left:25px;margin-top:20px;display:inline-block">
+        <%= render partial: "users/select_course_btn", locals: {user: current_user, index: 0, course: @course} %>
+      </div>
+    </div>
+</div>

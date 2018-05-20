@@ -95,7 +95,7 @@ class CoursesController < ApplicationController
   def blogs_index
     @course = Course.find(params[:course_id])
     @blog = Blog.all
-    @blog = Blog.paginate(:page => params[:page], :per_page => 2)
+    @blog = Blog.paginate(:page => params[:page], :per_page => 10)
   end
   
   def resources_index
@@ -147,7 +147,12 @@ class CoursesController < ApplicationController
     @teachers = @course.users.where("user_role=?","teacher")
   end
   
-
+  def ajaxnames
+    @course_id = params[:id]
+    respond_to do |format|
+        format.js{}
+    end
+  end
   
 
 

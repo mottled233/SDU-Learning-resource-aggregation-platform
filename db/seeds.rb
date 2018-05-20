@@ -74,6 +74,8 @@ question.keywords<<(keyword_down)
 student.focus_contents<<(question)
 student2.focus_contents<<(question)
 student2.focus_contents<<(question2)
+student.selected_courses<<(course)
+student2.selected_courses<<(course)
 
 course_speciality_relationship = CourseSpecialityAssociation.create(course_id: course.id, speciality_id: speciality.id)
 # good = GoodAssociation.create(user_id: student.id, knowledge_id: question.id)

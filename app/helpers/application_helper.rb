@@ -19,4 +19,12 @@ module ApplicationHelper
         time = time.sub(/second(s)?/, "秒")
         time = time.sub(/about/,"")
     end
+    
+    def short_digest(text, length=20)
+        digest = text
+        if digest.length>length
+          digest = digest[0,length]+"..."
+        end
+        return digest
+    end
 end

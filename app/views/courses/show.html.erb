@@ -2,19 +2,24 @@
 <% provide(:boutique_num, "5") %>
 <%=render '/courses/header'%>
 <div class="content">
-    <div class="box span12" style="margin-left:180px">
+  <div class="row-fluid">
+    <div class="box span8" style="margin-left:180px">
       <div class="box-header">
         <h2><i class="  halflings-icon white book" style="color:white"></i><span class="break"></span>课程简介</h2>
       </div>
       <div class="box-content">
-        <p>
-          <strong>课程名称:</strong>
-          <%= @course.course_name %>
-        </p>
-        
+        <div>
+          <p style="display:inline-block">
+            <strong>课程名称:</strong>
+            <%= @course.course_name %>
+          </p>
+          <div id="focus_btn0" class="" style="padding-left:20px;margin-top:-30px;display:inline-block">
+            <%= render partial: "users/select_course_btn", locals: {user: current_user, index: 0, course: @course} %>
+          </div>
+        </div>
         <p>
           <strong>任课老师:</strong>
-          <% @course.users.each do|teacher| %>
+          <% @course.users.where(user_role: :teacher).each do|teacher| %>
              <%= teacher.username %>&nbsp
           <% end %>
         </p>
@@ -27,49 +32,52 @@
         </p>
       </div>
     </div>
-    
-    <div class="box span12" style="margin-left:180px">
+  </div>
+  <div class="row-fluid">
+    <div class="box span8" style="margin-left:180px">
       <div class="box-header">
         <h2><i class="  halflings-icon white th" style="color:white"></i><span class="break"></span>精品推荐</h2>
       </div>
       <div class="box-content">
-        <% best_list = Knowledge.chooseBestKnowledge(@course, 5)%>
-        <% row = best_list.size/4+1%>
-        <% last_col = best_list.size%4%>
-        <div class="boutique-content">
-          <% for i in 1..row-1%>
+          <% best_list = Knowledge.chooseBestKnowledge(@course, 5)%>
+          <% row = best_list.size/4+1%>
+          <% last_col = best_list.size%4%>
+          <div class="boutique-content">
+            <% for i in 1..row-1%>
+              <div class="row-fluid">
+                <% for j in 1..4%>
+                  <% cur=best_list[(i-1)*4+j-1]%>
+                  <% cur_path = "/#{cur.type}s/#{cur.id}".downcase%>
+                  <div class="span3 statbox" style="background:#1c2e868f" ontablet="span6" ondesktop="span3">
+          				  <div style="zoom: 0.5;"><%= image_tag("Knowledge.png",:width => "128",:height => "120",:style => "display: inline-block;width: 129px;height: 123px;vertical-align: top;") %></div>
+          					<div class="number"><%=cur.good%></cur.good><i class="icon-arrow-up"></i></div>
+          					<div class="title"><%=cur.title%></div>
+          					<div class="footer" style="background-color:#403a3b">
+          						<%= link_to " read full",cur_path%>
+          					</div>	
+          				</div>
+                <% end %>
+              </div>
+            <% end %>
+            <%#= image_tag("Knowledge.png")%>
             <div class="row-fluid">
-              <% for j in 1..4%>
-                <% cur=best_list[(i-1)*4+j-1]%>
+              <% for j in 1..last_col%>
+                <% cur=best_list[(row-1)*4+j-1]%>
                 <% cur_path = "/#{cur.type}s/#{cur.id}".downcase%>
-                <div class="span3 statbox" style="background:#1c2e868f" ontablet="span6" ondesktop="span3">
-        				  <div style="zoom: 0.5;"><%= image_tag("Knowledge.png",:width => "128",:height => "120",:style => "display: inline-block;width: 129px;height: 123px;vertical-align: top;") %></div>
-        					<div class="number"><%=cur.good%></cur.good><i class="icon-arrow-up"></i></div>
-        					<div class="title"><%=cur.title%></div>
-        					<div class="footer" style="background-color:#403a3b">
-        						<%= link_to " read full",cur_path%>
-        					</div>	
-        				</div>
+                  <div class="span3 statbox" style="background:#1c2e868f" ontablet="span6" ondesktop="span3">
+          				        				  <div style="zoom: 0.5;"><%= image_tag("Knowledge.png",:width => "128",:height => "120",:style => "display: inline-block;width: 129px;height: 123px;vertical-align: top;") %></div>
+          					<div class="number"><%=cur.good%><i class="icon-arrow-up"></i></div>
+          					<div class="title"><%=cur.title%></div>
+          					<div class="footer" style="background-color:#403a3b">
+          						<%= link_to " read full",cur_path%>
+          					</div>	
+          				</div>
               <% end %>
             </div>
-          <% end %>
-          <%#= image_tag("Knowledge.png")%>
-         <div class="row-fluid">
-            <% for j in 1..last_col%>
-              <% cur=best_list[(row-1)*4+j-1]%>
-              <% cur_path = "/#{cur.type}s/#{cur.id}".downcase%>
-                <div class="span3 statbox" style="background:#1c2e868f" ontablet="span6" ondesktop="span3">
-        				        				  <div style="zoom: 0.5;"><%= image_tag("Knowledge.png",:width => "128",:height => "120",:style => "display: inline-block;width: 129px;height: 123px;vertical-align: top;") %></div>
-        					<div class="number"><%=cur.good%><i class="icon-arrow-up"></i></div>
-        					<div class="title"><%=cur.title%></div>
-        					<div class="footer" style="background-color:#403a3b">
-        						<%= link_to " read full",cur_path%>
-        					</div>	
-        				</div>
-            <% end %>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
