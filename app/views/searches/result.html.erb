@@ -2,9 +2,24 @@
   <div style="text-align:center;">
     <br />
     <div class="field">
-      <%= text_field :key ,params[0], class: 'form-control'%>
-      <%= submit_tag "搜索" , class: "btn btn-primary" %>
+      <%= text_field :key ,params[0], class: 'form-control'%><br />
     </div>
+    <div class="field">
+      排序依据：
+      <%= radio_button :select,:sort,:default%>默认&nbsp;
+      <%= radio_button :select,:sort,:time%>上传时间&nbsp;
+      <%= radio_button :select,:sort,:nice%>推荐程度&nbsp;<br />
+    </div>
+    <div class="field">
+      查询内容：
+      <%= radio_button :select,:find,:All%>全部&nbsp;
+      <%= radio_button :select,:find,:Blog%>专栏&nbsp;
+      <%= radio_button :select,:find,:Discuss%>讨论&nbsp;
+      <%= radio_button :select,:find,:Question%>问题&nbsp;
+      <%= radio_button :select,:find,:User%>用户&nbsp;<br />
+    </div>
+      
+      <%= submit_tag "搜索" , class: "btn btn-primary" %>
   </div>
 <% end %>
 <% unless @results.nil? %>
