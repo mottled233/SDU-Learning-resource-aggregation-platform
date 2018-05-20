@@ -31,9 +31,9 @@
 <li><a class="submenu" href="<%=followings_user_path(current_user)%>"><i class="icon-magnet"></i><span class="hidden-tablet"> 关注的用户</span></a></li>
 <li><a class="submenu" href="<%=followeds_user_path(current_user)%>"><i class="icon-group"></i><span class="hidden-tablet"> 粉丝</span></a></li>
 <hr/>
-<li><a class="submenu" href="submenu3.html"><i class="icon-calendar"></i><span class="hidden-tablet"> 我的课程</span></a></li>
-<li><a href="form.html"><i class="icon-rss"></i><span class="hidden-tablet"> 我发布的资源</span></a></li>
-<li><a href="form.html"><i class="icon-map-marker"></i><span class="hidden-tablet"> 知识图谱</span></a></li>
+<li><a class="submenu" href="<%=selected_courses_user_path(current_user)%>"><i class="icon-calendar"></i><span class="hidden-tablet"> 我的课程</span></a></li>
+<li><a href="<%=creatings_user_path(current_user)%>"><i class="icon-rss"></i><span class="hidden-tablet"> 我发布的资源</span></a></li>
+<li><a href="/unfinish"><i class="icon-map-marker"></i><span class="hidden-tablet"> 知识图谱</span></a></li>
 <%if @user.user_role == "teacher"%>
 	<hr/>
 	<li><a href="<%= teachers_teachers_space_path(@user.id)%>"><i class="icon-cog"></i><span class="hidden-tablet"> 课程内容管理</span></a></li>

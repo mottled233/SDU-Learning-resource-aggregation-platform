@@ -1,6 +1,12 @@
+<%if !notice.nil?%>
+    <div class="alert alert-success">
+        	<button type="button" class="close" data-dismiss="alert">×</button>
+        	<strong><%= notice%></strong>
+    </div>
+<%end%>
 <%if !flash[:notice].nil?%>
     <div class="alert alert-success">
-    	<button type="button" class="close" data-dismiss="alert">×</button>
-    	<strong><%= flash[:notice]%></strong>
+        	<button type="button" class="close" data-dismiss="alert">×</button>
+        	<strong><%= flash[:notice]%></strong>
     </div>
 <%end%>

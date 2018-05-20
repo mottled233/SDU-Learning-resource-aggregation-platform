@@ -12,7 +12,7 @@
         <div class="row-fluid" style="height:30px"></div>
         <%curlayer.each do|reply|%>
             <div class="row-fluid">
-                <div class="box span14 offset1"%>
+                <div class="box span9 offset1"%>
                 	<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%=link_to "#{reply.creator.nickname}",user_path(reply.creator)%>&nbsp;回复:&nbsp;<%=link_to "#{reply.topic.creator.nickname}:",user_path(reply.topic.creator)%></strong></h2>
                     <div class="box-content">
                     <div class="panel-body">
@@ -38,7 +38,7 @@
     <% if !(curindex == floors)%>
         <a class="seeMore" style="float:right">查看更多</a>
     <%end%>
-    <div class="span12 offset1">
+    <div class="span6 offset2">
         <div id="answer-<%= q.id%>" style="display:inline;height:50px">
             <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
         </div>

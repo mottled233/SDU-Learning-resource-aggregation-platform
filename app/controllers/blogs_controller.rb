@@ -1,9 +1,10 @@
 require "knowledges_controller"
-
+require 'will_paginate/array'
 class BlogsController < KnowledgesController
     def index
         @blog = Blog.all
-        @blog = Blog.paginate(:page => params[:page], :per_page => 4)
+        @blog = @blog.sort_by{ |created_at| created_at }.reverse
+        @blog = @blog.paginate(:page => params[:page], :per_page => 4)
     end
     def destroy
         @blog = Blog.find(params[:id])

@@ -1,13 +1,13 @@
-<div class="container-fluid-full">
-  <div class="span4"></div>
-  <div class="span12">
-    <%if !resources.nil?%>
-      <%resources.each do|q| %>
-          <%= render :partial => "resource_each", :locals => { :q => q } %> 
-      <%end%>
-      <div style="float:right">
-          <%= will_paginate resources %>
-      </div>
+<div class="span8" style="margin-left:5px">
+  <div class="row-fluid"></div>
+  <%if !resources.nil?%>
+    <%resources.each do|q| %>
+        <%= render :partial => "resources/resource_each", :locals => { :q => q } %> 
     <%end%>
-  </div>
+    <div class="row-fluid center span12 offset1">
+      <div style="padding-bottom:50px">
+        <%= will_paginate resources %>
+      </div>
+    </div>
+  <%end%>
 </div>

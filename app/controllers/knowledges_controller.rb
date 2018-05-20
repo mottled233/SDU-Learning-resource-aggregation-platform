@@ -152,7 +152,70 @@ class KnowledgesController < ApplicationController
         format.json { render json: @knowledge  , status: :success, location: @knowledge }
     end
   end
+  #copy for show
+  def good_add_show
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    GoodAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:good => @knowledge.good+1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
   
+  def bad_add_show
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    BadAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:bad => @knowledge.bad+1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def good_sub_show
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.like_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:good => @knowledge.good-1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def bad_sub_show
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.unlike_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:bad => @knowledge.bad-1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def good_add_bad_sub_show
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    GoodAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:good => @knowledge.good+1)
+    @knowledge.unlike_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:bad => @knowledge.bad-1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
+  
+  def good_sub_bad_add_show
+    @knowledge = Knowledge.find(params[:tempknowledge])
+    @knowledge.like_users.destroy(User.find(params[:tempuser]))
+    Knowledge.update(@knowledge,:good => @knowledge.good-1)
+    BadAssociation.create(user_id: params[:tempuser], knowledge_id: params[:tempknowledge])
+    Knowledge.update(@knowledge,:bad => @knowledge.bad+1)
+    respond_to do |format|
+        format.js {}
+        format.json { render json: @knowledge  , status: :success, location: @knowledge }
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_knowledge

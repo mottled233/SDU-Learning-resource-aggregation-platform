@@ -148,11 +148,11 @@ class User < ApplicationRecord
       # 为用户创造一个notification的辅助方法
     def generate_notification!(options={})
         if options[:notify_entity]
-            notify_entity = options[:notify_entity]
-            options.delete(:notify_entity)
-            notification = self.notifications.build(options)
-            notification.notify_entity_id = notify_entity.id
-            notification.save
+          notify_entity = options[:notify_entity]
+          options.delete(:notify_entity)
+          notification = self.notifications.build(options)
+          notification.notify_entity_id = notify_entity.id
+          notification.save
         elsif options[:notify_entity_id]
           notification = self.notifications.create(options)
         end

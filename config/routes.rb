@@ -28,7 +28,11 @@ Rails.application.routes.draw do
     get 'followings', on: :member
     get 'followeds', on: :member
     get 'create_following', on: :member
+    get 'selected_courses', on: :member
+    get 'select_course', on: :member
+    get 'unselect_course', on: :member
     get 'delete_following', on: :member
+    get 'creatings', on: :member
     post '/users/delete/:id', on: :member, to: 'users#destroy', as:"delete_user"
     # 用户通知
     resources :notifications, only: [:index]
@@ -67,6 +71,12 @@ Rails.application.routes.draw do
  match '/bad_sub/ajax', to: 'knowledges#bad_sub',as: "bad_sub", via: :get
  match '/good_add_bad_sub/ajax', to: 'knowledges#good_add_bad_sub',as: "good_add_bad_sub", via: :get
  match '/good_sub_bad_add/ajax', to: 'knowledges#good_sub_bad_add',as: "good_sub_bad_add", via: :get
+ match '/good_add_show/ajax', to: 'knowledges#good_add_show',as: "good_add_show", via: :get
+ match '/bad_add_show/ajax', to: 'knowledges#bad_add_show',as: "bad_add_show", via: :get
+ match '/good_sub_show/ajax', to: 'knowledges#good_sub_show',as: "good_sub_show", via: :get
+ match '/bad_sub_show/ajax', to: 'knowledges#bad_sub_show',as: "bad_sub_show", via: :get
+ match '/good_add_bad_sub_show/ajax', to: 'knowledges#good_add_bad_sub_show',as: "good_add_bad_sub_show", via: :get
+ match '/good_sub_bad_add_show/ajax', to: 'knowledges#good_sub_bad_add_show',as: "good_sub_bad_add_show", via: :get
  
 # end:scx's routes
 

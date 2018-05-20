@@ -1,12 +1,13 @@
 <% provide(:question, 'class=active') %>
 <% provide(:write_path, question_new_path) %>
-
-<%= render :partial => "knowledges/notice" %> 
+<div class="notice-show">
+    <%= render :partial => "knowledges/notice" %> 
+</div>
 <%= render :partial => "knowledges/write" %> 
 
-
-<%= render :partial => "question_list", :locals => { :questions => @question } %> 
-
+<div class="span10 offset2">
+    <%= render :partial => "question_list", :locals => { :questions => @question } %> 
+</div>
 <%= render :partial => "knowledges/script" %> 
 
 
