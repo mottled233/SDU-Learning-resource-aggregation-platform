@@ -1,13 +1,61 @@
-
-<header>
-<div class="container navigation">
-	<div class="row nav">
-			<ul class="nav nav-tabs">
-				<li <%= yield(:home) %>><%= link_to "主页", course_path(:id=>@course) %></li>
-        <li <%= yield(:blog) %>><%= link_to "专栏区", course_blogs_path(:course_id=>@course) %></li>
-        <li <%= yield(:question) %>><%= link_to "问题区", course_questions_path(:course_id=>@course) %></li>
-        <li <%= yield(:resource) %>><%= link_to "资源区",  course_resources_path(:course_id=>@course)%></li>
-      </ul>
+<div class="course-info-menu" style="margin-bottom:50px">
+	<div class="w">
+		<ul class="course-menu">
+		    <%x = yield(:which)%>
+		    <%case x%>
+		    <%when "1"%>
+		        <li><%= link_to "主页", course_path(:id=>@course),class:"moco-change-big-btn active"%></li>
+    			<li><%= link_to "专栏区", course_blogs_path(:course_id=>@course),class:"moco-change-big-btn" %></li>
+                <li><%= link_to "问题区", course_questions_path(:course_id=>@course),class:"moco-change-big-btn" %></li>
+                <li><%= link_to "资源区",  course_resources_path(:course_id=>@course),class:"moco-change-big-btn"%></li>
+		    <%when "2"%>
+		        <li><%= link_to "主页", course_path(:id=>@course),class:"moco-change-big-btn"%></li>
+    			<li><%= link_to "专栏区", course_blogs_path(:course_id=>@course),class:"moco-change-big-btn active" %></li>
+                <li><%= link_to "问题区", course_questions_path(:course_id=>@course),class:"moco-change-big-btn" %></li>
+                <li><%= link_to "资源区",  course_resources_path(:course_id=>@course),class:"moco-change-big-btn"%></li>
+		    <%when "3"%>
+		        <li><%= link_to "主页", course_path(:id=>@course),class:"moco-change-big-btn"%></li>
+    			<li><%= link_to "专栏区", course_blogs_path(:course_id=>@course),class:"moco-change-big-btn" %></li>
+                <li><%= link_to "问题区", course_questions_path(:course_id=>@course),class:"moco-change-big-btn active" %></li>
+                <li><%= link_to "资源区",  course_resources_path(:course_id=>@course),class:"moco-change-big-btn"%></li>
+		    <%when "4"%>
+		        <li><%= link_to "主页", course_path(:id=>@course),class:"moco-change-big-btn"%></li>
+    			<li><%= link_to "专栏区", course_blogs_path(:course_id=>@course),class:"moco-change-big-btn" %></li>
+                <li><%= link_to "问题区", course_questions_path(:course_id=>@course),class:"moco-change-big-btn" %></li>
+                <li><%= link_to "资源区",  course_resources_path(:course_id=>@course),class:"moco-change-big-btn active"%></li>
+		    <%end%>
+		</ul>
 	</div>
-</div>  
-</header>
+</div>
+<style>
+    /*! CSS Used from: https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201805211709 */
+    .moco-change-big-btn{display:inline-block;padding:0 16px;font-size:16px;color:#545c63;line-height:37px;font-weight:bold;cursor:pointer;}
+    .moco-change-big-btn:hover{color:#f20d0d;}
+    .moco-change-big-btn.active{position:relative;color:#f20d0d!important;cursor:default;}
+    .moco-change-big-btn.active:after{margin:0 auto;content:'';display:block;width:16px;border-radius:2px;height:3px;background:#f20d0d;}
+    /*! CSS Used from: https://static.mukewang.com/static/css/??base.css,common/common-less.css?t=2.5,course/common-less.css,course/view-less.css,course/learn-less.css,u/dynamic/home-less.css,course/qa-less.css,course/comment-less.css,course/inc/course_credit-less.css?v=201805211709 */
+    div,ul,li{margin:0;padding:0;}
+    :focus{outline:0;}
+    ul{list-style:none;}
+    :link,:visited{text-decoration:none;}
+    a:link,a:visited{color:#5e5e5e;}
+    a:hover{color:#c9394a;}
+    a:active{color:#666;}
+    a:focus{outline:0;-moz-outline:0;}
+    a:link,a:visited{color:#1c1f21;}
+    a:active,a:hover{color:#ec1500;}
+    a{outline:0;}
+    a:active{star:expression(this.onFocus=this.blur());}
+    .w{max-width:1152px;margin:0 auto;}
+    .course-info-menu{height:68px;line-height:68px;background:#fff;box-shadow:0 4px 8px 0 rgba(28,31,33,.1);}
+    .course-info-menu .w{position:relative;}
+    .course-info-menu .course-menu li{float:left;text-align:center;margin-right:12px;position:relative;}
+    .course-info-menu .course-menu li span{position:absolute;font-size:12px;font-weight:200;color:#9199a1;line-height:18px;top:10px;left:64px;}
+    .course-info-menu .course-menu a{margin-right:80px;padding:0;}
+    @media screen and (max-width:1200px){
+    .w{margin-left:5%;margin-right:5%;}
+    }
+    /*! CSS Used from: https://www.imooc.com/static/lib/layer/1.6.0/skin/layer.css?v=201805211709 */
+    div,ul{margin:0px;padding:0;}
+    li{margin-top:10px;padding:0;}
+</style>
