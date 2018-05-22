@@ -16,6 +16,13 @@ class SearchesController < ApplicationController
     ks.each do |keys|
       @results = @results.where(['title like ?','%'+keys+'%'])
     end
+    @result2 = []
+    ks.each do |keys|
+      if Keyword.find_by('name',keys)
+        @result2 = @result2 | Keyword.find_by('name',keys).knowledges
+      end
+    end
+    @results = @results | @result2
     if (params[:select] and params[:select][:sort])
       case params[:select][:sort]
         when "time"
@@ -24,6 +31,7 @@ class SearchesController < ApplicationController
           @results = @results.order("good - bad DESC")
       end
     end
+    
     @results = @results.paginate(:page => params[:page], :per_page => 4)
     
   end
