@@ -1,6 +1,9 @@
 require "knowledges_controller"
 require 'will_paginate/array'
 class QuestionsController < KnowledgesController
+    
+    before_action :record_visit, only: [:show]
+    
     def index
         @question = Question.all
         @question = @question.sort_by{ |created_at| created_at }.reverse
@@ -114,6 +117,8 @@ class QuestionsController < KnowledgesController
           end
         end
     end
+    
+    
 private
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
