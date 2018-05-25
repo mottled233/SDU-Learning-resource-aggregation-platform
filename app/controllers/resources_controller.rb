@@ -1,6 +1,8 @@
 require "knowledges_controller"
 require 'will_paginate/array'
 class ResourcesController < KnowledgesController
+    
+    before_action :record_visit, only: [:show]
     def index
         @resource = Resource.all
         @resource = @resource.sort_by{ |created_at| created_at }.reverse

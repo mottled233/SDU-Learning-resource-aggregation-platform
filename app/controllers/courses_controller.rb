@@ -1,7 +1,10 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  
+  before_action :confirm_logged_in, only: [:destroy, :course_department_associations, :newdeptass, :newteacherass, :deleteCourseDeptAss, :deleteCourseTeacherAss]
+  before_action :confirm_is_admin, only: [:destroy, :course_department_associations, :newdeptass, :newteacherass, :deleteCourseDeptAss, :deleteCourseTeacherAss]
 
-
+  before_action :record_visit, only: [:show]
   # GET /courses
   # GET /courses.json
   def index
@@ -155,6 +158,23 @@ class CoursesController < ApplicationController
   end
   
 
+  def record_visit
+      user = current_user
+      course = Course.find(params[:id])
+      
+      visit_associations = CourseVisit.where("user_id=? AND course_id=?",user.id,course.id)
+      if visit_associations.empty?
+          visit_association = CourseVisit.new
+          visit_association.user = user
+          visit_association.course = course
+          visit_association.count = 1
+          visit_association.save
+      else
+          visit_association = visit_associations.first
+          visit_association.count = visit_association.count + 1
+          visit_association.save
+      end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

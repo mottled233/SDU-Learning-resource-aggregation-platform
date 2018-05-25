@@ -1,6 +1,11 @@
 class TeachersController < ApplicationController
 
-  before_action :confirm_is_teacher, only: [:teachers_space]
+  before_action :confirm_logged_in
+  before_action :confirm_is_teacher, only: [:teachers_space, :detials, :questions_manage, :blogs_manage, :resources_manage]
+  
+
+  before_action :confirm_is_admin, only: [:new, :index, :destroy, :newcourseass, :create_course_association, :deleteCourseTeacherAss, :create]
+  
   def new
     @user = User.new
   end

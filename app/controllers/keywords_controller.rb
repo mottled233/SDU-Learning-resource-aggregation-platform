@@ -1,5 +1,9 @@
 class KeywordsController < ApplicationController
   before_action :set_keyword, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_logged_in
+  before_action :confirm_is_admin
+  
+  
 
   # GET /keywords
   # GET /keywords.json

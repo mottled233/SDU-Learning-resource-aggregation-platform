@@ -216,6 +216,26 @@ class KnowledgesController < ApplicationController
         format.json { render json: @knowledge  , status: :success, location: @knowledge }
     end
   end
+  
+
+  def record_visit
+      user = current_user
+      knowledge = Knowledge.find(params[:id])
+      
+      visit_associations = KnowledgeVisit.where("user_id=? AND knowledge_id=?",user.id,knowledge.id)
+      if visit_associations.empty?
+          visit_association = KnowledgeVisit.new
+          visit_association.user = user
+          visit_association.knowledge = knowledge
+          visit_association.count = 1
+          visit_association.save
+      else
+          visit_association = visit_associations.first
+          visit_association.count = visit_association.count + 1
+          visit_association.save
+      end
+  end
+    
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_knowledge

@@ -1,6 +1,8 @@
 require "knowledges_controller"
 require 'will_paginate/array'
 class BlogsController < KnowledgesController
+    
+    before_action :record_visit, only: [:show]
     def index
         @blog = Blog.all
         @blog = @blog.sort_by{ |created_at| created_at }.reverse

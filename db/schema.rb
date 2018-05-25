@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180510132142) do
+ActiveRecord::Schema.define(version: 20180523120108) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(version: 20180510132142) do
     t.index ["user_id"], name: "index_course_user_associations_on_user_id"
   end
 
+  create_table "course_visits", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_visits_on_course_id"
+    t.index ["user_id"], name: "index_course_visits_on_user_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
     t.datetime "created_at",  null: false
@@ -128,6 +138,16 @@ ActiveRecord::Schema.define(version: 20180510132142) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "knowledge_visits", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "knowledge_id"
+    t.integer  "count"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["knowledge_id"], name: "index_knowledge_visits_on_knowledge_id"
+    t.index ["user_id"], name: "index_knowledge_visits_on_user_id"
   end
 
   create_table "knowledges", force: :cascade do |t|
