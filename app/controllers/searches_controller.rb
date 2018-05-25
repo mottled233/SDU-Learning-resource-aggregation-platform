@@ -1,34 +1,35 @@
 class SearchesController < ApplicationController
   def index
-    
+    @kws = {}
   end
 
   def result
     @results = Knowledge
-    if (params[:select] and params[:select][:find])
-      if (params[:select][:find]=='User')
+    if (params.include?(:find))
+      if (params[:find]=='用户')
         
-      elsif (params[:select][:find]!='All')
-        @results = @results.where(['type = ?',params[:select][:find]])
+      elsif (params[:find]=='专栏')
+        @results = @results.where('type = "Blog"')
+      elsif (params[:find]=='问题')
+        @results = @results.where('type = "Question"')
+      elsif (params[:find]=='资源')
+        @results = @results.where('type = "Resource"')
       end
     end
-    ks=params[:key][0].split(" ")
+    k=params[:key][0]
+    k=k.gsub(/[\[_%]/,'[\1]')
+    ks=k.split(" ")
     ks.each do |keys|
-      @results = @results.where(['title like ?','%'+keys+'%'])
+      @results = @results.where(['knowledges.title like ? OR knowledges.id IN (SELECT keyword_knowledge_associations.knowledge_id FROM keyword_knowledge_associations WHERE(keyword_id IN (SELECT keywords.id FROM keywords WHERE keywords.name = ?)))','%'+keys+'%',keys])
     end
-    @result2 = []
-    ks.each do |keys|
-      if Keyword.find_by('name',keys)
-        @result2 = @result2 | Keyword.find_by('name',keys).knowledges
-      end
-    end
-    @results = @results | @result2
-    if (params[:select] and params[:select][:sort])
-      case params[:select][:sort]
-        when "time"
+
+    
+    if (params and params[:sort])
+      case params[:sort]
+        when "上传时间"
           @results = @results.order(created_at: :desc)
-        when "nice"
-          @results = @results.order("good - bad DESC")
+        when "推荐程度"
+          @results = @results.order("good DESC")
       end
     end
     

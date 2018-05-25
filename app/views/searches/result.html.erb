@@ -2,21 +2,15 @@
   <div style="text-align:center;">
     <br />
     <div class="field">
-      <%= text_field :key ,params[0], class: 'form-control'%><br />
+      <%= text_field :key ,params[0], class: 'form-control',value: params[:key][0]%><br />
     </div>
     <div class="field">
       排序依据：
-      <%= radio_button :select,:sort,:default%>默认&nbsp;
-      <%= radio_button :select,:sort,:time%>上传时间&nbsp;
-      <%= radio_button :select,:sort,:nice%>推荐程度&nbsp;<br />
+      <%= select_tag :sort,options_for_select(["默认","上传时间","推荐程度"],params[:sort]) %><br />
     </div>
     <div class="field">
       查询内容：
-      <%= radio_button :select,:find,:All%>全部&nbsp;
-      <%= radio_button :select,:find,:Blog%>专栏&nbsp;
-      <%= radio_button :select,:find,:Discuss%>讨论&nbsp;
-      <%= radio_button :select,:find,:Question%>问题&nbsp;
-      <%= radio_button :select,:find,:User%>用户&nbsp;<br />
+      <%= select_tag :find,options_for_select(["全部","专栏","问题","资源","用户"],params[:find]) %><br /><br />
     </div>
       
       <%= submit_tag "搜索" , class: "btn btn-primary" %>
@@ -24,4 +18,13 @@
 <% end %>
 
 
-<%= render :partial => "blogs/blog_list", :locals => { :blogs => @results } %> 
+<%if !@results.nil?%>
+  <%@results.each do|q| %>
+    <%= render :partial => "blogs/blog_each", :locals => { :q => q } %> 
+  <%end%>
+    <div class="row-fluid center span12 offset1">
+    <div style="padding-bottom:50px">
+    <%= will_paginate @results %>
+    </div>
+    </div>
+<%end%>
