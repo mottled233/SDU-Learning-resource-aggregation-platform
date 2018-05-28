@@ -162,18 +162,39 @@ class CoursesController < ApplicationController
       user = current_user
       course = Course.find(params[:id])
       
-      visit_associations = CourseVisit.where("user_id=? AND course_id=?",user.id,course.id)
-      if visit_associations.empty?
-          visit_association = CourseVisit.new
-          visit_association.user = user
-          visit_association.course = course
-          visit_association.count = 1
-          visit_association.save
+      # only record the association
+      # visit_associations = CourseVisit.where("user_id=? AND course_id=?",user.id,course.id)
+      # if visit_associations.empty?
+      #     visit_association = CourseVisit.new
+      #     visit_association.user = user
+      #     visit_association.course = course
+      #     visit_association.count = 1
+      #     visit_association.save
+      # else
+      #     visit_association = visit_associations.first
+      #     visit_association.count = visit_association.count + 1
+      #     visit_association.save
+      # end
+      
+      # record association with sequence
+      last_visit_association = CourseVisit.where("user_id=?",user.id).last
+      if last_visit_association.nil?
+        visit_association = CourseVisit.new
+        visit_association.user = user
+        visit_association.course = course
+        visit_association.count = 1
+        visit_association.save
+      elsif last_visit_association.course == course
+        last_visit_association.count = last_visit_association.count + 1
+        last_visit_association.save
       else
-          visit_association = visit_associations.first
-          visit_association.count = visit_association.count + 1
-          visit_association.save
+        visit_association = CourseVisit.new
+        visit_association.user = user
+        visit_association.course = course
+        visit_association.count = 1
+        visit_association.save
       end
+
   end
 
   private
