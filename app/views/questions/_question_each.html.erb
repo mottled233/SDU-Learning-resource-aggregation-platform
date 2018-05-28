@@ -49,17 +49,10 @@
         </div>
     </div>
     
-        
-    
     <div class="row-fluid">
         <div class="span12">
             <div class="question-content" style="width:95%;">
                 <div class = "span10" style="margin-top:10px">
-                    <div class="inline-block center cell" style="width:90px">
-                        <div id="add_evalute-<%= q.id%>" style="display:inline">
-                           <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>
-                        </div>
-                    </div>
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to question_path(q.id), class:"no-hover" do%>
@@ -79,21 +72,24 @@
     <div class="row-fluid">
         <hr class="normal-hr" style=""/>
     </div>
-    <div class="row-fluid" style="margin:10px">
+     <div class="row-fluid" style="margin:10px">
 
         <div id="focus" style="display:inline">
             <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => q }%>&nbsp;&nbsp;  
         </div>
         <div style="display:inline">
             <a class="ping"><%= q.getAllReplies.size%> 条评论</a>&nbsp;&nbsp;
-            <div class="reply" style="display:none;" style="float:left;">
-                <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
-            </div>
         </div>
-        <div id="focus" style="display:inline">
+        <div id="time" style="display:inline">
+            <% unless q.last_reply_at.nil? %>
+                <span>发布于：<%= q.created_at %>&nbsp;&nbsp; &nbsp;&nbsp; </span>
+            <%end%>
             <% unless q.last_reply_at.nil? %>
                 <span>最后回复：<%= q.last_reply_at %></span>
             <%end%>
+        </div>
+        <div class="reply" style="display:none;" style="float:left;">
+                <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
         </div>
     </div>
     <!--<div class="row-fluid">-->

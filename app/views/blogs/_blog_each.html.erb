@@ -86,14 +86,17 @@
         </div>
         <div style="display:inline">
             <a class="ping"><%= q.getAllReplies.size%> 条评论</a>&nbsp;&nbsp;
-            <div class="reply" style="display:none;" style="float:left;">
-                <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
-            </div>
         </div>
-        <div id="focus" style="display:inline">
+        <div id="time" style="display:inline">
+            <% unless q.last_reply_at.nil? %>
+                <span>发布于：<%= q.created_at %>&nbsp;&nbsp; &nbsp;&nbsp; </span>
+            <%end%>
             <% unless q.last_reply_at.nil? %>
                 <span>最后回复：<%= q.last_reply_at %></span>
             <%end%>
+        </div>
+        <div class="reply" style="display:none;" style="float:left;">
+                <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
         </div>
     </div>
     <!--<div class="row-fluid">-->

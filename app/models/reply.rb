@@ -4,7 +4,7 @@ class Reply < Knowledge
  
  # validates
  validates :knowledge_id, presence: true
- validates :content,presence: true,length:{maximum: 200}
+ validates :content,presence: true,length:{minimum: 1,maximum: 200}
  # associations
  belongs_to :topic,
     class_name: :Knowledge,

@@ -121,5 +121,4 @@ private
     def blog_params
       params.require(:blog).permit(:user_id,:title, :type,:content, :good, :bad)
     end
-
 end

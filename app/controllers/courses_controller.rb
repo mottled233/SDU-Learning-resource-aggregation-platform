@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   
@@ -14,6 +15,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+     @best_list = Knowledge.chooseBestKnowledge(@course)
   end
 
   # GET /courses/new
@@ -92,19 +94,22 @@ class CoursesController < ApplicationController
   def questions_index
     @course = Course.find(params[:course_id])
     @question = Question.all
-    @question = Question.paginate(:page => params[:page], :per_page => 2)
+    @question = @question.sort_by{ |created_at| created_at }.reverse
+    @question = @question.paginate(:page => params[:page], :per_page => 10)
   end
   
   def blogs_index
     @course = Course.find(params[:course_id])
     @blog = Blog.all
-    @blog = Blog.paginate(:page => params[:page], :per_page => 10)
+    @blog = @blog.sort_by{ |created_at| created_at }.reverse
+    @blog = @blog.paginate(:page => params[:page], :per_page => 10)
   end
   
   def resources_index
     @course = Course.find(params[:course_id])
     @resource = Resource.all
-    @resource = Resource.paginate(:page => params[:page], :per_page => 2)
+    @resource = @resource.sort_by{ |created_at| created_at }.reverse
+    @resource = @resource.paginate(:page => params[:page], :per_page => 10)
   end
   
   def course_departments_index
