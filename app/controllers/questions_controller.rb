@@ -68,7 +68,6 @@ class QuestionsController < KnowledgesController
    def update
         @question = Question.find(params[:id])
         b = true;
-        respond_to do |format|
           if @question.update(question_params)
             redirect_to question_path(@question)
             keyword_list = params[:keywords];
@@ -109,13 +108,14 @@ class QuestionsController < KnowledgesController
                     end
                 end
             else
-                format.html { render :edit } and return
+               render :edit
+               return
             end
           else
              flash[:notice] = '不合法的参数'
-             format.html { render :edit } and return
+             render :edit
+             return
           end
-        end
     end
     
     

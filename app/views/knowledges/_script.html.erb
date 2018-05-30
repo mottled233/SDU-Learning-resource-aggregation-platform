@@ -6,18 +6,12 @@
             });
       });
       
-      // $.each($(".btn.btn-info"),function(){
-      //       $(this).bind("click",function(){
-      //             $(this).parent().children(".answer-content").slideToggle();
-                 
-      //       });
-      // });
-      
        $.each($(".seeMore"),function(){
             $(this).bind("click",function(){
                   $(this).parent().parent().parent().css('display','none'); 
                   $(this).parent().parent().parent().parent().next().slideToggle();
             });
       });
+     
   });
 </script>
