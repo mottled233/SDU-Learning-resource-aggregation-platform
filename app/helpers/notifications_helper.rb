@@ -44,7 +44,7 @@ module NotificationsHelper
   def to_html notification
     @entity = notification.norrow_notify_entity
     @with_entity = notification.norrow_with_entity
-    unless (@entity || @with_entity)
+    unless (@entity && @with_entity)
       return (content_tag :div do
         concat "该提醒对应知识已经无效"
         notify_time notification
