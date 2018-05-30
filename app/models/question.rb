@@ -1,6 +1,6 @@
 class Question < Knowledge
   include ApplicationHelper
-    validates :content,presence: true,length:{maximum: 200}
+    validates :content,presence: true,length:{minimum: 1,maximum: 200}
     
     # instance methods
     def to_path

@@ -43,6 +43,8 @@ Rails.application.routes.draw do
 # start:scx's routes
  get "/resources/file_download",to: "resources#file_download",as:"resource_file_download"
  get "/resources/file_delete",to: "resources#file_delete",as:"resource_file_delete"
+ #图片
+ post "/knowledges/img_upload",to: "knowledges#img_upload",as:"img_upload"
  
  get "/courses/:course_id/questions", to: "courses#questions_index", as: "course_questions"
  get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
@@ -77,7 +79,7 @@ Rails.application.routes.draw do
  match '/bad_sub_show/ajax', to: 'knowledges#bad_sub_show',as: "bad_sub_show", via: :get
  match '/good_add_bad_sub_show/ajax', to: 'knowledges#good_add_bad_sub_show',as: "good_add_bad_sub_show", via: :get
  match '/good_sub_bad_add_show/ajax', to: 'knowledges#good_sub_bad_add_show',as: "good_sub_bad_add_show", via: :get
- 
+
 # end:scx's routes
 
  get '/test', to: 'static_pages#test'

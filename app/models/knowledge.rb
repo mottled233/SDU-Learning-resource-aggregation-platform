@@ -43,15 +43,11 @@ class Knowledge < ApplicationRecord
     Knowledge.where(:type => entry_type).all
   end
   #选取最佳资源
-  def Knowledge.chooseBestKnowledge(course,num)
+  def Knowledge.chooseBestKnowledge(course)
     if course.nil?
-      best_knowledge = Knowledge.order(good: :desc)[0..num-1]
+      best_knowledge = Knowledge.order(good: :desc)
     else
-      # best_knowledge = Knowledge.find_by_sql("select * 
-      #                                         from Knowledges as a,course_knowledge_associations as b,courses as c 
-      #                                         where a.id = b.knowledge_id and b.course_id = c.id and c.id = #{ course.id }  
-      #                                         order by good desc limit 0,#{num}") 
-      best_knowledge = course.knowledges.order(good: :desc)[0..num-1]
+      best_knowledge = course.knowledges.order(good: :desc)
     end
   end
 

@@ -73,7 +73,6 @@ class ResourcesController < KnowledgesController
              @resource.attachment = filename  
         end
          b = true;
-        respond_to do |format|
           if @resource.update(resource_params)
             redirect_to resource_path(@resource)
             keyword_list = params[:keywords];
@@ -114,13 +113,14 @@ class ResourcesController < KnowledgesController
                     end
                 end
             else
-                format.html { render :edit } and return
+                render :edit
+                return
             end
           else
              flash[:notice] = '不合法的参数'
-             format.html { render :edit } and return
+             render :edit
+             return
           end
-        end
         
     end
     def file_download  

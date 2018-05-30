@@ -30,6 +30,8 @@ class BlogsController < KnowledgesController
     end
     def create
         @blog = Blog.new(blog_params);
+        src = @blog.content.match("<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>")
+        
         b = true;
         if @blog.save
             keyword_list = params[:keywords];
@@ -67,15 +69,16 @@ class BlogsController < KnowledgesController
    def update
         @blog = Blog.find(params[:id])
         b = true;
-        respond_to do |format|
           if @blog.update(blog_params)
             redirect_to blog_path(@blog)
             keyword_list = params[:keywords];
             course_list = params[:courses];
+            
             if keyword_list.nil?
                 b = false;                
                 flash[:notice] = '无关联关键词'
             end
+            
             if course_list.nil?
                 b = false; 
                 flash[:notice] = '无关联课程'
@@ -108,18 +111,18 @@ class BlogsController < KnowledgesController
                     end
                 end
             else
-                format.html { render :edit } and return
+                  render :edit 
+                  return
             end
           else
              flash[:notice] = '不合法的参数'
-             format.html { render :edit } and return
+             render :edit
+             return
           end
-        end
     end
 private
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
       params.require(:blog).permit(:user_id,:title, :type,:content, :good, :bad)
     end
-
 end

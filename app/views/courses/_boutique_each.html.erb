@@ -1,0 +1,19 @@
+<div class="thumbnail">
+    <%if q.type.eql?"Question"%>
+        <h2><%=link_to "#{short_digest q.title,10}",question_path(q)%><a></a><small>&nbsp;&nbsp;&nbsp;&nbsp;
+    <%elsif q.type.eql?"Blog"%>
+        <h2><%=link_to "#{short_digest q.title,10}",blog_path(q)%><a></a><small>&nbsp;&nbsp;&nbsp;&nbsp;
+    <%elsif q.type.eql?"Resource"%>
+        <h2><%=link_to "#{short_digest q.title,10}",resource_path(q)%><a></a><small>&nbsp;&nbsp;&nbsp;&nbsp;
+    <%end%>
+    <span class="icon-book"></span><%=q.creator.nickname%></small></h2>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;<%=short_digest q.content,10%></p>
+    <p class="text-center">
+        <small>
+            <span class="icon-comment"></span><%=q.getAllReplies.size%>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="icon-thumbs-up"></span> <%=q.good%>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="icon-calendar"></span> <%=q.created_at.strftime("%Y-%m-%d")  %>
+        </small>
+    </p>
+</div>
+    
