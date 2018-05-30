@@ -221,18 +221,19 @@ class KnowledgesController < ApplicationController
   def record_visit
       user = current_user
       knowledge = Knowledge.find(params[:id])
-      
-      visit_associations = KnowledgeVisit.where("user_id=? AND knowledge_id=?",user.id,knowledge.id)
-      if visit_associations.empty?
-          visit_association = KnowledgeVisit.new
-          visit_association.user = user
-          visit_association.knowledge = knowledge
-          visit_association.count = 1
-          visit_association.save
-      else
-          visit_association = visit_associations.first
-          visit_association.count = visit_association.count + 1
-          visit_association.save
+      if !user.nil?
+        visit_associations = KnowledgeVisit.where("user_id=? AND knowledge_id=?",user.id,knowledge.id)
+        if visit_associations.empty?
+            visit_association = KnowledgeVisit.new
+            visit_association.user = user
+            visit_association.knowledge = knowledge
+            visit_association.count = 1
+            visit_association.save
+        else
+            visit_association = visit_associations.first
+            visit_association.count = visit_association.count + 1
+            visit_association.save
+        end
       end
   end
   # def img_upload
