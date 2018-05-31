@@ -1,52 +1,71 @@
-<div class="box span10 offset1" style="margin-left:55px">
-    <%layer = q.getAllReplies%>
-    <%floors = layer.size/6%>
-    <% for curindex in 0..floors%>
-    <% if curindex == 0%>
-        <div id="floor-<%=curindex%>" class="span10">
-    <%else%>
-        <div id="floor-<%=curindex%>" style="display:none" class="span10">
-    <%end%>
-    
-        <%curlayer = layer[6*curindex...6*curindex+6]%>
-        <div class="row-fluid" style="height:30px"></div>
-        <%curlayer.each do|reply|%>
-            <div class="row-fluid">
-                <div class="box span14 offset1"%>
-                	<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%=link_to "#{reply.creator.nickname}",user_path(reply.creator)%>&nbsp;回复:&nbsp;<%=link_to "#{reply.topic.creator.nickname}:",user_path(reply.topic.creator)%></strong></h2>
-                    <div class="box-content">
-                    <div class="panel-body">
-                        <p><%= reply.content %></p>
-                    </div>
-                    <div class="panel-footer" >
-                        <p style="text-align:justify;width:300px;display:inline">发布时间:<%= reply.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
-                        <div id="add_evalute-<%= reply.id%>" style="display:inline">
-                             <%= render :partial => "knowledges/comments", :locals => { :knowledge => reply } %>  
+<%layer = q.getAllReplies%>
+<%floors = layer.size/6%>
+<div class="row-fluid" style="margin-top:30px">
+    <div class="span10 shadow-box offset1">
+        <div class="row-fluid" style="height:20px">
+            <strong><%=layer.size%>条评论</strong>
+        </div>
+        <div class="row-fluid">
+            <hr class="normal-hr" style="">
+        </div>
+        <% for curindex in 0..floors%>
+        <% if curindex == 0%>
+            <div id="floor-<%=curindex%>" class="row-fluid">
+        <%else%>
+            <div id="floor-<%=curindex%>" style="display:none" class="row-fluid">
+        <%end%>
+            <%curlayer = layer[6*curindex...6*curindex+6]%>
+            <%curlayer.each do|reply|%>
+                <div class="row-fluid">
+                    <div class="span12"%>
+                        <img alt="aaa" class="gravatar" src="https://secure.gravatar.com/avatar/aaa?s=20"><span style="font-size:16px"><%=link_to "#{reply.creator.nickname}",user_path(reply.creator)%>&nbsp;回复:&nbsp;<%=link_to "#{reply.topic.creator.nickname}:",user_path(reply.topic.creator)%></span>
+                        <div class="box-content">
+                        <div class="panel-body">
+                            <p><%= reply.content %></p>
                         </div>
-                        <div style="display:inline">
-                           <%= reply.getAllReplies.size%> 条评论&nbsp;
+                        <div class="panel-footer" >
+                            <p style="text-align:justify;width:300px;display:inline">发布时间:<%= reply.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
+                            <div id="add_evalute-<%= reply.id%>" style="display:inline">
+                                 <%= render :partial => "knowledges/comments_show", :locals => { :knowledge => reply } %>  
+                            </div>
+                            <div style="display:inline">
+                               <%= reply.getAllReplies.size%> 条评论&nbsp;
+                            </div>
+                            <div id="answer-<%= reply.id%>" class="span12" style="display:inline">
+                                <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => reply } %> 
+                            </div>
+                            </p>
+                          </div>
                         </div>
-                        <div id="answer-<%= reply.id%>" style="display:inline">
-                            <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => reply } %> 
-                        </div>
-                        </p>
-                      </div>
                     </div>
                 </div>
+                <div class="row-fluid">
+                    <hr class="normal-hr" style="">
+                </div>
+            <%end%>
+            <% if !(curindex == floors)%>
+                <div class="row-fluid">
+                    <div class="row-fluid">
+                        <span class="span2 offset5">
+                                <a class="seeMore moco-change-big-btn" style="color:#0084ffbf!important">查看更多</a>
+                            
+                        </span>
+                    </div>
+                    <div class="row-fluid">
+                        <hr class="normal-hr" style="">
+                    </div>
+                </div>
+            <%end%>
             </div>
         <%end%>
-    <% if !(curindex == floors)%>
-        <a class="seeMore" style="float:right">查看更多</a>
-    <%end%>
-    <div class="span12 offset1">
-        <div id="answer-<%= q.id%>" style="display:inline;height:50px">
-            <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
+        <div class="row-fluid">
+            <span class="span2" style="color:#0084ffbf!important"><h2>回复作者：</h2></span>
+            <div id="answer-<%= q.id%>" class="span12" style="display:inline;margin-top:-20px!important">
+                <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
+            </div>
         </div>
     </div>
-    </div>
-    <%end%>
 </div>
-
 
 
 

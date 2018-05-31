@@ -1,20 +1,21 @@
-<div class="release_reply" style="display:inline">
-  <%= form_for :reply,:url => { :controller=>"replies",:action => "create"}, method: :post do |f| %>
-  <%if !current_user.nil?%>
-    <%= f.hidden_field:user_id , :value => current_user.id %>
-    <%= f.hidden_field:type,:value => 'Reply' %>
-  <%end%>
-  <div class="control-group success" style="display:inline;">
-    <p>评论区(最多200字)</p>
-    <%= f.text_field :content,:id => "inputSuccess",style: "width:450px;margin-top:10px"%>
-	</div>
-  <%= f.hidden_field :knowledge_id,:value => topic.id%>
-  <%= f.hidden_field:good,:value => 0 %>
-
-  <%= f.hidden_field:bad,:value => 0 %>
-
-  <div class="action" style="display:inline;">
-    <%= f.submit "发布" ,class: "btn btn-success"%>
+<div class="row-fluid">
+  <div class="release_reply" style="display:inline">
+    <%= form_for :reply,:url => { :controller=>"replies",:action => "create"}, method: :post do |f| %>
+    <%if !current_user.nil?%>
+      <%= f.hidden_field:user_id , :value => current_user.id %>
+      <%= f.hidden_field:type,:value => 'Reply' %>
+    <%end%>
+    <div class="control-group success span9">
+      <%= f.text_field :content,:id => "inputSuccess",style: "width:450px;margin:0px;height:25px",placeholder:"写下你的评论"%>
+  	</div>
+    <%= f.hidden_field :knowledge_id,:value => topic.id%>
+    <%= f.hidden_field:good,:value => 0 %>
+  
+    <%= f.hidden_field:bad,:value => 0 %>
+  
+    <div class="action span2">
+      <%= f.submit "发布" ,class: "btn btn-success"%>
+    </div>
+    <% end %>
   </div>
-  <% end %>
 </div>

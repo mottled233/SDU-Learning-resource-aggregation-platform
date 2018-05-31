@@ -1,72 +1,11 @@
 <% provide(:write_path, blog_new_path) %>
-<% provide(:reply_size, 'box span9 offset1') %>
 <%= render :partial => "knowledges/notice" %> 
-<%= render :partial => "knowledges/write" %> 
-
-<div class="box span12 offset2">
-    <div class="box-header" data-original-title="">
-		<h2><i class="halflings-icon white edit"></i><span class="break"></span><strong><%= @knowledge.title %></strong></h2>
-		<div style="float:right;font-size:17px;color:white">
-    		<%if !log_in?%>
-                <%= link_to "修改",login_path%>
-                <%= link_to "删除",login_path%>
-    	    <%elsif current_user?(@knowledge.creator)%>
-    	        <%= link_to "修改",edit_blog_path(@knowledge)%>
-    	        <%= link_to '删除',blog_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
-    	    <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-@knowledge.courses) != current_user.selected_courses%>
-    	        <%= link_to '删除',blog_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
-    	    <%end%>
-	    </div>
-	</div>
-    <div class="box-content">
-        <div class="page-header">
-		  <h1><%= @knowledge.title %></h1>
-	    </div>
-        <p>
-          <!--<strong>Content:</strong>-->
-          <%= @knowledge.content %>
-        </p>
-        <div class="tooltip-demo well">
-            <p>
-              <strong>所属课程:</strong>
-              <% @knowledge.courses.each do|course| %>
-                       <%= course.course_name %>&nbsp
-              <% end %>
-            </p>
-             <div class="panel-footer">
-              <h4 style="display: inline;">标签：</h4>
-                <% @knowledge.keywords.each do|k|%>
-                <span class="label label-info">
-                  &nbsp;<%= k.name%>&nbsp;
-                </span>
-                <%end%>
-            </div>
-            <div class="blank" style="height:20px"></div>
-            <p style="text-align:justify;width:300px;display:inline"><strong>author</strong>:<%= @knowledge.creator.nickname%><%#=link_to "#{@knowledge.creator.nickname}",users_path(@knowledge.creator)%>&nbsp;&nbsp;&nbsp;<strong>发布时间</strong>:<%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
-            </p>
-            <div id="add_evalute-<%=@knowledge.id%>" style="display:inline">
-                 <%= render :partial => "knowledges/comments_show", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
-            </div>
-             <div id="focus" style="display:inline">
-                 <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  
-            </div>
-            <div style="display:inline">
-               <a class="ping"><%= @knowledge.getAllReplies.size%> 条评论</a>&nbsp;
-               <div class="reply" style="float:left;margin-top:50px">
-                 <%= render :partial => "knowledges/reply_show2", :locals => { :q => @knowledge } %>  
-               </div>
-            </div>
-             
-		</div>
-         <div class="blank" style="height:30px"></div>
+<div class="row-fluid" style="margin-top:50px">
+    <div class="span8 offset2">
+        <%= render :partial => "blogs/blog_content",:locals => { :current_user => current_user }%>
+        <%= render :partial => "blogs/blog_aside",:locals => { :current_user => current_user }%>
     </div>
 </div>
-
-
-<%similar_list=nil%>
-<%if !similar_list.nil?%>
-    <%= render :partial => "", :locals => { :blogs => similar_list } %>
-<%end%>
 
 <%= render :partial => "knowledges/script" %> 
 

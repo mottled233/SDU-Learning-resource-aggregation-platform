@@ -1,4 +1,18 @@
 <% provide(:which, "2") %>
+<% provide(:list_size, 'class=span8') %>
+<% provide(:write_path, blog_new_path(:course_id => @course.id)) %>
+<%= render 'courses/header'%>
+<%= render :partial => "knowledges/notice" %> 
+
+<div class="blog-page-content row-fluid">
+    <div class="span8 offset2">
+        <%= render :partial => "aside",:locals => { :course => @course }%>
+        <%= render :partial => "blogs/blog_list", :locals => { :blogs => @blog } %>
+    </div>
+</div>
+
+<%= render :partial => "knowledges/script" %>
+<% provide(:which, "2") %>
 <% provide(:write_path, blog_new_path(:course_id => @course.id)) %>
 <%= render 'courses/header'%>
 <%= render :partial => "knowledges/notice" %> 

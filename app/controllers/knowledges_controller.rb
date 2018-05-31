@@ -221,21 +221,43 @@ class KnowledgesController < ApplicationController
   def record_visit
       user = current_user
       knowledge = Knowledge.find(params[:id])
-      
-      visit_associations = KnowledgeVisit.where("user_id=? AND knowledge_id=?",user.id,knowledge.id)
-      if visit_associations.empty?
-          visit_association = KnowledgeVisit.new
-          visit_association.user = user
-          visit_association.knowledge = knowledge
-          visit_association.count = 1
-          visit_association.save
-      else
-          visit_association = visit_associations.first
-          visit_association.count = visit_association.count + 1
-          visit_association.save
+      if !user.nil?
+        visit_associations = KnowledgeVisit.where("user_id=? AND knowledge_id=?",user.id,knowledge.id)
+        if visit_associations.empty?
+            visit_association = KnowledgeVisit.new
+            visit_association.user = user
+            visit_association.knowledge = knowledge
+            visit_association.count = 1
+            visit_association.save
+        else
+            visit_association = visit_associations.first
+            visit_association.count = visit_association.count + 1
+            visit_association.save
+        end
       end
   end
+  # def img_upload
+  #   raw = params[:content]
+  #   imgs = raw.to_s.scan(/<img.*?src="(.*?)"/)
+  #   file = params[:img][:img];
+  #   dir = Dir.open("#{Rails.root}/public/upload/img/")
+   
+  #   dir.each do|name|
+  #     if !imgs.include?(name)
+  #       File.delete(name)
+  #     end
+  #   end
     
+  #   if !file.nil?
+  #     filename = uploadfile(params[:blog][:img],imgs.size+1);
+  #     @content = raw+'<img src='+"#{Rails.root}/public/upload/img/#{filename}"+'/>'
+  #   end
+    
+  #   respond_to do |format|
+  #       format.js {}
+  #       format.json { render json: @knowledge  , status: :success, location: @knowledge }
+  #   end
+  # end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_knowledge
@@ -246,5 +268,20 @@ class KnowledgesController < ApplicationController
     def knowledge_params
       params.require(:knowledge).permit(:author, :type, :time, :good, :bad)
     end
+    # def uploadfile(filepath,index)  
+    #     file = File.read(filepath,'rb')
+    #     if !file.original_filename.empty?  
+    #       # @filename = file.original_filename
+    #       @filename = "#{@knowledge.id}_img#{index}"
+    #       #设置目录路径，如果目录不存在，生成新目录  
+    #       FileUtils.mkdir("#{Rails.root}/public/upload/img") unless File.exist?("#{Rails.root}/public/upload/img")  
+    #       #写入文件  
+    #       ##wb 表示通过二进制方式写，可以保证文件不损坏  
+    #       File.open("#{Rails.root}/public/upload/img/#{@filename}", "wb") do |f|  
+    #         f.write(file.read)  
+    #       end  
+    #       return @filename  
+    #     end  
+    # end  
 
 end
