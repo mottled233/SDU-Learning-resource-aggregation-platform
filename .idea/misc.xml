@@ -57,7 +57,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="Remote Python 3.5.2 (ssh://lmy@127.0.0.1:2222/home/lmy/ubuntu/.virtualenvs/spider/bin/python)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (SDU-Learning-resource-aggregation-platform-spider)" project-jdk-type="Python SDK" />
   <component name="ScalaCompilerConfiguration">
     <option name="deprecationWarnings" value="true" />
     <option name="uncheckedWarnings" value="true" />
