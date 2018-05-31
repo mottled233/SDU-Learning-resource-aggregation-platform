@@ -1,9 +1,10 @@
 <% provide(:write_path, blog_new_path) %>
+<% provide(:title, @knowledge.title)%>
 <%= render :partial => "knowledges/notice" %> 
 <div class="row-fluid" style="margin-top:50px">
     <div class="span8 offset2">
-        <%= render :partial => "blogs/blog_content",:locals => { :current_user => current_user }%>
-        <%= render :partial => "blogs/blog_aside",:locals => { :current_user => current_user }%>
+        <%= render :partial => "blogs/blog_content",:locals => {}%>
+        <%= render :partial => "blogs/blog_aside",:locals => { :knowledge => @knowledge }%>
     </div>
 </div>
 

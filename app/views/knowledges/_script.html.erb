@@ -1,17 +1,22 @@
 <script type="text/javascript">
   $(document).ready(function(){
-      $.each($(".ping"),function(){
-            $(this).bind("click",function(){
-                  $(this).parent().parent().children(".reply").slideToggle();
-            });
-      });
+    $(".reply-reply-show").click(function(){
+      index = $(this).attr("data-index");
+      $("#answer-"+index).toggle()
+    });
+    
+    $.each($(".ping"),function(){
+          $(this).bind("click",function(){
+                $(this).parent().parent().children(".reply").slideToggle();
+          });
+    });
+    
+    $.each($(".seeMore"),function(){
+          $(this).bind("click",function(){
+                $(this).parent().parent().parent().css('display','none'); 
+                $(this).parent().parent().parent().parent().next().slideToggle();
+          });
+    });
       
-       $.each($(".seeMore"),function(){
-            $(this).bind("click",function(){
-                  $(this).parent().parent().parent().css('display','none'); 
-                  $(this).parent().parent().parent().parent().next().slideToggle();
-            });
-      });
-     
   });
 </script>

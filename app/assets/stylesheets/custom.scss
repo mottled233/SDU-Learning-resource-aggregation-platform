@@ -40,6 +40,10 @@ hr {
     background-color:grey;
 }
 
+a {
+    cursor: pointer;
+}
+
 #content {
     background-color:transparent;
 }
@@ -218,4 +222,45 @@ hr {
     margin-bottom:5px;
     font-size:1.2em;
     border-radius:3px;
+}
+
+.ping{
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+.knowledge-header{
+    padding-left: 30px;
+}
+
+.knowledge-footer{
+    padding-left: 30px;
+}
+
+
+.knowledge-content{
+    padding-left: 30px;
+}
+
+.knowledge-reply{
+    padding-left: 30px;
+}
+
+.knowledge-reply p{
+    font-size:14px;
+    padding-top:10px;
+    padding-left:10px;
+    padding-bottom:10px;
+    line-height:120%;
+}
+
+.knowledge-content p{
+    font-size:16px;
+    padding-top:10px;
+    padding-bottom:10px;
+    line-height:150%;
+}
+
+.reply-block{
+    margin-top:10px;
 }
