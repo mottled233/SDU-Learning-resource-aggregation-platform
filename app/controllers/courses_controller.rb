@@ -15,7 +15,6 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-     @best_list = Knowledge.chooseBestKnowledge(@course)
   end
 
   # GET /courses/new
@@ -94,8 +93,7 @@ class CoursesController < ApplicationController
   def questions_index
     @course = Course.find(params[:course_id])
     @question = Question.all
-    @question = @question.sort_by{ |created_at| created_at }.reverse
-    @question = @question.paginate(:page => params[:page], :per_page => 10)
+    @question = Question.paginate(:page => params[:page], :per_page => 2)
   end
   
   def blogs_index
@@ -105,6 +103,7 @@ class CoursesController < ApplicationController
     @blog = @blog.paginate(:page => params[:page], :per_page => 10)
   end
   
+
   def resources_index
     @course = Course.find(params[:course_id])
     @resource = Resource.all
@@ -167,18 +166,41 @@ class CoursesController < ApplicationController
       user = current_user
       course = Course.find(params[:id])
       
-      visit_associations = CourseVisit.where("user_id=? AND course_id=?",user.id,course.id)
-      if visit_associations.empty?
+      # only record the association
+      # visit_associations = CourseVisit.where("user_id=? AND course_id=?",user.id,course.id)
+      # if visit_associations.empty?
+      #     visit_association = CourseVisit.new
+      #     visit_association.user = user
+      #     visit_association.course = course
+      #     visit_association.count = 1
+      #     visit_association.save
+      # else
+      #     visit_association = visit_associations.first
+      #     visit_association.count = visit_association.count + 1
+      #     visit_association.save
+      # end
+      
+      # record association with sequence
+      if !user.nil?
+        last_visit_association = CourseVisit.where("user_id=?",user.id).last
+        if last_visit_association.nil?
           visit_association = CourseVisit.new
           visit_association.user = user
           visit_association.course = course
           visit_association.count = 1
           visit_association.save
-      else
-          visit_association = visit_associations.first
-          visit_association.count = visit_association.count + 1
+        elsif last_visit_association.course == course
+          last_visit_association.count = last_visit_association.count + 1
+          last_visit_association.save
+        else
+          visit_association = CourseVisit.new
+          visit_association.user = user
+          visit_association.course = course
+          visit_association.count = 1
           visit_association.save
+        end
       end
+
   end
 
   private
