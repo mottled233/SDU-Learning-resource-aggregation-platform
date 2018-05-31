@@ -9,8 +9,9 @@ import MySQLdb
 import MySQLdb.cursors
 import requests
 import time
-from readability import Document
+from bs4 import BeautifulSoup
 from twisted.enterprise import adbapi
+
 
 # def get_article_content(url):
 #     result = requests.get(url)
@@ -54,7 +55,19 @@ class MysqlTwistedPipeline(object):
             cursor.execute(insert_sql, (
                 item['article_type'], item['created_time'], item['nick_name'],
                 item['article_title'], item['article_link'], item['user_link'], item['view_number'],
-                item['spider_time'],item['article_content']))
+                item['spider_time'], item['article_content']))
 
         except Exception as e:
             print(e)
+
+
+class FileWriterPipeline(object):
+
+    def __init__(self):
+        self.file = open('items.txt', 'wb')
+
+    def process_item(self, item, spider):
+        content = item['article_content']
+        soup = BeautifulSoup(content)
+        self.file.write(soup.get_text())
+        return item

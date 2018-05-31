@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="94e86117-5a0d-4a74-ab75-9e12657834f0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/resource_aggregation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/resource_aggregation.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource_aggregation/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/resource_aggregation/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource_aggregation/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/resource_aggregation/pipelines.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,47 +36,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="csdn_spider.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
+      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="976">
+              <caret line="66" column="43" lean-forward="true" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#194#208#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="custom_spider.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-              <folding>
-                <element signature="e#24#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="288">
-                <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_spider.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db_spider.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -81,22 +51,10 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="510">
+              <caret line="90" column="35" lean-forward="true" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
               <folding>
                 <element signature="e#24#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="864">
-              <caret line="41" column="34" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
-              <folding>
-                <element signature="e#194#208#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -156,10 +114,10 @@
         <option value="$PROJECT_DIR$/resource_aggregation/settings.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/items.py" />
-        <option value="$PROJECT_DIR$/resource_aggregation/pipelines.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/db_spider.sql" />
+        <option value="$PROJECT_DIR$/resource_aggregation/pipelines.py" />
         <option value="$PROJECT_DIR$/resource_aggregation/main.py" />
       </list>
     </option>
@@ -177,7 +135,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -210,30 +168,30 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="LombokPluginEnabledInProject" value="true" />
-    <property name="LombokPluginIS_VAL_Enabled" value="true" />
     <property name="LombokPluginIS_BUILDER_Enabled" value="true" />
+    <property name="LombokPluginIS_CONSTRUCTOR_Enabled" value="true" />
     <property name="LombokPluginIS_DELEGATE_Enabled" value="true" />
     <property name="LombokPluginIS_LOG_Enabled" value="true" />
-    <property name="LombokPluginIS_CONSTRUCTOR_Enabled" value="true" />
-    <property name="LombokPluginIS_THIRD_PARTY_Enabled" value="false" />
-    <property name="LombokPluginIS_RUNTIME_PATCH_Enabled" value="true" />
     <property name="LombokPluginIS_LOMBOK_VERSION_CHECK_Enabled" value="false" />
     <property name="LombokPluginIS_MISSING_LOMBOK_CHECK_Enabled" value="true" />
+    <property name="LombokPluginIS_RUNTIME_PATCH_Enabled" value="true" />
+    <property name="LombokPluginIS_THIRD_PARTY_Enabled" value="false" />
+    <property name="LombokPluginIS_VAL_Enabled" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="ignore_missing_gitignore" value="true" />
+    <property name="last_opened_file_path" value="E:/workPlace/android/Weather" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="E:/workPlace/android/Weather" />
-    <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="ignore_missing_gitignore" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
-    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -546,6 +504,14 @@
       <option name="presentableId" value="Default" />
       <updated>1527685167962</updated>
     </task>
+    <task id="LOCAL-00001" summary="动态配置爬虫基本完成">
+      <created>1527761849737</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1527761849737</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -574,7 +540,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32821077" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="right" id="Remote Host" order="11" weight="0.32942432" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21162046" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21162046" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
@@ -739,13 +705,6 @@
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/twisted/enterprise/adbapi.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/loader/processors.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/MySQLdb/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/http/request/__init__.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/twisted/internet/base.py" />
     <entry file="file://$PROJECT_DIR$/resource_aggregation/settings.py">
@@ -775,41 +734,11 @@
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/crawler.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/lxml/doctestcompare.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/w3lib/url.py" />
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="41" column="34" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
-          <folding>
-            <element signature="e#194#208#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/scrapy/linkextractors/lxmlhtml.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/.IntelliJIdea2017.1/system/remote_sources/-1472041285/-344917974/twisted/internet/task.py" />
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#24#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db_spider.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="24">
           <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
         </state>
       </provider>
@@ -829,12 +758,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/custom_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/spiders/csdn_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="47" lean-forward="true" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resource_aggregation/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="510">
+          <caret line="90" column="35" lean-forward="true" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
           <folding>
             <element signature="e#24#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource_aggregation/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="976">
+          <caret line="66" column="43" lean-forward="true" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
+          <folding>
+            <element signature="e#194#208#0" expanded="true" />
           </folding>
         </state>
       </provider>

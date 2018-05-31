@@ -41,7 +41,7 @@ def custom_spider():
     process = CrawlerProcess(get_project_settings())
     db.close()
     for rule in rules:
-        process.crawl(CustomSpiderSpider,rule)
+        process.crawl(CustomSpiderSpider, rule)
         pass
 
     process.start()
@@ -66,7 +66,6 @@ def csdn_user_article_job():
     execute(["scrapy", "crawl", "csdn_user_articles_spider", "-a", "user_id=%s" % data['user_id']])
 
 
-
 def csdn_index_task():
     threading.Thread(target=csdn_index_job).start()
 
@@ -74,8 +73,10 @@ def csdn_index_task():
 def csdn_user_article_task():
     threading.Thread(target=csdn_user_article_job).start()
 
+
 def custom_spider_task():
     threading.Thread(target=custom_spider).start()
+
 
 def run():
     schedule.every(10).hour.do(csdn_index_task)  # 每10小时爬取一次
@@ -93,6 +94,6 @@ def run():
 #        以下为函数执行            #
 ###################################
 
-run()
-
+# run()
+csdn_index_job()
 # custom_spider()
