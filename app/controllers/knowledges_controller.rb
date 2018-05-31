@@ -1,6 +1,7 @@
 class KnowledgesController < ApplicationController
   before_action :set_knowledge, only: [:show, :edit, :update, :destroy]
-
+  before_action :confirm_logged_in, only: [:new, :edit, :newdeptass, :create, :update, :destroy,:focus,:unfocus,:good_add,:bad_add,:good_sub,:bad_sub,:good_add_bad_sub,:good_sub_bad_add,:good_add_show,:bad_add_show,:good_sub_show,:bad_sub_show,:good_add_bad_sub_show,:good_sub_bad_add_show,:record_visit]
+  
   # GET /knowledges
   # GET /knowledges.json
   def index
