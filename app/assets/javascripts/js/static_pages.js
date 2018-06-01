@@ -29,13 +29,14 @@ function changecolor(id)
 				console.log(h.response);
 				var o=JSON.parse(h.response);
 				if (o.status=="200"){
-					document.getElementById("row"+id.substring(1,2)).innerHTML="";
+					document.getElementById("row"+id.substring(1,2)+"0").innerHTML="";
+					document.getElementById("row"+id.substring(1,2)+"1").innerHTML="";
 					var type="";
 					if (id.substring(1,2)=="1")
 						type="blogs";
 					else
 						type="resources";
-					for (var j=0;j<=3;++j)
+					for (var j=0;j<=7;++j)
 					{
 						var span3 = document.createElement("div");
 						span3.setAttribute("class","span3");
@@ -79,14 +80,13 @@ function changecolor(id)
 							small2.innerHTML=small2.innerHTML+" "+"123"+"&nbsp;&nbsp;&nbsp;&nbsp;";
 						}
 						small2.appendChild(thup);
-						small2.innerHTML=small2.innerHTML+" "+o.data[j].good+"&nbsp;&nbsp;&nbsp;&nbsp;";
+						small2.innerHTML=small2.innerHTML+" "+(o.data[j].good-o.data[j].bad)+"&nbsp;&nbsp;&nbsp;&nbsp;";
 						small2.appendChild(calendar);
 						small2.innerHTML=small2.innerHTML+" "+o.data[j].created_at.substring(0,10);
 						textcenter.appendChild(small2);
 						thumbnail.appendChild(textcenter);
 						span3.appendChild(thumbnail);
-						document.getElementById("row"+id.substring(1,2)).appendChild(span3);
-						console.log(span3)
+						document.getElementById("row"+id.substring(1,2)+parseInt(j/4)).appendChild(span3);
 					}
 				}
 			}
@@ -148,10 +148,6 @@ function dropdownOnClick(e,id)
 			}
 			h.send(JSON.stringify(x));
 			console.log(JSON.stringify(x));
-
-			
-			
-			
 		}
 		if (id=='3')
 		{

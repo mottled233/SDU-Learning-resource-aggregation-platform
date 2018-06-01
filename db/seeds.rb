@@ -41,11 +41,22 @@ content = "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，
   blogs.good = rand(0..200)
   blogs.bad = rand(0..200)
   blogs.created_at = blogs.created_at - rand(0..1000)
+  course.keywords.each do |kw|
+    if rand(0..99)<25
+      blogs.keywords<<(kw)
+    end
+  end
+  blogs.courses<<(course)
   blogs.save
   resources = Resource.create(creator:student,title:"Resource "+i.to_s,type:'Resource',content:content,good:rand(0..200),bad:rand(0..200))
   resources.good = rand(0..200)
   resources.bad = rand(0..200) 
   resources.created_at = resources.created_at - rand(0..1000)
+  course.keywords.each do |kw|
+    if rand(0..99)<25
+      resources.keywords<<(kw)
+    end
+  end
   resources.save
   
 end

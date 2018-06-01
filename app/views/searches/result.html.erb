@@ -20,7 +20,7 @@
 
 <%if !@results.nil?%>
   <%@results.each do|q| %>
-    <%= render :partial => "blogs/blog_each", :locals => { :q => q } %> 
+    <%= render :partial => "blog_each", :locals => { :q => q } %> 
   <%end%>
     <div class="row-fluid center span12 offset1">
     <div style="padding-bottom:50px">
