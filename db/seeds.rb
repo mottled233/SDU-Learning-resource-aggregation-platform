@@ -13,6 +13,7 @@ teacher = User.create(username:'aaa',user_role:'teacher',nickname:'ttt',email:'m
 admin = User.create(username:'admin',user_role:'admin',nickname:'tempadmin',email:'w-z-y1997@163.com',phone_number:'17864154856',password:'123456',sex:"男")
 student = User.create(username:'hello',user_role:'student',nickname:'hhh',email:'123@163.com',phone_number:'17864154809',password:'12345678',sex:"男")
 student2 = User.create(username:'mottled',user_role:'student',nickname:'梁惠欣',email:'6310@163.com',phone_number:'17864154861',password:'123456',sex:"男")
+student3 = User.create(username:'12341234',user_role:'student',nickname:'Knowledge',email:'6311@163.com',phone_number:'17864154862',password:'123456',sex:"男")
 course = Course.create(course_name: 'rails')
 keyword_down = Keyword.create(name:'框架')
 keyword_up = Keyword.create(name:'Ruby')

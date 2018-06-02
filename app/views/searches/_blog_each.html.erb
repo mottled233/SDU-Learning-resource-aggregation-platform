@@ -33,20 +33,6 @@
             </div>
             
         </div>
-        
-        <div style="float:right;font-size:1em;margin-top:13px;margin-right:20px">
-            <strong>
-            <%if current_user.nil?%>
-                <%= link_to "修改",login_path%>
-                <%= link_to "删除",login_path%>
-            <%elsif current_user?(q.creator)%>
-                <%= link_to "修改",edit_blog_path(q)%>
-                <%= link_to '删除',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
-            <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-q.courses) != current_user.selected_courses%>
-                <%= link_to '删除',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
-            <%end%>
-            </strong>
-        </div>
     </div>
         
     <div class="row-fluid">
@@ -84,17 +70,6 @@
         </div>
         <div style="display:inline">
             <a class="ping"><%= q.getAllReplies.size%> 条评论</a>&nbsp;&nbsp;
-        </div>
-        <div id="time" style="display:inline">
-            <% unless q.last_reply_at.nil? %>
-                <span>发布于：<%= q.created_at %>&nbsp;&nbsp; &nbsp;&nbsp; </span>
-            <%end%>
-            <% unless q.last_reply_at.nil? %>
-                <span>最后回复：<%= q.last_reply_at %></span>
-            <%end%>
-        </div>
-        <div class="reply" style="display:none;" style="float:left;">
-                <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
         </div>
     </div>
     <!--<div class="row-fluid">-->
