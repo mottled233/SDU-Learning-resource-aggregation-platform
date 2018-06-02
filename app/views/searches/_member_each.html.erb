@@ -1,27 +1,30 @@
-<div class="span12 shadow-box" style="margin-left:10px;">
-  <div class="span12" style="margin-top:30px">
+  <div class="span12 shadow-box" style="margin-bottom:15px;padding:10px">
+    <div class="row-fluid">
       <div class="span2">
         <section class="user_info">
-          <h1 style = "">
+          <div style="text-align:center;margin-top:10px;">
             <%= gravatar_for q, size: 80 %>
-          </h1>
+          </div>
         </section>
       </div>
-    <div class="span8 user-info-digest">
-      <div>
-        <h3><%= link_to q.nickname, user_path(q)%></h3>
+      <div class="span8 user-info-digest">
         <div>
-          <%= link_to "关注:#{q.followings.count}", followings_user_path(q), class: :focus_link%>
-          <%= link_to "粉丝:#{q.followeds.count}", followeds_user_path(q), class: :focus_link%>
+          <h3><%= link_to q.nickname, user_path(q)%>
+          <span class="label label-info" style="margin-left:3px"><%= q.user_role%></span></h3>
+          <div>
+            <%= link_to "关注:#{q.followings.count}", followings_user_path(q), class: :focus_link%>
+            <%= link_to "粉丝:#{q.followeds.count}", followeds_user_path(q), class: :focus_link%>
+          </div>
+          <div>
+            <%= q.self_introduce %>
+          </div>
+          <div id="focus_btn0" style="padding-left:10px;display:inline-block">
+            <%= render partial: "users/focus_btn", locals: {index: 0, following: q}%>
+          </div>
         </div>
-        <div>
-          <%= q.self_introduce %>
-        </div>
-        <div id="focus_btn0" style="padding-left:10px;display:inline-block">
-          <%= render partial: "users/focus_btn", locals: {index: 0, following: q}%>
-        </div>
+          <hr/>
       </div>
-        <hr/>
     </div>
   </div>
+    
 </div>

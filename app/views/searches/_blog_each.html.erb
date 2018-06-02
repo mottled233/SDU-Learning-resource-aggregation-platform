@@ -16,13 +16,13 @@
                     <% unless q.keywords.empty? %>
                         <span class="intro-title">标签：</span>
                         <% (q.keywords[0,3]).each do |keyword| %>
-                            <span class="label label-info" style="margin:left:3px"><%= keyword.name%></span>
+                            <span class="label label-info" style="margin-left:3px"><%= keyword.name%></span>
                         <% end %>
                     <% end %>
                     <% unless q.courses.empty? %>
                         <span class="intro-title">所属课程：</span>
                         <% (q.courses[0,3]).each do |course| %>
-                            <span class="label label-success" style="margin:left:3px"><%= course.course_name%></span>
+                            <span class="label label-success" style="margin-left:3px"><%= course.course_name%></span>
                         <% end %>
                     <% end %>
                     
