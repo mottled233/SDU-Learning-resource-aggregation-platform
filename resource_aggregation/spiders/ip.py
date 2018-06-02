@@ -25,11 +25,11 @@ class IpSpider(CrawlSpider):
             "Upgrade-Insecure-Requests": 1,
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36",
         },
-        # 'DOWNLOADER_MIDDLEWARES': {},
+        'DOWNLOADER_MIDDLEWARES': {},
         'ITEM_PIPELINES': {
             'resource_aggregation.pipelines.IpWriterPipeline': 300,
         },
-        'DOWNLOAD_DELAY': 5
+        'DOWNLOAD_DELAY': 8
     }
 
     rules = (
@@ -48,13 +48,13 @@ class IpSpider(CrawlSpider):
             port = re.findall(patternPORT, raw)
 
             url = 'http://httpbin.org/ip'
-            proxy = 'http://' + str(ip) + ':' + str(port)
+            proxy = 'http://' + ip[0] + ':' + port[0]
             meta = {
                 'proxy': proxy,
                 'dont_retry': True,
                 'download_timeout': 30,
-                '_proxy_ip': ip,
-                '_proxy_port': port
+                '_proxy_ip': ip[0],
+                '_proxy_port': port[0]
             }
             yield scrapy.Request(url, callback=self.check_available, meta=meta, dont_filter=True)
 
