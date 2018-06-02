@@ -5,4 +5,5 @@ module KnowledgesHelper
     TYPE_BLOG = "Blog"
     TYPE_REPLY = "Reply"
     
+    
 end
