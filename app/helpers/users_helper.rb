@@ -6,7 +6,6 @@ module UsersHelper
     
     # methods
     def gravatar_for(user, options = { size: 80, style:""})
-        gravatar_id = Digest::MD5::hexdigest((user.email).downcase)
         gravatar_url = "https://secure.gravatar.com/avatar/#{user.username}?s=#{options[:size]}"
         image_tag(gravatar_url, alt: user.username, class:"gravatar", style: options[:style])
     end
@@ -15,7 +14,7 @@ module UsersHelper
     def confirm_logged_in
       unless log_in?
         store_location
-        flash[:danger] = "您必须先登录才可以访问此页面!"
+        flash[:danger] = "请先登录。"
         redirect_to login_path
       end
     end
