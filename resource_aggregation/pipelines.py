@@ -7,10 +7,9 @@
 
 import MySQLdb
 import MySQLdb.cursors
-import requests
-import time
 from bs4 import BeautifulSoup
 from twisted.enterprise import adbapi
+from readability import Document
 
 
 # def get_article_content(url):
@@ -51,6 +50,7 @@ class MysqlTwistedPipeline(object):
         #     time.sleep(1)
         #     item['article_content'] = get_article_content(item['article_link'])
 
+        print('>>>>>>save to db<<<<<<<')
         try:
             cursor.execute(insert_sql, (
                 item['article_type'], item['created_time'], item['nick_name'],
@@ -64,10 +64,27 @@ class MysqlTwistedPipeline(object):
 class FileWriterPipeline(object):
 
     def __init__(self):
-        self.file = open('items.txt', 'wb')
+        self.file = open('items2.txt', 'a+', encoding='utf-8')
 
     def process_item(self, item, spider):
-        content = item['article_content']
-        soup = BeautifulSoup(content)
-        self.file.write(soup.get_text())
-        return item
+        doc = Document(item['article_content'])
+        soup = BeautifulSoup(doc.summary(), 'lxml')
+        [s.decompose() for s in soup(['pre'])]  # 删除pre标签
+        print('>>>>>>save to file<<<<<<<')
+        self.file.write(soup.get_text(strip=True))
+        self.file.write('\n')
+        # return item  #处理完之后返回item给其他pipeline继续使用
+
+
+class IpWriterPipeline(object):
+    def __init__(self):
+        self.file = open('ip.txt', 'w+', encoding='utf-8')
+
+    def process_item(self, item, spider):
+        ip = item['ip']
+        port = item['port']
+        proxy = 'http://{}:{}'.format(ip, port)
+
+        print('>>>>>>save to file<<<<<<<')
+        self.file.write(proxy)
+        self.file.write('\n')

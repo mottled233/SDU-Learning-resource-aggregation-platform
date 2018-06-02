@@ -47,7 +47,7 @@ class csdn_index_spider(scrapy.Spider):
             yield scrapy.Request(article['url'], headers=header, meta={'category': category, 'article': article},
                                  callback=self.save_article)
 
-        if not self.count[category] == 100:
+        if not self.count[category] == 10000:
             url = self.crawl_url.format(type=self.types[0], category=category, offset=0)
             yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse,
                                  dont_filter=True)
@@ -106,6 +106,8 @@ class csdn_user_articles_spider(scrapy.Spider):
         yield scrapy.Request(url=url, callback=self.parse)
 
     def save_article(self, response):
+        global article_item
+
         pre_response = response.meta.get('pre_response')
         article = response.meta.get('article')
 
@@ -113,7 +115,7 @@ class csdn_user_articles_spider(scrapy.Spider):
         article_url = article.css('.text-truncate a::attr(href)').extract_first('')
 
         view_number = re.match('.*(\d)', article_info.css('.read-num').extract_first())
-        item_loader = ItemLoader(item=article_item(), selector=article)
+        item_loader = ItemLoader(item=article_item(), selector=article)  # selector 和 response参数的区别，如果指定selector，之后的数据提取从selector中提取，如果不指定selector而制定response，则用response构造一个selector
         item_loader.add_value('article_type', 'personal')
         item_loader.add_css('article_title', '.text-truncate a::text')
         item_loader.add_value('article_link', article_url)

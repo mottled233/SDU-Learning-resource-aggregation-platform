@@ -52,3 +52,8 @@ class article_item(scrapy.Item):
     article_content = scrapy.Field(
         output_processor=TakeFirst()
     )
+
+
+class IpItem(scrapy.Item):
+    ip = scrapy.Field()
+    port = scrapy.Field()

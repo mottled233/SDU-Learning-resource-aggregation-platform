@@ -66,6 +66,15 @@ def csdn_user_article_job():
     execute(["scrapy", "crawl", "csdn_user_articles_spider", "-a", "user_id=%s" % data['user_id']])
 
 
+def ip_job():
+    print('========================', '开始爬取ip', '========================')
+    execute(["scrapy", "crawl", "ip"])
+
+
+def ip_task():
+    threading.Thread(target=ip_job).start()
+
+
 def csdn_index_task():
     threading.Thread(target=csdn_index_job).start()
 
@@ -82,6 +91,7 @@ def run():
     schedule.every(10).hour.do(csdn_index_task)  # 每10小时爬取一次
     schedule.every(3).day.at("02:00").do(csdn_user_article_task)  # 每三天凌晨两点爬取一次
     schedule.every(2).week.do(custom_spider_task)
+    schedule.every(2).day.at("10:30").do(ip_task)
 
     while True:
         schedule.run_pending()
@@ -95,5 +105,7 @@ def run():
 ###################################
 
 # run()
-csdn_index_job()
+# csdn_index_job()
 # custom_spider()
+# custom_spider()
+ip_job()
