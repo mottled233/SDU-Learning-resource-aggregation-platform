@@ -1,0 +1,120 @@
+<div class="span12 shadow-box" style="margin-bottom:15px">
+    <div class="row-fluid">
+        <div class="span10" style="padding-left: 10px;">
+            <div>
+                <%=link_to blog_path(q.id), class:"no-hover", style:"padding-left:5px" do%>
+                    <h1 style="font-size:1.7em;display:inline-block;"><strong><%= short_digest q.title, 20%></strong></h1>
+                <%end%>
+            </div>
+            <hr class="normal-hr" style="margin:2px 0 5px"/>
+            <div class="blog-intro row-fluid">
+                <div class="span10" style="padding-left:13px">
+                    <%= link_to user_path(q.creator), class:"no-hover user-intro" do%>
+                        <%= gravatar_for q.creator, size:20%>
+                        <p class="inline-block"><%=short_digest q.creator.nickname, 10%></p>
+                    <% end %>
+                    <% unless q.keywords.empty? %>
+                        <span class="intro-title">标签：</span>
+                        <% (q.keywords[0,3]).each do |keyword| %>
+                            <span class="label label-info" style="margin:left:3px"><%= keyword.name%></span>
+                        <% end %>
+                    <% end %>
+                    <% unless q.courses.empty? %>
+                        <span class="intro-title">所属课程：</span>
+                        <% (q.courses[0,3]).each do |course| %>
+                            <span class="label label-success" style="margin:left:3px"><%= course.course_name%></span>
+                        <% end %>
+                    <% end %>
+                    
+                </div>
+                <div class="span2">
+                    <span class="intro-title" style="margin-left:0px">浏览：<%=q.visit_count%>&nbsp;&nbsp;</span>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div style="float:right;font-size:1em;margin-top:13px;margin-right:20px">
+            <strong>
+            <%if current_user.nil?%>
+                <%= link_to "修改",login_path%>
+                <%= link_to "删除",login_path%>
+            <%elsif current_user?(q.creator)%>
+                <%= link_to "修改",edit_blog_path(q)%>
+                <%= link_to '删除',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-q.courses) != current_user.selected_courses%>
+                <%= link_to '删除',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%end%>
+            </strong>
+        </div>
+    </div>
+        
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="blog-content" style="width:95%;">
+                <div class = "span10" style="margin-top:10px">
+                    <div class="inline-block center cell" style="width:90px">
+                        <div id="add_evalute-<%= q.id%>" style="display:inline">
+                           <%= render :partial => "knowledges/comments", :locals => { :knowledge => q }%>
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="inline-block digest-text " style="width:89%">
+                            <%=link_to blog_path(q.id), class:"no-hover" do%>
+                                <p><%= short_digest q.content, 100 %></p>
+                            <%end%>
+                        </div>
+                    </div>
+                </div>
+                <div class="span1">
+                    <div class="xyxwM2L" style="background-color:#f6f6f6">
+                        <p><%=q.created_at.day%><em>/<%=q.created_at.month%></em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <hr class="normal-hr" style=""/>
+    </div>
+    <div class="row-fluid" style="margin:10px">
+
+        <div id="focus" style="display:inline">
+            <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => q }%>&nbsp;&nbsp;  
+        </div>
+        <div style="display:inline">
+            <a class="ping"><%= q.getAllReplies.size%> 条评论</a>&nbsp;&nbsp;
+        </div>
+        <div id="time" style="display:inline">
+            <% unless q.last_reply_at.nil? %>
+                <span>发布于：<%= q.created_at %>&nbsp;&nbsp; &nbsp;&nbsp; </span>
+            <%end%>
+            <% unless q.last_reply_at.nil? %>
+                <span>最后回复：<%= q.last_reply_at %></span>
+            <%end%>
+        </div>
+        <div class="reply" style="display:none;" style="float:left;">
+                <%= render :partial => "knowledges/reply_show", :locals => { :q => q } %>  
+        </div>
+    </div>
+    <!--<div class="row-fluid">-->
+    <!--    <div id="answer-<%#= q.id%>" class="span11" style="display:inline;margin-left:20px;margin-bottom:10px">-->
+    <!--        <%#= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> -->
+    <!--    </div>-->
+    <!--</div>-->
+    
+</div>
+
+<style>
+/*! CSS Used from: http://eecs.pku.edu.cn/css/css.css */
+    *{margin:0;padding:0;outline:none;-webkit-font-smoothing:antialiased;}
+    em{font-style:normal;}
+    .xyxwM2L{width:80px;height:80px}
+    .xyxwM2L p{font-size:40px;font-family:Arial, Helvetica, sans-serif;padding-top:30px;color:#333333;}
+    .xyxwM2L p em{display:block;font-size:24px;color:#333;margin-left:45px;margin-top:-10px;}
+    .xyxwM2 li:hover .xyxwM2L p{color:#004aa2;}
+    .xyxwM2 li:hover .xyxwM2L p em{color:#004aa2;}
+    .not_ann .xyxwM2L{width:130px;text-align:center;padding-bottom:20px;background:#f6f6f6;}
+    .not_ann .xyxwM2L p{padding-top:20px;}
+    *:before,*:after{transition:all ease-in-out .5s;-webkit-transition:all ease-in-out .5s;-moz-transition:all ease-in-out .5s;-o-transition:all ease-in-out .5s;-ms-transition:all ease-in-out .5s;}
+</style>

@@ -1,0 +1,27 @@
+<div class="span12 shadow-box" style="margin-left:10px;">
+  <div class="span12" style="margin-top:30px">
+      <div class="span2">
+        <section class="user_info">
+          <h1 style = "">
+            <%= gravatar_for q, size: 80 %>
+          </h1>
+        </section>
+      </div>
+    <div class="span8 user-info-digest">
+      <div>
+        <h3><%= link_to q.nickname, user_path(q)%></h3>
+        <div>
+          <%= link_to "关注:#{q.followings.count}", followings_user_path(q), class: :focus_link%>
+          <%= link_to "粉丝:#{q.followeds.count}", followeds_user_path(q), class: :focus_link%>
+        </div>
+        <div>
+          <%= q.self_introduce %>
+        </div>
+        <div id="focus_btn0" style="padding-left:10px;display:inline-block">
+          <%= render partial: "users/focus_btn", locals: {index: 0, following: q}%>
+        </div>
+      </div>
+        <hr/>
+    </div>
+  </div>
+</div>
