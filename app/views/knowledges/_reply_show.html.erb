@@ -1,13 +1,17 @@
 <%layer = q.getAllReplies%>
 <%floors = layer.size/6%>
-<div class="row-fluid" style="margin-top:30px">
-    <div class="span10 shadow-box offset1">
+<div class="row-fluid knowledge-reply">
+    <div class="span10">
         <div class="row-fluid" style="height:20px">
             <strong><%=layer.size%>条评论</strong>
         </div>
-        <div class="row-fluid">
-            <hr class="normal-hr" style="">
-        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <hr class="normal-hr">
+</div>
+<div class="row-fluid knowledge-reply">
+    <div class="span10">
         <% for curindex in 0..floors%>
         <% if curindex == 0%>
             <div id="floor-<%=curindex%>" class="row-fluid">
@@ -16,26 +20,46 @@
         <%end%>
             <%curlayer = layer[6*curindex...6*curindex+6]%>
             <%curlayer.each do|reply|%>
-                <div class="row-fluid">
-                    <div class="span12"%>
-                        <img alt="aaa" class="gravatar" src="https://secure.gravatar.com/avatar/aaa?s=20"><span style="font-size:16px"><%=link_to "#{reply.creator.nickname}",user_path(reply.creator)%>&nbsp;回复:&nbsp;<%=link_to "#{reply.topic.creator.nickname}:",user_path(reply.topic.creator)%></span>
-                        <div class="box-content">
+                <div class="row-fluid reply-block">
+                    <!-- 评论头 -->
+                    <div class="row-fluid">
+                        <div class="span12"%>
+                            <div class="span4">
+                                 <%= gravatar_for reply.creator, size: 20%>
+                                    <span style="font-size:16px">
+                                        <%=link_to "#{reply.creator.nickname}",user_path(reply.creator)%>&nbsp;
+                                        回复:&nbsp;
+                                        <%=link_to "#{reply.topic.creator.nickname}:",user_path(reply.topic.creator)%>
+                                    </span>
+                            </div>
+                            <div class="span4">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- 评论内容 -->
+                    <div class="box-content">
                         <div class="panel-body">
                             <p><%= reply.content %></p>
                         </div>
-                        <div class="panel-footer" >
-                            <p style="text-align:justify;width:300px;display:inline">发布时间:<%= reply.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp
-                            <div id="add_evalute-<%= reply.id%>" style="display:inline">
-                                 <%= render :partial => "knowledges/comments_show", :locals => { :knowledge => reply } %>  
+                        <div class="panel-footer " >
+                            <div class="info" style="float:right">
+                                <span style="color:grey; padding-right:40px">
+                                    <%=reply.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>
+                                </span>
+                                <div id="add_evalute-<%= reply.id%>" style="display:inline;padding-right:20px">
+                                     <%= render :partial => "knowledges/comments_show", :locals => { :knowledge => reply } %>  
+                                </div>
+                                <div style="display:inline">
+                                    <a class="reply-reply-show" data-index="<%= reply.id%>" class="no-hover">
+                                    回复&nbsp;
+                                    </a>
+                                </div>
                             </div>
-                            <div style="display:inline">
-                               <%= reply.getAllReplies.size%> 条评论&nbsp;
-                            </div>
-                            <div id="answer-<%= reply.id%>" class="span12" style="display:inline">
+                            <div id="answer-<%= reply.id%>" class="span12 reply-reply-input" style="display:none">
                                 <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => reply } %> 
                             </div>
-                            </p>
-                          </div>
                         </div>
                     </div>
                 </div>
@@ -52,15 +76,15 @@
                         </span>
                     </div>
                     <div class="row-fluid">
-                        <hr class="normal-hr" style="">
+                        <hr class="normal-hr">
                     </div>
                 </div>
             <%end%>
             </div>
         <%end%>
         <div class="row-fluid">
-            <span class="span2" style="color:#0084ffbf!important"><h2>回复作者：</h2></span>
-            <div id="answer-<%= q.id%>" class="span12" style="display:inline;margin-top:-20px!important">
+            <span class="span2" style="color:#0084ffbf!important"><h2>新回复：</h2></span>
+            <div id="answer-<%= q.id%>" class="span12" style="display:inline;margin-top:-20px!important;margin-left:60px">
                 <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => q } %> 
             </div>
         </div>

@@ -1,44 +1,31 @@
+<% creator = knowledge.creator %>
 <div class="span3" style="margin-left:10px;">
-    <div class="span12 shadow-box" style="margin-left:10px;">
-        <div class="span12" style="margin-top:30px">
-            <h3 class="aside-title" style="margin-left:10px">个人资料</h3>
-            <div class="span2">
+    <div class="row-fluid shadow-box" style="margin-left:10px;padding:5px">
+        <div class="span12" style="">
+            <h3 class="aside-title" style="margin-left:10px;font-size:1.2em">作者:</h3>
+            <hr class="normal-hr"/>
+            <div class="span4">
                 <section class="user_info">
                     <h1 style = "">
-                        <%= gravatar_for current_user, size: 80 %>
+                        <%= gravatar_for creator, size: 80 %>
                     </h1>
                 </section>
             </div>
-            <div class="span8 user-info-digest">
+            <div class="span6 user-info-digest" >
+                <h3 style="padding-bottom:10px"><%= creator.nickname%></h3>
                 <div>
-                    <h3><%= current_user.nickname%></h3>
-                    <div>
-                        <%= link_to "关注:#{current_user.followings.count}", followings_user_path(current_user), class: :focus_link%>
-                        <%= link_to "粉丝:#{current_user.followeds.count}", followeds_user_path(current_user), class: :focus_link%>
-                    </div>
-                    <div id="focus_btn0" style="padding-left:10px;display:inline-block">
-                        <%= render partial: "users/focus_btn", locals: {index: 0, following: current_user}%>
-                    </div>
+                    <%= link_to "关注:#{creator.followings.count}", followings_user_path(creator), class: :focus_link%>
+                    <%= link_to "粉丝:#{creator.followeds.count}", followeds_user_path(creator), class: :focus_link%>
                 </div>
-                <hr/>
+                <div id="focus_btn0" style="padding:10px 0;display:inline-block">
+                    <%= render partial: "users/focus_btn", locals: {index: 0, following: creator}%>
+                </div>
             </div>
-            <button id="newButton" type="button" class="btn btn-small btn-warning" style="margin-left:50px;margin-top:50px;margin-bottom:50px;width:150px;height:30px;border-radius:16px!important;">
-               <% if log_in?%>
-                 <%=link_to yield(:write_path),method: :get do%>
-                   <i class="halflings-icon white edit"></i>
-                   <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
-                 <%end%>
-              <%else%>
-                 <%= link_to login_path(:message => "请先登录") do%>
-                    <i class="halflings-icon white edit"></i>
-                    <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
-                 <%end%>
-              <%end%>
-            </button>
+            
         </div>
     
     </div>
-    <div class="span12 shadow-box" style="margin-left:10px;margin-top:10px">
+    <div class="row-fluid shadow-box" style="margin:10px 10px;padding:5px">
         <div class="row-fluid">
             <h2>发表的知识</h2>
         </div>
@@ -48,17 +35,17 @@
             </div>
         </div>
         <% query = ["Question", "Blog", "Resource"]%>
-        <% @creatings = current_user.creatings.where(type: query)[0...5]%>
+        <% @creatings = creator.creatings.where(type: query)[0...5]%>
         <% @creatings.each_with_index do |creating, index|%>
         <div class="row-fluid" data-index="<%= index%>">
-            <div class="row-fluid span11 offset1">
-                <div class="span8">
-                    <%=link_to "[#{creating.chinese_type}]", creatings_user_path(current_user, type: creating.type), class: "creating-title"%>
+            <div class="row-fluid span12" style="padding:10px">
+                <div>
+                    <%=link_to "[#{creating.chinese_type}]", creatings_user_path(creator, type: creating.type), class: "creating-title"%>
                         
                     <%=link_to "《#{creating.title}》", creating.to_path, class: "creating-title"%>
                         
                 </div>
-                <div class="span4" style="">
+                <div style="float:right">
                     <strong>浏览量：</strong>
                     <span><%= creating.visit_count%></span>
                 </div>

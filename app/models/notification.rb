@@ -25,6 +25,7 @@ class Notification < ApplicationRecord
   end
   
   def norrow_with_entity
+    return true unless with_entity_id
     Notification.norrow_entity with_entity_id, with_entity_type
   end
   
