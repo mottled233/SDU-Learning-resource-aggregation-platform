@@ -2,72 +2,40 @@
   <div style="text-align:center;">
     <br />
     <div class="field">
-      <%= text_field :key ,params[0], class: 'form-control'%>
+      <%= text_field :key ,params[0], class: 'form-control',value: params[:key][0]%><br />
+    </div>
+    <div class="field">
+      查询内容：
+      <%= select_tag :find,options_for_select(["全部","专栏","问题","资源","用户"],params[:find]) %>
+    </div>
+    <div class="field">
+      排序依据：
+      <%= select_tag :sort,options_for_select(["默认","上传时间","推荐程度"],params[:sort]) %><br />
+    </div>
+      
       <%= submit_tag "搜索" , class: "btn btn-primary" %>
-    </div>
   </div>
 <% end %>
-<% unless @results.nil? %>
-  <% @results.each do |res| %>
-  <div class="row-fluid">
-    <div class="box span10 offset1">
-      <div class="box-header">
-    		<h2><i class="halflings-icon white white tasks"></i><span class="break">&nbsp;<%=link_to "#{res.title}",blog_path(res.id),style: "color:white"%></span></h2>
-        <span><p style="text-align:justify;float:right;display:inline;color:white"><strong>By:</strong><%= res.creator.username%>&nbsp;&nbsp;&nbsp;发布时间:<%= res.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%>&nbsp;</span>
-    	</div>
-      <div class="box-content">
-        <div class="container">
-          <div class = "panel panel-default">
-            <div class="panel-head"></div>
-            <div class="panel-body">
-              <%if res.content.length>50%>
-                <p><%= "#{res.content[0...50]}..." %></p>
-              <%else%>
-                <p><%= res.content %></p>
-              <%end%>
-            </div>
-            <div class="panel-footer">
-              <div style="margin-bottom:10px">
-                <strong>所属课程:</strong>
-                <% res.courses.each do|course| %>
-                  <span class="label label-success"><%= course.course_name %>&nbsp;</span>
-                <% end %>
-              </div>
-              <div id="add_evalute-<%= res.id%>" style="display:inline">
-                <%= render :partial => "knowledges/comments", :locals => { :knowledge => res }%>    
-              </div>
-              <div id="focus" style="display:inline">
-                <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => res }%>  
-              </div>
-              <div style="display:inline">
-                <a class="ping"><%= res.getAllReplies.size%> 条评论</a>&nbsp;
-                <div class="reply" style="display:none;margin-left:50px" style="float:left">
-                  <%= render :partial => "knowledges/reply_show", :locals => { :q => res } %>  
-                </div>
-              </div>
-            </div>
-            <div class="panel-footer">
-              <h4 style="display: inline;">标签：</h4>
-              <%res.keywords.each do|k|%>
-                <span class="label label-info">
-                  &nbsp;<%= k.name%>&nbsp;
-                </span>
-              <%end%>
-            </div>
-            <div class="blank" style="height:20px"></div>
-          </div>
-        </div>
-        <div id="answer-<%= res.id%>" style="display:inline;float:right">
-          <%= render :partial => "knowledges/reply_answer", :locals => { :knowledge => res } %> 
-        </div>
-        <div class="blank" style="height:30px"></div>
-      </div>
+
+<%if !@members.nil?%>
+  <%@members.each do|q| %>
+    <%= render :partial => "member_each", :locals =>{:q => q} %>
+  <%end%>
+  <%if @results.nil?%>
+    <div class="row-fluid center span12 offset1">
+    <div style="padding-bottom:50px">
+    <%= will_paginate @members %>
     </div>
-    
+    </div>
+  <%end%>
+<%end%>
+<%if !@results.nil?%>
+  <%@results.each do|q| %>
+    <%= render :partial => "blog_each", :locals => { :q => q } %> 
+  <%end%>
+  <div class="row-fluid center span12 offset1">
+  <div style="padding-bottom:50px">
+  <%= will_paginate @results %>
   </div>
-  <% end %>
-  
-  <div style="float:right;margin-bottom:30px">
-    <%= will_paginate @results %>
   </div>
-<% end %>
+<%end%>

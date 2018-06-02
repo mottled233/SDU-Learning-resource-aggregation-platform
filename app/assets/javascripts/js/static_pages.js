@@ -29,9 +29,14 @@ function changecolor(id)
 				console.log(h.response);
 				var o=JSON.parse(h.response);
 				if (o.status=="200"){
-					console.log(o.data[0]);
-					document.getElementById("row"+id.substring(1,2)).innerHTML="";
-					for (var j=0;j<=3;++j)
+					document.getElementById("row"+id.substring(1,2)+"0").innerHTML="";
+					document.getElementById("row"+id.substring(1,2)+"1").innerHTML="";
+					var type="";
+					if (id.substring(1,2)=="1")
+						type="blogs";
+					else
+						type="resources";
+					for (var j=0;j<=7;++j)
 					{
 						var span3 = document.createElement("div");
 						span3.setAttribute("class","span3");
@@ -55,6 +60,7 @@ function changecolor(id)
 						var calendar = document.createElement("span");
 						calendar.setAttribute("class","icon-calendar");
 						a.innerHTML = o.data[j].title;
+						a.setAttribute("href","http://"+document.domain+"/"+type+"/"+o.data[j].id);
 						h2.appendChild(a);
 						small1.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp";
 						small1.appendChild(book);
@@ -74,14 +80,13 @@ function changecolor(id)
 							small2.innerHTML=small2.innerHTML+" "+"123"+"&nbsp;&nbsp;&nbsp;&nbsp;";
 						}
 						small2.appendChild(thup);
-						small2.innerHTML=small2.innerHTML+" "+o.data[j].good+"&nbsp;&nbsp;&nbsp;&nbsp;";
+						small2.innerHTML=small2.innerHTML+" "+(o.data[j].good-o.data[j].bad)+"&nbsp;&nbsp;&nbsp;&nbsp;";
 						small2.appendChild(calendar);
 						small2.innerHTML=small2.innerHTML+" "+o.data[j].created_at.substring(0,10);
 						textcenter.appendChild(small2);
 						thumbnail.appendChild(textcenter);
 						span3.appendChild(thumbnail);
-						document.getElementById("row"+id.substring(1,2)).appendChild(span3);
-						console.log(span3)
+						document.getElementById("row"+id.substring(1,2)+parseInt(j/4)).appendChild(span3);
 					}
 				}
 			}
@@ -103,13 +108,6 @@ function dropdownOnClick(e,id)
 		document.getElementById('dropdown'+id).setAttribute("data-id",e.target.getAttribute("data-id"));
 		if (document.getElementById('dropdown'+(parseInt(id)+1).toString()))
 		{
-			if (document.getElementById('dropdown'+(parseInt(id)+2).toString()))
-			{
-				document.getElementById('dropdown'+(parseInt(id)+2).toString()).parentNode.style.display="none";
-				document.getElementById('ul'+(parseInt(id)+2).toString()).innerHTML="";
-			}
-			document.getElementById('dropdown'+(parseInt(id)+1).toString()).parentNode.style.display="inline";
-				document.getElementById('ul'+(parseInt(id)+1).toString()).innerHTML="";
 				
 			var x={};
 			x.authenticity_token=$("meta[name='csrf-token']").attr("content");
@@ -128,6 +126,13 @@ function dropdownOnClick(e,id)
 				if (o.status=="200"){
 					for (var i=0;i<o.count;++i)
 					{
+						if (document.getElementById('dropdown'+(parseInt(id)+2).toString()))
+						{
+							document.getElementById('dropdown'+(parseInt(id)+2).toString()).parentNode.style.display="none";
+							document.getElementById('ul'+(parseInt(id)+2).toString()).innerHTML="";
+						}
+						document.getElementById('dropdown'+(parseInt(id)+1).toString()).parentNode.style.display="inline";
+							document.getElementById('ul'+(parseInt(id)+1).toString()).innerHTML="";
 						var newli=document.createElement("li");
 						newli.setAttribute("data-id",o.data[i].id);
 						if (o.data[i].name)
@@ -143,14 +148,10 @@ function dropdownOnClick(e,id)
 			}
 			h.send(JSON.stringify(x));
 			console.log(JSON.stringify(x));
-
-			
-			
-			
 		}
 		if (id=='3')
 		{
-		  var url = "https://sdulrap-baka719.c9users.io/courses/"+e.target.getAttribute("data-id");
+		  var url = "http://"+document.domain+"/courses/"+e.target.getAttribute("data-id");
 			document.getElementById('goButton').style.display="inline";
 			document.getElementById('goButton').setAttribute('onclick','window.open("'+url+'")');
 		}

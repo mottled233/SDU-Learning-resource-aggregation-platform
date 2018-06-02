@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
   get '/unfinish', to: 'static_pages#unfinished'
-  get '/search', to: 'searches#index', as:"searches_index"
-  get '/search/res', to: 'searches#result', as:"searches_result"
+  match '/search', to: 'searches#index', as:"searches_index", via: [:get, :post]
+  match '/search/res', to: 'searches#result', as:"searches_result", via: [:get, :post]
   
   # 用户资源相关路由
   resources :users do
