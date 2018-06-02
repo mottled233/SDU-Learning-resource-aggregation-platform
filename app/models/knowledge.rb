@@ -81,6 +81,7 @@ class Knowledge < ApplicationRecord
     end
   end
   
+  
 
   
   def chinese_type
