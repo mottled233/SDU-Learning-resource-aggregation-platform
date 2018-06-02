@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import json
+
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 import re
+
 from resource_aggregation.items import IpItem
 
 
@@ -10,8 +13,6 @@ class IpSpider(CrawlSpider):
     name = 'ip'
     allowed_domains = ['xicidaili.com']
     start_urls = ['http://www.xicidaili.com/wt/1/']
-
-    count = 0  # 用于爬取计数， 一般爬取10页就够用
 
     custom_settings = {
         'DEFAULT_REQUEST_HEADERS': {
@@ -24,7 +25,7 @@ class IpSpider(CrawlSpider):
             "Upgrade-Insecure-Requests": 1,
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36",
         },
-        'DOWNLOADER_MIDDLEWARES': {},
+        # 'DOWNLOADER_MIDDLEWARES': {},
         'ITEM_PIPELINES': {
             'resource_aggregation.pipelines.IpWriterPipeline': 300,
         },
@@ -46,14 +47,24 @@ class IpSpider(CrawlSpider):
             ip = re.findall(patternIP, raw)
             port = re.findall(patternPORT, raw)
 
-            re.match(patternIP, raw)
-            item = IpItem()
-            item['ip'] = ip[0]
-            item['port'] = port[0]
-            yield item
+            url = 'http://httpbin.org/ip'
+            proxy = 'http://' + str(ip) + ':' + str(port)
+            meta = {
+                'proxy': proxy,
+                'dont_retry': True,
+                'download_timeout': 30,
+                '_proxy_ip': ip,
+                '_proxy_port': port
+            }
+            yield scrapy.Request(url, callback=self.check_available, meta=meta, dont_filter=True)
 
-        # 判断爬取的页数是否到达上限
-        if self.count == 10:
-            return
-        else:
-            self.count += 1
+    def check_available(self, response):
+        proxy_ip = response.meta['_proxy_ip']
+        print(proxy_ip)
+        print(response.text)
+
+        if proxy_ip == json.loads(response.text)['origin']:
+            item = IpItem()
+            item['ip'] = proxy_ip
+            item['port'] = response.meta['_proxy_port']
+            yield item
