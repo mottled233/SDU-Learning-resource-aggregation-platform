@@ -1,0 +1,24 @@
+<% provide(:title, "知识图谱") %>
+<div class="container-fluid-full">
+  <div class="row-fluid">
+    <%= render 'users/aside' %>
+    <div id="content" class="span8">
+        <div class="row-fluid">
+        <%= render 'layouts/flash' %>
+        </div>
+        <div class="row-fluid offset1">
+            <h1>知识图谱</h1>
+            
+        </div>
+        <div class="row-fluid ">
+            <div class="span8">
+               <hr style="background-color:grey"/> 
+            </div>
+        </div>
+        
+        <img src="<%= asset_path "knowledge_graph_demo.png" %>" height="600" width="1200">
+
+    </div>
+  </div>
+</div>
+
