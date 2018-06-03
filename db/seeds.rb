@@ -38,7 +38,8 @@ content = "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，
 (1..100).each do |i|
   good = rand(0..200)
   bad = rand(0..200)
-  blogs = Blog.create(creator:student,title:"Blog "+i.to_s,type:'Blog',content:content,good:good,bad:bad)
+  st=User.find(rand(1..4))
+  blogs = Blog.create(creator:st,title:"Blog "+i.to_s,type:'Blog',content:content,good:good,bad:bad)
   blogs.good = rand(0..200)
   blogs.bad = rand(0..200)
   blogs.created_at = blogs.created_at - rand(0..1000)
@@ -49,7 +50,8 @@ content = "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，
   end
   blogs.courses<<(course)
   blogs.save
-  resources = Resource.create(creator:student,title:"Resource "+i.to_s,type:'Resource',content:content,good:rand(0..200),bad:rand(0..200))
+  st=User.find(rand(1..4))
+  resources = Resource.create(creator:st,title:"Resource "+i.to_s,type:'Resource',content:content,good:rand(0..200),bad:rand(0..200))
   resources.good = rand(0..200)
   resources.bad = rand(0..200) 
   resources.created_at = resources.created_at - rand(0..1000)

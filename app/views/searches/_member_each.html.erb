@@ -1,4 +1,4 @@
-  <div class="span12 shadow-box" style="margin-bottom:15px;padding:10px">
+  <div class="span8 offset3 shadow-box" style="margin-bottom:15px;padding:10px 10px 30px 10px">
     <div class="row-fluid">
       <div class="span2">
         <section class="user_info">
@@ -11,20 +11,18 @@
         <div>
           <h3><%= link_to q.nickname, user_path(q)%>
           <span class="label label-info" style="margin-left:3px"><%= q.user_role%></span></h3>
-          <div>
+          <div style="margin-bottom:5px">
             <%= link_to "关注:#{q.followings.count}", followings_user_path(q), class: :focus_link%>
             <%= link_to "粉丝:#{q.followeds.count}", followeds_user_path(q), class: :focus_link%>
           </div>
           <div>
             <%= q.self_introduce %>
           </div>
-          <div id="focus_btn0" style="padding-left:10px;display:inline-block">
-            <%= render partial: "users/focus_btn", locals: {index: 0, following: q}%>
-          </div>
         </div>
-          <hr/>
+      </div>
+      <div id="focus_btn0" style="display:inline-block;float:right">
+        <%= render partial: "users/focus_btn", locals: {index: 0, following: q}%>
       </div>
     </div>
   </div>
     
-</div>

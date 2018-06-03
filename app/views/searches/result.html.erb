@@ -2,40 +2,41 @@
   <div style="text-align:center;">
     <br />
     <div class="field">
-      <%= text_field :key ,params[0], class: 'form-control',value: params[:key][0]%><br />
+      <%= text_field :key ,params[0], class: 'form-control',value: params[:key][0],style:"width:320px;font-size:large;height:25px"%><br />
     </div>
     <div class="field">
       查询内容：
-      <%= select_tag :find,options_for_select(["全部","专栏","问题","资源","用户"],params[:find]) %>
-    </div>
-    <div class="field">
+      <%= select_tag :find,options_for_select(["全部","专栏","问题","资源","用户"],params[:find]),style:"width:80px" %>
+      &nbsp;&nbsp;&nbsp;&nbsp;
       排序依据：
-      <%= select_tag :sort,options_for_select(["默认","上传时间","推荐程度"],params[:sort]) %><br />
+      <%= select_tag :sort,options_for_select(["默认","上传时间","推荐程度"],params[:sort]),style:"width:80px" %><br />
+      <%= submit_tag " 搜索 " , class: "btn btn-primary",style:"font-size:large"%>
     </div>
       
-      <%= submit_tag "搜索" , class: "btn btn-primary" %>
   </div>
 <% end %>
-
-<%if !@members.nil?%>
-  <%@members.each do|q| %>
-    <%= render :partial => "member_each", :locals =>{:q => q} %>
-  <%end%>
+<div>
+  <div class="row">
+    <%if !@members.nil?%>
+      <%@members.each do|q| %>
+        <%= render :partial => "member_each", :locals =>{:q => q} %>
+      <%end%>
+    <%end%>
+    <%if !@results.nil?%>
+      <%@results.each do|q| %>
+        <%= render :partial => "blog_each", :locals => { :q => q } %> 
+      <%end%>
+    <%end%>
+    
+  </div>
   <%if @results.nil?%>
-    <div class="row-fluid center span12 offset1">
-    <div style="padding-bottom:50px">
-    <%= will_paginate @members %>
+    <div class="span8 offset3" style="padding-bottom:50px">
+        <%= will_paginate @members %>
     </div>
+  <%else%>
+    <div class="span8 offset3" style="padding-bottom:50px">
+        <%= will_paginate @results %>
     </div>
   <%end%>
-<%end%>
-<%if !@results.nil?%>
-  <%@results.each do|q| %>
-    <%= render :partial => "blog_each", :locals => { :q => q } %> 
-  <%end%>
-  <div class="row-fluid center span12 offset1">
-  <div style="padding-bottom:50px">
-  <%= will_paginate @results %>
-  </div>
-  </div>
-<%end%>
+  
+</div>

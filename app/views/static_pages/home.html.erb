@@ -1,7 +1,7 @@
 <%= csrf_meta_tags %>
 <% provide(:onload, 'onload=load()') %>
-<div class="hero-unit" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>)">
-	<h1 style="color:white;">山东大学资源聚合平台</h1>
+<div class="hero-unit" style="padding-top:15%;padding-bottom:10%;padding-left:5%;background-image: url(<%= asset_path "index_bg.png" %>);background-size: cover;background-position: center;">
+	<h1 style="color:white;text-shadow: 0.1em 0.1em 0.1em black">山东大学资源聚合平台</h1>
 	<p>
 		<div class="btn-group dropdown" onclick="dropdownOnClick(event,1)" style="display:inline">
 		  <a id="dropdown1" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -36,9 +36,8 @@
 		</button>
 	</p>
 </div>
-<div style="margin:10px;">
-	
-	<div class="span9">
+<div style="margin-left:20px;margin-right:20px;margin-top:20px;margin-bottom:20px;">
+	<div class="row-fluid">
 		<div class="projects-header page-header">
 			<h1><span class="icon-edit" aria-hidden="true"></span>&nbsp;&nbsp;专栏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<small>
@@ -50,16 +49,51 @@
 			</small>
 			</h1>
 		</div>
+	
+	<div class="span8">
 			
-		<div class="row-fluid" id="row10">
+		<div class="row-fluid" id="row10" style="margin-bottom:20px">
 		</div>
-		<div class="row-fluid" id="row11">
+		<div class="row-fluid" id="row11" style="margin-bottom:20px">
 		</div>
+	
 	</div>
 	<div class="span3">
-		Rank
+		<div class="thumbnail">
+			<div class="box-content" style="background-color:transparent">
+				<ul class="dashboard-list">
+					<li>
+						<p style="font-size:14px"><span class="icon-fire" aria-hidden="true"></span>15日最热专栏</p>
+					</li>
+					<%
+					i=0
+					@rank_blog.each do |item| 
+					i=i+1
+					%>
+					<li>
+							<span style="background-color:<%= 
+							case i
+								when 1 then
+									"#1f1"
+								when 2 then
+									"#ddd"
+								when 3 then 
+									"#6c6"
+								else
+									"#ccc"
+							end
+							%>;color:#fff;font-size:14px"><b>&nbsp;<%= i %>&nbsp;</b></span>
+							<%=link_to item.title,resource_path(item.id)%>
+						<span style="float:right;"><%= item.created_at.strftime("%Y-%m-%d") %></span>
+					</li>
+					<% end %>
+				</ul>
+			</div>
+		</div><!--/span-->
+
 	</div>
-	<div class="span9">
+	</div>
+	<div class="row-fluid">
 		<div class="projects-header page-header">
 			<h1><span class="icon-hdd" aria-hidden="true"></span>&nbsp;&nbsp;资源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<small>
@@ -70,84 +104,95 @@
 					<%end%>
 			</small>
 		</div>
-		<div class="row-fluid" id="row20">
-		</div>
-		<div class="row-fluid" id="row21">
-		</div>
-		
-	</div>
-	<div class="span3">
-		Rank
-	</div>
-	<div class="span9">
-		<div class="projects-header page-header">
-			<h1><span class="icon-user" aria-hidden="true"></span>&nbsp;&nbsp;活跃用户</h1>
-		</div>
-		<div class="row-fluid" id="row3">
-			<div class="span3">
-			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-			  	<p class="text-center">
-			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
-						</small>
-					</p>
-			  </div>
+		<div class="span8">
+			<div class="row-fluid" id="row20" style="margin-bottom:5px">
 			</div>
-			<div class="span3">
-			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-			  	<p class="text-center">
-			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
-						</small>
-					</p>
-			  </div>
-			</div>
-			<div class="span3">
-			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-			  	<p class="text-center">
-			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
-						</small>
-					</p>
-			  </div>
-			</div>
-			<div class="span3">
-			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-			  	<p class="text-center">
-			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
-						</small>
-					</p>
-			  </div>
+			<div class="row-fluid" id="row21" style="margin-bottom:5px">
 			</div>
 			
 		</div>
-		
+		<div class="span3"><div class="thumbnail">
+				<div class="box-content" style="background-color:transparent">
+					<ul class="dashboard-list">
+						<li>
+							<p style="font-size:14px"><span class="icon-fire" aria-hidden="true"></span>15日最热资源</p>
+						</li>
+						<%
+						i=0
+						@rank_res.each do |item| 
+						i=i+1
+						%>
+						<li>
+								<span style="background-color:<%= 
+								case i
+									when 1 then
+										"#1f1"
+									when 2 then
+										"#ddd"
+									when 3 then 
+										"#6c6"
+									else
+										"#ccc"
+								end
+								%>;color:#fff;font-size:14px"><b>&nbsp;<%= i %>&nbsp;</b></span>
+								<%=link_to item.title,resource_path(item.id)%>
+							<span style="float:right;"><%= item.created_at.strftime("%Y-%m-%d") %></span>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+			</div><!--/span-->
+		</div>
 	</div>
-	<div class="span3">
-		Rank
+	
+	
+	<div class="row-fluid">
+		<div class="projects-header page-header">
+			<h1><span class="icon-user" aria-hidden="true"></span>&nbsp;&nbsp;活跃用户</h1>
+		</div>
+		<div class="span8">
+			<% @user_active.each do |q|%>
+			<div class="span3">
+			  <div class="thumbnail">
+            <%= gravatar_for q, size: 80 %><br />
+			  	<h2><a href="#"><%= link_to q.nickname, user_path(q)%></a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> <%= (q.department_id==nil ? "" : Department.find(q.department_id).name) %> - <%= (q.speciality_id==nil ? "" : Speciality.find(q.speciality_id).name) %> </small></h2>
+			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> <%=q.self_introduce%></p>
+			  	<p class="text-center">
+			  		<small>
+			  			<span class="icon-upload"></span> <%= @user_res[q.id] %>&nbsp;&nbsp;&nbsp;&nbsp;
+			  			<span class="icon-edit"></span> <%= @user_blog[q.id] %>&nbsp;&nbsp;&nbsp;&nbsp;
+			  			<span class="icon-comment"></span> <%= @user_ques[q.id] %>
+						</small>
+					</p>
+			  </div>
+			</div>
+			<%end%>
+		</div>
+		<div class="span3"><div class="thumbnail">
+				<div class="box-content" style="background-color:transparent">
+					<ul class="dashboard-list">
+						<li>
+							<p style="font-size:14px"><span class="icon-fire" aria-hidden="true"></span>新注册用户</p>
+						</li>
+						<%
+						i=0
+						@user_new.each do |item| 
+						i=i+1
+						%>
+						<li>
+								<%=link_to item.nickname,user_path(item.id)%>
+							<span style="float:right;"><%= item.created_at.strftime("%m-%d %H:%M") %></span>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+			</div><!--/span-->
+		</div>
 	</div>
+	
+	
+	
+	
 </div>
-<br />
 <br />
 <br />

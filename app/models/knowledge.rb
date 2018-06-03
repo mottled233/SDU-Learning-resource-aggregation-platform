@@ -74,7 +74,7 @@ class Knowledge < ApplicationRecord
     return list
   end
   
-  def digest(length=50)
+  def knowledge_digest(length=50)
     digest = self.content
     if digest.length>length
       digest = digest[0,length]+"..."
