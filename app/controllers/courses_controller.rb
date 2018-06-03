@@ -15,18 +15,22 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-     tempList = @course.knowledges
+    tempList = Array.new
+    @course.knowledges.each do|k|
+      tempList = tempList << k.id   
+    end
+    
      @best_list = Array.new
      len = tempList.size
       for i in 0..len-1
         max = tempList[0];
         tempLen = tempList.size
         for j in 0..tempLen-1
-          if tempList[j].good > max.good
+          if Knowledge.find((tempList[j])).good > Knowledge.find(max).good
             max = tempList[j]
           end
         end
-        @best_list = @best_list << max
+        @best_list = @best_list << Knowledge.find(max)
         tempList.delete(max)
       end
   end
