@@ -4,6 +4,27 @@ class StaticPagesController < ApplicationController
     @rank_blog = Blog.where("strftime('%s','now')-strftime('%s',created_at)<=15*24*60*60").order('"good"-"bad"').reverse_order.limit(8)
     @rank_res = Resource.where("strftime('%s','now')-strftime('%s',created_at)<=15*24*60*60").order('"good"-"bad"').reverse_order.limit(8)
     @user_new = User.order('created_at').reverse_order.limit(8)
+    @user_active = []
+    @user_blog = Blog.group(:user_id).count
+    @user_ques = Question.group(:user_id).count
+    @user_res = Resource.group(:user_id).count
+    @user_all={}
+    for i in 1..User.count
+      unless (@user_blog.include?(i))
+        @user_blog[i]=0
+      end
+      unless (@user_ques.include?(i))
+        @user_ques[i]=0
+      end
+      unless (@user_res.include?(i))
+        @user_res[i]=0
+      end
+      @user_all[i]=@user_blog[i]+@user_ques[i]+@user_res[i]
+    end
+    @user_all=@user_all.sort{|a,b|b[1]<=>a[1]}
+    for i in 0..3
+      @user_active[i]=User.find(@user_all[i][0])
+    end
   end
   
   def test_page

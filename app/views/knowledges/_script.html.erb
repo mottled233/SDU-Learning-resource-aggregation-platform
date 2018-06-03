@@ -5,6 +5,7 @@
       $("#answer-"+index).toggle()
     });
     
+    
     $.each($(".ping"),function(){
           $(this).bind("click",function(){
                 $(this).parent().parent().children(".reply").slideToggle();
@@ -18,5 +19,9 @@
           });
     });
       
+    var content = $("#knowledge-main");
+    if(content.height()<300){
+      $("#knowledge-main").css("padding-bottom","300px");
+    }
   });
 </script>

@@ -179,13 +179,13 @@ class BlogsController < KnowledgesController
             
         if !@hasChoose.nil?
             @hasChoose.each do |c| 
-                @chooseItem << Keyword.find(c)
+                @chooseItem << Course.find(c)
             end
         end
-        
-        if @course.nil?||@course.empty?
+        if !(@course.nil?||@course.empty?)
             @course = @course-@chooseItem
         end
+        
         render "render_course.js.erb"
         respond_to do |format|
             format.js {}
@@ -198,7 +198,7 @@ class BlogsController < KnowledgesController
             
         if !@hasChoose.nil?
             @hasChoose.each do |c| 
-                @chooseItem << Keyword.find(c)
+                @chooseItem << Course.find(c)
             end
         end
         @chooseItem = @chooseItem<<@course
