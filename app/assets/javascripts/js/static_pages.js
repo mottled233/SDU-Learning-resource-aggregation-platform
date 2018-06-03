@@ -12,11 +12,11 @@ function changecolor(id)
 			document.getElementById(i.toString()+id.substring(1,2)).style.color='#777';
 	}
 	if (id.substring(0,1)=="1")
-		document.getElementById("1"+id.substring(1,2)).style.color="#33F";
+		document.getElementById("1"+id.substring(1,2)).style.color="#CE6";
 	else if (id.substring(0,1)=="2")
-		document.getElementById("2"+id.substring(1,2)).style.color="#F33";
+		document.getElementById("2"+id.substring(1,2)).style.color="#E6C";
 	else if (id.substring(0,1)=="3")
-		document.getElementById("3"+id.substring(1,2)).style.color="#3F3";
+		document.getElementById("3"+id.substring(1,2)).style.color="#6CE";
 		
 		var x={};
 			x.authenticity_token=$("meta[name='csrf-token']").attr("content");
@@ -63,8 +63,6 @@ function changecolor(id)
 						a.setAttribute("href","http://"+document.domain+"/"+type+"/"+o.data[j].id);
 						h2.appendChild(a);
 						small1.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp";
-						small1.appendChild(book);
-						small1.innerHTML = small1.innerHTML + " " + o.data[j].type;
 						h2.appendChild(small1);
 						thumbnail.appendChild(h2);
 						p.innerHTML = o.data[j].content.substring(0,30)+(o.data[j].content.length>30?"...":"");
@@ -80,7 +78,7 @@ function changecolor(id)
 							small2.innerHTML=small2.innerHTML+" "+"123"+"&nbsp;&nbsp;&nbsp;&nbsp;";
 						}
 						small2.appendChild(thup);
-						small2.innerHTML=small2.innerHTML+" "+(o.data[j].good-o.data[j].bad)+"&nbsp;&nbsp;&nbsp;&nbsp;";
+						small2.innerHTML=small2.innerHTML+" "+(o.data[j].good-o.data[j].bad)+"<br />";
 						small2.appendChild(calendar);
 						small2.innerHTML=small2.innerHTML+" "+o.data[j].created_at.substring(0,10);
 						textcenter.appendChild(small2);
