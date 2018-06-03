@@ -14,7 +14,7 @@ class SearchesController < ApplicationController
           ks.each do |keys|
           @members = User.where(['nickname like ?','%'+keys+'%'])
         end
-        @members = @members.paginate(:page => params[:page], :per_page => 4)
+        @members = @members.paginate(:page => params[:page], :per_page => 10)
         else
           @results = Knowledge
           if (params[:find]=='专栏')
@@ -42,7 +42,7 @@ class SearchesController < ApplicationController
               @results = @results.order("good-bad DESC")
           end
         end
-        @results = @results.paginate(:page => params[:page], :per_page => 4)
+        @results = @results.paginate(:page => params[:page], :per_page => 10)
       end
     else
       redirect_to searches_index_path

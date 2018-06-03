@@ -2,18 +2,16 @@
   <div style="text-align:center;margin:10%">
     <h1>Search</h1>
     <div class="field">
-      <%= text_field :key,params[0], class: 'form-control'%>
+      <%= text_field :key ,params[0], class: 'form-control',value: params[:key][0],style:"width:320px;font-size:large;height:25px"%><br />
     </div>
     <div class="field">
       查询内容：
-      <%= select_tag :find,options_for_select(["全部","专栏","问题","资源","用户"],params[:find]) %>
-    </div>
-    <div class="field">
+      <%= select_tag :find,options_for_select(["全部","专栏","问题","资源","用户"],params[:find]),style:"width:80px" %>
       排序依据：
-      <%= select_tag :sort,options_for_select(["默认","上传时间","推荐程度"],params[:sort]) %><br />
+      <%= select_tag :sort,options_for_select(["默认","上传时间","推荐程度"],params[:sort]),style:"width:80px" %><br />
     </div>
     <div class="actions">
-      <%= submit_tag "搜索" , class: "btn btn-primary" %>
+      <%= submit_tag " 搜索 " , class: "btn btn-primary",style:"font-size:large"%>
     </div>
     
   </div>
