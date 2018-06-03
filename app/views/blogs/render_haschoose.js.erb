@@ -1,0 +1,5 @@
+$("#hasChoose").html("<%= escape_javascript(render(:partial => "choose",  :locals => { :hasChoose => @chooseItem})) %>");
+$("#hasChoose input[type=checkbox]").click(function(){
+    $(this).parent().html(" ");
+})
+$("#selectDiv").html("<%= escape_javascript(render(:partial => "select",  :locals => { :keywords => @after,:info => @info })) %>");

@@ -1,0 +1,13 @@
+<input id="infoContent" style="display:none" value="<%=info%>"></input>
+<input id="infoContent" style="display:none" value="<%=info%>"></input>
+<select id="mySelect"onchange="myShow()">
+    <option value="0" disabled selected style='display:none;'>请选择<%=info%>级分类</option>  
+    <%if !(keywords.nil?||keywords.empty?)%>
+        <% for keyword in keywords %>
+            <option value="<%=keyword.id%>"><%=keyword.name%></option>
+        <% end %>
+    <%end%>
+    <%if info!=1%>
+        <option value="-1">返回一级目录</option>
+    <%end%>
+</select>

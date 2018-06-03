@@ -9,11 +9,13 @@
                 <h2><i class="  halflings-icon white book" style="color:white"></i><span class="break"></span>课程简介</h2>
             </div>
             <div class="box-content" style="margin-top:20px;padding-left:20px">
-                <div>
-                    <h1 style="display:inline;">
-                       <strong>&nbsp;&nbsp;<%= @course.course_name %></strong>
-                    </h1>
-                    <div id="focus_btn0" class=" " style="padding-left:25px;margin-left:25px;display:inline">
+                <div class="row-fluid">
+                    <div class="span2 ">
+                        <h1 style="display:inline;">
+                           <strong>&nbsp;&nbsp;<%= @course.course_name %></strong>
+                        </h1>
+                    </div>
+                    <div id="focus_btn0" class="span2 offset1" style="padding-left:25px;margin-left:25px;display:inline">
                         <%= render partial: "users/select_course_btn", locals: {user: current_user, index: 0, course: @course}%>&nbsp;&nbsp;
                     </div>
                 </div>
@@ -65,6 +67,7 @@
                     <h2><i class="  halflings-icon white th" style="color:white"></i><span class="break"></span>精品推荐</h2>
                 </div>
                 <div class="box-content">
+                    <%if !@best_list.nil?%>
                     <%@best_list = @best_list[0...boutique_num]%>
                     <%row = @best_list.size/3%>
                     <%last_row_col = @best_list.size%3%>
@@ -88,6 +91,7 @@
                             </div>
                         <%end%>
                     </div>
+                    <%end%>
                 </div>
             </div>
         </div>

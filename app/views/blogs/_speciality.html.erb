@@ -1,0 +1,6 @@
+<select id="mySelectSpeciality" onchange="ClickSpeciality()">
+    <option value='' disabled selected style='display:none;'>请选择专业</option>  
+    <% for s in speciality %>
+        <option value="<%=s.id%>"><%=s.name%></option>
+    <% end %>
+</select>

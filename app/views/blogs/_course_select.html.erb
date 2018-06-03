@@ -1,0 +1,6 @@
+<select id="mySelectCourse" onchange="ClickCourse()">
+    <option value='' disabled selected style='display:none;'>请选择课程</option>  
+    <% for c in courses %>
+        <option value="<%=c.id%>"><%=c.course_name%></option>
+    <% end %>
+</select>

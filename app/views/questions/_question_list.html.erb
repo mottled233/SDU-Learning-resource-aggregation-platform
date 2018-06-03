@@ -1,4 +1,4 @@
-<div class="span8" style="margin-left:5px">
+<div <%=yield(:list_size)%> style="margin-left:5px">
   <div class="row-fluid"></div>
   <%if !questions.nil?%>
     <%questions.each do|q| %>

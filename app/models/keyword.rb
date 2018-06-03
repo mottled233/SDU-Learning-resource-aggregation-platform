@@ -22,4 +22,13 @@ class Keyword < ApplicationRecord
                                    
   has_many :lowers, through: :lower_relationships,  source: :lower, inverse_of: :highers
 
+  def Keyword.getFirstLayer(content)
+    re = Array.new
+    content.each do|k|
+      if k.highers.empty?
+        re << k
+      end
+    end
+    return re
+  end
 end

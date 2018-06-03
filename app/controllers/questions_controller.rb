@@ -1,7 +1,7 @@
 require "knowledges_controller"
 require 'will_paginate/array'
 class QuestionsController < KnowledgesController
-    
+    include ApplicationHelper
     before_action :record_visit, only: [:show]
     
     def index
@@ -31,6 +31,9 @@ class QuestionsController < KnowledgesController
     end
     def create
         @question = Question.new(question_params);
+        if(@question.knowledge_digest.nil?||@question.knowledge_digest.empty?)
+            @question.knowledge_digest = short_digest(@question.content,50) 
+        end
         b = true;
         if @question.save
             keyword_list = params[:keywords];
@@ -69,6 +72,9 @@ class QuestionsController < KnowledgesController
         @question = Question.find(params[:id])
         b = true;
           if @question.update(question_params)
+            if((@question.knowledge_digest.nil?||@question.knowledge_digest.empty?))
+                @question.knowledge_digest = short_digest(@question.content,50) 
+            end
             redirect_to question_path(@question)
             keyword_list = params[:keywords];
             course_list = params[:courses];

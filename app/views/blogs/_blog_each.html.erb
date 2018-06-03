@@ -61,7 +61,7 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to blog_path(q.id), class:"no-hover" do%>
-                                <p><%= short_digest q.content, 100 %></p>
+                                <p><%= q.knowledge_digest %></p>
                             <%end%>
                         </div>
                     </div>

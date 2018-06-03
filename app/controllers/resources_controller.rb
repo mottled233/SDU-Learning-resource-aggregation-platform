@@ -1,8 +1,9 @@
 require "knowledges_controller"
 require 'will_paginate/array'
 class ResourcesController < KnowledgesController
-    
+    include ApplicationHelper
     before_action :record_visit, only: [:show]
+    
     def index
         @resource = Resource.all
         @resource = @resource.sort_by{ |created_at| created_at }.reverse
@@ -31,6 +32,9 @@ class ResourcesController < KnowledgesController
     def create
         @resource = Resource.new(resource_params);
         b = true;
+        if(@resource.knowledge_digest.nil?||@resource.knowledge_digest.empty?)
+            @resource.knowledge_digest = short_digest(@resource.content,50) 
+        end
         filename = uploadfile(params[:resource][:attachment])  
         @resource.attachment = filename  
         if @resource.save
@@ -74,6 +78,9 @@ class ResourcesController < KnowledgesController
         end
          b = true;
           if @resource.update(resource_params)
+            if(@resource.knowledge_digest.nil?||@resource.knowledge_digest.empty?)
+                @resource.knowledge_digest = short_digest(@resource.content,50) 
+            end
             redirect_to resource_path(@resource)
             keyword_list = params[:keywords];
             course_list = params[:courses];
