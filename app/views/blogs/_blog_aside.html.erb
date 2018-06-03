@@ -42,7 +42,7 @@
                 <div>
                     <%=link_to "[#{creating.chinese_type}]", creatings_user_path(creator, type: creating.type), class: "creating-title"%>
                         
-                    <%=link_to "《#{creating.title}》", creating.to_path, class: "creating-title"%>
+                    <%=link_to "《#{short_digest creating.title, 10}》", creating.to_path, class: "creating-title"%>
                         
                 </div>
                 <div style="float:right">
