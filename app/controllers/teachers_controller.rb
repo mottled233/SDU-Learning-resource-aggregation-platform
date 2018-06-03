@@ -107,6 +107,12 @@ class TeachersController < ApplicationController
     @user = @teacher
   end
   
+  def upload_check
+    @teacher = User.find(params[:id])
+    @courses = @teacher.selected_courses
+    @user = @teacher
+  end
+  
   def detials
     @course = Course.find(params[:id])
     @students = @course.users.where("user_role=?","student")
@@ -127,6 +133,16 @@ class TeachersController < ApplicationController
     @user = @teacher
     @course = Course.find(params[:cid])
     @blog = @course.knowledges.where("type=?","Blog")
+    @blog = @blog.where("check_state=?","1")
+    @blog = @blog.paginate(:page => params[:page], :per_page => 2)
+  end
+  
+  def blogs_check
+    @teacher = User.find(params[:tid])
+    @user = @teacher
+    @course = Course.find(params[:cid])
+    @blog = @course.knowledges.where("type=?","Blog")
+    @blog = @blog.where("check_state=?","0")
     @blog = @blog.paginate(:page => params[:page], :per_page => 2)
   end
   
@@ -135,7 +151,24 @@ class TeachersController < ApplicationController
     @user = @teacher
     @course = Course.find(params[:cid])
     @resource = @course.knowledges.where("type=?","Resource")
+    @resource = @resource.where("check_state=?","1")
     @resource = @resource.paginate(:page => params[:page], :per_page => 2)
+  end
+  
+  def resources_check
+    @teacher = User.find(params[:tid])
+    @user = @teacher
+    @course = Course.find(params[:cid])
+    @resource = @course.knowledges.where("type=?","Resource")
+    @resource = @resource.where("check_state=?","0")
+    @resource = @resource.paginate(:page => params[:page], :per_page => 2)
+  end
+  
+  def accept
+    @knowledge = Knowledge.find(params[:id])
+    @knowledge.check_state = 1
+    @knowledge.save
+    
   end
 
   def ajaxnames

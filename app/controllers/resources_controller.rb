@@ -6,6 +6,7 @@ class ResourcesController < KnowledgesController
     
     def index
         @resource = Resource.all
+        @resource = @resource.where("check_state=?",1)
         @resource = @resource.sort_by{ |created_at| created_at }.reverse
         @resource = @resource.paginate(:page => params[:page], :per_page => 4)
     end

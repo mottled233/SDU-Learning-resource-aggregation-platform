@@ -172,6 +172,11 @@ Rails.application.routes.draw do
   get "teachers/:tid/questions_manage/:cid", to: "teachers#questions_manage", as:"teachers/questions_manage"
   get "teachers/:tid/blogs_manage/:cid", to: "teachers#blogs_manage", as:"teachers/blogs_manage"
   get "teachers/:tid/resources_manage/:cid", to: "teachers#resources_manage", as:"teachers/resources_manage"
+  
+  get "teachers/upload_check/:id", to: "teachers#upload_check", as:"teachers/upload_check"
+  get "teachers/:tid/blogs_check/:cid", to: "teachers#blogs_check", as:"teachers/blogs_check"
+  get "teachers/:tid/resources_check/:cid", to: "teachers#resources_check", as:"teachers/resources_check"
+  get "teachers/:id/accept", to:"teachers#accept", as:"accept"
 
   get "/teachers/ajaxnames/:id", to:"teachers#ajaxnames" 
   get "/departments/ajaxnames/:id", to:"departments#ajaxnames"  

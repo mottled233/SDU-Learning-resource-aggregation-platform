@@ -15,20 +15,20 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-     tempList = @course.knowledges
+    # tempList = @course.knowledges
      @best_list = Array.new
-     len = tempList.size
-      for i in 0..len-1
-        max = tempList[0];
-        tempLen = tempList.size
-        for j in 0..tempLen-1
-          if tempList[j].good > max.good
-            max = tempList[j]
-          end
-        end
-        @best_list = @best_list << max
-        tempList.delete(max)
-      end
+    # len = tempList.size
+    #   for i in 0..len-1
+    #     max = tempList[0];
+    #     tempLen = tempList.size
+    #     for j in 0..tempLen-1
+    #       if tempList[j].good > max.good
+    #         max = tempList[j]
+    #       end
+    #     end
+    #     @best_list = @best_list << max
+    #     tempList.delete(max)
+    #   end
   end
 
   # GET /courses/new
@@ -106,13 +106,14 @@ class CoursesController < ApplicationController
   
   def questions_index
     @course = Course.find(params[:course_id])
-    @question = Question.all
+    @question = @course.knowledges.where("type=?","Question")
     @question = Question.paginate(:page => params[:page], :per_page => 2)
   end
   
   def blogs_index
     @course = Course.find(params[:course_id])
-    @blog = Blog.all
+    @blog = @course.knowledges.where("type=?","Blog")
+    @blog = @blog.where("check_state=?",1)
     @blog = @blog.sort_by{ |created_at| created_at }.reverse
     @blog = @blog.paginate(:page => params[:page], :per_page => 10)
   end
@@ -120,7 +121,7 @@ class CoursesController < ApplicationController
 
   def resources_index
     @course = Course.find(params[:course_id])
-    @resource = Resource.all
+    @resource = @courses.knowledges.where("type=?","Resourse")
     @resource = @resource.sort_by{ |created_at| created_at }.reverse
     @resource = @resource.paginate(:page => params[:page], :per_page => 10)
   end

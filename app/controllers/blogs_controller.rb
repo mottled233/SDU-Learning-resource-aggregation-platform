@@ -6,6 +6,7 @@ class BlogsController < KnowledgesController
     skip_before_filter :verify_authenticity_token, :only => [:render_keyword,:render_department,:render_spe,:render_newCourse]
     def index
         @blog = Blog.all
+        @blog = @blog.where("check_state=?",1)
         @blog = @blog.sort_by{ |created_at| created_at }.reverse
         @blog = @blog.paginate(:page => params[:page], :per_page => 4)
     end
@@ -31,6 +32,7 @@ class BlogsController < KnowledgesController
     end
     def create
         @blog = Blog.new(blog_params);
+        @blog.check_state = 0
         # src = @blog.content.match("<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>")
         if(@blog.knowledge_digest.nil?||@blog.knowledge_digest.empty?)
             @blog.knowledge_digest = short_digest(@blog.content,50) 
@@ -71,6 +73,7 @@ class BlogsController < KnowledgesController
     end
    def update
         @blog = Blog.find(params[:id])
+        @blog.check_state = 0
         b = true;
           if @blog.update(blog_params)
             if((@blog.knowledge_digest.nil?||@blog.knowledge_digest.empty?))
