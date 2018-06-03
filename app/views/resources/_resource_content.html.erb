@@ -1,0 +1,82 @@
+<div class="span9">
+    <div class="span12 shadow-box">
+        <div class="row-fluid knowledge-header">
+            <div class="row-fluid">
+    		    <h1><strong><%= short_digest @knowledge.title,30 %></strong></h1>
+    		</div>
+    		<div class="row-fluid" style="padding-bottom:0px">
+        		<div class="span3">
+        		    <span style="text-align:justify;width:300px;"><%= @knowledge.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')%></span>
+        		</div>
+        		<div class="span5">
+        		    <h4 style="display: inline;">所属课程：</h4>
+                    <% @knowledge.courses[0...4].each do|course| %>
+                        <%=link_to "#{course.course_name}",course_path(course) %>&nbsp;
+                    <% end %>
+        	    </div>
+        		<div class="span2 offset1">
+            		<%if !log_in?%>
+                        <%= link_to "修改",login_path%>
+                        <%= link_to "删除",login_path%>
+            	    <%elsif current_user?(@knowledge.creator)%>
+            	        <%= link_to "修改",edit_resource_path(@knowledge)%>
+            	        <%= link_to '删除',resource_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
+            	    <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-@knowledge.courses) != current_user.selected_courses%>
+            	        <%= link_to '删除',resource_path(@knowledge) , method: :delete, data: { confirm: 'Are you sure?' } %>
+            	    <%end%>
+        	    </div>
+    	    </div>
+    	</div>
+    	<div class="row-fluid">
+            <hr class="normal-hr"/>
+        </div>
+        <div class="row-fluid knowledge-content">
+            <div class="span11">
+              <p><%=  @knowledge.content.html_safe%></p>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <hr class="normal-hr"/>
+        </div>
+        <%if !@knowledge.attachment.nil?%>
+            <div class="row-fluid">
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="-webkit-font-smoothing: antialiased;font-family:verdana, arial, helvetica, sans-serif;color:#1c1f21;font-size:18px">资源下载：</span><%= link_to "#{@knowledge.attachment}", resource_file_download_path(:r_id => @knowledge.id) %></span>
+            </div>
+             <div class="row-fluid">
+                <hr class="normal-hr" style=""/>
+            </div>
+        <%end%>
+        <div class="row-fluid knowledge-footer">
+        	<div class="row-fluid">
+        	    <div class="">
+                    <h4 style="display: inline;">标签：</h4>
+                    <% @knowledge.keywords.each do|k|%>
+                    <span class="label label-info">
+                      &nbsp;<%= k.name%>&nbsp;
+                    </span>
+                    <%end%>
+                </div>
+            </div>
+            <div class="row-fluid " style="margin-top:10px;padding-bottom:10px">
+                <div id="add_evalute-<%=@knowledge.id%>" class="span3" style="font-size:20px">
+                     <%= render :partial => "knowledges/comments_show", :locals => { :knowledge => @knowledge } %>&nbsp;&nbsp;  
+                </div>
+                 <div id="focus" class="span2" style="font-size:18px">
+                     <%= render :partial => "knowledges/focus_link", :locals => { :knowledge => @knowledge }%>  
+                </div>
+                <div  class="span4" style="font-size:18px">
+                    <a class="ping no-hover"><%= @knowledge.getAllReplies.size%> 条评论</a>&nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span12 shadow-box" style="margin:10px 0;padding-top:30px">
+        <div class="row-fluid reply">
+                <%= render :partial => "knowledges/reply_show", :locals => { :q => @knowledge } %>  
+        </div>
+        <div class="span12" style="height:20px">
+        </div>
+    </div>
+    <div class="span12" style="height:100px">
+    </div>
+</div>

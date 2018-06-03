@@ -1,0 +1,55 @@
+<%hasChoose = @blog.courses%>
+<div class="row-fluid">
+	<div id="hasChooseCourse" class="span6">
+		<%=render(:partial => "choose_course",  :locals => { :hasChoose => hasChoose})%>
+	</div>
+</div>
+<div class="row-fluid">
+    <div id="departmentDiv" class="span4">
+        <%=render(:partial => "department_select")%>
+    </div>
+    <div id="SpecialityDiv" class="span4">
+    </div>
+    <div id="CourseDiv" class="span4">
+    </div>
+</div>
+<script>
+	function ClickDepartment(){
+// 		var chooseContent = $("#hasChooseCourse input[type=checkbox]").map(function(){
+// 		      return $(this).val();
+// 		}).get();
+		var select = document.getElementById("mySelectDepartment");
+		var value = select.options[select.selectedIndex].value
+		
+		$.ajax({
+	      url:"../blogs/render_department",
+	      type: 'POST',
+	      data: {department: value}
+	    });
+	}
+	function ClickSpeciality(){
+		var chooseContent = $("#hasChooseCourse input[type=checkbox]").map(function(){
+		      return $(this).val();
+		}).get();
+		var select = document.getElementById("mySelectSpeciality");
+		var value = select.options[select.selectedIndex].value
+		
+		$.ajax({
+	      url:"../blogs/render_spe",
+	      type: 'POST',
+	      data: {speciality: value,hasChoose: chooseContent}
+	    });
+	}
+	function ClickCourse(){
+		var chooseContent = $("#hasChooseCourse input[type=checkbox]").map(function(){
+      		return $(this).val();
+		}).get();
+		var select = document.getElementById("mySelectCourse");
+		var value = select.options[select.selectedIndex].value
+		$.ajax({
+	      url:"../blogs/render_newCourse",
+	      type: 'POST',
+	      data: {course: value,hasChoose: chooseContent}
+	    });
+	}
+</script>

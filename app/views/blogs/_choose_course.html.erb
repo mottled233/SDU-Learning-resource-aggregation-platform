@@ -1,0 +1,6 @@
+<span class="checkbox inline">
+	<% for course in hasChoose %>  
+        <%=check_box_tag 'courses[]', course.id,checked: :true %>
+        <%= course.course_name %>
+	<%end%>
+</span>

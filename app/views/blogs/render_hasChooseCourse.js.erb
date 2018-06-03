@@ -1,0 +1,7 @@
+$("#hasChooseCourse").html("<%= escape_javascript(render(:partial => "choose_course",  :locals => { :hasChoose => @chooseItem})) %>");
+$("#hasChooseCourse input[type=checkbox]").click(function(){
+    $(this).parent().html(" ");
+})
+$("#departmentDiv").html("<%= escape_javascript(render(:partial => "department_select")) %>");
+$("#SpecialityDiv").html("");
+$("#CourseDiv").html("");

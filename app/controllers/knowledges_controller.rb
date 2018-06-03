@@ -28,7 +28,7 @@ class KnowledgesController < ApplicationController
   # POST /knowledges.json
   def create
     @knowledge = Knowledge.new(knowledge_params)
-
+  
     respond_to do |format|
       if @knowledge.save
         flash[:notice] = "已发布"

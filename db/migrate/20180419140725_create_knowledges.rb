@@ -8,7 +8,7 @@ class CreateKnowledges < ActiveRecord::Migration[5.0]
       t.string :type
       t.string :content
       t.string :attachment
-      
+      t.string :knowledge_digest      
       t.integer :good,default: 0
       t.integer :bad,default: 0
 

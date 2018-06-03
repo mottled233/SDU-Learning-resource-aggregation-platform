@@ -1,0 +1,65 @@
+<% creator = knowledge.creator %>
+<div class="span3" style="margin-left:10px;">
+    <div class="row-fluid shadow-box" style="margin-left:10px;padding:5px">
+        <div class="span12" style="">
+            <h3 class="aside-title" style="margin-left:10px;font-size:1.2em">作者:</h3>
+            <hr class="normal-hr"/>
+            <div class="span4">
+                <section class="user_info">
+                    <h1 style = "">
+                        <%= gravatar_for creator, size: 80 %>
+                    </h1>
+                </section>
+            </div>
+            <div class="span6 user-info-digest" >
+                <h3 style="padding-bottom:10px"><%= creator.nickname%></h3>
+                <div>
+                    <%= link_to "关注:#{creator.followings.count}", followings_user_path(creator), class: :focus_link%>
+                    <%= link_to "粉丝:#{creator.followeds.count}", followeds_user_path(creator), class: :focus_link%>
+                </div>
+                <div id="focus_btn0" style="padding:10px 0;display:inline-block">
+                    <%= render partial: "users/focus_btn", locals: {index: 0, following: creator}%>
+                </div>
+            </div>
+            
+        </div>
+    
+    </div>
+    <div class="row-fluid shadow-box" style="margin:10px 10px;padding:5px">
+        <div class="row-fluid">
+            <h2>发表的问题</h2>
+        </div>
+        <div class="row-fluid ">
+            <div class="span12">
+               <hr style="background-color:grey"/> 
+            </div>
+        </div>
+        <% query = ["Question", "Blog", "Resource"]%>
+        <% @creatings = creator.creatings.where(type: query)[0...5]%>
+        <% @creatings.each_with_index do |creating, index|%>
+        <div class="row-fluid" data-index="<%= index%>">
+            <div class="row-fluid span11 offset1">
+                <div class="span8">
+                    <%=link_to "[#{creating.chinese_type}]", creatings_user_path(current_user, type: creating.type), class: "creating-title"%>
+                        
+                    <%=link_to "《#{creating.title}》", creating.to_path, class: "creating-title"%>
+                        
+                </div>
+                <div class="span4" style="">
+                    <strong>浏览量：</strong>
+                    <span><%= creating.visit_count%></span>
+                </div>
+                      
+            </div>
+                    
+        </div>
+        <div class="row-fluid span11">
+            <hr class="normal-hr"/>
+        </div>
+        <% end %>
+    </div>
+</div>
+<style>
+aside div.aside-box h3.aside-title{padding:16px 16px 0;font-size:14px;color:#333;}
+aside div.aside-box h3.aside-title::before{display:inline-block;margin-right:8px;content:'';width:4px;height:22px;vertical-align:-6px;background-color:#ca0c16;}
+</style>

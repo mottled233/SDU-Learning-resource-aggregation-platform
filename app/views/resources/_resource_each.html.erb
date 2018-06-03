@@ -48,9 +48,17 @@
             </strong>
         </div>
     </div>
-    
-        
-    
+    <div class="row-fluid">
+        <hr class="normal-hr" style=""/>
+    </div>
+    <%if !q.attachment.nil?%>
+        <div class="row-fluid">
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="-webkit-font-smoothing: antialiased;font-family:verdana, arial, helvetica, sans-serif;color:#1c1f21;font-size:18px">资源下载：</span><%= link_to "#{q.attachment}", resource_file_download_path(:r_id => q.id) %></span>
+        </div>
+         <div class="row-fluid">
+            <hr class="normal-hr" style=""/>
+        </div>
+    <%end%>   
     <div class="row-fluid">
         <div class="span12">
             <div class="resource-content" style="width:95%;">
@@ -63,7 +71,7 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to resource_path(q.id), class:"no-hover" do%>
-                                <p><%= short_digest q.content, 100 %></p>
+                                <p><%= q.knowledge_digest %></p>
                             <%end%>
                         </div>
                     </div>
@@ -79,14 +87,6 @@
     <div class="row-fluid">
         <hr class="normal-hr" style=""/>
     </div>
-    <%if !q.attachment.nil?%>
-    <div class="row-fluid">
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="-webkit-font-smoothing: antialiased;font-family:verdana, arial, helvetica, sans-serif;color:#1c1f21;font-size:18px">资源下载：</span><%= link_to "#{q.attachment}", resource_file_download_path(:r_id => q.id) %></span>
-    </div>
-     <div class="row-fluid">
-        <hr class="normal-hr" style=""/>
-    </div>
-    <%end%>
     <div class="row-fluid" style="margin:10px">
 
         <div id="focus" style="display:inline">

@@ -1,56 +1,182 @@
+<div class="course-info-menu" style="margin-bottom:50px">
+	<div class="w row-fluid">
+      <h1 style="text-align:center">问题发布</h1>		    
+	</div>
+</div>
+<div class="row-fluid" style="margin-top:50px">
+    <div class="span8 shadow-box offset2">
+        <%= form_for :question,:url => { :controller=>"questions",:action => "create"}, method: :post, html: {class: "form-horizontal"} do |f| %>
+          <fieldset>
+            <%= f.hidden_field:good,:value => 0 %>
+            <%= f.hidden_field:bad,:value => 0 %>
+            <%if !current_user.nil?%>
+              <%= f.hidden_field:user_id , :value => current_user.id %>
+              <%= f.hidden_field:type,:value => 'Question' %>
+            <%end%>
+            <div class="row-fluid">
+              <div class="span8 offset2" style="margin-top:20px">
+                  <%= f.text_field :title,class: "span12",placeholder: "请输入标题",style: "width:800px;margin-left:0px;background:#efefef;font-size:18px:line-height:150；padding:10px"%>
+        			</div>
+      			</div>
+      			<div class="row-fluid" style="margin-top:10px">
+      			  
+      			  <div class="span8 offset2">
+      			    <span input style="display:inline">摘要生成方式:</span>
+      			    <input  type="radio" id="autoChoice1" name="autoGenerate" value="YES"  checked>自动
+                <input  type="radio" id="autoChoice2" name="autoGenerate" value="NO">手动
+      			  </div>
+      			  
+      			   <div class="span8 offset2" id="digestDiv" style="margin-top:10px;display:none">
+      			       <%= f.text_area :knowledge_digest,class: "span12",id: "textarea1",style:" width: 700px; height: 200px;" %>
+      			   </div>
+      			</div>
+      			<div class="row-fluid">
+      			  <div class="span8 offset2" style="margin-top:0px">
+          			<input id="img_input2" type="file" accept="image/*" multiple="multiple"/>
+                <label for="img_input2" id="img_label2">选择图片
+                  <i class="fa fa-plus fa-lg"></i>
+                </label>
+              </div>
+      			</div>
+      			<div class="row-fluid">
+        			<div class="span8 offset2" style="margin-top:10px">
+        				  <%= f.text_area :content,class: "cleditor span12",id: "textarea2",style:"display: none; width: 800px; height: 500px;" %>
+        			</div>
+        		</div>
+        		<div class="row-fluid">
+        			<div class="span8 offset2">
+        			  <label class="control-label" for="typeahead">课程</label>
+                <% for course in @courses %>  
+                  <label class="checkbox inline">
+            			  <div class="checker" id="uniform-inlineCheckbox1">
+            			    <span class="">
+            			      <%if @question.courses.include?(course)%>
+            			        <%=check_box_tag 'courses[]', course.id,checked: :true %>
+            			      <%else%>
+            			        <%=check_box_tag 'courses[]', course.id%>
+            			      <%end%>
+            			    </span>
+            			   </div>
+            			   <%= course.course_name %>
+            		  </label>
+                <% end %>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span8 offset2">
+        			  <label class="control-label" for="typeahead">标签</label>
+        			    <% for keyword in @keywords %>  
+                  <label class="checkbox inline">
+            			  <div class="checker" id="uniform-inlineCheckbox1">
+            			    <span class="">
+            			       <%if @question.keywords.include?(keyword)%>
+            			        <%=check_box_tag 'keywords[]', keyword.id,checked: :true %>
+            			      <%else%>
+            			       <%=check_box_tag 'keywords[]', keyword.id %>
+            			      <%end%>
+            			      
+            			      </span>
+            			      </div> 
+            			      <%= keyword.name %>
+            		  </label>
+                <% end %>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span4 offset4">
+                <%= f.submit "发布" ,class: "btn btn-primary"%>
+                <button type="reset" class="btn">
+                  <%= link_to "返回",:back%>
+                </button>
+              </div>
+            </div>
+          </fieldset>
+      <%end%>
+    </div>
+</div>
 <div class="row-fluid" style="height:50px">
 </div>
-<div class="box span10 offset3">
-  <div class="box-header" data-original-title="">
-		<h2><i class="halflings-icon white edit"></i><span class="break"></span>问题发布</h2>
-	</div>
-	<div class="box-content">
-    <%= form_for :question,:url => { :controller=>"questions",:action => "create"}, method: :post, html: {class: "form-horizontal"} do |f| %>
-    <fieldset>
-      <%if !current_user.nil?%>
-        <%= f.hidden_field:user_id , :value => current_user.id %>
-        <%= f.hidden_field:type,:value => 'Question' %>
-      <%end%>
-      <div class="control-group">
-			  <label class="control-label" for="typeahead">标题</label>
-			  <div class="controls">
-        <%= f.text_field :title %>
-			  </div>
-			</div>
-      <div class="control-group hidden-phone" style="width: 1000px; height: 250px;">
-			  <label class="control-label" for="textarea2">内容(最多200字)</label>
-			  <div class="controls">
-				<%= f.text_area :content,class: "cleditor",id: "textarea2",style: "display: none; width: 500px; height: 197px;" %><iframe frameborder="0" src="javascript:true;" style="width: 500px; height: 197px;"></iframe>
-			  </div>
-			</div>
-  		<div class="control-group">
-			  <label class="control-label" for="typeahead">课程</label>
-        <% for course in @courses %>  
-          <label class="checkbox inline">
-    			  <div class="checker" id="uniform-inlineCheckbox1"><span class=""><%=check_box_tag 'courses[]', course.id %></span></div> <%= course.course_name %>
-    		  </label>
-        <% end %>
-      </div>
-      <div class="control-group">
-			  <label class="control-label" for="typeahead">标签</label>
-        <% for keyword in @keywords %>  
-          <label class="checkbox inline">
-    			  <div class="checker" id="uniform-inlineCheckbox1"><span class=""><%=check_box_tag 'keywords[]', keyword.id %></span></div> <%= keyword.name %>
-    		  </label>
-        <% end %>
-      </div>
-      
-      <%= f.hidden_field:good,:value => 0 %>
-    
-      <%= f.hidden_field:bad,:value => 0 %>
-    
-      <div class="form-actions" style="width:870px;text-align:center;padding-left:50px;padding-right:50px">
-        <%= f.submit "发布" ,class: "btn btn-primary"%>
-        <button type="reset" class="btn">
-          <%= link_to "返回",:back%>
-        </button>
-      </div>
-    </fieldset>
-    <% end %>
-  </div>
-</div>
+<style>
+.cleditorMain{
+  height:500px!important;
+  width:800px!important;
+}
+#textarea2{
+  height:1000px!important;
+  width:800px!important;
+}
+iframe{
+  word-wrap: break-word!important;  
+  word-break: normal!important;  
+  height:470px!important;
+  width:800px!important;
+}
+#img_input2 {
+  display: none;
+}
+#img_label2 {
+  background-color: #f2d547;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px;
+}
+#preview_box2 img {
+  width: 200px;
+}
+</style>
+<script>
+function DealImg(){
+    var con = $(".cleditorMain").find('iframe').contents().find('body').html();
+    $.ajax({
+      url:"../knowledges/img_upload",
+      type: 'POST',
+      data: {content: con}
+    });
+}
+$("#autoChoice1").on("change",function(e) {
+  if(this.checked){
+    $("#digestDiv").css("display","none");
+  }
+});
+$("#autoChoice2").on("click",function(e) {
+  if(this.checked){
+    $("#digestDiv").css("display","block");
+  }
+});
+$("#img_input2").on("change", function(e) {
+
+  var file = e.target.files[0]; //获取图片资源
+
+  // 只选择图片文件
+  if (!file.type.match('image.*')) {
+    return false;
+  }
+
+  var reader = new FileReader();
+
+  reader.readAsDataURL(file); // 读取文件
+
+  // 渲染文件
+  reader.onload = function(arg) {
+    var img = '<img class="preview" style="width:400px;" src="' + arg.target.result + '" alt="preview"/>';
+    $(".cleditorMain").find('iframe').contents().find('body').append(img);
+  }
+  this.value = '';
+});
+
+
+</script>
+
+<style>
+    /*! CSS Used from: https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201805211709 */
+    .w{max-width:1152px;margin:0 auto;}
+    .course-info-menu{height:68px;line-height:68px;background:#fff;box-shadow:0 4px 8px 0 rgba(28,31,33,.1);}
+    .course-info-menu .w{position:relative;}
+    .course-info-menu .course-menu li{float:left;text-align:center;margin-right:12px;position:relative;}
+    .course-info-menu .course-menu li span{position:absolute;font-size:12px;font-weight:200;color:#9199a1;line-height:18px;top:10px;left:64px;}
+    .course-info-menu .course-menu h1{margin-right:80px;padding:0;}
+    @media screen and (max-width:1200px){
+    .w{margin-left:5%;margin-right:5%;}
+    }
+    /*! CSS Used from: https://www.imooc.com/static/lib/layer/1.6.0/skin/layer.css?v=201805211709 */
+</style>

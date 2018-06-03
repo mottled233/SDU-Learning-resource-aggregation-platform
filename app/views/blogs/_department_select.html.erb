@@ -1,0 +1,6 @@
+<select id="mySelectDepartment"onchange="ClickDepartment()">
+	<option value='' disabled selected style='display:none;'>请选择学院</option>  
+    <% for department in Department.all %>
+        <option value="<%=department.id%>"><%=department.name%></option>
+    <% end %>
+</select>

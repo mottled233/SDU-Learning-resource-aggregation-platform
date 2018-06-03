@@ -1,0 +1,28 @@
+<%hasChoose = @blog.keywords%>
+<div class="row-fluid">
+	<div id="hasChoose" class="span6">
+		<%=render(:partial => "choose",  :locals => { :hasChoose => hasChoose})%>
+	</div>
+	
+</div>
+<div class="row-fluid">
+	<div id="selectDiv" class="span6">
+		<%=render(:partial => "select",  :locals => { :keywords => keywords,:info => 1})%>
+	</div>
+</div>
+
+<script>
+	function myShow(){
+		var chooseContent = $("#hasChoose input[type=checkbox]").map(function(){
+		      return $(this).val();
+		}).get();
+		var select = document.getElementById("mySelect");
+		var value = select.options[select.selectedIndex].value
+		var infoContent = document.getElementById("infoContent").value;
+		$.ajax({
+	      url:"../blogs/render_keyword",
+	      type: 'POST',
+	      data: {keyword: value,hasChoose:chooseContent,info:infoContent}
+	    });
+	}
+</script>
