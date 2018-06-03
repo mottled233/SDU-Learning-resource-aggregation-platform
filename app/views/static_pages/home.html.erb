@@ -151,63 +151,22 @@
 			<h1><span class="icon-user" aria-hidden="true"></span>&nbsp;&nbsp;活跃用户</h1>
 		</div>
 		<div class="span8">
+			<% @user_active.each do |q|%>
 			<div class="span3">
 			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
+            <%= gravatar_for q, size: 80 %><br />
+			  	<h2><a href="#"><%= link_to q.nickname, user_path(q)%></a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> <%= (q.department_id==nil ? "" : Department.find(q.department_id).name) %> - <%= (q.speciality_id==nil ? "" : Speciality.find(q.speciality_id).name) %> </small></h2>
+			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> <%=q.self_introduce%></p>
 			  	<p class="text-center">
 			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
+			  			<span class="icon-upload"></span> <%= @user_res[q.id] %>&nbsp;&nbsp;&nbsp;&nbsp;
+			  			<span class="icon-edit"></span> <%= @user_blog[q.id] %>&nbsp;&nbsp;&nbsp;&nbsp;
+			  			<span class="icon-comment"></span> <%= @user_ques[q.id] %>
 						</small>
 					</p>
 			  </div>
 			</div>
-			
-			<div class="span3">
-			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-			  	<p class="text-center">
-			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
-						</small>
-					</p>
-			  </div>
-			</div>
-			<div class="span3">
-			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-			  	<p class="text-center">
-			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
-						</small>
-					</p>
-			  </div>
-			</div>
-			<div class="span3">
-			  <div class="thumbnail">
-			  	<%= image_tag("default_avatar.jpg", alt: "Avatar") %><br />
-			  	<h2><a href="#">用户名</a><small>&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon-book"></span> 软件学院 - 软件工程 </small></h2>
-			  	<p class="text-center"><span class="glyphicon glyphicon-pencil"></span> 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。</p>
-			  	<p class="text-center">
-			  		<small>
-			  			<span class="icon-upload"></span> 15&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-edit"></span> 719&nbsp;&nbsp;&nbsp;&nbsp;
-			  			<span class="icon-comment"></span> 72
-						</small>
-					</p>
-			  </div>
-			</div>
+			<%end%>
 		</div>
 		<div class="span3"><div class="thumbnail">
 				<div class="box-content" style="background-color:transparent">
