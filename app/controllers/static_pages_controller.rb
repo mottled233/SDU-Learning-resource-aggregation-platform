@@ -1,6 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
     @departments = Department.all
+    @rank_blog = Blog.where("strftime('%s','now')-strftime('%s',created_at)<=15*24*60*60").order('"good"-"bad"').reverse_order.limit(8)
+    @rank_res = Resource.where("strftime('%s','now')-strftime('%s',created_at)<=15*24*60*60").order('"good"-"bad"').reverse_order.limit(8)
+    @user_new = User.order('created_at').reverse_order.limit(8)
   end
   
   def test_page
