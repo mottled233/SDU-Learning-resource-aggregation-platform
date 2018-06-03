@@ -38,14 +38,14 @@
         <% @creatings = creator.creatings.where(type: query)[0...5]%>
         <% @creatings.each_with_index do |creating, index|%>
         <div class="row-fluid" data-index="<%= index%>">
-            <div class="row-fluid span11 offset1">
-                <div class="span8">
-                    <%=link_to "[#{creating.chinese_type}]", creatings_user_path(current_user, type: creating.type), class: "creating-title"%>
+            <div class="row-fluid span12" style="padding:10px">
+                <div>
+                    <%=link_to "[#{creating.chinese_type}]", creatings_user_path(creator, type: creating.type), class: "creating-title"%>
                         
                     <%=link_to "《#{creating.title}》", creating.to_path, class: "creating-title"%>
                         
                 </div>
-                <div class="span4" style="">
+                <div style="float:right">
                     <strong>浏览量：</strong>
                     <span><%= creating.visit_count%></span>
                 </div>

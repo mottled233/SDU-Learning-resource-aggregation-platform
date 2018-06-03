@@ -13,6 +13,7 @@ teacher = User.create(username:'aaa',user_role:'teacher',nickname:'ttt',email:'m
 admin = User.create(username:'admin',user_role:'admin',nickname:'tempadmin',email:'w-z-y1997@163.com',phone_number:'17864154856',password:'123456',sex:"男")
 student = User.create(username:'hello',user_role:'student',nickname:'hhh',email:'123@163.com',phone_number:'17864154809',password:'12345678',sex:"男")
 student2 = User.create(username:'mottled',user_role:'student',nickname:'梁惠欣',email:'6310@163.com',phone_number:'17864154861',password:'123456',sex:"男")
+student3 = User.create(username:'12341234',user_role:'student',nickname:'Knowledge',email:'6311@163.com',phone_number:'17864154862',password:'123456',sex:"男")
 course = Course.create(course_name: 'rails')
 keyword_down = Keyword.create(name:'框架')
 keyword_up = Keyword.create(name:'Ruby')
@@ -25,6 +26,13 @@ reply_up = Reply.create(creator:student,title:'firstReply',type:'Reply',content:
 reply_down = Reply.create(creator:student,title:'SecondReply',type:'Reply',content:'cccccc',good:0,bad:0)
 speciality = department.specialities.create(name: 'Software Engineering')
 
+# Generate Tags
+k_down=[]
+(50..59).each do |i|
+  k_down[i] = Keyword.create(name:i.to_s)
+  k_down[i].highers<<(keyword_up)
+  course.keywords<<(k_down[i])
+end
 # Create 100 blogs & resources
 content = "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢，古今多少事， 都付笑谈中。";
 (1..100).each do |i|
@@ -34,12 +42,24 @@ content = "滚滚长江东逝水，浪花淘尽英雄。是非成败转头空，
   blogs.good = rand(0..200)
   blogs.bad = rand(0..200)
   blogs.created_at = blogs.created_at - rand(0..1000)
+  course.keywords.each do |kw|
+    if rand(0..99)<25
+      blogs.keywords<<(kw)
+    end
+  end
+  blogs.courses<<(course)
   blogs.save
   resources = Resource.create(creator:student,title:"Resource "+i.to_s,type:'Resource',content:content,good:rand(0..200),bad:rand(0..200))
   resources.good = rand(0..200)
   resources.bad = rand(0..200) 
   resources.created_at = resources.created_at - rand(0..1000)
+  course.keywords.each do |kw|
+    if rand(0..99)<25
+      resources.keywords<<(kw)
+    end
+  end
   resources.save
+  
 end
 
 # replies<=>knowledges
