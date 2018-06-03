@@ -29,7 +29,7 @@ class IpSpider(CrawlSpider):
         'ITEM_PIPELINES': {
             'resource_aggregation.pipelines.IpWriterPipeline': 300,
         },
-        'DOWNLOAD_DELAY': 8
+        'DOWNLOAD_DELAY': 20
     }
 
     rules = (
@@ -50,7 +50,7 @@ class IpSpider(CrawlSpider):
             url = 'http://httpbin.org/ip'
             proxy = 'http://' + ip[0] + ':' + port[0]
             meta = {
-                'proxy': proxy,
+                # 'proxy': proxy,
                 'dont_retry': True,
                 'download_timeout': 30,
                 '_proxy_ip': ip[0],
