@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 
+import requests
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
@@ -25,11 +26,11 @@ class IpSpider(CrawlSpider):
             "Upgrade-Insecure-Requests": 1,
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36",
         },
-        'DOWNLOADER_MIDDLEWARES': {},
+        # 'DOWNLOADER_MIDDLEWARES': {},
         'ITEM_PIPELINES': {
             'resource_aggregation.pipelines.IpWriterPipeline': 300,
         },
-        'DOWNLOAD_DELAY': 20
+        'DOWNLOAD_DELAY': 50
     }
 
     rules = (
@@ -48,23 +49,39 @@ class IpSpider(CrawlSpider):
             port = re.findall(patternPORT, raw)
 
             url = 'http://httpbin.org/ip'
-            proxy = 'http://' + ip[0] + ':' + port[0]
-            meta = {
-                # 'proxy': proxy,
-                'dont_retry': True,
-                'download_timeout': 30,
-                '_proxy_ip': ip[0],
-                '_proxy_port': port[0]
-            }
-            yield scrapy.Request(url, callback=self.check_available, meta=meta, dont_filter=True)
+            proxy = {'http': ip[0] + ':' + port[0]}
 
-    def check_available(self, response):
-        proxy_ip = response.meta['_proxy_ip']
-        print(proxy_ip)
-        print(response.text)
+            # meta = {
+            #     # 'proxy': proxy,
+            #     'dont_retry': True,
+            #     'download_timeout': 30,
+            #     '_proxy_ip': ip[0],
+            #     '_proxy_port': port[0]
+            # }
+            # yield scrapy.Request(url, callback=self.check_available, meta=meta, dont_filter=True)
 
-        if proxy_ip == json.loads(response.text)['origin']:
+            json_response = ''
+            try:
+                json_response = requests.get(url, proxies=proxy).text
+                print(json_response)
+            except Exception as e:
+                print('error {} '.format(e))
+                continue
+
+            # if ip[0] == json.loads(json_response)['origin']:
+            print('ip {} is available'.format(ip[0]))
             item = IpItem()
-            item['ip'] = proxy_ip
-            item['port'] = response.meta['_proxy_port']
+            item['ip'] = ip[0]
+            item['port'] = port[0]
             yield item
+
+    # def check_available(self, response):
+    #     proxy_ip = response.meta['_proxy_ip']
+    #     print(proxy_ip)
+    #     print(response.text)
+    #
+    #     if proxy_ip == json.loads(response.text)['origin']:
+    #         item = IpItem()
+    #         item['ip'] = proxy_ip
+    #         item['port'] = response.meta['_proxy_port']
+    #         yield item

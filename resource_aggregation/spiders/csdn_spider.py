@@ -25,15 +25,13 @@ class csdn_index_spider(scrapy.Spider):
     name = "csdn_index_spider"
     allowed_domains = ["blog.csdn.net"]
     categories = ['news', 'ai', 'cloud', 'blockchain', 'db', 'career', 'game', 'engineering',
-                  'web', 'mobile',
-                  'iot', 'arch', 'avi', 'sec', 'other']
+                  'web', 'mobile', 'iot', 'ops', 'fund', 'lang', 'arch', 'avi', 'sec', 'other']
     types = ['more']
     home_url = "https://blog.csdn.net/"
     crawl_url = "https://blog.csdn.net/api/articles?type={type}&category={category}&shown_offset={offset}"
 
     count = {'news': 0, 'ai': 0, 'cloud': 0, 'blockchain': 0, 'db': 0, 'career': 0, 'game': 0, 'engineering': 0,
-             'web': 0, 'mobile': 0,
-             'iot': 0, 'arch': 0, 'avi': 0, 'sec': 0, 'other': 0}
+             'web': 0, 'mobile': 0, 'iot': 0, 'ops': 0, 'fund': 0, 'lang': 0, 'arch': 0, 'avi': 0, 'sec': 0, 'other': 0}
 
     def parse(self, response):
         category = response.meta.get('category')
@@ -47,7 +45,7 @@ class csdn_index_spider(scrapy.Spider):
             yield scrapy.Request(article['url'], headers=header, meta={'category': category, 'article': article},
                                  callback=self.save_article)
 
-        if not self.count[category] == 10000:
+        if not self.count[category] == 10:
             url = self.crawl_url.format(type=self.types[0], category=category, offset=0)
             yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse,
                                  dont_filter=True)
@@ -56,9 +54,21 @@ class csdn_index_spider(scrapy.Spider):
         category = response.meta.get('category')
         article = response.meta.get('article')
 
+        print('保存文章: {}'.format(article['title']))
+
         item = article_item()
         item["article_type"] = category
-        item["created_time"] = article['created_at']
+
+        if '小时' not in article['created_at']:
+            created_days = article['created_at'].split('天')[0]  # 如果csdn接口返回的数据创建时间为几天前的格式的话，进行日期计算
+        else:
+            created_days = 0
+
+        if created_days != 0 and created_days.isdigit():
+            item["created_time"] = (datetime.date.today() - datetime.timedelta(days=int(created_days)))
+        else:
+            item["created_time"] = created_days
+
         item["nick_name"] = article['nickname']
         item["article_title"] = article['title']
         item["article_link"] = article['url']
@@ -115,7 +125,8 @@ class csdn_user_articles_spider(scrapy.Spider):
         article_url = article.css('.text-truncate a::attr(href)').extract_first('')
 
         view_number = re.match('.*(\d)', article_info.css('.read-num').extract_first())
-        item_loader = ItemLoader(item=article_item(), selector=article)  # selector 和 response参数的区别，如果指定selector，之后的数据提取从selector中提取，如果不指定selector而制定response，则用response构造一个selector
+        item_loader = ItemLoader(item=article_item(),
+                                 selector=article)  # selector 和 response参数的区别，如果指定selector，之后的数据提取从selector中提取，如果不指定selector而制定response，则用response构造一个selector
         item_loader.add_value('article_type', 'personal')
         item_loader.add_css('article_title', '.text-truncate a::text')
         item_loader.add_value('article_link', article_url)

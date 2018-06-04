@@ -78,7 +78,7 @@ class FileWriterPipeline(object):
 
 class IpWriterPipeline(object):
     def __init__(self):
-        self.file = open('ip2.txt', 'w+', encoding='utf-8')
+        self.file = open('ip.txt', 'w+', encoding='utf-8')
 
     def process_item(self, item, spider):
         ip = item['ip']
