@@ -15,20 +15,26 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
-    # tempList = @course.knowledges
+
+    tempList = Array.new
+    @course.knowledges.each do|k|
+      tempList = tempList << k.id   
+    end
+    
      @best_list = Array.new
-    # len = tempList.size
-    #   for i in 0..len-1
-    #     max = tempList[0];
-    #     tempLen = tempList.size
-    #     for j in 0..tempLen-1
-    #       if tempList[j].good > max.good
-    #         max = tempList[j]
-    #       end
-    #     end
-    #     @best_list = @best_list << max
-    #     tempList.delete(max)
-    #   end
+     len = tempList.size
+      for i in 0..len-1
+        max = tempList[0];
+        tempLen = tempList.size
+        for j in 0..tempLen-1
+          if Knowledge.find((tempList[j])).good > Knowledge.find(max).good
+            max = tempList[j]
+          end
+        end
+        @best_list = @best_list << Knowledge.find(max)
+        tempList.delete(max)
+      end
+
   end
 
   # GET /courses/new
@@ -58,7 +64,6 @@ class CoursesController < ApplicationController
   end
 
   
-
   
   ##########################################################################################################
   
@@ -106,24 +111,38 @@ class CoursesController < ApplicationController
   
   def questions_index
     @course = Course.find(params[:course_id])
-    @question = @course.knowledges.where("type=?","Question")
-    @question = Question.paginate(:page => params[:page], :per_page => 2)
+    if !(@course.knowledges.nil?||@course.knowledges.empty?)
+      @question = @course.knowledges.where("type=?","Resourse")
+      @question = @question.sort_by{ |created_at| created_at }.reverse
+      @question = @question.paginate(:page => params[:page], :per_page => 10)
+    end
   end
   
   def blogs_index
     @course = Course.find(params[:course_id])
-    @blog = @course.knowledges.where("type=?","Blog")
-    @blog = @blog.where("check_state=?",1)
-    @blog = @blog.sort_by{ |created_at| created_at }.reverse
-    @blog = @blog.paginate(:page => params[:page], :per_page => 10)
+    if !(@course.knowledges.nil?||@course.knowledges.empty?)
+      @blog = @course.knowledges.where("type=?","Blog")
+      @blog = @blog.where("check_state=?",1)
+      @blog = @blog.sort_by{ |created_at| created_at }.reverse
+      @blog = @blog.paginate(:page => params[:page], :per_page => 10)
+    end
   end
   
 
   def resources_index
     @course = Course.find(params[:course_id])
+<<<<<<< HEAD
     @resource = @course.knowledges.where("type=?","Resourse")
     @resource = @resource.sort_by{ |created_at| created_at }.reverse
     @resource = @resource.paginate(:page => params[:page], :per_page => 10)
+=======
+    if !(@course.knowledges.nil?||@course.knowledges.empty?)
+      @resource = @course.knowledges.where("type=?","Resourse")
+      @resource = @resource.where("check_state=?",1)
+      @resource = @resource.sort_by{ |created_at| created_at }.reverse
+      @resource = @resource.paginate(:page => params[:page], :per_page => 10)
+    end
+>>>>>>> fe6454c458425e5d2b40619eb943bc9d8b267d16
   end
   
   def course_departments_index

@@ -1,6 +1,6 @@
 <span class="checkbox inline">
 	<% for keyword in hasChoose %>  
-        <%= check_box_tag 'keywords[]', keyword.id,checked: :true,onchange: "myDel()" %>
+        <%= check_box_tag 'keywords[]', keyword.id,checked: :true%>
         <%= keyword.name %>
 	<%end%>
 </span>

@@ -45,14 +45,14 @@
         		<div class="row-fluid" style="margin-top:15px">
         			<div class="span8 offset2">
         			  <span class="span2">所属课程:</span>
-        			  <%= render :partial => "course_edit"%> 
+        			  <%= render :partial => "knowledges/course_edit",:locals => {:knowledge => @blog } %> 
               </div>
             </div>
             <div class="row-fluid" style="margin-bottom:18px;margin-top:15px">
               <div class="span8 offset2">
         			  <span class="span2" >标签</span>
         			    <%firstlayer = Keyword.getFirstLayer(Keyword.all)%>
-        			    <%= render :partial => "keyword_edit", :locals => { :keywords => firstlayer } %> 
+        			    <%= render :partial => "knowledges/keyword_edit", :locals => { :keywords => firstlayer,:knowledge => @blog } %> 
               </div>
             </div>
             <div class="row-fluid">
@@ -139,7 +139,61 @@ $("#img_input2").on("change", function(e) {
 
 
 </script>
-
+<script>
+	function ClickDepartment(){
+// 		var chooseContent = $("#hasChooseCourse input[type=checkbox]").map(function(){
+// 		      return $(this).val();
+// 		}).get();
+		var select = document.getElementById("mySelectDepartment");
+		var value = select.options[select.selectedIndex].value
+		
+		$.ajax({
+	      url:"../knowledges/render_department",
+	      type: 'POST',
+	      data: {department: value}
+	    });
+	}
+	function ClickSpeciality(){
+		var chooseContent = $("#hasChooseCourse input[type=checkbox]").map(function(){
+		      return $(this).val();
+		}).get();
+		var select = document.getElementById("mySelectSpeciality");
+		var value = select.options[select.selectedIndex].value
+		
+		$.ajax({
+	      url:"../knowledges/render_spe",
+	      type: 'POST',
+	      data: {speciality: value,hasChoose: chooseContent}
+	    });
+	}
+	function ClickCourse(){
+		var chooseContent = $("#hasChooseCourse input[type=checkbox]").map(function(){
+      		return $(this).val();
+		}).get();
+		var select = document.getElementById("mySelectCourse");
+		var value = select.options[select.selectedIndex].value
+		$.ajax({
+	      url:"../knowledges/render_newCourse",
+	      type: 'POST',
+	      data: {course: value,hasChoose: chooseContent}
+	    });
+	}
+</script>
+<script>
+	function myShow(){
+		var chooseContent = $("#hasChoose input[type=checkbox]").map(function(){
+		      return $(this).val();
+		}).get();
+		var select = document.getElementById("mySelect");
+		var value = select.options[select.selectedIndex].value
+		var infoContent = document.getElementById("infoContent").value;
+		$.ajax({
+	      url:"../knowledges/render_keyword",
+	      type: 'POST',
+	      data: {keyword: value,hasChoose:chooseContent,info:infoContent}
+	    });
+	}
+</script>
 <style>
     /*! CSS Used from: https://www.imooc.com/static/moco/v1.0/dist/css/moco.min.css?t=201805211709 */
     .w{max-width:1152px;margin:0 auto;}

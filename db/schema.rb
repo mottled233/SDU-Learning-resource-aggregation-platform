@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603115742) do
+ActiveRecord::Schema.define(version: 20180605123124) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 20180603115742) do
     t.datetime "updated_at",                   null: false
     t.datetime "last_reply_at"
     t.integer  "check_state"
+    t.string   "label"
   end
 
   create_table "notifications", force: :cascade do |t|
