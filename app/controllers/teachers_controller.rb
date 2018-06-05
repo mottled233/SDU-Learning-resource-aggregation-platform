@@ -164,10 +164,26 @@ class TeachersController < ApplicationController
     @resource = @resource.paginate(:page => params[:page], :per_page => 2)
   end
   
-  def accept
+  def accept_blog
     @knowledge = Knowledge.find(params[:id])
     @knowledge.check_state = 1
     @knowledge.save
+    
+    respond_to do |format|
+        format.js{}
+    end
+    
+  end
+  
+  def accept_resourse
+    @knowledge = Knowledge.find(params[:id])
+    @knowledge.check_state = 1
+    @knowledge.save
+    
+    
+    respond_to do |format|
+        format.js{}
+    end
     
   end
 

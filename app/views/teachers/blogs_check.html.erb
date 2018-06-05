@@ -8,14 +8,15 @@
         
         <h1><%=@course.course_name%>—全部专栏</h1>
         <hr>
-        
-        <%= render :partial => "blogs/blog_list", :locals => { :blogs => @blog } %>
+        <div id = "to_check">
+          <%= render :partial => "blogs/blog_list", :locals => { :blogs => @blog } %>
+        </div>
         
         <br>
         
 
         <hr>
-        <%= link_to '返回',  teachers_teachers_space_path(@teacher.id) %>
+        <%= link_to '返回',  teachers_upload_check_path(@teacher.id) %>
       </div>
     </div>
     
