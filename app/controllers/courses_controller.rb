@@ -121,7 +121,7 @@ class CoursesController < ApplicationController
 
   def resources_index
     @course = Course.find(params[:course_id])
-    @resource = @courses.knowledges.where("type=?","Resourse")
+    @resource = @course.knowledges.where("type=?","Resourse")
     @resource = @resource.sort_by{ |created_at| created_at }.reverse
     @resource = @resource.paginate(:page => params[:page], :per_page => 10)
   end

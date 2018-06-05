@@ -176,7 +176,8 @@ Rails.application.routes.draw do
   get "teachers/upload_check/:id", to: "teachers#upload_check", as:"teachers/upload_check"
   get "teachers/:tid/blogs_check/:cid", to: "teachers#blogs_check", as:"teachers/blogs_check"
   get "teachers/:tid/resources_check/:cid", to: "teachers#resources_check", as:"teachers/resources_check"
-  get "teachers/:id/accept", to:"teachers#accept", as:"accept"
+  get "teachers/:id/accept_blog", to:"teachers#accept_blog", as:"accept_blog"
+  get "teachers/:id/accept_resourse", to:"teachers#accept_resourse", as:"accept_resourse"
 
   get "/teachers/ajaxnames/:id", to:"teachers#ajaxnames" 
   get "/departments/ajaxnames/:id", to:"departments#ajaxnames"  

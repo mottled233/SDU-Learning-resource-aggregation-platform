@@ -32,6 +32,7 @@ class ResourcesController < KnowledgesController
     end
     def create
         @resource = Resource.new(resource_params);
+        @resource.check_state = 0;
         b = true;
         if(@resource.knowledge_digest.nil?||@resource.knowledge_digest.empty?)
             @resource.knowledge_digest = short_digest(@resource.content,50) 
@@ -73,6 +74,7 @@ class ResourcesController < KnowledgesController
     end
     def update
         @resource = Resource.find(params[:id])
+        @resource.check_state = 0;
         if !params[:resource][:attachment].nil?
              filename = uploadfile(params[:resource][:attachment])  
              @resource.attachment = filename  
