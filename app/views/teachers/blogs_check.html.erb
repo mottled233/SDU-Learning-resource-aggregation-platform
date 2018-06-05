@@ -1,0 +1,25 @@
+<% provide(:title, "#{@course.course_name}—专栏管理") %>
+<div class="container-fluid-full"> 
+
+    <div class="row-fluid">
+      <%= render :partial => "users/aside" %>
+      <div id="content" class="span8">
+        <p id="notice"><%= notice %></p>
+        
+        <h1><%=@course.course_name%>—全部专栏</h1>
+        <hr>
+        
+        <%= render :partial => "blogs/blog_list", :locals => { :blogs => @blog } %>
+        
+        <br>
+        
+
+        <hr>
+        <%= link_to '返回',  teachers_teachers_space_path(@teacher.id) %>
+      </div>
+    </div>
+    
+    
+</div> 
+
+<div class="clearfix"></div>

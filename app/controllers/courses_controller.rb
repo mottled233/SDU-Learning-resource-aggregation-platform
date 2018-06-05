@@ -15,6 +15,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+
     tempList = Array.new
     @course.knowledges.each do|k|
       tempList = tempList << k.id   
@@ -33,6 +34,7 @@ class CoursesController < ApplicationController
         @best_list = @best_list << Knowledge.find(max)
         tempList.delete(max)
       end
+
   end
 
   # GET /courses/new
@@ -62,7 +64,6 @@ class CoursesController < ApplicationController
   end
 
   
-
   
   ##########################################################################################################
   
@@ -110,23 +111,32 @@ class CoursesController < ApplicationController
   
   def questions_index
     @course = Course.find(params[:course_id])
-    @question = Question.all
-    @question = Question.paginate(:page => params[:page], :per_page => 2)
+    if !(@course.knowledges.nil?||@course.knowledges.empty?)
+      @question = @course.knowledges.where("type=?","Resourse")
+      @question = @question.sort_by{ |created_at| created_at }.reverse
+      @question = @question.paginate(:page => params[:page], :per_page => 10)
+    end
   end
   
   def blogs_index
     @course = Course.find(params[:course_id])
-    @blog = Blog.all
-    @blog = @blog.sort_by{ |created_at| created_at }.reverse
-    @blog = @blog.paginate(:page => params[:page], :per_page => 10)
+    if !(@course.knowledges.nil?||@course.knowledges.empty?)
+      @blog = @course.knowledges.where("type=?","Blog")
+      @blog = @blog.where("check_state=?",1)
+      @blog = @blog.sort_by{ |created_at| created_at }.reverse
+      @blog = @blog.paginate(:page => params[:page], :per_page => 10)
+    end
   end
   
 
   def resources_index
     @course = Course.find(params[:course_id])
-    @resource = Resource.all
-    @resource = @resource.sort_by{ |created_at| created_at }.reverse
-    @resource = @resource.paginate(:page => params[:page], :per_page => 10)
+    if !(@course.knowledges.nil?||@course.knowledges.empty?)
+      @resource = @course.knowledges.where("type=?","Resourse")
+      @resource = @resource.where("check_state=?",1)
+      @resource = @resource.sort_by{ |created_at| created_at }.reverse
+      @resource = @resource.paginate(:page => params[:page], :per_page => 10)
+    end
   end
   
   def course_departments_index

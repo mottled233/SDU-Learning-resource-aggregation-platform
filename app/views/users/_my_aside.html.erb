@@ -37,6 +37,7 @@
 <%if @user.user_role == "teacher"%>
 	<hr/>
 	<li><a href="<%= teachers_teachers_space_path(@user.id)%>"><i class="icon-cog"></i><span class="hidden-tablet"> 课程内容管理</span></a></li>
+	<li><a href="<%= teachers_upload_check_path(@user.id)%>"><i class="icon-cog"></i><span class="hidden-tablet"> 上传内容审核</span></a></li>
 <%end%>
 <%if @user.user_role == "admin"%>
 	<hr/>

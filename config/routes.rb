@@ -45,10 +45,10 @@ Rails.application.routes.draw do
  get "/resources/file_delete",to: "resources#file_delete",as:"resource_file_delete"
  #图片
  post "/knowledges/img_upload",to: "knowledges#img_upload",as:"img_upload"
- post "/blogs/render_keyword",to: "blogs#render_keyword",as:"render_keyword"
- post "/blogs/render_department",to: "blogs#render_department",as:"render_department"
- post "/blogs/render_spe",to: "blogs#render_spe",as:"render_spe"
- post "/blogs/render_newCourse",to: "blogs#render_newCourse",as:"render_newCourse"
+ post "/knowledges/render_keyword",to: "knowledges#render_keyword",as:"render_keyword"
+ post "/knowledges/render_department",to: "knowledges#render_department",as:"render_department"
+ post "/knowledges/render_spe",to: "knowledges#render_spe",as:"render_spe"
+ post "/knowledges/render_newCourse",to: "knowledges#render_newCourse",as:"render_newCourse"
  
  get "/courses/:course_id/questions", to: "courses#questions_index", as: "course_questions"
  get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"
@@ -172,6 +172,11 @@ Rails.application.routes.draw do
   get "teachers/:tid/questions_manage/:cid", to: "teachers#questions_manage", as:"teachers/questions_manage"
   get "teachers/:tid/blogs_manage/:cid", to: "teachers#blogs_manage", as:"teachers/blogs_manage"
   get "teachers/:tid/resources_manage/:cid", to: "teachers#resources_manage", as:"teachers/resources_manage"
+  
+  get "teachers/upload_check/:id", to: "teachers#upload_check", as:"teachers/upload_check"
+  get "teachers/:tid/blogs_check/:cid", to: "teachers#blogs_check", as:"teachers/blogs_check"
+  get "teachers/:tid/resources_check/:cid", to: "teachers#resources_check", as:"teachers/resources_check"
+  get "teachers/:id/accept", to:"teachers#accept", as:"accept"
 
   get "/teachers/ajaxnames/:id", to:"teachers#ajaxnames" 
   get "/departments/ajaxnames/:id", to:"departments#ajaxnames"  

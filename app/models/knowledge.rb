@@ -81,6 +81,13 @@ class Knowledge < ApplicationRecord
     end
   end
   
+  def knowledge_digest(length=50)
+    digest = self.content
+    if !digest.nil? && digest.length>length
+      digest = digest[0,length]+"..."
+    end
+  end
+  
   
 
   

@@ -1,7 +1,8 @@
 class KnowledgesController < ApplicationController
+  include ApplicationHelper
   before_action :set_knowledge, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in, only: [:new, :edit, :newdeptass, :create, :update, :destroy,:focus,:unfocus,:good_add,:bad_add,:good_sub,:bad_sub,:good_add_bad_sub,:good_sub_bad_add,:good_add_show,:bad_add_show,:good_sub_show,:bad_sub_show,:good_add_bad_sub_show,:good_sub_bad_add_show,:record_visit]
-  
+  skip_before_filter :verify_authenticity_token, :only => [:render_keyword,:render_department,:render_spe,:render_newCourse]
   # GET /knowledges
   # GET /knowledges.json
   def index
@@ -259,6 +260,84 @@ class KnowledgesController < ApplicationController
   #       format.json { render json: @knowledge  , status: :success, location: @knowledge }
   #   end
   # end
+  def render_keyword
+    option_id = params[:keyword]
+    @info = params[:info]
+    @hasChoose  = params[:hasChoose]
+    @chooseItem = Array.new;
+    
+        
+    if !@hasChoose.nil?
+        @hasChoose.each do |c| 
+            @chooseItem << Keyword.find(c)
+        end
+    end
+    if option_id.eql?("-1")
+        @info = 1
+        @after = Keyword.getFirstLayer(Keyword.all-@chooseItem)
+        render "render_haschoose.js.erb"
+    else
+        @raw  = Keyword.find(params[:keyword])
+        @info = @info.to_i+1
+        @after = @raw.lowers
+        if @after.nil?||@after.empty?
+            @chooseItem = @chooseItem<<@raw
+            @info = 1;
+            @after = Keyword.getFirstLayer(Keyword.all-@chooseItem)
+            render "render_haschoose.js.erb"
+        elsif
+            @after = @after - @chooseItem 
+            render "render_select.js.erb"
+        end
+    end
+    respond_to do |format|
+        format.js {}
+    end
+  end
+  def render_department
+      @department = Department.find(params[:department])
+      @speciality = @department.specialities
+      render "render_speciality.js.erb"
+      respond_to do |format|
+          format.js {}
+      end
+  end
+  def render_spe
+      @speciality = Speciality.find(params[:speciality])
+      @course = @speciality.courses
+      @hasChoose  = params[:hasChoose]
+      @chooseItem = Array.new;
+          
+      if !@hasChoose.nil?
+          @hasChoose.each do |c| 
+              @chooseItem << Course.find(c)
+          end
+      end
+      if !(@course.nil?||@course.empty?)
+          @course = @course-@chooseItem
+      end
+      
+      render "render_course.js.erb"
+      respond_to do |format|
+          format.js {}
+      end
+  end
+  def render_newCourse
+      @course = Course.find(params[:course])
+      @hasChoose  = params[:hasChoose]
+      @chooseItem = Array.new;
+          
+      if !@hasChoose.nil?
+          @hasChoose.each do |c| 
+              @chooseItem << Course.find(c)
+          end
+      end
+      @chooseItem = @chooseItem<<@course
+      render "render_hasChooseCourse.js.erb"
+      respond_to do |format|
+          format.js {}
+      end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_knowledge
