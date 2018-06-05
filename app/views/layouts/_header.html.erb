@@ -13,6 +13,13 @@
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
+						<!-- start: Search Field -->
+						<li>
+							<div class="header-search-block">
+								<%= text_field :key , params[0], class: 'header-input', id: 'header-input', placeholder:"搜索"%>
+								<a id="header-submit"><i class="halflings-icon search"></i> </a>
+							</div>
+						</li>
 						
 						<%unless log_in?%>
 						<!-- start: Login Dropdown -->
@@ -41,22 +48,28 @@
 										<span class="badge red"><%=new_count%> </span>
 									<%end%>
 								</a>
-								<ul class="dropdown-menu notifications">
-									<li class="dropdown-menu-title">
+								<ul class="dropdown-menu notifications" style="width:300px">
+									<li class="dropdown-menu-title" style="width:300px">
 	 									<span><%="你有#{new_count}条新消息"%></span>
 										<a href="#refresh"><i class="icon-repeat"></i></a>
 									</li>
 										<% notifications.each do |notification| %>
-                    	<li>
+                    	<li style="width:300px">
                         <a href="#">
+												<div class="row-fluid">
+													<div class="span11">
+														<span class="message"><%= notification.to_text %></span>
+													</div>
+													<div class="span1">
+														<span class="time"><%= time_to_chinese(time_ago_in_words(notification.created_at)) %>前</span> 
+                    			</div>
+												</div>
 												
-												<span class="message"><%= notification.to_text %></span>
-												<span class="time"><%= time_to_chinese(time_ago_in_words(notification.created_at)) %>前</span> 
-                        </a>
+												</a>
                       </li>
 	                  <% end %>
 		
-	                  <li class="dropdown-menu-sub-footer">
+	                  <li class="dropdown-menu-sub-footer" style="width:300px">
 	              		<%= link_to "查看全部消息", user_notifications_path(current_user)%>
 									</li>	
 								</ul>

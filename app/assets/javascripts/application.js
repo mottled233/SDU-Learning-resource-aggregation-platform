@@ -19,3 +19,21 @@
 //= requier_tree ./js
 
 
+$(document).ready(function(){
+
+  function search(){
+    var text = $("#header-input").val();
+      window.location.href = "/search/res?key[]="+text;
+  }
+  
+  $("#header-submit").click(function(){
+    search();
+  });
+  
+  $(".header-search-block").keypress(function(e){
+    if(e.keyCode==13)
+      search();
+  });
+  
+  
+});

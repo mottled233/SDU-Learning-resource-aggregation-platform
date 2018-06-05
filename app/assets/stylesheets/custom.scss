@@ -264,3 +264,38 @@ a {
 .reply-block{
     margin-top:10px;
 }
+
+.header-search-block{
+    margin-top:8px;
+    height:30px;
+    padding-top:1px;
+    width:192px;
+    margin-bottom:0;
+    background-color:#FAFAFA;
+    border:1px solid #748185;
+    border-radius: 3px;
+}
+
+
+.header-input{
+    display:inline-block !important;
+    background-color:#FAFAFA !important;
+    width:150px !important;
+    height:22px !important;
+    border:none !important;
+    border-radius: 3px;
+}
+
+#header-submit{
+    background-color:#FAFAFA;
+    color: grey;
+    width:30px;
+    height:30px;
+}
+
+#header-submit i{
+    margin-top:6px;
+    color: grey;
+}
+
+

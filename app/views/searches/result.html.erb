@@ -16,27 +16,49 @@
   </div>
 <% end %>
 <div>
-  <div class="row">
-    <%if !@members.nil?%>
+  <div class="row-fluid">
+    <%if @members%>
       <%@members.each do|q| %>
-        <%= render :partial => "member_each", :locals =>{:q => q} %>
+        <div class="row-fluid">
+          <%= render :partial => "member_each", :locals =>{:q => q} %>
+        </div>
       <%end%>
     <%end%>
-    <%if !@results.nil?%>
+    <%if @results%>
       <%@results.each do|q| %>
-        <%= render :partial => "blog_each", :locals => { :q => q } %> 
+        <div class="row-fluid">
+          <%= render :partial => "blog_each", :locals => { :q => q } %> 
+        </div>
       <%end%>
     <%end%>
     
   </div>
   <%if @results.nil?%>
-    <div class="span8 offset3" style="padding-bottom:50px">
-        <%= will_paginate @members %>
+    <div class="row-fluid">
+      <div class="span8 offset3" style="padding-bottom:50px">
+          <%= will_paginate @members %>
+      </div>
     </div>
   <%else%>
-    <div class="span8 offset3" style="padding-bottom:50px">
-        <%= will_paginate @results %>
+    <div class="row-fluid">
+      <div class="center" style="padding-bottom:50px">
+          <%= will_paginate @results %>
+      </div>
     </div>
   <%end%>
   
 </div>
+
+<style>
+/*! CSS Used from: http://eecs.pku.edu.cn/css/css.css */
+    *{margin:0;padding:0;outline:none;-webkit-font-smoothing:antialiased;}
+    em{font-style:normal;}
+    .xyxwM2L{width:80px;height:80px}
+    .xyxwM2L p{font-size:40px;font-family:Arial, Helvetica, sans-serif;padding-top:30px;color:#333333;}
+    .xyxwM2L p em{display:block;font-size:24px;color:#333;margin-left:45px;margin-top:-10px;}
+    .xyxwM2 li:hover .xyxwM2L p{color:#004aa2;}
+    .xyxwM2 li:hover .xyxwM2L p em{color:#004aa2;}
+    .not_ann .xyxwM2L{width:130px;text-align:center;padding-bottom:20px;background:#f6f6f6;}
+    .not_ann .xyxwM2L p{padding-top:20px;}
+    *:before,*:after{transition:all ease-in-out .5s;-webkit-transition:all ease-in-out .5s;-moz-transition:all ease-in-out .5s;-o-transition:all ease-in-out .5s;-ms-transition:all ease-in-out .5s;}
+</style>
