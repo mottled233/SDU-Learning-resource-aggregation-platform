@@ -4,6 +4,7 @@ import time
 
 import re
 import scrapy
+from bs4 import BeautifulSoup
 from scrapy.loader import ItemLoader
 
 from resource_aggregation.items import article_item
@@ -45,7 +46,7 @@ class csdn_index_spider(scrapy.Spider):
             yield scrapy.Request(article['url'], headers=header, meta={'category': category, 'article': article},
                                  callback=self.save_article)
 
-        if not self.count[category] == 10:
+        if not self.count[category] == 1:
             url = self.crawl_url.format(type=self.types[0], category=category, offset=0)
             yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse,
                                  dont_filter=True)
@@ -76,6 +77,16 @@ class csdn_index_spider(scrapy.Spider):
         item["view_number"] = article['views']
         item["spider_time"] = datetime.datetime.now()
         item['article_content'] = response.css('#article_content').extract_first('')
+
+        tags = response.css('.tag-link').extract()
+        tag_str = ''
+        for tag in tags:
+            tag_str += tag.strip('\t').replace('\t','')
+            tag_str += ','
+
+        tag_soup = BeautifulSoup(tag_str, 'lxml')
+        tag_str = tag_soup.get_text()
+        item['article_tag'] = tag_str
         yield item
 
     # 首先访问csdn主页，获取cookie

@@ -54,7 +54,7 @@ class MysqlTwistedPipeline(object):
         print('>>>>>>save to db<<<<<<<')
         try:
             cursor.execute(insert_sql, (
-                item['article_tag'],item['article_type'], item['created_time'], item['nick_name'],
+                item['article_tag'], item['article_type'], item['created_time'], item['nick_name'],
                 item['article_title'], item['article_link'], item['user_link'], item['view_number'],
                 item['spider_time'], item['article_content']))
 
