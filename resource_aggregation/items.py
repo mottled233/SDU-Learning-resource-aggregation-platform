@@ -19,6 +19,10 @@ class article_item(scrapy.Item):
     article_type = scrapy.Field(
         output_processor=TakeFirst()
     )
+    # 作品标签
+    article_tag = scrapy.Field(
+        output_processor=TakeFirst()
+    )
     # 发布时间
     created_time = scrapy.Field(
         output_processor=TakeFirst()

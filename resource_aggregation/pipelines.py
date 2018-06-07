@@ -36,10 +36,11 @@ class MysqlTwistedPipeline(object):
 
     def process_item(self, item, spider):
         # 使用twisted将mysql插入变成异步执行
+        # item = self.clean_content(item)  #去除文章中的标签
         query = self.dbpool.runInteraction(self.do_insert, item)
 
     def do_insert(self, cursor, item):
-        insert_sql = "INSERT INTO articles (article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        insert_sql = "INSERT INTO articles (article_tag,article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
         # try:
         #     item['article_content'] = get_article_content(item['article_link'])
@@ -53,12 +54,19 @@ class MysqlTwistedPipeline(object):
         print('>>>>>>save to db<<<<<<<')
         try:
             cursor.execute(insert_sql, (
-                item['article_type'], item['created_time'], item['nick_name'],
+                item['article_tag'],item['article_type'], item['created_time'], item['nick_name'],
                 item['article_title'], item['article_link'], item['user_link'], item['view_number'],
                 item['spider_time'], item['article_content']))
 
         except Exception as e:
             print(e)
+
+    def clean_content(self, item):
+        # 清理article_content中的标签
+        doc = Document(item['article_content'])
+        soup = BeautifulSoup(doc.summary(), 'lxml')
+        item['article_content'] = soup.get_text()
+        return item
 
 
 class FileWriterPipeline(object):

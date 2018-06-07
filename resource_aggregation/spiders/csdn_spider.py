@@ -62,9 +62,9 @@ class csdn_index_spider(scrapy.Spider):
         if '小时' not in article['created_at']:
             created_days = article['created_at'].split('天')[0]  # 如果csdn接口返回的数据创建时间为几天前的格式的话，进行日期计算
         else:
-            created_days = 0
+            created_days = '0'
 
-        if created_days != 0 and created_days.isdigit():
+        if created_days.isdigit():
             item["created_time"] = (datetime.date.today() - datetime.timedelta(days=int(created_days)))
         else:
             item["created_time"] = created_days
