@@ -42,6 +42,29 @@
         				  <%= f.text_area :content,class: "cleditor span12",id: "textarea2",style:"display: none; width: 800px; height: 500px;" %>
         			</div>
         		</div>
+        		<div class="row-fluid">
+        			<div class="span8 offset2" style="margin-top:10px">
+        			   <span class="span3">标签(最多添加5个):</span>
+            			<div id="label_div" class="span8">
+            			  <%= render :partial => "knowledges/label_show",:locals => {:label_string => @question.label } %> 
+            		  </div>
+        			</div>
+        		</div>
+        	
+        		<div class="row-fluid">
+        		  <div class="span8 offset2" id="input_label" style="margin-top:10px">
+        		     <%= f.hidden_field :label,id:"label_for_form" %>
+        				 <input id="labelInput" type="text" style="width:100px"/>
+        				 <button id="label_sub_button" type="button" onClick="label_show_click()">添加</button>
+        				  <%if @question.label.nil?||@question.label.empty?%>
+        				      <p style="display:none" id="label_count" value="0"></p>
+        				      <p style="display:none" id="label_string" value=""></p>
+        				  <%else%>
+        				      <p style="display:none" id="label_count"><%=@question.label.split(";").size()%></p>
+        				      <p style="display:none" id="label_string" value="<%=@question.label%>"></p>
+        				  <%end%>
+        			</div>
+        		</div>
         		<div class="row-fluid" style="margin-top:15px">
         			<div class="span8 offset2">
         			  <span class="span2">所属课程:</span>
@@ -98,6 +121,32 @@ iframe{
 }
 </style>
 <script>
+function label_show_click(){
+      var label = $("#labelInput").val();
+      $("#labelInput").val("")
+      if(label != ""){
+          var count = Number($("#label_count").val())+1;
+          var label_string = $("#label_string").html();
+          $("#label_count").val(count);
+          if(count == 1){
+              label_string = label;
+          }
+          else if(count == 5){
+            label_string = label_string+";"+label;
+            $("#input_label").css("display","none");     
+          }
+          else{
+            label_string = label_string+";"+label;
+          }
+          $("#label_string").html(label_string);
+          $("#label_for_form").val(label_string);
+      }
+    	$.ajax({
+        url:"../knowledges/render_label",
+        type: 'POST',
+        data: {label_string: label_string}
+      });
+  }
 function DealImg(){
     var con = $(".cleditorMain").find('iframe').contents().find('body').html();
     $.ajax({

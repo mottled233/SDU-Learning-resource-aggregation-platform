@@ -1,0 +1,12 @@
+<%if !label_string.nil?%>
+    <%label_list = label_string.split(";")%>
+    <div>
+        <%for label in label_list%>
+        <div style="display:inline">
+            <span class="label label-info"><%=label%></span>    
+            <!--<button class="btn btn-small btn-danger del_btn" onClick="del_label()" style="margin-right:15px;height:20px;width:15px;padding:0px" type="button"></button>-->
+        </div>
+        <%end%>
+    </div>
+<%end%>
+

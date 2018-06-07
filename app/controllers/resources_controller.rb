@@ -152,7 +152,7 @@ class ResourcesController < KnowledgesController
      private
     # Never trust parameters from the scary internet, only allow the white list through.
     def resource_params
-      params.require(:resource).permit(:user_id,:title, :type,:content, :good, :bad)
+      params.require(:resource).permit(:user_id,:title, :type,:content, :good, :bad,:label)
     end
     def uploadfile(file)  
         if !file.original_filename.empty?  
