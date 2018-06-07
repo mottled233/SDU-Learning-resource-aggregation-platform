@@ -3,7 +3,7 @@
         <div class="span10" style="padding-left: 10px;">
             <div>
                 <%=link_to blog_path(q.id), class:"no-hover", style:"padding-left:5px" do%>
-                    <h1 style="font-size:1.7em;display:inline-block;"><strong><%= short_digest q.title, 20%></strong></h1>
+                    <h1 style="font-size:1.7em;display:inline-block;"><strong><%= short_digest q.title, 40%></strong></h1>
                 <%end%>
             </div>
             <hr class="normal-hr" style="margin:2px 0 5px"/>
@@ -71,7 +71,7 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to blog_path(q.id), class:"no-hover" do%>
-                                <p><%= q.knowledge_digest %></p>
+                                <p><%= short_digest q.content, 50%></p>
                             <%end%>
                         </div>
                     </div>

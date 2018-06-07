@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '5.0.1'
+gem 'pycall'
 gem 'sidekiq'
 gem 'nokogiri'
 gem 'faker', '1.6.6'
