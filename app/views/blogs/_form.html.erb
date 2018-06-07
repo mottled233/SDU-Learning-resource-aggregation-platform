@@ -191,6 +191,27 @@ $("#img_input2").on("change", function(e) {
         data: {label_string: label_string}
       });
   }
+  function label_del_click(which){
+    var label = $(which).parent().children(".label_content").html();
+    var count = Number($("#label_count").val())-1;
+    $("#label_count").val(count);
+    var label_string = $("#label_string").html();
+    label_list = label_string.split(";");
+    for(var i=0;i<label_list.length;i++){
+      if(label == label_list[i]){
+          if(i == label_list.length-1){
+            //最后一个
+            label_string = label_string.replace(label,"");
+          }
+          else{
+            label_string = label_string.replace(label+";","");
+          }
+      }
+    }
+    $("#label_string").html(label_string);
+    $("#label_for_form").val(label_string);
+    $(which).parent().html("");
+  }
 	function ClickDepartment(){
 // 		var chooseContent = $("#hasChooseCourse input[type=checkbox]").map(function(){
 // 		      return $(this).val();
