@@ -14,7 +14,7 @@
                         <p class="inline-block"><%=short_digest q.creator.nickname, 10%></p>
                     <% end %>
                     <% unless q.keywords.empty? %>
-                        <span class="intro-title">标签：</span>
+                        <span class="intro-title">分类：</span>
                         <% (q.keywords[0,3]).each do |keyword| %>
                             <span class="label label-info" style="margin:left:3px"><%= keyword.name%></span>
                         <% end %>
@@ -40,7 +40,6 @@
                 <%= link_to "修改",login_path%>
                 <%= link_to "删除",login_path%>
             <%elsif current_user?(q.creator)%>
-                
                 <%if q.check_state == 0%>
                     <%= link_to "通过",accept_blog_path(q),remote:true%>
                     <%= link_to '拒绝',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>

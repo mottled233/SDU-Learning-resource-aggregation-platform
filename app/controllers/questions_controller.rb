@@ -128,7 +128,7 @@ class QuestionsController < KnowledgesController
 private
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:user_id,:title, :type,:content, :good, :bad)
+      params.require(:question).permit(:user_id,:title, :type,:content, :good, :bad,:label)
     end
 
 end
