@@ -122,15 +122,15 @@ function dropdownOnClick(e,id)
 				console.log(o.message);
 				console.log(o.data);
 				if (o.status=="200"){
+					if (document.getElementById('dropdown'+(parseInt(id)+2).toString()))
+					{
+						document.getElementById('dropdown'+(parseInt(id)+2).toString()).parentNode.style.display="none";
+						document.getElementById('ul'+(parseInt(id)+2).toString()).innerHTML="";
+					}
+					document.getElementById('dropdown'+(parseInt(id)+1).toString()).parentNode.style.display="inline";
+						document.getElementById('ul'+(parseInt(id)+1).toString()).innerHTML="";
 					for (var i=0;i<o.count;++i)
 					{
-						if (document.getElementById('dropdown'+(parseInt(id)+2).toString()))
-						{
-							document.getElementById('dropdown'+(parseInt(id)+2).toString()).parentNode.style.display="none";
-							document.getElementById('ul'+(parseInt(id)+2).toString()).innerHTML="";
-						}
-						document.getElementById('dropdown'+(parseInt(id)+1).toString()).parentNode.style.display="inline";
-							document.getElementById('ul'+(parseInt(id)+1).toString()).innerHTML="";
 						var newli=document.createElement("li");
 						newli.setAttribute("data-id",o.data[i].id);
 						if (o.data[i].name)
