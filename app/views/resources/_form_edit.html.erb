@@ -11,7 +11,7 @@
             <%= f.hidden_field:bad,:value => 0 %>
             <%if !current_user.nil?%>
               <%= f.hidden_field:user_id , :value => current_user.id %>
-              <%= f.hidden_field:type,:value => 'resource' %>
+              <%= f.hidden_field:type,:value => 'Resource' %>
             <%end%>
             <div class="row-fluid">
               <div class="span8 offset2" style="margin-top:20px">

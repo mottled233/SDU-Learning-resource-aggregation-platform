@@ -28,7 +28,7 @@ class ResourcesController < KnowledgesController
     def destroy
         @resource = Resource.find(params[:id])
         @resource.destroy
-        redirect_to :back
+        redirect_to resources_path
     end
     def create
         @resource = Resource.new(resource_params);

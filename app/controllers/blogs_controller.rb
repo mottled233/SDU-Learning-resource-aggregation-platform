@@ -13,7 +13,7 @@ class BlogsController < KnowledgesController
     def destroy
         @blog = Blog.find(params[:id])
         @blog.destroy
-        redirect_to :back
+        redirect_to blogs_path
     end
     def new
         super

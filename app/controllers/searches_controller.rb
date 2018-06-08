@@ -19,10 +19,12 @@ class SearchesController < ApplicationController
           @results = Knowledge
           if (params[:find]=='专栏')
             @results = @results.where('type = "Blog"')
+            @results = @results.where("check_state=?",1)
           elsif (params[:find]=='问题')
             @results = @results.where('type = "Question"')
           elsif (params[:find]=='资源')
             @results = @results.where('type = "Resource"')
+            @results = @results.where("check_state=?",1)
           end
         end
       else
