@@ -2,7 +2,7 @@ class KnowledgesController < ApplicationController
   include ApplicationHelper
   before_action :set_knowledge, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in, only: [:new, :edit, :newdeptass, :create, :update, :destroy,:focus,:unfocus,:good_add,:bad_add,:good_sub,:bad_sub,:good_add_bad_sub,:good_sub_bad_add,:good_add_show,:bad_add_show,:good_sub_show,:bad_sub_show,:good_add_bad_sub_show,:good_sub_bad_add_show,:record_visit]
-  skip_before_filter :verify_authenticity_token, :only => [:render_keyword,:render_department,:render_spe,:render_newCourse]
+  skip_before_filter :verify_authenticity_token, :only => [:render_keyword,:render_department,:render_spe,:render_newCourse,:render_label]
   # GET /knowledges
   # GET /knowledges.json
   def index
@@ -260,13 +260,18 @@ class KnowledgesController < ApplicationController
   #       format.json { render json: @knowledge  , status: :success, location: @knowledge }
   #   end
   # end
+  def render_label
+      @label_string = params[:label_string]
+      render "render_label.js.erb"
+      respond_to do |format|
+          format.js {}
+      end
+  end
   def render_keyword
     option_id = params[:keyword]
     @info = params[:info]
     @hasChoose  = params[:hasChoose]
     @chooseItem = Array.new;
-    
-        
     if !@hasChoose.nil?
         @hasChoose.each do |c| 
             @chooseItem << Keyword.find(c)
@@ -363,5 +368,4 @@ class KnowledgesController < ApplicationController
     #       return @filename  
     #     end  
     # end  
-
 end

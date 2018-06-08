@@ -22,3 +22,15 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+* 
+when install
+run cmd "bundle install"
+run cmd "rails db:migrate"
+install redis
+create file mylib.pth in /usr/local/lib/python2.7/dist-packages with content:
+"{SDU-Learning-resource-aggregation-platform path}/app/jobs/python_lib"
+
+when run
+need to run cmd "sudo service redis-server start"
+need to run cmd "sidekiq"
+run cmd "rails s"

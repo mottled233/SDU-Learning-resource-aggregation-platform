@@ -3,7 +3,7 @@ require 'will_paginate/array'
 class BlogsController < KnowledgesController
     include ApplicationHelper
     before_action :record_visit, only: [:show]
-    skip_before_filter :verify_authenticity_token, :only => [:render_keyword,:render_department,:render_spe,:render_newCourse]
+    skip_before_filter :verify_authenticity_token, :only => [:render_keyword,:render_department,:render_spe,:render_newCourse,:render_label]
     def index
         @blog = Blog.all
         @blog = @blog.where("check_state=?",1)
@@ -133,6 +133,6 @@ class BlogsController < KnowledgesController
 private
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.require(:blog).permit(:user_id,:title, :type,:content, :good, :bad,:knowledge_digest)
+      params.require(:blog).permit(:user_id,:title, :type,:content, :good, :bad,:knowledge_digest,:label)
     end
 end

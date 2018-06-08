@@ -42,7 +42,7 @@
         </div>
         <div class="row-fluid span5 offset1">
           <%=link_to creating.to_path do%>
-            <p class="digest"><%= creating.digest()%></p>
+            <p class="digest"><%= short_digest creating.content%></p>
           <% end %>
         </div>
         <div class="row-fluid span7">
