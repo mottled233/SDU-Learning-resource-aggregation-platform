@@ -131,20 +131,14 @@ class CoursesController < ApplicationController
 
   def resources_index
     @course = Course.find(params[:course_id])
-<<<<<<< HEAD
 
-=======
->>>>>>> 4257a75e10b9f58c262cec00a96eb60d7c03d4d1
     if !(@course.knowledges.nil?||@course.knowledges.empty?)
       @resource = @course.knowledges.where("type=?","Resourse")
       @resource = @resource.where("check_state=?",1)
       @resource = @resource.sort_by{ |created_at| created_at }.reverse
       @resource = @resource.paginate(:page => params[:page], :per_page => 10)
     end
-<<<<<<< HEAD
 
-=======
->>>>>>> 4257a75e10b9f58c262cec00a96eb60d7c03d4d1
   end
   
   def course_departments_index
