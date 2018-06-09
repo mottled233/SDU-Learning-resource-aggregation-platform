@@ -14,16 +14,15 @@
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
 						<!-- start: Search Field -->
-						<li>
+						<li style="margin:8px 70px 0 0">
 							<div class="header-search-block">
 								<%= text_field :key , params[0], class: 'header-input', id: 'header-input', placeholder:"搜索"%>
 								<a id="header-submit"><i class="halflings-icon search"></i> </a>
 							</div>
 						</li>
-						
 						<%unless log_in?%>
 						<!-- start: Login Dropdown -->
-							<li class="dropdown">
+							<li class="dropdown" style="margin-top:0">
 								<a class="btn dropdown-toggle" data-toggle="dropdown" href="<%= login_path %>">
 									<i class="halflings-icon white user"></i> 登录
 									<span class="caret"></span>
@@ -41,7 +40,7 @@
 						%>
 						
 						<!-- start notifications dropdown -->
-							<li class="dropdown hidden-phone">
+							<li class="dropdown hidden-phone" style="margin-top:0">
 								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 									<i class="icon-bell"></i>
 									<%if new_count>0%>
@@ -75,7 +74,7 @@
 								</ul>
 							</li>
 							<!-- start: User Dropdown -->
-							<li class="dropdown">
+							<li class="dropdown" style="margin-top:0">
 								<a class="btn dropdown-toggle" data-toggle="dropdown" href="<%= user_path(current_user)%>">
 									<i class="halflings-icon white user"></i> <%= current_user.nickname%>
 									<span class="caret"></span>

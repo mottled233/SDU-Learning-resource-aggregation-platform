@@ -44,32 +44,14 @@
 		},
 		{
 
-			"title":"推荐一本离散数学的书，很有价值 - CSDN博客",
-			"content":"\n                    <link rel=\"stylesheet\" href=\"https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css\"/>\n            <div class=\"htmledit_views\">\n                \n推荐一本离散数学的书，很有价值Discrete Mathematics and Its Applications\n            </div>\n                ",
-			"keywords":["machine_learning"]
-		},
-		{
-
 			"title":"离散数学对编程究竟有用不？？？ - CSDN博客",
 			"content":"\n                    <link rel=\"stylesheet\" href=\"https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css\"/>\n            <div class=\"htmledit_views\">\n                <p>上完了离散数学，到现在也还没有感觉到离散数学和编程有什么联系！学离散数学到底有用不？？有什么作用啊？？</p>            </div>\n                ",
 			"keywords":["machine_learning"]
 		},
 		{
 
-			"title":"离散数学经典教材及资料（整理） - CSDN博客",
-			"content":"\n                    <link rel=\"stylesheet\" href=\"https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css\"/>\n            <div class=\"htmledit_views\">\n                \n<p>左孝陵 版：</p>\n<p>              <a href=\"http://www.ctdisk.com/file/7555149\">离散数学-左孝凌.pdf</a></p>\n<p>              <a href=\"http://www.ctdisk.com/file/7553711\">离散数学答案（左孝凌）.pdf</a></p>\n<p>曲婉玲 版：</p>\n<p>               <a href=\"http://www.ctdisk.com/file/7555152\">离散数学_屈婉玲_教学大纲pku.doc</a><br/></p>\n<p>               <a href=\"http://www.ctdisk.com/file/7555246\">离散数学清华经典版本(曲婉玲）.pdf</a></p>\n<p>               <a href=\"http://www.ctdisk.com/file/7553745\">离散数学课件(曲婉玲）.rar</a><br/></p>\n<p>电子科技大学内部版：</p>\n<p>               <a href=\"http://www.ctdisk.com/file/7553958\">离散数学课件+答案(焦占亚</a><br/></p>\n<p>               <a href=\"http://www.ctdisk.com/file/7553784\">电子科大离散数学内部教学教材</a></p>\n<p><a href=\"http://www.ctdisk.com/file/7553784\"><br/></a></p>\n<p>试卷：</p>\n<p>             <a href=\"http://www.ctdisk.com/file/7553640\">工学】山东理工大学离散数学考试大纲及试题2008A.doc</a></p>\n<p><a href=\"http://www.ctdisk.com/file/7553649\">       </a><a href=\"http://www.ctdisk.com/file/7553649\">    《离散数学》试题及答案.doc</a><br/></p>\n链接地址：<a href=\"http://skyming.ctdisk.com/u/715332/1419708\">http://skyming.ctdisk.com/u/715332/1419708<br/></a>\n            </div>\n                ",
-			"keywords":["machine_learning"]
-		},
-		{
-
 			"title":"C++中的得摩根定理 - CSDN博客",
 			"content":"\n                    <link rel=\"stylesheet\" href=\"https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css\"/>\n            <div class=\"htmledit_views\">\n                \n<p>在数字逻辑和离散数学以及概率论中都学到了德摩根定理，没想到，还可以在C++中用到；</p>\n<p>在C++中逻辑表达式有时候很复杂，不容易理解，出了问题也很难检查。比如下面这个运算：</p>\n<p>!(x==a&amp;&amp;y!=b&amp;&amp;z!=c);</p>\n<p>需要简化逻辑表达式，需要用到德摩根定理，数学式为：</p>\n<p>-(A∧B)=(-A)∨(-B)</p>\n<p>-(A∨B)=(-A)∧(-B)</p>\n<p>用这个运算方法上式可以改为：</p>\n<p>（x!=a||y==b||z==c）;</p>\n<p><br/></p>\n            </div>\n                ",
-			"keywords":["machine_learning"]
-		},
-		{
-
-			"title":"离散数学，数据结构，算法好书推荐 - CSDN博客",
-			"content":"\n                    <link rel=\"stylesheet\" href=\"https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css\"/>\n            <div class=\"htmledit_views\">\n                <p>我来一本推荐： <br/><br/>离散数学导学 <br/><a href=\"http://book.jqcq.com/product/408873.html\">http://book.jqcq.com/product/408873.html</a> <br/>离散数学的基本概念与基础知识，并把理论知识与一系列实际应用联系起来。主要内容包括：命题逻辑和谓词逻辑、类型集合论、布尔代数、关系、函数、序列、归纳法、图论、组合数学等。通过适当的教学方法，可以加深学生对离散数学的理解。本书适合所有学习离散数学的学生，并可作为相关专业的教材。 <br/><br/>离散数学及其应用（英文版，第4版) 离散数学及其应用（英文版，第4版) <br/><a href=\"http://book.jqcq.com/product/303083.html\">http://book.jqcq.com/product/303083.html</a> <br/>离散数学所获得的经验基础上写出的，其目的是为学生提供准确而可读的教材，使离散数学的概念和技术得以清晰地介绍和演示。向爱怀疑的学生们展示离散数学的实用性。为计算机科学专业的学生提供一切必需的数学基矗使数学专业的学生理解数学概念的重要性以及这些概念为什么对应用而言是重要的。为教师（指导者）设计一个灵 ... <br/><br/>离散数学与组合数学（第5版） 离散数学与组合数学（第5版） <br/><a href=\"http://book.jqcq.com/product/586647.html\">http://book.jqcq.com/product/586647.html</a> <br/>离散数学是大学计算机专业最重要的必修课程之一，是许多计算机专业课程的基矗组合数学是研究图论、密码学、编码理论、算法复杂性的基本数学工具。本书是一个优秀的离散数学与组合数学的入门教材，包括计数、数理逻辑、集合论、图论、应用代数等基本内容，还有与计算技术密切相关的许多算法。作者Grimaldi教授具有极其极其 ... <br/><br/>离散数学及其应用(原书第5版) <br/><a href=\"http://book.jqcq.com/product/620737.html\">http://book.jqcq.com/product/620737.html</a> <br/>离散数学教材，为全球多所大学广为采用。本书全面而系统地介绍了离散数学的理论和方法，内容涉及数学推理、组合分析、离散结构和算法设计。全书取材广泛，除包括定义、定理的严密陈述外，还配备大量的实例和图表的说明，各种练习和题目，以及丰富的历史资料和网站资源。第5版在前四版的基础上做了大量的改进，使其成为? ... <br/><br/>离散数学（第四版） <br/><a href=\"http://book.jqcq.com/product/583297.html\">http://book.jqcq.com/product/583297.html</a> <br/>离散数学的入门教材，充分考虑到了初学者的需要，内容、例题、习题都作了精心的挑选和组织，讲解细致，叙述浅显易懂，循序渐进，用例贴近日常生活或计算机应用，并注重算法。主要内容包括集合、关系、函数、图论、组合数学、组合电路设计、有限自动机、算法、逻辑等。本书可作为计算机专业或其他相关专业的离散数学教 ... <br/><br/>数据结构与STL（英文版） 数据结构与STL（英文版） <br/><a href=\"http://book.jqcq.com/product/345529.html\">http://book.jqcq.com/product/345529.html</a> <br/>数据结构及其实现的基础知识。书中引导学生通过对方法接口、示例和应用的学习，逐渐理解和掌握如何高效地使用数据结构。适合课堂教学和自学参考。 本书特色大多数数据结构用STL（标准模板库）提供，并详细探究了STL数据结构的规范实现，同时讨论了一些数据结构的其他实现方式，可以使学生尽早接触工程实践，为未来 ... <br/><br/>数据结构 C++语言描述（英文影印版） <br/><a href=\"http://book.jqcq.com/product/306107.html\">http://book.jqcq.com/product/306107.html</a> <br/>数据结构。内容从数据结构的基本原理到面向对象程序设计的方法。书内使用适应面极广的C++语言。全书14章分别为：1.绪论；2.基本数据类型；3.抽象数据类型与类；4.集合类；5.栈与队列；6.抽象运算符；7.类属数据类型；8.类与动态存储；9.链表；10.递归；11.树；12.继承与抽象类；13.先进的非线性结构；14.构建集合。书后 ... <br/><br/>计算机算法（C++版） <br/><a href=\"http://book.jqcq.com/product/413600.html\">http://book.jqcq.com/product/413600.html</a> <br/>算法在设计与分析文献的一本经典著作。书中介绍了算法和算法性能的基本知识，基本的数据结构知识，重点讨论了不同的算法设计策略，研究了下界理论等，提供了计算机算法的设计技术和有效的算法分析，以及大量的详细实例和实际应用。同时，对NP难和NP完全问题能否有效求解进行了分析。本书还汇聚了各种随机算法与并行算法 ... <br/><br/>数据结构与算法分析：C++描述(第3版) 数据结构与算法分析：C++描述(第3版) <br/><a href=\"http://book.jqcq.com/product/431801.html\">http://book.jqcq.com/product/431801.html</a> <br/>算法分析的经典教材，书中使用主流的程序设计语言C++作为具体的实现语言。书的内容包括表、栈、队列、树、散列表、优先队列、排序、不相交集算法、图论算法、算法分析、算法设计、摊还分析、查找树算法、k-d树和配对堆等。本书适合作为计算机相关专业本科生的数据结构课程和研究生算法分析课程的教材。本科生的数据结构 ...<br/>参考资料：<a href=\"http://www.jqcq.com/forum\">http://www.jqcq.com/forum</a></p>\n<p>(摘自 <a href=\"http://zhidao.baidu.com/question/35635271.html?si=5\">http://zhidao.baidu.com/question/35635271.html?si=5</a>) </p>            </div>\n                ",
 			"keywords":["machine_learning"]
 		},
 		{

@@ -1,7 +1,7 @@
 <% if log_in? %>
   <% if following.in?(current_user.followings)&&following.id!=current_user.id%>
-    <%=link_to "取消关注", delete_following_user_path(id: current_user.id, following: following.id, index: index), remote:true, class:"delete-following btn red btn-primary"%>
+    <%=link_to "取消关注", delete_following_user_path(id: current_user.id, following: following.id, index: index, no_notification_check: :true), remote:true, class:"delete-following btn red btn-primary"%>
   <% elsif following.id!=current_user.id %>
-    <%=link_to "+关注", create_following_user_path(id: current_user.id, following: following.id, index: index), remote:true, class:"create-following btn btn-primary"%>
+    <%=link_to "+关注", create_following_user_path(id: current_user.id, following: following.id, index: index, no_notification_check: :true), remote:true, class:"create-following btn btn-primary"%>
   <% end %>
 <% end %>

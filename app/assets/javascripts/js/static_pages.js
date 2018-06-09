@@ -22,7 +22,7 @@ function changecolor(id)
 			x.authenticity_token=$("meta[name='csrf-token']").attr("content");
 			x.specify=parseInt(id);
 			var h=new XMLHttpRequest();
-			h.open('POST','/home_change');
+			h.open('POST','/home_change?no_notification_check=true');
 			h.setRequestHeader('Content-Type','application/json');
 			h.onload=function()
 			{
@@ -42,6 +42,7 @@ function changecolor(id)
 						span3.setAttribute("class","span3");
 						var thumbnail = document.createElement("div");
 						thumbnail.setAttribute("class","thumbnail");
+						thumbnail.setAttribute("style","height:110px");
 						var h2 = document.createElement("h2");
 						var a = document.createElement("a");
 						var small1 = document.createElement("small");

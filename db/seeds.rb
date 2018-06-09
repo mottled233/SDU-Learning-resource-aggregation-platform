@@ -157,7 +157,7 @@ reply =
 
 
 # 添加课程专栏
-file_list = ["java", "machine_learning","discrete_math"]
+file_list = ["java", "machine_learning","discrete_math", "python", "data_structure"]
 file_list.each do |course_file|
   # 对每一课程，读取相应资源文件
   file_content=""
@@ -181,7 +181,7 @@ file_list.each do |course_file|
 end
 
 # 添加课程资源
-file_list = ["java"]
+file_list = ["java", "machine_learning","discrete_math", "python"]
 file_list.each do |course_file|
   # 对每一课程，读取相应资源文件
   file_content=""

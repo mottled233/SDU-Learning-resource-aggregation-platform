@@ -131,26 +131,43 @@ class UsersController < ApplicationController
   
   def select_course
     @user = User.find(params[:id])
-    @course = Course.find(params[:course])
-    @result = @user.selected_courses<<@course
-    @index = params[:index]
-    respond_to do |format|
-      format.html { render "show" }
-      format.js
+    if @user.user_role.to_s == 'teacher'
+      @result = :teacher
+      respond_to do |format|
+        format.html { render "show" }
+        format.js
+      end
+    else
+      @course = Course.find(params[:course])
+      @result = @user.selected_courses<<@course
+      @index = params[:index]
+      respond_to do |format|
+        format.html { render "show" }
+        format.js
+      end
     end
+
   end
   
   def unselect_course
     @user = User.find(params[:id])
-    @course = Course.find(params[:course])
-    @index = params[:index]
-    
-    # @result = UserCourseAssociation.find_by(user: @user, course: @course).destroy
-    @result = @user.selected_courses.delete(@course)
-    
-    respond_to do |format|
-      format.html {render("show")}
-      format.js
+    if @user.user_role.to_s == 'teacher'
+      @result = :teacher
+      respond_to do |format|
+        format.html { render "show" }
+        format.js
+      end
+    else
+      @course = Course.find(params[:course])
+      @index = params[:index]
+      
+      # @result = UserCourseAssociation.find_by(user: @user, course: @course).destroy
+      @result = @user.selected_courses.delete(@course)
+      
+      respond_to do |format|
+        format.html {render("show")}
+        format.js
+      end
     end
   end
   

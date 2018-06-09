@@ -1,3 +1,7 @@
 <% if @result %>
+  <% if @result == :teacher%>
+    alert("教师用户不能自行选课，请联系教务管理员");
+  <% else %>
     $("#focus_btn<%=@index%>").html("<%= escape_javascript(render partial: "users/select_course_btn", locals: {user: @user, index: @index, course: @course})%>");
+  <% end %>
 <% end %>
