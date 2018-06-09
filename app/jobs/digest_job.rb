@@ -1,15 +1,14 @@
 class DigestJob < ApplicationJob
+  queue_as :default
   require 'pycall/import'
   include PyCall::Import
-  
-  
-  queue_as :default
 
   def perform(*args)
-    pyimport "test_call"
+    pyimport :summary
+    knowledge = args[0]
+    text = knowledge.content_without_html
     puts "there do the work."
-    a = test_call.cut("他来到了网易大厦")
-    puts(a.class)
-    p(a)
+    digest = summary.interface text
+    knowledge.update_attribute(:digest, digest)
   end
 end

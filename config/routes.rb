@@ -49,6 +49,7 @@ Rails.application.routes.draw do
  post "/knowledges/render_department",to: "knowledges#render_department",as:"render_department"
  post "/knowledges/render_spe",to: "knowledges#render_spe",as:"render_spe"
  post "/knowledges/render_newCourse",to: "knowledges#render_newCourse",as:"render_newCourse"
+ post "/knowledges/render_label",to: "knowledges#render_label",as:"render_label"
  
  get "/courses/:course_id/questions", to: "courses#questions_index", as: "course_questions"
  get "/courses/:course_id/blogs", to: "courses#blogs_index", as: "course_blogs"

@@ -1,0 +1,11 @@
+<%if !label_string.nil?%>
+    <%label_list = label_string.split(";")%>
+    <div>
+        <%for label in label_list%>
+        <div style="display:inline">
+            <span class="label label-info"><p class="label_content" style="display:none"><%=label%></p><%=label%>&nbsp;&nbsp;&nbsp;&nbsp;<button style="width：14px;height:18px;margin:0px;padding:0px;background-color:#DEB948;border-color:#DEB948;" type="button" onClick="label_del_click(this)"><i class="halflings-icon ban-circle" style="margin-bottom:2px"></i></button></span>    
+        </div>
+        <%end%>
+    </div>
+<%end%>
+

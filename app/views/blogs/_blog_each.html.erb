@@ -3,7 +3,7 @@
         <div class="span10" style="padding-left: 10px;">
             <div>
                 <%=link_to blog_path(q.id), class:"no-hover", style:"padding-left:5px" do%>
-                    <h1 style="font-size:1.7em;display:inline-block;"><strong><%= short_digest q.title, 20%></strong></h1>
+                    <h1 style="font-size:1.7em;display:inline-block;"><strong><%= short_digest q.title, 40%></strong></h1>
                 <%end%>
             </div>
             <hr class="normal-hr" style="margin:2px 0 5px"/>
@@ -14,7 +14,7 @@
                         <p class="inline-block"><%=short_digest q.creator.nickname, 10%></p>
                     <% end %>
                     <% unless q.keywords.empty? %>
-                        <span class="intro-title">标签：</span>
+                        <span class="intro-title">分类：</span>
                         <% (q.keywords[0,3]).each do |keyword| %>
                             <span class="label label-info" style="margin:left:3px"><%= keyword.name%></span>
                         <% end %>
@@ -40,7 +40,6 @@
                 <%= link_to "修改",login_path%>
                 <%= link_to "删除",login_path%>
             <%elsif current_user?(q.creator)%>
-                
                 <%if q.check_state == 0%>
                     <%= link_to "通过",accept_blog_path(q),remote:true%>
                     <%= link_to '拒绝',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -72,7 +71,7 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to blog_path(q.id), class:"no-hover" do%>
-                                <p><%= q.knowledge_digest %></p>
+                                <p><%= short_digest q.content, 50%></p>
                             <%end%>
                         </div>
                     </div>

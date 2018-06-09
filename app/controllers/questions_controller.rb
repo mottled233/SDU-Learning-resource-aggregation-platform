@@ -12,11 +12,12 @@ class QuestionsController < KnowledgesController
     def destroy
         @question = Question.find(params[:id])
         @question.destroy
-        redirect_to :back
+        redirect_to questions_path
     end
     def new
         super
         @question = Question.new
+        @question.check_state = 1
         @keywords = Keyword.all
     end
     def show
@@ -26,6 +27,7 @@ class QuestionsController < KnowledgesController
     end
     def edit
         @question = Question.find(params[:id])
+        @question.check_state = 1
         @courses =  Course.all
         @keywords = Keyword.all
     end
@@ -34,6 +36,7 @@ class QuestionsController < KnowledgesController
         if(@question.knowledge_digest.nil?||@question.knowledge_digest.empty?)
             @question.knowledge_digest = short_digest(@question.content,50) 
         end
+        question.check_state = 1
         b = true;
         if @question.save
             keyword_list = params[:keywords];
@@ -128,7 +131,7 @@ class QuestionsController < KnowledgesController
 private
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:user_id,:title, :type,:content, :good, :bad)
+      params.require(:question).permit(:user_id,:title, :type,:content, :good, :bad,:label)
     end
 
 end

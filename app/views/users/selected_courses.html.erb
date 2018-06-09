@@ -19,14 +19,14 @@
         <% @courses.each_with_index do |course,index|%>
         <div class="row-fluid">
             <div class="row-fluid span7 offset1">
-              <div class="span3">
+              <div class="span5">
                   <%=link_to course.course_name, course_path(course), style:"padding: 20px;font-size: 1.5em"%>
               </div>
               <div class="span3" style="">
                   <p>
                     <strong>任课老师:</strong>
                     <% course.users.where(user_role: :teacher).each do|teacher| %>
-                       <%= teacher.username %>&nbsp
+                       <%= teacher.nickname %>&nbsp
                     <% end %>
                   </p>
                   
@@ -37,7 +37,7 @@
                     <% end %>
                   </p>
               </div>
-              <div id="focus_btn<%=index%>" class="span1 offset6" style="margin-top:-50px">
+              <div id="focus_btn<%=index%>" class="span1 offset8" style="margin-top:-50px">
                 <%= render partial: "users/select_course_btn", locals: {user: @user, index: index, course: course} %>
               </div>
               
