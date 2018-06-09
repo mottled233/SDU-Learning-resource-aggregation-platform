@@ -8,34 +8,38 @@
             <div class="box-header">
                 <h2><i class="  halflings-icon white book" style="color:white"></i><span class="break"></span>课程简介</h2>
             </div>
-            <div class="box-content" style="margin-top:20px;padding-left:20px">
+            <div class="box-content" style="padding:20px">
                 <div class="row-fluid">
-                    <div class="span2 ">
+                    <div class="row-fluid center">
                         <h1 style="display:inline;">
-                           <strong>&nbsp;&nbsp;<%= @course.course_name %></strong>
+                           <strong><%= @course.course_name %></strong>
                         </h1>
                     </div>
-                    <div id="focus_btn0" class="span2 offset1" style="padding-left:25px;margin-left:25px;display:inline">
+                    <div id="focus_btn0" class="center row-fluid" style="padding-top:20px;">
                         <%= render partial: "users/select_course_btn", locals: {user: current_user, index: 0, course: @course}%>&nbsp;&nbsp;
                     </div>
+                    
                 </div>
-                <div style="margin-top:20px">
+                <div class="row-fluid">
+                    <hr class="normal-hr" style="margin: 20px 0"/>
+                </div>
+                <div class="row-fluid">
                     <p>
                         <h2 style="display:inline-block"> <strong>任课老师:</strong></h2>
                         <%t_list = @course.users.where(user_role: :teacher)%>
                         <% if t_list.size>2%>
                             <% t_list[0..2].each do|teacher| %>
-                                <%= teacher.username %>&nbsp;
+                                <%=link_to teacher.nickname, user_path(teacher) %>&nbsp;
                             <% end %>
                             <p style="display:inline">...</p>
                         <%else%>
                             <% t_list.each do|teacher| %>
-                                <%= teacher.username %>&nbsp;
+                                <%= link_to teacher.nickname, user_path(teacher) %>&nbsp;
                             <% end %>
                         <%end%>
                     </p>
                 </div>
-                <div style="margin-top:20px">
+                <div class="row-fluid" style="margin-top:20px">
                     <p>
                         <strong>开课院系:</strong>
                             <%c_list = @course.departments%>
@@ -54,15 +58,15 @@
           </div>
         </div>
         <div class="span8">
-            <div class="row-fluid shadow-box" style="height:300px;margin-bottom:50px">
+            <div class="row-fluid shadow-box" style="height:400px;">
                 <div class="box-header">
                     <h2><i class="  halflings-icon white th" style="color:white"></i><span class="break"></span>课程简介</h2>
                 </div>
-                <div class="box-content">
-                    write smomething about the course  。。。
+                <div class="box-content course-introduction">
+                    <%= @course.introduction.html_safe %>
                 </div>
             </div>
-            <div class="row-fluid shadow-box" style="margin-bottom:50px">
+            <div class="row-fluid shadow-box" style="margin: 50px 0">
                 <div class="box-header">
                     <h2><i class="  halflings-icon white th" style="color:white"></i><span class="break"></span>精品推荐</h2>
                 </div>

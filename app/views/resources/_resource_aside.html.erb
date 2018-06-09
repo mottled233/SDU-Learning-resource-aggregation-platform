@@ -40,7 +40,7 @@
         <div class="row-fluid" data-index="<%= index%>">
             <div class="row-fluid span11 offset1">
                 <div class="span8">
-                    <%=link_to "[#{creating.chinese_type}]", creatings_user_path(current_user, type: creating.type), class: "creating-title"%>
+                    <%=link_to "[#{creating.chinese_type}]", creatings_user_path(creator, type: creating.type), class: "creating-title"%>
                         
                     <%=link_to "《#{creating.title}》", creating.to_path, class: "creating-title"%>
                         

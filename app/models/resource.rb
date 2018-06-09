@@ -1,5 +1,5 @@
 class Resource< Knowledge
-    validates :content,presence: true,length:{minimum: 1,maximum: 200}
+    validates :content,presence: true
     
     # instance methods
     def to_path

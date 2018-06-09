@@ -28,12 +28,12 @@
           <%t_list = @course.users.where(user_role: :teacher)%>
           <% if t_list.size>2%>
               <% t_list[0..2].each do|teacher| %>
-                 <%= teacher.username %>&nbsp;
+                 <%= teacher.nickname %>&nbsp;
               <% end %>
               <p style="display:inline">...</p>
           <%else%>
               <% t_list.each do|teacher| %>
-                 <%= teacher.username %>&nbsp;
+                 <%= teacher.nickname %>&nbsp;
               <% end %>
           <%end%>
         </p>

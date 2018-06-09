@@ -112,8 +112,7 @@ class CoursesController < ApplicationController
   def questions_index
     @course = Course.find(params[:course_id])
     if !(@course.knowledges.nil?||@course.knowledges.empty?)
-      @question = @course.knowledges.where("type=?","Question")
-      @question = @question.sort_by{ |created_at| created_at }.reverse
+      @question = @course.knowledges.where("type=?","Question").order(last_reply_at: :desc)
       @question = @question.paginate(:page => params[:page], :per_page => 10)
     end
   end
@@ -121,9 +120,7 @@ class CoursesController < ApplicationController
   def blogs_index
     @course = Course.find(params[:course_id])
     if !(@course.knowledges.nil?||@course.knowledges.empty?)
-      @blog = @course.knowledges.where("type=?","Blog")
-      @blog = @blog.where("check_state=?",1)
-      @blog = @blog.sort_by{ |created_at| created_at }.reverse
+      @blog = @course.knowledges.where("type=?","Blog").where("check_state=?",1).order(last_reply_at: :desc)
       @blog = @blog.paginate(:page => params[:page], :per_page => 10)
     end
   end
@@ -133,9 +130,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:course_id])
 
     if !(@course.knowledges.nil?||@course.knowledges.empty?)
-      @resource = @course.knowledges.where("type=?","Resourse")
-      @resource = @resource.where("check_state=?",1)
-      @resource = @resource.sort_by{ |created_at| created_at }.reverse
+      @resource = @course.knowledges.where(type: "Resource").where(check_state: 1).order(last_reply_at: :desc)
       @resource = @resource.paginate(:page => params[:page], :per_page => 10)
     end
 

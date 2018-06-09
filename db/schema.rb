@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606135807) do
+ActiveRecord::Schema.define(version: 20180609095805) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -84,8 +84,9 @@ ActiveRecord::Schema.define(version: 20180606135807) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.text     "introduction"
   end
 
   create_table "departments", force: :cascade do |t|
