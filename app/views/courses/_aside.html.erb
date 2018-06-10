@@ -1,17 +1,20 @@
 <div class="span3 shadow-box offset1" style="height:800px">
-    <button id="newButton" type="button" class="btn btn-small btn-warning" style="margin-left:50px;margin-top:50px;width:150px;height:30px;border-radius:16px!important;">
-       <% if log_in?%>
-         <%=link_to yield(:write_path),method: :get do%>
-           <i class="halflings-icon white edit"></i>
-           <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
-         <%end%>
-      <%else%>
-         <%= link_to login_path(:message => "请先登录") do%>
-            <i class="halflings-icon white edit"></i>
-            <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
-         <%end%>
+    <% if log_in?%>
+      <%=link_to yield(:write_path),method: :get do%>
+        <button id="newButton" type="button" class="btn btn-small btn-warning" style="margin-left:50px;margin-top:50px;width:150px;height:30px;border-radius:16px!important;">
+          <i class="halflings-icon white edit"></i>
+          <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
+        </button>
       <%end%>
-    </button>
+    <%else%>
+      <%= link_to login_path(:message => "请先登录") do%>
+        <button id="newButton" type="button" class="btn btn-small btn-warning" style="margin-left:50px;margin-top:50px;width:150px;height:30px;border-radius:16px!important;">
+          <i class="halflings-icon white edit"></i>
+          <p style="display:inline;font-size:14px"><strong>我要发布</strong></p>
+        </button>
+      <%end%>
+    <%end%>
+    
     <div class="span8" style="margin-left:40px;margin-top:30px">
       <div class="box-header">
         <h2><i class="  halflings-icon white book" style="color:white"></i><span class="break"></span>课程简介</h2>

@@ -37,8 +37,6 @@
         <div style="float:right;font-size:1em;margin-top:13px;margin-right:20px">
             <strong>
             <%if current_user.nil?%>
-                <%= link_to "修改",login_path%>
-                <%= link_to "删除",login_path%>
             <%elsif current_user?(q.creator)%>
                 <%if q.check_state == 0%>
                     <%= link_to "通过",accept_blog_path(q),remote:true%>
@@ -71,7 +69,11 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to blog_path(q.id), class:"no-hover" do%>
-                                <p><%= short_digest q.content, 50%></p>
+                                <% if q.content_digest.blank? %>
+                                    <p><%= short_digest q.content_without_html, 100%></p>
+                                <% else %>
+                                    <p><%= short_digest q.digest, 100%></p>
+                                <% end %>
                             <%end%>
                         </div>
                     </div>
