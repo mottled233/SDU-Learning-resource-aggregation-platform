@@ -131,14 +131,37 @@ course[:machine_learning].keywords << ([ keyword_up[:computer], keyword_down[:ma
 question =
 {
   question1: course[:machine_learning].knowledges.create(creator: student[:student1], title:'请问SVM和感知机有什么区别？', type:'Question', content:'SVM和感知机都是线性分类器，公式都是wx=b，那么他们有什么区别？', good:0, bad:0),
-  question2: course[:machine_learning].knowledges.create(creator: student[:student2], title:'梯度下降的问题', type:'Question', content:'为什么不能直接求导求出全局最低点，而非要通过梯度下降来一步步下降呢？', good:5, bad:0),
-  question3: course[:machine_learning].knowledges.create(creator: student[:student1],title:'神经网络无法收敛！',type:'Question',content:'我把学习率已经调的很低了，网络模型结构是[784,30,10]，为什么不收敛呢？',good:1,bad:1)
+  question2: course[:machine_learning].knowledges.create(creator: student[:student2], title:'梯度下降的问题', type:'Question', content:'为什么不能直接求导求出全局最低点，而非要通过梯度下降来一步步下降呢？', good:0, bad:0),
+  question3: course[:machine_learning].knowledges.create(creator: student[:student1],title:'神经网络无法收敛！',type:'Question',content:'我把学习率已经调的很低了，网络模型结构是[784,30,10]，为什么不收敛呢？',good:1,bad:1),
+
+  question4: course[:python].knowledges.create(creator: student[:student1],title:'你是如何自学 Python 的？',type:'Question',content:'我该怎么自学 Python 呢？',good:1,bad:10),
+  question5: course[:python].knowledges.create(creator: student[:student1],title:'你都用 Python 来做什么？',type:'Question',content:'发现很多人都在学习 Python ，但是没有明确的说明可以做什么，主流的功能是什么？想知道目前利用 Python 开发的都在干什么？',good:2,bad:9),
+  question6: course[:python].knowledges.create(creator: student[:student1],title:'知乎上这么多推崇学 Python 入IT 行的，如果他们学完 Python这一套找不到工作怎么办？',type:'Question',content:'Python 的岗位本来就比较少，而且大部分都对经验要求比较高，没有什么初级岗位啊<br/>我说的学Python当然不只是学语言，既然说的是学Python入IT坑，入坑当然是学全套，但我个人认为很多人学完全套还是找不到工作的，尤其是非北上广城市，职位数量少，要求反而比一线城市更高，我个人对这些人转行不看好，欢迎指正。',good:3,bad:8),
+  question7: course[:python].knowledges.create(creator: student[:student1],title:'Python 有那么神吗？',type:'Question',content:'本人无编程经验，出于对学术的研究,就想学一下，结果网上有人说学 R 有人说学 Python，我打算去了解一下 Python，结果好像看到一个新世界了， Python 在他们口中好像无所不能，究竟这里面是个什么情况呢？',good:4,bad:7),
+  # question7: course[:python].knowledges.create(creator: student[:student1],title:'Python 有那么神吗？',type:'Question',content:'Python 的岗位本来就比较少，而且大部分都对经验要求比较高，没有什么初级岗位啊<br/>我说的学Python当然不只是学语言，既然说的是学Python入IT坑，入坑当然是学全套，但我个人认为很多人学完全套还是找不到工作的，尤其是非北上广城市，职位数量少，要求反而比一线城市更高，我个人对这些人转行不看好，欢迎指正。',good:3,bad:8),
+  question8: course[:python].knowledges.create(creator: student[:student1],title:'可以用 Python 编程语言做哪些神奇好玩的事情？',type:'Question',content:'请说明为什么这些事情适合用 Python 做',good:5,bad:6),
+  question9: course[:python].knowledges.create(creator: student[:student2],title:'为什么很多人喜欢 Python？',type:'Question',content:'为什么很多人喜欢 Python？',good:6,bad:5),
+  question10: course[:python].knowledges.create(creator: student[:student2],title:'未来十年Python的前景会怎样？',type:'Question',content:'未来十年，Python在中国的发展会怎样？使用Python的企业会不会越来越多？Python主要被运用的领域有哪些？使用Python的程序猿会越来越多还是越来越少呢？',good:7,bad:4),
+  question11: course[:python].knowledges.create(creator: student[:student2],title:'Python 相较于Java 而言，有什么优势？',type:'Question',content:'Python 相较于Java 而言，有什么优势？',good:8,bad:3),
+  question12: course[:python].knowledges.create(creator: student[:student2],title:'关于 Python 的经典入门书籍有哪些？',type:'Question',content:'适合完全没有编程基础的新手使用。',good:9,bad:2),
+  question13: course[:python].knowledges.create(creator: student[:student3],title:'怎么样才算是精通 Python？',type:'Question',content:'当初学习 Python 的时候，看见各种招聘要求写着 “精通 Python 语言”。所以才问了这样一个问题，求教大家。过去一年多了，收到了很多回答，也看到了很多想法。',good:10,bad:1)
 } 
 
 # 关联问题与分类
 question[:question1].keywords << (keyword_down[:machine_learning])
 question[:question2].keywords << (keyword_down[:machine_learning])
 question[:question3].keywords << (keyword_down[:machine_learning])
+
+question[:question4].keywords << (keyword_down[:programing])
+question[:question5].keywords << (keyword_down[:programing])
+question[:question6].keywords << (keyword_down[:programing])
+question[:question7].keywords << (keyword_down[:programing])
+question[:question8].keywords << (keyword_down[:programing])
+question[:question9].keywords << (keyword_down[:programing])
+question[:question10].keywords << (keyword_down[:programing])
+question[:question11].keywords << (keyword_down[:programing])
+question[:question12].keywords << (keyword_down[:programing])
+question[:question13].keywords << (keyword_down[:programing])
 
 # 用户关注问题
 student[:student1].focus_contents<<(question[:question1])
@@ -150,7 +173,34 @@ student[:student2].focus_contents<<([question[:question1],question[:question2]])
 reply = 
 {
   relpy1: question[:question3].replies.create(creator: student[:student2], type:'Reply',content:'可能原因有很多，你说的太不具体了！',good:15,bad:1),
-  reply2: question[:question2].replies.create(creator: teacher[:teacher_ml], type:'Reply',content:'因为有很多复杂的函数是无法通过直接求解得到答案的，必须通过梯度下降的方式逐步求解。',good:32,bad:1)
+  reply2: question[:question2].replies.create(creator: teacher[:teacher_ml], type:'Reply',content:'因为有很多复杂的函数是无法通过直接求解得到答案的，必须通过梯度下降的方式逐步求解。',good:32,bad:1),
+  
+  #question4-11,一人一条回复
+  reply3: question[:question4].replies.create(creator: student[:student4], type:'Reply',content:'这里强烈推荐Yupeng Jiang博士撰写的《三天搞定Python基本功》，只用三天时间可以了解Python数据分析的广度和所涉及的概念，是诚意之作，十分难得！因原文是用英文写成，给英国伦敦大学学院的本科生、研究生上课用的。我将其翻译成了中文，便于自己将来快速复习用。在征得jiang博士的同意后，分享给大家。',good:32,bad:1),
+  reply4: question[:question5].replies.create(creator: student[:student4], type:'Reply',content:'python能做的有很多，我这里之阐述我自学的数据分析的内容，这也是我学习利用python进行数据分析的过程，如果要看实践可以直接看项目篇数据分析中常用的软件是jupyter notebook，而应用这个软件最方便的方法就是anaconda。具体的anaconda操作方法这篇文章讲述的比较详细就不多加叙述了。',good:32,bad:1),
+  reply5: question[:question6].replies.create(creator: student[:student4], type:'Reply',content:'放心，学Python不会找不到工作。找不到工作的话说明你只学了Python。',good:32,bad:1),
+  reply6: question[:question7].replies.create(creator: student[:student3], type:'Reply',content:'看你是要把 Python 用在什么领域？答主自己做 DevOps，常用的是 Ansible/SaltStack（ansible批量部署的问题？、ansible使用密钥短语的问题? ），有时也会写点爬虫（Python 爬虫进阶？、大家都用python写过哪些有趣的脚本? ）',good:32,bad:1),
+  reply7: question[:question8].replies.create(creator: student[:student3], type:'Reply',content:'Python作为一种应用极为广泛的语言，几乎在任何领域都能派上用场。想做Web有Flask/Django/Tornado；想做分布式有Celery；想做手机App有Kivy；想做数据分析有Pandas；想做可视化有Matplotlib/Seaborn/Plotly/Bokeh；想做机器学习有Tensorflow/PyTorch/MxNet……夸张一点说，几乎没有什么做不了的东西（笔芯）。',good:32,bad:1),
+  reply8: question[:question4].replies.create(creator: student[:student1], type:'Reply',content:'看书啊',good:32,bad:1),
+  reply9: question[:question5].replies.create(creator: student[:student1], type:'Reply',content:'面部识别',good:32,bad:1),
+  reply10: question[:question6].replies.create(creator: student[:student1], type:'Reply',content:'入行!=找工作零基础学Python=零基础学钢琴，难道1个月学会了弹小星星就能找到工作吗？',good:32,bad:1),
+  # #回复question10、11、12 没人回复
+  
+  # #回复question13
+  reply11: reply11=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'level 1：了解基本语法<br/>这是最容易的一级，掌握了 Python 的基本语法，可以通过 Python 代码实现常用的需求，不管代码质量怎么样。',good:32,bad:1),
+  reply12: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'熟悉常用 standard library 的使用',good:32,bad:1),
+  reply13: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'阅读 Python 的 C 实现，掌握 Python 中各种对象的本质',good:32,bad:1),
+  reply14: reply14=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'我在以前找工作的时候，曾经用过「精通X」之类的词。随着踩得坑越多，越用越感觉自己懂的太少，要学的太多了',good:32,bad:1),
+  reply15: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'很少有人会说自己精通Python',good:32,bad:1),
+
+  #回复reply11
+  reply16: reply16=reply11.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
+  reply17: reply11.replies.create(creator: student[:student3], type:'Reply',content:'没有你那么高的境界，不过应该是这么个过程！赞',good:32,bad:1),
+  #回复reply14
+  reply18: reply14.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
+  reply19: reply14.replies.create(creator: student[:student3], type:'Reply',content:'做为一个不得不学那么多语言的人来说，语言上的差异已经非常小，但是每一种语言都有自己的思想，重要的是思想上的转变。',good:32,bad:1),
+  #回复reply16
+  reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1)
 }
 
 # ==============================================================================

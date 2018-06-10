@@ -1,6 +1,6 @@
 <div class="course-info-menu" style="margin-bottom:50px">
 	<div class="w row-fluid">
-      <h1 style="text-align:center">专栏修改/h1>		    
+      <h1 style="text-align:center">专栏修改</h1>		    
 	</div>
 </div>
 <div class="row-fluid" style="margin-top:50px">
@@ -95,7 +95,7 @@
 </div>
 <style>
 .cleditorMain{
-  height:1000px!important;
+  height:1027px!important;
   width:800px!important;
 }
 #textarea2{
@@ -202,7 +202,7 @@ $("#img_input2").on("change", function(e) {
       if(label == label_list[i]){
           if(i == label_list.length-1){
             //最后一个
-            label_string = label_string.replace(label,"");
+            label_string = label_string.replace(";"+label,"");
           }
           else{
             label_string = label_string.replace(label+";","");
