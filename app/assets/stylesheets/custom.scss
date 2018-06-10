@@ -304,3 +304,13 @@ a {
     padding-bottom:10px;
     line-height:200%;
 }
+
+.main-dropitem{
+    cursor: pointer;
+    
+}
+
+.main-dropitem:hover{
+    background-color: #578ebd;
+    color: #fff;
+}

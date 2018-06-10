@@ -88,8 +88,14 @@ class Knowledge < ApplicationRecord
     end
   end
   
-  
-
+  def content_without_html
+    string = content
+    string.gsub!(/[\n\\n\s]/,"")
+    string.gsub!(/<pre.*?\/pre>/,"")
+    string.gsub!(/<.+?>/,"")
+    string
+    
+  end
   
   def chinese_type
     case self.type

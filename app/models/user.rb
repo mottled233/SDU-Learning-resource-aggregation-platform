@@ -164,7 +164,7 @@ class User < ApplicationRecord
         
         # check courses user has followed
         self.selected_courses.each do |course|
-          knowledges_need_notify = course.knowledges.where(type: course_config.keys).where(
+          knowledges_need_notify = course.knowledges.where(type: course_config.keys, check_state: 1).where(
                                   "knowledges.created_at>?",time)
                   
           knowledges_need_notify.each do |knowledge|
@@ -177,7 +177,7 @@ class User < ApplicationRecord
         end
         
         # check knowledges user has followed
-        knowledges_need_notify = self.focus_contents.where("knowledges.updated_at>?",time)
+        knowledges_need_notify = self.focus_contents.where(check_state: 1).where("knowledges.updated_at>?",time)
         knowledges_need_notify.each do |knowledge|
           generate_notification!(notify_entity: knowledge,
                                 notify_type: NOTIFY_TYPE_UPDATE,
@@ -185,7 +185,7 @@ class User < ApplicationRecord
         end
         
         # check new replies for user's creation and following quesion
-        knowledges_need_notify = self.focus_contents.where("knowledges.type=? and knowledges.last_reply_at>?",ENTITY_TYPE_QUESTION, time)
+        knowledges_need_notify = self.focus_contents.where(type: ENTITY_TYPE_QUESTION, check_state: 1).where("knowledges.last_reply_at>?", time)
         knowledges_need_notify.each do |knowledge|
           knowledge.replies.where("knowledges.created_at>?",time).each do |reply|
             generate_notification!(notify_entity: knowledge,
@@ -211,7 +211,7 @@ class User < ApplicationRecord
         
         #check focus users new creating,no include answer or relpy, need to optimize:
         f_user_ids = self.following_ids
-        knowledges_need_notify = Knowledge.where("knowledges.user_id IN (?) and knowledges.created_at>? and knowledges.type<>?",f_user_ids, time, "Reply")
+        knowledges_need_notify = Knowledge.where("knowledges.user_id IN (?) and knowledges.created_at>? and knowledges.type<>? and check_state=1",f_user_ids, time, "Reply")
         knowledges_need_notify.each do |knowledge|
           generate_notification!(notify_entity: knowledge,
                                 notify_type: NOTIFY_TYPE_FOCUS_USER_NEW,

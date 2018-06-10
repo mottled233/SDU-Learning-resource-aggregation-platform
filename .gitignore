@@ -23,3 +23,7 @@
 /.gitignore
 /db/schema.rb
 /git_stats/*
+/app/jobs/python_script/SRModel
+/app/jobs/python_script/SRModel.trainables.syn1neg.npy
+/app/jobs/python_script/SRModel.wv.vectors.npy
+

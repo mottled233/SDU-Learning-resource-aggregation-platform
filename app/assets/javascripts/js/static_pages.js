@@ -134,6 +134,7 @@ function dropdownOnClick(e,id)
 					{
 						var newli=document.createElement("li");
 						newli.setAttribute("data-id",o.data[i].id);
+						newli.setAttribute("class", "main-dropitem");
 						if (o.data[i].name)
 							newli.innerHTML=o.data[i].name;
 						else

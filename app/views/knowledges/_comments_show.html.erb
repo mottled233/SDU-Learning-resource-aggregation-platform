@@ -1,5 +1,4 @@
 <% knowledge = Knowledge.find(knowledge)%>
-
 <%like = knowledge.like_users.where(:id => current_user).first %>
 <%unlike = knowledge.unlike_users.where(:id => current_user).first %>
 <% if like %>

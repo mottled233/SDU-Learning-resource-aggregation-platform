@@ -10,7 +10,7 @@
         </div>
       <% end %>
         <div class="like_value">
-            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%>-<%=knowledge.bad%><span>
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good-knowledge.bad%><span>
         </div>
       <%=link_to good_sub_bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
         <div class="bad_btn">
@@ -24,7 +24,7 @@
         </div>
       <% end %>
         <div class="like_value">
-            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%>-<%=knowledge.bad%><span>
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good-knowledge.bad%><span>
         </div>
       <%=link_to login_path(:message => "请先登录") do%>
         <div class="bad_btn">
@@ -40,7 +40,7 @@
         </div>
       <% end %>
         <div class="like_value">
-            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%>-<%=knowledge.bad%><span>
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good-knowledge.bad%><span>
         </div>
       <%=link_to bad_sub_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
         <div class="bad_btn">
@@ -54,7 +54,7 @@
         </div>
       <% end %>
         <div class="like_value">
-            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%>-<%=knowledge.bad%><span>
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good-knowledge.bad%><span>
         </div>
       <%=link_to login_path(:message => "请先登录") do%>
         <div class="bad_btn">
@@ -70,7 +70,7 @@
         </div>
       <% end %>
         <div class="like_value">
-            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%>-<%=knowledge.bad%><span>
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good-knowledge.bad%><span>
         </div>
       <%=link_to bad_add_path(tempknowledge: knowledge,tempuser: current_user), remote: true,:id => "bad-#{knowledge.id}" do%>
         <div class="bad_btn">
@@ -84,7 +84,7 @@
         </div>
       <% end %>
         <div class="like_value">
-            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good%>-<%=knowledge.bad%><span>
+            <span class="label" style="background-color:#d6d6d6"><%=knowledge.good-knowledge.bad%><span>
         </div>
       <%=link_to login_path(:message => "请先登录") do%>
         <div class="bad_btn">
