@@ -71,12 +71,12 @@ function changecolor(id)
 						if (id.substring(1,2)=="1")
 						{
 							small2.appendChild(comment);
-							small2.innerHTML=small2.innerHTML+" "+"123"+"&nbsp;&nbsp;&nbsp;&nbsp;";
+							small2.innerHTML=small2.innerHTML+" "+o.reply[j]+"&nbsp;&nbsp;&nbsp;&nbsp;";
 						}
 						else
 						{
 							small2.appendChild(dld);
-							small2.innerHTML=small2.innerHTML+" "+"123"+"&nbsp;&nbsp;&nbsp;&nbsp;";
+							small2.innerHTML=small2.innerHTML+" "+o.data[j].download_count+"&nbsp;&nbsp;&nbsp;&nbsp;";
 						}
 						small2.appendChild(thup);
 						small2.innerHTML=small2.innerHTML+" "+(o.data[j].good-o.data[j].bad)+"<br />";
