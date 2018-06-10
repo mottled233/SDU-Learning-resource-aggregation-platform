@@ -36,7 +36,7 @@ teacher =
   teacher_ml: User.create(username:'teacher1',user_role:'teacher',nickname:'许信顺',email:'teacher1@sdu.edu.com',phone_number:'13156141242',password:'123456'),
   teacher_java: User.create(username:'teacher2',user_role:'teacher',nickname:'鹿旭东',email:'teacher2@sdu.edu.com',phone_number:'13156441271',password:'123456'),
   teacher_java2: User.create(username:'teacher3',user_role:'teacher',nickname:'戴鸿君',email:'teacher3@sdu.edu.com',phone_number:'13156234271',password:'123456'),
-  teacher_data_structure: User.create(username:'teacher5',user_role:'teacher',nickname:'郭凤华',email:'teacher5@sdu.edu.com',phone_number:'13176234271',password:'123456'),
+
   teacher_discrete_math: User.create(username:'teacher4',user_role:'teacher',nickname:'卢雷',email:'teacher4@sdu.edu.com',phone_number:'13256441271',password:'123456'),
 
 }
@@ -62,21 +62,20 @@ student[:student2].followings<<([ teacher[:teacher_ml], student[:student3], stud
 # 课程数据
 course = 
 {
-  rails: Course.create(course_name: 'rails开发技术', introduction: '<p>讲授设计可持久化软件的基础知识，利用敏捷开发技术以及 Ruby on Rails 来开发云服务 (SaaS)。 学生们将了解 SaaS 对抗成品软件的新挑战和机遇。他们将了解并将基础编程技术应用于一个简单的 SaaS 应用的设计、开发、测试及公共云部署。学生们将使用同类最佳的工具，支持行为驱动设计、用户故事、测试驱动开发、快速及结对编程等现代开发技术。学生们将学习如何利用元程序设计和反射机制等现代编程语言特性提高编程效率和代码可维护性。 </p>'),
-  discrete_math: Course.create(course_name: '离散数学', introduction: '<p>离散数学是计算机学科的经典核心基础课程。课程内容主要包括集合论，数理逻辑，关系理论，图论相关内容，为进一步学习计算机科学的基本理论和方法以及之后的专业课打下良好的基础。通过这门课程的学习，将会培养学生的抽象思维能力，逻辑推理能力，缜密概括能力以及分析和解决实际问题的能力。</p><p>离散数学的学习，为其后续课程（如数据结构、操作系统、计算机网络、编译理论、数字逻辑理论、数据库系统、算法分析、系统结构、人工智能等）的学习打下坚实的理论基础。</p><p>这门课程的理论性较强，知识点比较多，但均“有迹可循，有法可依”，因而完成这门课程的学习并非很难。</p>'),
-  java: Course.create(course_name: '高级程序设计语言', introduction: '<p>    “高级语言程序设计”类课程面向无编程基础的学生，培养其运用编程语言解决实际问题的编程能力，使学生掌握一门编程语言的基本语法、语句、控制结构以及结构化程序设计的基本思想和方法，了解基本的算法和数据结构、良好的程序设计风格，具备熟练使用一门编程语言分析和解决实际问题的能力，从而无论以后在学习、工作中使用什么语言编程，都能灵活应用这些思想和方法，为进一步学习其他专业课程和今后从事软件开发工作打下坚实的基础。</p>'),
-  python: Course.create(course_name: 'python基础', introduction: '<p>     Python [paɪθən] 语言，由Guido van Rossum大牛在1990年发明，它是当今世界最受欢迎的计算机编程语言，也是一门对大多数人“学了能用、学了有用、学会能久用”的计算生态语言。</p><p>    本课程是一门体现大学水平的Python 语言入门课程，采用“理解和运用计算生态”为教学理念，面向Python零基础学习者，不要求学习者有任何编程基础。本课程将帮助大家快速学习Python语言，高效编写程序，掌握利用计算机解决问题的基本方法和过程。</p>'),
-  liner: Course.create(course_name: '线性代数', introduction: '<p>本课程主要讨论有限维线性空间的线性理论与方法，具有较强的逻辑性、抽象性与广泛的实用性，尤其在计算机日益普及的今天，解大型线性方程组、求矩阵的特征值等已经成为技术人员经常遇到的课题。因此，本课程所介绍的方法广泛地应用于各个学科。</p><p>通过本课程的学习，使学习者获得应用科学中常用的矩阵方法，线性方程组、二次型等理论及其有关的基础知识，并具有熟练的矩阵运算能力和用矩阵方法解决一些实际问题的能力，从而为学习后继课程及进一步扩大数学知识面、提高数学素养奠定必要的基础。</p>'),
-  high_math: Course.create(course_name: '高等数学', introduction: '<p>在当今科技飞速发展，特别是计算机科学及其应用日新月异的时代，数学科学已渗透到各个科技领域，学习任何一门科学都要用到许多数学知识，而其中最基本的则是微积分。高等数学微积分是非数学各专业的一门必修课，学习任何一门近代数学或工程技术都必须先学微积分。</p> <p>   通过本课程的学习不但可以使学生了解微积分的起源、领会基本概念、基本思想和基本运算方法，更重要的是培养学生抽象思维、逻辑推理能力，尤其是用数学的意识和能力。通过本课程的学习也可以为后续课程打下坚实的基础。</p>'),
-  machine_learning: Course.create(course_name: '机器学习', introduction: '<p>机器学习课程系统介绍进行机器智能所必须了解与掌握的专业知识，重点介绍机器学习的基本概念、基本算法、设计原理、设计方法与评价分析方法，主要内容包括机器学习的数学基础、经常使用的算法、定理以及应用等。本课程的任务是要在全局和整体的角度系统地理解和掌握机器学习的基本算法，建立定量分析的概念，培养用机器学习方法解决实际智能问题的能力。</p>'),
-  data_structure: Course.create(course_name: '数据结构与算法基础', introduction: '<p>从本质上讲，数据结构属于编程类的课程，是程序设计语言课程的进阶篇。首先，程序是对数据的操作，由输入产生输出。对于比较复杂的数据，就需要从数据结构的角度来组织和存储数据，如采用数组还是链表存储结构更加高效；另外，对于比较复杂的数据操作，就需要采用一些特定的数据结构来求解，如判断一个表达式中的括号是否匹配，就需要采用栈来处理。所以数据结构课程中讲解人们在软件开发中常见的各种数据结构，并从逻辑结构到存储结构，再到运算算法设计3个层面加以学习。</p><p>程序设计解决问题往往有多种方法，且不同方法之间的效率可能相差甚远。程序的时间和空间效率，不仅跟数据的组织方式有关，也跟处理流程的巧妙程度有关。本课程将介绍有关数据组织、算法设计、时间和空间效率的概念和通用分析方法，帮助学生学会数据的组织方法和一些典型算法的实现，能够针对问题的应用背景分析，选择合适的数据结构，从而培养高级程序设计技能。</p>')
+  rails: Course.create(course_name: 'rails开发技术'),
+  discrete_math: Course.create(course_name: '离散数学'),
+  java: Course.create(course_name: '高级程序设计语言'),
+  python: Course.create(course_name: 'python基础'),
+  liner: Course.create(course_name: '线性代数'),
+  high_math: Course.create(course_name: '高等数学'),
+  machine_learning: Course.create(course_name: '机器学习'),
+  data_structure: Course.create(course_name: '数据结构与算法基础')
 }
 
 # 关联课程与老师
 course[:machine_learning].users<<(teacher[:teacher_ml])
 course[:java].users<<([ teacher[:teacher_java], teacher[:teacher_java2] ])
 course[:discrete_math].users<<(teacher[:teacher_discrete_math])
-course[:data_structure].users<<(teacher[:teacher_data_structure])
 
 # 关联课程与学院
 soft_course = [ course[:rails], course[:java], course[:python], course[:discrete_math], course[:liner], course[:high_math], course[:machine_learning], course[:data_structure] ]
@@ -169,6 +168,57 @@ student[:student2].focus_contents<<([question[:question1],question[:question2]])
 
 # ==============================================================================
 
+# 回复数据
+reply = 
+{
+  relpy1: question[:question3].replies.create(creator: student[:student2], type:'Reply',content:'可能原因有很多，你说的太不具体了！',good:15,bad:1),
+  reply2: question[:question2].replies.create(creator: teacher[:teacher_ml], type:'Reply',content:'因为有很多复杂的函数是无法通过直接求解得到答案的，必须通过梯度下降的方式逐步求解。',good:32,bad:1),
+  
+  #question4-11,一人一条回复
+  reply3: question[:question4].replies.create(creator: student[:student4], type:'Reply',content:'这里强烈推荐Yupeng Jiang博士撰写的《三天搞定Python基本功》，只用三天时间可以了解Python数据分析的广度和所涉及的概念，是诚意之作，十分难得！因原文是用英文写成，给英国伦敦大学学院的本科生、研究生上课用的。我将其翻译成了中文，便于自己将来快速复习用。在征得jiang博士的同意后，分享给大家。',good:32,bad:1),
+  reply4: question[:question5].replies.create(creator: student[:student4], type:'Reply',content:'python能做的有很多，我这里之阐述我自学的数据分析的内容，这也是我学习利用python进行数据分析的过程，如果要看实践可以直接看项目篇数据分析中常用的软件是jupyter notebook，而应用这个软件最方便的方法就是anaconda。具体的anaconda操作方法这篇文章讲述的比较详细就不多加叙述了。',good:32,bad:1),
+  reply5: question[:question6].replies.create(creator: student[:student4], type:'Reply',content:'放心，学Python不会找不到工作。找不到工作的话说明你只学了Python。',good:32,bad:1),
+  reply6: question[:question7].replies.create(creator: student[:student3], type:'Reply',content:'看你是要把 Python 用在什么领域？答主自己做 DevOps，常用的是 Ansible/SaltStack（ansible批量部署的问题？、ansible使用密钥短语的问题? ），有时也会写点爬虫（Python 爬虫进阶？、大家都用python写过哪些有趣的脚本? ）',good:32,bad:1),
+  reply7: question[:question8].replies.create(creator: student[:student3], type:'Reply',content:'Python作为一种应用极为广泛的语言，几乎在任何领域都能派上用场。想做Web有Flask/Django/Tornado；想做分布式有Celery；想做手机App有Kivy；想做数据分析有Pandas；想做可视化有Matplotlib/Seaborn/Plotly/Bokeh；想做机器学习有Tensorflow/PyTorch/MxNet……夸张一点说，几乎没有什么做不了的东西（笔芯）。',good:32,bad:1),
+  reply8: question[:question4].replies.create(creator: student[:student1], type:'Reply',content:'看书啊',good:32,bad:1),
+  reply9: question[:question5].replies.create(creator: student[:student1], type:'Reply',content:'面部识别',good:32,bad:1),
+  reply10: question[:question6].replies.create(creator: student[:student1], type:'Reply',content:'入行!=找工作零基础学Python=零基础学钢琴，难道1个月学会了弹小星星就能找到工作吗？',good:32,bad:1),
+  # #回复question10、11、12 没人回复
+  
+  # #回复question13
+  reply11: reply11=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'level 1：了解基本语法<br/>这是最容易的一级，掌握了 Python 的基本语法，可以通过 Python 代码实现常用的需求，不管代码质量怎么样。',good:32,bad:1),
+  reply12: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'熟悉常用 standard library 的使用',good:32,bad:1),
+  reply13: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'阅读 Python 的 C 实现，掌握 Python 中各种对象的本质',good:32,bad:1),
+  reply14: reply14=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'我在以前找工作的时候，曾经用过「精通X」之类的词。随着踩得坑越多，越用越感觉自己懂的太少，要学的太多了',good:32,bad:1),
+  reply15: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'很少有人会说自己精通Python',good:32,bad:1),
+
+  #回复reply11
+  reply16: reply16=reply11.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
+  reply17: reply11.replies.create(creator: student[:student3], type:'Reply',content:'没有你那么高的境界，不过应该是这么个过程！赞',good:32,bad:1),
+  #回复reply14
+  reply18: reply14.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
+  reply19: reply14.replies.create(creator: student[:student3], type:'Reply',content:'做为一个不得不学那么多语言的人来说，语言上的差异已经非常小，但是每一种语言都有自己的思想，重要的是思想上的转变。',good:32,bad:1),
+  #回复reply16
+  reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1)
+}
+
+# ==============================================================================
+
+
+# 添加课程专栏
+file_list = ["java", "machine_learning","discrete_math", "python", "data_structure"]
+file_list.each do |course_file|
+  # 对每一课程，读取相应资源文件
+  file_content=""
+  File.open(File.expand_path("../blog_origin_data/#{course_file}.json", __FILE__),"r") do |file|
+    while line = file.gets
+      file_content+=line
+    end
+  end
+  # 转换为json格式，读取文章列表
+  file_content = JSON::parse(file_content)
+  file_content["arr"].each do |article|
+    blog = Blog.create(creator: network, title: article['title'], type:'Blog', content: article['content'], good: rand(0..200), bad: rand(0..200),check_state: 1)
 # 回复数据
 reply = 
 {
