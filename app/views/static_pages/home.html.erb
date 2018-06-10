@@ -4,12 +4,12 @@
 	<h1 style="color:white;text-shadow: 0.1em 0.1em 0.1em black">山东大学资源聚合平台</h1>
 	<p>
 		<div class="btn-group dropdown" onclick="dropdownOnClick(event,1)" style="display:inline">
-		  <a id="dropdown1" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-		    学院 <span class="caret"></a>
+		  <button id="dropdown1" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		    学院 <span class="caret"></span>
 		  </button>
 		  <ul id="ul1" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 		  	<% @departments.each do |department| %>
-		    	<li data-id=<%= department.id %>><%= department.name %></li>
+		    	<li class="main-dropitem" data-id=<%= department.id %>><%= department.name %></li>
 		    <% end %>
 		  </ul>
 		</div>

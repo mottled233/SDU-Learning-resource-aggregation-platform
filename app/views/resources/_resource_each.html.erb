@@ -39,8 +39,6 @@
             
             
             <%if current_user.nil?%>
-                <%= link_to "修改",login_path%>
-                <%= link_to "删除",login_path%>
             <%elsif current_user?(q.creator)%>
                 
                 <%if q.check_state == 0%>
@@ -84,7 +82,11 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to resource_path(q.id), class:"no-hover" do%>
-                                <p><%= short_digest q.content,50 %></p>
+                                <% if q.content_digest.blank? %>
+                                    <p><%= short_digest q.content_without_html, 100%></p>
+                                <% else %>
+                                    <p><%= short_digest q.digest, 100%></p>
+                                <% end %>
                             <%end%>
                         </div>
                     </div>

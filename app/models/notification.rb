@@ -33,7 +33,10 @@ class Notification < ApplicationRecord
     entity = norrow_notify_entity
     with_entity = norrow_with_entity
     
-    return "该提醒对应资源已被删除" unless entity && with_entity 
+    unless entity && with_entity 
+      self.destroy
+      return "该提醒对应资源已被删除" 
+    end
     
     case notify_type
     when NOTIFY_TYPE_NEW
@@ -44,6 +47,8 @@ class Notification < ApplicationRecord
       %Q{您关注的资源"#{entity.title}"更新了。}
     when NOTIFY_TYPE_NEW_FOLLOWED
       %Q{用户"#{entity.nickname}"关注了您。}
+    when NOTIFY_TYPE_FOCUS_USER_NEW
+      %Q{您关注的用户"#{User.find(initiator_id).nickname}"发布了新的资源"#{entity.title}"。}
     when NOTIFY_TYPE_REPLY
       if entity.type==ENTITY_TYPE_REPLY
         str = "回复"

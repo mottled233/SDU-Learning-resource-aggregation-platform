@@ -53,17 +53,17 @@ class StaticPagesController < ApplicationController
       @subj=[]
       case params["specify"]
         when 11 then
-          @results = Blog.order('created_at').reverse_order.limit(8)
+          @results = Blog.where(check_state: 1).order('created_at').reverse_order.limit(8)
         when 12 then
-          @results = Resource.order('created_at').reverse_order.limit(8)
+          @results = Resource.where(check_state: 1).order('created_at').reverse_order.limit(8)
         when 21 then
-          @results = Blog.order('"good" - "bad"').reverse_order.limit(8)
+          @results = Blog.where(check_state: 1).order('"good" - "bad"').reverse_order.limit(8)
         when 22 then 
-          @results = Resource.order('"good" - "bad"').reverse_order.limit(8)
+          @results = Resource.where(check_state: 1).order('"good" - "bad"').reverse_order.limit(8)
         when 31 then
-          @results = Blog.joins(:creator).where('users.speciality=:speciality',{speciality:"空"}).order('good').reverse_order.limit(8)
+          @results = Blog.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:"空"}).order('good').reverse_order.limit(8)
         when 32 then
-          @results = Resource.joins(:creator).where('users.speciality=:speciality',{speciality:"空"}).order('good').reverse_order.limit(8)
+          @results = Resource.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:"空"}).order('good').reverse_order.limit(8)
       end
       format.json {render json:{'status'=>'200','message'=>'OK','data'=>@results}}
     end
