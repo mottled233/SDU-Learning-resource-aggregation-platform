@@ -1,6 +1,8 @@
-<span class="checkbox inline">
+<span class="row-fluid">
 	<% for keyword in hasChoose %>  
-        <%= check_box_tag 'keywords[]', keyword.id,checked: :true%>
-        <%= keyword.name %>
+    	<div style="display:inline">
+    	    <%= check_box_tag 'keywords[]', keyword.id,checked: :true%>
+            <%= keyword.name %>
+        </div>
 	<%end%>
 </span>

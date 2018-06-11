@@ -1,6 +1,8 @@
-<span class="checkbox inline">
+<span class="row-fluid">
 	<% for course in hasChoose %>  
-        <%= check_box_tag 'courses[]', course.id,checked: :true %>
-        <%= course.course_name %>
+    	<div style="display:inline">
+            <%= check_box_tag 'courses[]', course.id,checked: :true %>
+            <%= course.course_name %>
+        </div>
 	<%end%>
 </span>

@@ -47,7 +47,7 @@
                 <%end%>
             <%elsif current_user.user_role.eql?('teacher')&&(current_user.selected_courses-q.courses) != current_user.selected_courses%>
                 <%if q.check_state == 0%>
-                    <%= link_to "通过",accept_path(q),remote:true%>
+                    <%= link_to "通过",accept_blog_path(q),remote:true%>
                     <%= link_to '拒绝',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>
                 <%else%>
                     <%= link_to '删除',blog_path(q) , method: :delete, data: { confirm: 'Are you sure?' } %>

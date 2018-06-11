@@ -51,6 +51,7 @@ class StaticPagesController < ApplicationController
   def home_change
     respond_to do |format|
       @subj=[]
+      @reply=[]
       case params["specify"]
         when 11 then
           @results = Blog.where(check_state: 1).order('created_at').reverse_order.limit(8)
@@ -65,7 +66,12 @@ class StaticPagesController < ApplicationController
         when 32 then
           @results = Resource.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:"空"}).order('good').reverse_order.limit(8)
       end
-      format.json {render json:{'status'=>'200','message'=>'OK','data'=>@results}}
+      i=0
+      @results.each do |res|
+        @reply[i] = res.getAllReplies.size
+        i+=1
+      end
+      format.json {render json:{'status'=>'200','message'=>'OK','data'=>@results,'reply'=>@reply}}
     end
   end
 end
