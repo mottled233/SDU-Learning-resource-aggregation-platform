@@ -9,7 +9,7 @@ from itertools import product, count
 from gensim.models import word2vec  
 import numpy as np  
   
-model = word2vec.Word2Vec.load("SRModel")  
+model = word2vec.Word2Vec.load("/home/ubuntu/workspace/sdu-resouce/app/jobs/python_script/SRModel")  
 np.seterr(all='warn')  
   
   
@@ -191,11 +191,12 @@ def summarize(text, n):
         sents.append([word for word in jieba.cut(sent) if word])  
   
     # sents = filter_symbols(sents)
-    print(len(sents))
+    before = len(sents)
     filter_model(sents)
-    print(len(sents[0]))
-    filter_model(sents)
-    print(len(sents[0]))
+    while before != len(sents):
+        before = len(sents)
+        filter_model(sents)
+        
     graph = create_graph(sents)  
   
     scores = weight_sentences_rank(graph)  
@@ -213,10 +214,9 @@ if __name__ == '__main__':
         for res in result:
             print(res.encode('utf-8'))
 			
-def summary_interface(text, n):
-    text = myfile.read().replace('\n', '').decode('utf-8')
+def summary_interface(text, n=3):
     result = summarize(text, 3)
     encoding_result = []
     for res in result:
         encoding_result.append(res.encode('utf-8'))
-    return encoding_result
+    return " ".join(encoding_result)
