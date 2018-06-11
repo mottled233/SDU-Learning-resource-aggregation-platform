@@ -143,7 +143,16 @@ question =
   question10: course[:python].knowledges.create(creator: student[:student2],title:'未来十年Python的前景会怎样？',type:'Question',content:'未来十年，Python在中国的发展会怎样？使用Python的企业会不会越来越多？Python主要被运用的领域有哪些？使用Python的程序猿会越来越多还是越来越少呢？',good:7,bad:4),
   question11: course[:python].knowledges.create(creator: student[:student2],title:'Python 相较于Java 而言，有什么优势？',type:'Question',content:'Python 相较于Java 而言，有什么优势？',good:8,bad:3),
   question12: course[:python].knowledges.create(creator: student[:student2],title:'关于 Python 的经典入门书籍有哪些？',type:'Question',content:'适合完全没有编程基础的新手使用。',good:9,bad:2),
-  question13: course[:python].knowledges.create(creator: student[:student3],title:'怎么样才算是精通 Python？',type:'Question',content:'当初学习 Python 的时候，看见各种招聘要求写着 “精通 Python 语言”。所以才问了这样一个问题，求教大家。过去一年多了，收到了很多回答，也看到了很多想法。',good:10,bad:1)
+  question13: course[:python].knowledges.create(creator: student[:student3],title:'怎么样才算是精通 Python？',type:'Question',content:'当初学习 Python 的时候，看见各种招聘要求写着 “精通 Python 语言”。所以才问了这样一个问题，求教大家。过去一年多了，收到了很多回答，也看到了很多想法。',good:10,bad:1),
+  
+  question14: course[:java].knowledges.create(creator: student[:student1],title:'Java 学习线路图是怎样的？',type:'Question',content:'新手该如何一步步的学习 Java？',good:10,bad:1),
+  question15: course[:java].knowledges.create(creator: student[:student3],title:'java中的<<是什么意思?',type:'Question',content:'是移位吗，移位又是什么意思',good:10,bad:1),
+  question16: course[:java].knowledges.create(creator: student[:student2],title:'JAVA什么是异常',type:'Question',content:'什么是异常，为什么要进行异常处理？异常的处理机制是怎样的?',good:10,bad:1),
+  question17: course[:java].knowledges.create(creator: student[:student2],title:'java中如何实现构造方法的调用',type:'Question',content:'请先文字简述，后举个简单例子',good:10,bad:5),
+  question18: course[:java].knowledges.create(creator: student[:student2],title:'java 中线程是什么东东？？',type:'Question',content:'在JAVA中线程到底起到什么作用',good:10,bad:5),
+  question19: course[:java].knowledges.create(creator: student[:student3],title:'java的IO类那么多，应该掌握哪几个',type:'Question',content:'java的IO类那么多，怎么记得住，应该掌握哪几个，请高手说说',good:20,bad:5)
+  
+
 } 
 
 # 关联问题与分类
@@ -199,7 +208,30 @@ reply =
   reply18: reply14.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
   reply19: reply14.replies.create(creator: student[:student3], type:'Reply',content:'做为一个不得不学那么多语言的人来说，语言上的差异已经非常小，但是每一种语言都有自己的思想，重要的是思想上的转变。',good:32,bad:1),
   #回复reply16
-  reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1)
+  reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1),
+  
+  #回复qusetion14
+  reply21: question[:question14].replies.create(creator: student[:student3], type:'Reply',content:'打个好基础任<br/>何语言学习都可以分成两部分：语言基础和具体开发。<br/>语言基础就是变量，函数，基本面向对象，各种语法。<br/>具体开发就是语言在具体领域的应用，这个领域的开发环境，特定的库，领域概念，开发实践等。<br/>',good:73,bad:8),
+  #回复question15
+  reply22: reply22=question[:question15].replies.create(creator: student[:student2], type:'Reply',content:'位移动运算符:<br/><<表示左移, 左移一位表示原来的值乘2.<br/>例如：3 <<2(3为int型) <br/>1）把3转换为二进制数字0000 0000 0000 0000 0000 0000 0000 0011， <br/>2）把该数字高位(左侧)的两个零移出，其他的数字都朝左平移2位， <br/>3）在低位(右侧)的两个空位补零。则得到的最终结果是0000 0000 0000 0000 0000 0000 0000 1100， <br/>转换为十进制是12。<br/>同理,>>表示右移. 右移一位表示除2.',good:32,bad:1),
+  
+  #回复question16
+  reply24: question[:question16].replies.create(creator: student[:student1], type:'Reply',content:'异常通常指，你的代码可能在编译时没有错误，可是运行时会出现异常。比如常见的空指针异常。也可能是程序可能出现无法预料的异常，比如你要从一个文件读信息，可这个文件不存在，程序无法运行下去了，故程序要抓这些异常，通过异常处理机制来抛出这些异常，程序员就可以通过抛出的异常来修改代码。try{}catch{}finally{}try块中放入可能会出现异常的代码，catch块负责捕获异常，finally块负责处理一些必须执行的代码，比较关闭流等。',good:13,bad:13),
+  reply25: question[:question16].replies.create(creator: student[:student3], type:'Reply',content:'异常就是程序可能会报错地方了，JAVA中一般都用try{}catch{}finally{}来进行异常处理，把可能会出现异常的代码放到try快中，如果出现异常程序就会执行catch快，如果不出现异常，就不会执行catch快。',good:3,bad:4),
+  #回复question17
+  reply26: question[:question17].replies.create(creator: student[:student3], type:'Reply',content:'public class Util {<br/>    public String name;<br/>    public Util(){<br/>        System.out.println("无参构造方法..");<br/>  }<br/>    public Util(String name){<br/>        this.name = name;<br/>        System.out.println("有参构造方法.."+name);<br/>    }<br/>    public static void main(String[] args) {<br/>        Util u1 = new Util();<br/>              <br/>        Util u2 = new Util("小明");<br/>    }<br/>}',good:52,bad:7),
+  #回复question18
+  reply27: reply27=question[:question18].replies.create(creator: student[:student3], type:'Reply',content:'线程是进程中的一个实体，是被系统独立调度和分派的基本单位，线程自己不拥有系统资源，只拥有一点在运行中必不可少的资源，但它可与同属一个进程的其它线程共享进程所拥有的全部资源。一个线程可以创建和撤消另一个线程，同一进程中的多个线程之间可以并发执行。由于线程之间的相互制约，致使线程在运行中呈现出间断性。线程也有就绪、阻塞和运行三种基本状态。 <br/> 线程是程序中一个单一的顺序控制流程.在单个程序中同时运行多个线程完成不同的工作,称为多线程.  <br/>线程和进程的区别在于,子进程和父进程有不同的代码和数据空间,而多个线程则共享数据空间,每个线程有自己的执行堆栈和程序计数器为其执行上下文.多线程主要是为了节约CPU时间,发挥利用,根据具体情况而定. 线程的运行中需要使用计算机的内存资源和CPU',good:19,bad:17),
+  #回复question19
+  reply30: question[:question19].replies.create(creator: student[:student3], type:'Reply',content:'IO包中绝大部分的类都是由以下四个类直接或间接继承来的<br/>InputStream OutputStream Reader 还有Writer<br/>其中InputStream和OutputStream代表输入流和输出流,也就是字节流的输入和输出,他们定义了如何读取和写入字节和字节数组,所以说基本上所有XXXInputStream和XXXOutputStream都是针对字节进行操作的<br/>比如说FileInputStream,它可以以流的形式读取一个文件,或者StringBufferInputStream,它以流的形式读取一个字符串,所有的子类都是不同领域的应用罢了<br/>而Reader和Writer是在输入输出流之上的更高级的字符级别的输入输出,称为读取器和写入器,他们直接读取和写入字符(字符串)数据而不是字节(字节数组),比如你有一个文本文件就可以使用FileReader这个类来读取里面的文本,还有PrintWriter是用来输出的写入器,System.out的那个out返回的就是一个PrintWirter的内部实现PrintOutputStream<br/>其实具体类用的比较多的就是File开头的String开头的和Object开头的,Object开头的是用来序列化读取的<br/>IO包并不难,别被吓到了,掌握好他们之间的继承关系,就可以很容易了解',good:23,bad:3),
+  reply31: question[:question19].replies.create(creator: student[:student1], type:'Reply',content:'一个也不需要记,记的快忘的也快,用的时候查api,常用的熟了自然就记住了<br/>可以在熟知IO流基本原理的前提下,了解一点装饰器模式,对理解Java IO的整体架构相当有好处',good:5,bad:0),
+  
+  # #回复reply20
+  # reply23: reply22.replies.create(creator: student[:student3], type:'Reply',content:'明白了，感谢答主！',good:0,bad:0),
+  # #回复reply27
+  # reply28: reply28=reply27.replies.create(creator: student[:student1], type:'Reply',content:'亲  能不能用一句比较通俗易懂的话  解释一下下    谢谢',good:0,bad:0),
+  # #回复reply28
+  # reply29: reply28.replies.create(creator: student[:student3], type:'Reply',content:'线程是程序中一个单一的顺序控制流程，就是执行一个程序命令的单元，比如说，QQ是一个主程序，包含了其它很多的线程，譬如聊天窗口...等等',good:2,bad:0),
 }
 
 # ==============================================================================
@@ -219,6 +251,8 @@ file_list.each do |course_file|
   file_content = JSON::parse(file_content)
   file_content["arr"].each do |article|
     blog = Blog.create(creator: network, title: article['title'], type:'Blog', content: article['content'], good: rand(0..200), bad: rand(0..200),check_state: 1)
+  end
+end
 # 回复数据
 reply = 
 {
@@ -330,5 +364,4 @@ end
 #     end
 #   end
 #   resources.save
-  
 # end
