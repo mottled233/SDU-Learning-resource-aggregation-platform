@@ -25,8 +25,9 @@ header = {
 class csdn_index_spider(scrapy.Spider):
     name = "csdn_index_spider"
     allowed_domains = ["blog.csdn.net"]
-    categories = ['news', 'ai', 'cloud', 'blockchain', 'db', 'career', 'game', 'engineering',
-                  'web', 'mobile', 'iot', 'ops', 'fund', 'lang', 'arch', 'avi', 'sec', 'other']
+    categories = {'news':'新闻', 'ai':'人工智能', 'cloud':'云计算', 'blockchain':'区块链', 'db':'数据库', 'career':'求职',
+                  'game':'游戏开发', 'engineering':'研发管理','web':'前端', 'mobile':'移动开发', 'iot':'物联网', 'ops':'运维',
+                  'fund':'计算机基础', 'lang':'编程语言', 'arch':'架构', 'avi':'音视频开发', 'sec':'安全', 'other':'其他'}
     types = ['more']
     home_url = "https://blog.csdn.net/"
     crawl_url = "https://blog.csdn.net/api/articles?type={type}&category={category}&shown_offset={offset}"
@@ -35,30 +36,30 @@ class csdn_index_spider(scrapy.Spider):
              'web': 0, 'mobile': 0, 'iot': 0, 'ops': 0, 'fund': 0, 'lang': 0, 'arch': 0, 'avi': 0, 'sec': 0, 'other': 0}
 
     def parse(self, response):
-        category = response.meta.get('category')
+        category_key = response.meta.get('category')
         articles = json.loads(response.text)["articles"]
 
-        self.count[category] += 1
+        self.count[category_key] += 1
 
         print('记录爬取次数: {}'.format(self.count))
 
         for article in articles:
-            yield scrapy.Request(article['url'], headers=header, meta={'category': category, 'article': article},
+            yield scrapy.Request(article['url'], headers=header, meta={'category': category_key, 'article': article},
                                  callback=self.save_article)
 
-        if not self.count[category] == 1:
-            url = self.crawl_url.format(type=self.types[0], category=category, offset=0)
-            yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse,
+        if not self.count[category_key] == 1:
+            url = self.crawl_url.format(type=self.types[0], category=category_key, offset=0)
+            yield scrapy.Request(url, headers=header, meta={'category': category_key}, callback=self.parse,
                                  dont_filter=True)
 
     def save_article(self, response):
-        category = response.meta.get('category')
+        category_key = response.meta.get('category')
         article = response.meta.get('article')
 
         print('保存文章: {}'.format(article['title']))
 
         item = article_item()
-        item["article_type"] = category
+        item["article_type"] = self.categories[category_key]
 
         if '小时' not in article['created_at']:
             created_days = article['created_at'].split('天')[0]  # 如果csdn接口返回的数据创建时间为几天前的格式的话，进行日期计算
@@ -86,7 +87,11 @@ class csdn_index_spider(scrapy.Spider):
 
         tag_soup = BeautifulSoup(tag_str, 'lxml')
         tag_str = tag_soup.get_text()
-        item['article_tag'] = tag_str
+        if tag_str != '':
+            item['article_tag'] = tag_str
+        else:
+            item['article_tag'] = item["article_type"]
+
         yield item
 
     # 首先访问csdn主页，获取cookie
@@ -95,9 +100,9 @@ class csdn_index_spider(scrapy.Spider):
 
     # 获取offset
     def get_offset(self, response):
-        for category in self.categories:
-            url = self.crawl_url.format(type=self.types[0], category=category, offset=int(time.time() * 1000000))
-            yield scrapy.Request(url, headers=header, meta={'category': category}, callback=self.parse)
+        for category_key in self.categories:
+            url = self.crawl_url.format(type=self.types[0], category=category_key, offset=int(time.time() * 1000000))
+            yield scrapy.Request(url, headers=header, meta={'category': category_key}, callback=self.parse)
 
 
 class csdn_user_articles_spider(scrapy.Spider):

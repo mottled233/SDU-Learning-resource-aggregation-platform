@@ -36,11 +36,11 @@ class MysqlTwistedPipeline(object):
 
     def process_item(self, item, spider):
         # 使用twisted将mysql插入变成异步执行
-        # item = self.clean_content(item)  #去除文章中的标签
+        item = self.clean_content(item)  #去除文章中的标签
         query = self.dbpool.runInteraction(self.do_insert, item)
 
     def do_insert(self, cursor, item):
-        insert_sql = "INSERT INTO articles (article_tag,article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        insert_sql = "INSERT INTO articles_cleaned (article_tag,article_type,created_time,nick_name,article_title,article_link,user_link,view_number,spider_time,article_content) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
         # try:
         #     item['article_content'] = get_article_content(item['article_link'])

@@ -63,43 +63,38 @@ class CustomSpiderSpider(CrawlSpider):
             article['article_type'], article['article_tag'] = self.get_article_type(userId, blogId, postId)
         else:
             view_number_result = \
-                strip(response.xpath(self.rule['view_number']).xpath('string(.)').extract_first('')) if self.rule[
-                                                                                                            'view_number'] is not None else ''
+                strip(response.xpath(self.rule['view_number']).xpath('string(.)').extract_first('')) if self.rule['view_number'] is not None else ''
 
-            match_obj = re.match(r'.*?(\d+).*', view_number_result)
+            match_obj = re.search(r'\((\d+)\)', view_number_result)
 
             article['view_number'] = match_obj.group(1) if match_obj is not None else ''
 
             article['article_type'] = \
-                strip(response.xpath(self.rule['article_type']).extract_first('')) if self.rule[
-                                                                                          'article_type'] is not None else ''
+                strip(response.xpath(self.rule['article_type']).extract_first('')) if self.rule['article_type'] is not None else ''
             article['article_tag'] = \
-                response.xpath(self.rule['article_tag']).extract_first(datetime.now()) if self.rule[
-                                                                                              'article_tag'] is not None else ''
+                response.xpath(self.rule['article_tag']).extract_first(datetime.now()) if self.rule['article_tag'] is not None else ''
+
+        if article['article_tag'] == '':
+            article['article_tag'] = article['article_type']
 
         article['created_time'] = \
-            response.xpath(self.rule['created_time']).extract_first(datetime.now()) if self.rule[
-                                                                                           'created_time'] is not None else ''
+            response.xpath(self.rule['created_time']).extract_first(datetime.now()) if self.rule['created_time'] is not None else ''
 
         article['nick_name'] = \
-            strip(response.xpath(self.rule['nick_name']).extract_first('')) if self.rule[
-                                                                                   'nick_name'] is not None else ''
+            strip(response.xpath(self.rule['nick_name']).extract_first('')) if self.rule['nick_name'] is not None else ''
 
         article['article_title'] = \
-            strip(response.xpath(self.rule['article_title']).extract_first('')) if self.rule[
-                                                                                       'article_title'] is not None else ''
+            strip(response.xpath(self.rule['article_title']).extract_first('')) if self.rule['article_title'] is not None else ''
 
         article['article_link'] = response.url
 
         article['user_link'] = \
-            urljoin(response.url, strip(response.xpath(self.rule['user_link']).extract_first(''))) \
-                if self.rule['user_link'] is not None else ''
+            urljoin(response.url, strip(response.xpath(self.rule['user_link']).extract_first(''))) if self.rule['user_link'] is not None else ''
 
         article['spider_time'] = datetime.now()
 
-        article_contents = response.xpath(self.rule['article_content']).extract() if self.rule[
-                                                                                         'article_content'] is not None else [
-            '']
+        article_contents = response.xpath(self.rule['article_content']).extract() if self.rule['article_content'] is not None else ['']
+
         article_content = ''
         for i in range(0, len(article_contents)):
             article_content += article_contents[i]
