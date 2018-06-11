@@ -58,13 +58,13 @@ class StaticPagesController < ApplicationController
         when 12 then
           @results = Resource.where(check_state: 1).order('created_at').reverse_order.limit(8)
         when 21 then
-          @results = Blog.where(check_state: 1).order('"good" - "bad"').reverse_order.limit(8)
+          @results = Blog.where(check_state: 1).order('"score"').reverse_order.limit(8)
         when 22 then 
-          @results = Resource.where(check_state: 1).order('"good" - "bad"').reverse_order.limit(8)
+          @results = Resource.where(check_state: 1).order('"score"').reverse_order.limit(8)
         when 31 then
-          @results = Blog.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:"空"}).order('good').reverse_order.limit(8)
+          @results = Blog.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:current_user.speciality}).order('"score"').reverse_order.limit(8)
         when 32 then
-          @results = Resource.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:"空"}).order('good').reverse_order.limit(8)
+          @results = Resource.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:current_user.speciality}).order('"score"').reverse_order.limit(8)
       end
       i=0
       @results.each do |res|
