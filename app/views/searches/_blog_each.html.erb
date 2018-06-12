@@ -49,7 +49,7 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to blog_path(q.id), class:"no-hover" do%>
-                                <p><%= short_digest q.content_without_html, 100 %></p>
+                                <p style="word-break:break-all"><%= short_digest q.content_without_html, 100 %></p>
                             <%end%>
                         </div>
                     </div>
