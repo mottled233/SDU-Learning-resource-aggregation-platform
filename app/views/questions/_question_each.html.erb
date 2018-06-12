@@ -59,11 +59,7 @@
                     <div class="cell">
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to question_path(q.id), class:"no-hover" do%>
-                                <% if q.content_digest.blank? %>
-                                    <p><%= short_digest q.content_without_html, 100%></p>
-                                <% else %>
-                                    <p><%= short_digest q.digest, 100%></p>
-                                <% end %>
+                                <p style="word-break:break-all"><%= q.knowledge_digest 100%></p>
                             <%end%>
                         </div>
                     </div>
