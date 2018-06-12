@@ -179,6 +179,10 @@ class UsersController < ApplicationController
     @creatings = @user.creatings.where(type: query).paginate(page: page, per_page: per_page)
   end
   
+  def knowledge_graph_demo
+    @user = User.find(params[:id])
+    
+  end
   
   private
     def user_param

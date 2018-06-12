@@ -186,6 +186,8 @@ Rails.application.routes.draw do
   get "/keywords/ajaxkeywordname/:id", to:"keywords#ajaxkeywordname"
   get "/keywords/ajaxkeywordnamelow/:id", to:"keywords#ajaxkeywordnamelow"
   get "/keywords/ajaxkeywordnamehigh/:id", to:"keywords#ajaxkeywordnamehigh"
+  
+  get '/knowledge_graph_demo/:id', to: 'users#knowledge_graph_demo', as: '/knowledge_graph_demo'
 
 # end:wzy's routes
 

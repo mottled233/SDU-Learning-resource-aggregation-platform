@@ -170,6 +170,12 @@ question[:question10].keywords << (keyword_down[:programing])
 question[:question11].keywords << (keyword_down[:programing])
 question[:question12].keywords << (keyword_down[:programing])
 question[:question13].keywords << (keyword_down[:programing])
+question[:question14].keywords << (keyword_down[:programing])
+question[:question15].keywords << (keyword_down[:programing])
+question[:question16].keywords << (keyword_down[:programing])
+question[:question17].keywords << (keyword_down[:programing])
+question[:question18].keywords << (keyword_down[:programing])
+question[:question19].keywords << (keyword_down[:programing])
 
 # 用户关注问题
 student[:student1].focus_contents<<(question[:question1])
