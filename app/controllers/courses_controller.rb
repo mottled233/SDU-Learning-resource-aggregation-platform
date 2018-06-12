@@ -74,6 +74,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
 
+
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
@@ -236,7 +237,7 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:course_name, :knowledge, :teacher, :teacher_relationship, :department_id)
+      params.require(:course).permit(:course_name, :knowledge, :teacher, :teacher_relationship, :department_id, :introduction)
     end
     
 end

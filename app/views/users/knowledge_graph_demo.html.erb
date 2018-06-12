@@ -1,0 +1,43 @@
+<% provide(:title, "知识图谱") %>
+<div class="container-fluid-full">
+  <div class="row-fluid">
+    <%= render 'users/aside' %>
+    <div id="content" class="span8">
+        <div class="row-fluid">
+        <%= render 'layouts/flash' %>
+        </div>
+        <div class="row-fluid offset1">
+            <h1>知识图谱</h1>
+            
+        </div>
+        <div class="row-fluid ">
+            <div class="span8">
+               <hr style="background-color:grey"/> 
+            </div>
+        </div>
+        
+        <img src="<%= asset_path "knowledge_graph_demo.png" %>" height="600" width="1200">
+
+        <div class="row-fluid ">
+            <div class="span8">
+               <hr style="background-color:grey"/> 
+            </div>
+        </div>
+        
+        <div class="row-fluid ">
+            <div class="span8">
+               <p>
+                    系统根据您最近的学习内容，为您推荐的学习路径是：</br>
+                    [Java]  ==>  [数据结构]  ==>  [数据库] ==> [计算机网络]，</br>
+                    其中您学过了：</br>
+                    [Java]  ==>  [数据结构]</br>
+                    请查漏补缺，并进行接下来的学习。</br></br>
+                    系统根据您最近的学习内容，为您推荐的学习内容是：</br>
+                    [线性代数, 数据库]
+               </p>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+

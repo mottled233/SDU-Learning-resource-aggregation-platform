@@ -63,6 +63,9 @@
                     <h2><i class="  halflings-icon white th" style="color:white"></i><span class="break"></span>课程简介</h2>
                 </div>
                 <div class="box-content course-introduction">
+                    <%if @course.introduction.nil?%>
+                        <%@course.introduction = "暂无简介"%>
+                    <%end%>
                     <%= @course.introduction.html_safe %>
                 </div>
             </div>

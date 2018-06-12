@@ -17,8 +17,8 @@
   </div>
 
   <div class="field">
-    <%#= f.label :knowledges %>
-    <%#= f.text_field :knowledges %>
+    <%= f.label :'课程简介' %>
+    <%= f.text_area :introduction, :value => course.introduction%>
   </div>
 
   <div class="field">
