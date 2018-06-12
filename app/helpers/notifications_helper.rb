@@ -103,8 +103,7 @@ module NotificationsHelper
     concat(
       content_tag(:p, style:"font-size:1.2em;padding-left:50px;color:grey") do
         concat "“"
-        content = entity.content
-        content = content[0,50] + "..." if entity.content.length>50
+        content = entity.knowledge_digest
         concat content
         concat "”"
       end
@@ -148,8 +147,7 @@ module NotificationsHelper
     concat(
       content_tag(:p, style:"font-size:1.2em;padding-left:50px;color:grey") do
         concat "“"
-        content = with_entity.content
-        content = content[0,50] + "..." if with_entity.content.length>50
+        content = with_entity.knowledge_digest
         concat content
         concat "”"
       end

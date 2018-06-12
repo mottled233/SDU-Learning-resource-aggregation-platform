@@ -18,6 +18,7 @@ module ApplicationHelper
         time = time.sub(/minute(s)?/, "分钟")
         time = time.sub(/second(s)?/, "秒")
         time = time.sub(/about/,"")
+        time = time.sub(/less\sthan\sa/,"1")
     end
     
     def short_digest(text, length=20)

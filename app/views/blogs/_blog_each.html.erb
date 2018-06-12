@@ -70,9 +70,9 @@
                         <div class="inline-block digest-text " style="width:89%">
                             <%=link_to blog_path(q.id), class:"no-hover" do%>
                                 <% if q.content_digest.blank? %>
-                                    <p><%= short_digest q.content_without_html, 100%></p>
+                                    <p><%= q.knowledge_digest 100%></p>
                                 <% else %>
-                                    <p><%= short_digest q.digest, 100%></p>
+                                    <p><%= q.knowledge_digest 100%></p>
                                 <% end %>
                             <%end%>
                         </div>

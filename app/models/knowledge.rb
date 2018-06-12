@@ -1,5 +1,7 @@
 class Knowledge < ApplicationRecord
   include KnowledgesHelper
+  include ApplicationHelper
+  
   # callbacks
   before_create :default_values
   def default_values
@@ -75,17 +77,7 @@ class Knowledge < ApplicationRecord
   end
   
   def knowledge_digest(length=50)
-    digest = self.content
-    if digest.length>length
-      digest = digest[0,length]+"..."
-    end
-  end
-  
-  def knowledge_digest(length=50)
-    digest = self.content
-    if !digest.nil? && digest.length>length
-      digest = digest[0,length]+"..."
-    end
+    short_digest(self.content_without_html, length)
   end
   
   def content_without_html
