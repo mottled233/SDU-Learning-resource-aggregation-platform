@@ -33,7 +33,7 @@ class SearchesController < ApplicationController
       if (params[:find]!='用户')
         ks=k.split(" ")
         ks.each do |keys|
-          @results = @results.where(['knowledges.title like ? OR knowledges.id IN (SELECT keyword_knowledge_associations.knowledge_id FROM keyword_knowledge_associations WHERE(keyword_id IN (SELECT keywords.id FROM keywords WHERE keywords.name = ?)))','%'+keys+'%',keys])
+          @results = @results.where(['knowledges.title like ? OR knowledges.id IN (SELECT keyword_knowledge_associations.knowledge_id FROM keyword_knowledge_associations WHERE(keyword_id IN (SELECT keywords.id FROM keywords WHERE keywords.name = ?))OR knowledges.id IN (SELECT course_knowledge_associations.knowledge_id FROM course_knowledge_associations WHERE(course_id IN (SELECT courses.id FROM courses WHERE courses.course_name = ?))))','%'+keys+'%',keys,keys])
         end
         @members = User.where(['nickname = ?',k])
         if (params and params[:sort])
