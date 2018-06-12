@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get 'creatings', on: :member
     get '/users/delete/:id', on: :member, to: 'users#destroy', as:"delete"
     get 'ban', on: :member
+    get 'focuses', on: :member
     get 'unban', on: :member
     # 用户通知
     resources :notifications, only: [:index]

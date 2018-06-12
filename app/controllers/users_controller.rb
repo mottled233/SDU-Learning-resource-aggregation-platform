@@ -204,6 +204,14 @@ class UsersController < ApplicationController
     @creatings = @user.creatings.where(type: query).paginate(page: page, per_page: per_page)
   end
   
+  def focuses
+    @user = User.find(params[:id])
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    query = params[:type] || [TYPE_QUESTION, TYPE_BLOG, TYPE_RESOURCE]
+    @creatings = @user.focus_contents.where(type: query).paginate(page: page, per_page: per_page)
+  end
+  
   def knowledge_graph_demo
     @user = User.find(params[:id])
     
