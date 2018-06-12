@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611055630) do
+ActiveRecord::Schema.define(version: 20180612113703) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -233,8 +233,8 @@ ActiveRecord::Schema.define(version: 20180611055630) do
     t.string   "phone_number"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.datetime "last_check_time"
     t.string   "sex"
     t.integer  "grade"
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(version: 20180611055630) do
     t.string   "department"
     t.string   "speciality"
     t.string   "recommend"
+    t.boolean  "ban",             default: false
     t.index ["username"], name: "index_users_on_username"
   end
 

@@ -33,7 +33,9 @@ Rails.application.routes.draw do
     get 'unselect_course', on: :member
     get 'delete_following', on: :member
     get 'creatings', on: :member
-    post '/users/delete/:id', on: :member, to: 'users#destroy', as:"delete_user"
+    get '/users/delete/:id', on: :member, to: 'users#destroy', as:"delete"
+    get 'ban', on: :member
+    get 'unban', on: :member
     # 用户通知
     resources :notifications, only: [:index]
   end
