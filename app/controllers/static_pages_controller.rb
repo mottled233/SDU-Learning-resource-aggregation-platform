@@ -53,7 +53,7 @@ class StaticPagesController < ApplicationController
       @subj=[]
       @reply=[]
       
-      if (Speciality.find_by("name='"+User.find(current_user.id).speciality+"'")!=nil)
+      if (current_user!=nil and Speciality.find_by("name='"+User.find(current_user.id).speciality+"'")!=nil)
         @user_course=Speciality.find_by("name='"+User.find(current_user.id).speciality+"'").courses.select("id")
       else
         @user_course=nil
