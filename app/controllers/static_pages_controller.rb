@@ -52,6 +52,12 @@ class StaticPagesController < ApplicationController
     respond_to do |format|
       @subj=[]
       @reply=[]
+      
+      if (Speciality.find_by("name='"+User.find(current_user.id).speciality+"'")!=nil)
+        @user_course=Speciality.find_by("name='"+User.find(current_user.id).speciality+"'").courses.select("id")
+      else
+        @user_course=nil
+      end
       case params["specify"]
         when 11 then
           @results = Blog.where(check_state: 1).order('created_at').reverse_order.limit(8)
@@ -62,12 +68,32 @@ class StaticPagesController < ApplicationController
         when 22 then 
           @results = Resource.where(check_state: 1).order('"score" - "score_yesterday"').reverse_order.limit(8)
         when 31 then
-          @results = Blog.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:current_user.speciality}).order('"score" - "score_yesterday"').reverse_order.limit(8)
+          @results = []
+          if (@user_course!=nil)
+            @user_course.each do |c|
+              @results = @results + Course.find(c["id"]).knowledges.where(type: "Blog").order('"score" - "score_yesterday"').reverse_order.limit(8)
+            end
+            @results.sort!{ |x,y| y["score"]-y["score_yesterday"]<=>x["score"]-x["score_yesterday"]}
+            @results=@results[0,8]
+          else
+            @results = Blog.where(check_state: 1).order('"score" - "score_yesterday"').reverse_order.limit(8)
+          end
         when 32 then
-          @results = Resource.where(check_state: 1).joins(:creator).where('users.speciality=:speciality',{speciality:current_user.speciality}).order('"score" - "score_yesterday"').reverse_order.limit(8)
+          
+          if (@user_course!=nil)
+            @results = []
+            @user_course.each do |c|
+              @results = @results + Course.find(c["id"]).knowledges.where(type: "Resource").order('"score" - "score_yesterday"').reverse_order.limit(8)
+            end
+            @results.sort!{ |x,y| y["score"]-y["score_yesterday"]<=>x["score"]-x["score_yesterday"]}
+            @results=@results[0,8]
+          else
+            @results = Resource.where(check_state: 1).order('"score" - "score_yesterday"').reverse_order.limit(8)
+          end
       end
       i=0
       @results.each do |res|
+        res["content"]=short_digest(res.content_without_html,20)
         @reply[i] = res.getAllReplies.size
         i+=1
       end

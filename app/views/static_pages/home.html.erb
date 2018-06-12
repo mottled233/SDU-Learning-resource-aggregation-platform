@@ -83,7 +83,7 @@
 									"#ccc"
 							end
 							%>;color:#fff;font-size:14px"><b>&nbsp;<%= i %>&nbsp;</b></span>
-							<%=link_to item.title,resource_path(item.id)%>
+							<span><%=link_to item.title,resource_path(item.id)%></span>
 						<span style="float:right;"><%= item.created_at.strftime("%Y-%m-%d") %></span>
 					</li>
 					<% end %>

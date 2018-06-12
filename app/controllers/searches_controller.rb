@@ -41,7 +41,7 @@ class SearchesController < ApplicationController
             when "上传时间"
               @results = @results.order(created_at: :desc)
             when "推荐程度"
-              @results = @results.order("good-bad DESC")
+              @results = @results.order("score-score_yesterday DESC")
           end
         end
         @results = @results.paginate(:page => params[:page], :per_page => 10)

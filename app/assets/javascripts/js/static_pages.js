@@ -42,7 +42,7 @@ function changecolor(id)
 						span3.setAttribute("class","span3");
 						var thumbnail = document.createElement("div");
 						thumbnail.setAttribute("class","thumbnail");
-						thumbnail.setAttribute("style","height:110px");
+						thumbnail.setAttribute("style","height:140px");
 						var h2 = document.createElement("h2");
 						var a = document.createElement("a");
 						var small1 = document.createElement("small");
@@ -66,7 +66,7 @@ function changecolor(id)
 						small1.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp";
 						h2.appendChild(small1);
 						thumbnail.appendChild(h2);
-						p.innerHTML = o.data[j].content.substring(0,30)+(o.data[j].content.length>30?"...":"");
+						p.innerHTML = o.data[j].content/*.substring(0,30)+(o.data[j].content.length>30?"...":"");*/
 						thumbnail.appendChild(p);
 						if (id.substring(1,2)=="1")
 						{
