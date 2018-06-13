@@ -51,10 +51,11 @@ class StaticPagesController < ApplicationController
   def home_change
     respond_to do |format|
       @subj=[]
+      
       @reply=[]
       
-      if (current_user!=nil and Speciality.find_by("name='"+User.find(current_user.id).speciality+"'")!=nil)
-        @user_course=Speciality.find_by("name='"+User.find(current_user.id).speciality+"'").courses.select("id")
+      if (current_user!=nil and current_user.interest!="")
+        @user_course=current_user.interest.split(";");
       else
         @user_course=nil
       end
@@ -70,8 +71,33 @@ class StaticPagesController < ApplicationController
         when 31 then
           @results = []
           if (@user_course!=nil)
+            
+            
             @user_course.each do |c|
-              @results = @results + Course.find(c["id"]).knowledges.where(type: "Blog").order('"score" - "score_yesterday"').reverse_order.limit(8)
+              if (Course.find_by(name: c).knowledges.where(tyle:"Blog").length==0)
+                @user_course[	array.index(c)]=""
+              end
+              a.delete("")
+            end
+            @alloc=Array.new(@user_course.length,0)
+            @limit=Array.new(@user_course.length)
+            @limit[0]=@user_course.length
+            (1..@user_course.length-1).each do |i|
+              @limit[i]=@limit[i-1]+(@user_course.length-i)
+            end
+            (1..8).each do |i|
+              rnd=rand(1..@user_course.length*(@user_course.length-1))
+              (0..@user_course.length-1).each do |j|
+                if (rnd>@limit[j])
+                  @alloc[j]+=1
+                  break
+                end
+              end
+            end
+            t=0
+            @user_course.each do |c|
+              @results = @results + Course.find(c["id"]).knowledges.where(type: "Blog").order('"score" - "score_yesterday"').reverse_order.limit(alloc[t])
+              t+=1
             end
             @results.sort!{ |x,y| y["score"]-y["score_yesterday"]<=>x["score"]-x["score_yesterday"]}
             @results=@results[0,8]
