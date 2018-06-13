@@ -27,14 +27,18 @@
         
         <div class="row-fluid ">
             <div class="span8" style="padding-bottom:100px">
+              <% if !@interest_arr.blank? %>
               <p>系统根据您最近的学习内容，为您推荐的学习路径是：</p>
                   
               <p style="font-size:1.3em;margin:10px">
-                <% @interest_arr[0..-2].each do |course|%>
-                  [<%= link_to course.course_name, course%>] ==> 
+                <% if (@interest_arr.size>=2) %>
+                  <% @interest_arr[0..-2].each do |course|%>
+                    [<%= link_to course.course_name, course%>] ==> 
+                  <% end %>
                 <% end %>
                 [<%= link_to @interest_arr[-1].course_name, @interest_arr[-1]%>]
               </p>
+              <% end %>
               <p>
                 近期将为您推送相关内容。
               </p>

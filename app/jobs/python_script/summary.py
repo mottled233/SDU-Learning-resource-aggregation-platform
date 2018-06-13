@@ -86,11 +86,17 @@ def compute_similarity_by_avg(sents_1, sents_2):
         return 0.0  
     vec1 = model[sents_1[0]]  
     for word1 in sents_1[1:]:  
-        vec1 = vec1 + model[word1]  
+        try:
+            vec1 = vec1 + model[word1]  
+        except KeyError, e:
+            pass
   
     vec2 = model[sents_2[0]]  
     for word2 in sents_2[1:]:  
-        vec2 = vec2 + model[word2]  
+        try:
+            vec2 = vec2 + model[word2]  
+        except KeyError, e:
+            pass
   
     similarity = cosine_similarity(vec1 / len(sents_1), vec2 / len(sents_2))  
     return similarity  
@@ -174,8 +180,10 @@ def filter_symbols(sents):
 def filter_model(sents):  
     _sents = []  
     for sentence in sents:  
-        for word in sentence:  
-            if word not in model:  
+        for word in sentence:
+            try:
+                model[word]
+            except KeyError, e:
                 sentence.remove(word)  
         if sentence:  
             _sents.append(sentence)  
@@ -191,12 +199,10 @@ def summarize(text, n):
         sents.append([word for word in jieba.cut(sent) if word])  
   
     # sents = filter_symbols(sents)
-    before = len(sents)
-    filter_model(sents)
-    while before != len(sents):
-        before = len(sents)
-        filter_model(sents)
-        
+    
+    sents = filter_model(sents)
+    sents = filter_model(sents)
+    print(len(sents))
     graph = create_graph(sents)  
   
     scores = weight_sentences_rank(graph)  

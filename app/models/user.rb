@@ -257,6 +257,38 @@ class User < ApplicationRecord
     "/users/#{self.id}"
   end
   
+  def get_creating_count options={}
+    rule = options[:rule] || :month
+    rule = rule.to_sym
+    n = options[:n] || 6
+    n = n.to_i
+    topic = []
+    reply = []
+    
+    (1..n).each do |index|
+      from = index.send(rule).ago
+      to = (index-1).send(rule).ago
+      count = self.creatings.where("type<>? and created_at>? and created_at<?",:Reply,from,to).count
+      reply_count = self.creatings.where("type=? and created_at>? and created_at<?",:Reply,from,to).count
+      topic.append([from, count])
+      reply.append([from, reply_count])
+    end
+    {reply: reply, topic: topic}
+    
+  end
+  
+  def get_type_count
+    result = {}
+    types = [:Reply, :Resource, :Blog, :Question]
+    total_count = 0
+    types.each do |type|
+      result[type] = creatings.where(type: type).count
+      total_count+=result[type]
+    end
+    result[:total] = total_count
+    result
+  end
+  
   def calc_knowledge_graph
     return unless self.knowledge_graph
     threshold = 1
@@ -271,7 +303,8 @@ class User < ApplicationRecord
     graph = graph[num_vetex+1..-1].each_slice(num_vetex).to_a
     graph.each_with_index do |row, i|
       row.each_with_index do |ele, j|
-        if ele.to_i>= threshold
+        if ele.to_i>= threshold&&ele.to_i>=graph[j][i].to_i
+          graph[i][j] = ele.to_i+1
           knowledge_edge.append([knowledge_vetex[i],knowledge_vetex[j]])
         end
       end

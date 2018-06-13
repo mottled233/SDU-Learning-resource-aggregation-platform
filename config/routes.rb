@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     get 'ban', on: :member
     get 'focuses', on: :member
     get 'unban', on: :member
+    get 'chart', on: :member
     # 用户通知
     resources :notifications, only: [:index]
   end
