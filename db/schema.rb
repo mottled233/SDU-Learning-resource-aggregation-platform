@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612163201) do
+ActiveRecord::Schema.define(version: 20180613074653) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(version: 20180612163201) do
     t.string   "recommend"
     t.boolean  "ban",             default: false
     t.text     "interest"
+    t.text     "knowledge_graph"
     t.index ["username"], name: "index_users_on_username"
   end
 
