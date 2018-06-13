@@ -1,4 +1,4 @@
-<% provide(:title, "发表的知识") %>
+<% provide(:title, "关注的知识") %>
 <div class="container-fluid-full">
   <div class="row-fluid">
     <%= render 'users/aside' %>
@@ -7,7 +7,7 @@
         <%= render 'layouts/flash' %>
         </div>
         <div class="row-fluid offset1">
-            <h1>发表的知识</h1>
+            <h1>关注的知识</h1>
             
         </div>
         <div class="row-fluid ">
@@ -25,7 +25,7 @@
                 <%=link_to "《#{creating.title}》", creating.to_path, class: "creating-title"%>
                 
               </div>
-              <div class="span3" >
+              <div class="span2" >
                 <strong>所属课程：</strong>
                 <% creating.courses.each do |course|%>
                   <%=link_to course.course_name, course.to_path, class: ""%>
@@ -35,11 +35,6 @@
               <div class="span2" style="">
                   <strong>浏览量：</strong>
                   <span><%= creating.visit_count%></span>
-              </div>
-              
-              <div class="span2" style="">
-                  <strong>被关注：</strong>
-                  <span><%= creating.followers.count%></span>
               </div>
               
             </div>

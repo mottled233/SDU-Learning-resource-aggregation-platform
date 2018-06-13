@@ -33,6 +33,7 @@
 <hr/>
 <li><a class="submenu" href="<%=selected_courses_user_path(current_user)%>"><i class="icon-calendar"></i><span class="hidden-tablet"> 我的课程</span></a></li>
 <li><a href="<%=creatings_user_path(current_user)%>"><i class="icon-rss"></i><span class="hidden-tablet"> 我发布的资源</span></a></li>
+<li><a href="<%=focuses_user_path(current_user)%>"><i class="icon-rss"></i><span class="hidden-tablet"> 我关注的资源</span></a></li>
 <li><a href="<%=knowledge_graph_demo_path(current_user)%>"><i class="icon-map-marker"></i><span class="hidden-tablet"> 知识图谱</span></a></li>
 <%if @user.user_role == "teacher"%>
 	<hr/>

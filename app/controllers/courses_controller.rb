@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   
   before_action :confirm_logged_in, only: [:destroy, :course_department_associations, :newdeptass, :newteacherass, :deleteCourseDeptAss, :deleteCourseTeacherAss]
   before_action :confirm_is_admin, only: [:destroy, :course_department_associations, :newdeptass, :newteacherass, :deleteCourseDeptAss, :deleteCourseTeacherAss]
-
+  before_action :confirm_is_teacher, only: [:edit_info, :update_info]
   before_action :record_visit, only: [:show]
   # GET /courses
   # GET /courses.json
@@ -185,6 +185,34 @@ class CoursesController < ApplicationController
     respond_to do |format|
         format.js{}
     end
+  end
+  
+  def edit_info
+    @course = Course.find(params[:id]);
+  end
+  
+  def update_info
+    @course = Course.find(params[:id])
+    if @course.update_attributes(introduction: params[:info])
+      flash[:success].now = "成功更新该课程！"
+      render "edit_info"
+    else
+      flash[:danger].now = "更新课程失败"
+      render "edit_info"
+    end
+  end
+  
+  def switch_review_mode
+    @course = Course.find(params[:id])
+    
+    @course.review_strategy = !@course.review_strategy
+    @course.review_strategy = false if(@course.review_strategy.nil?)
+    @mode = @course.review_strategy ? "自动审核": "手动审核"
+    @result = @course.save
+    respond_to do |format|
+        format.js
+    end
+      
   end
   
 

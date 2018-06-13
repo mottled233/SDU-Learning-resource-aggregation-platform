@@ -6,8 +6,8 @@
     <%elsif q.type.eql?"Resource"%>
         <h2><%=link_to "#{short_digest q.title,10}",resource_path(q)%><a></a><small>&nbsp;&nbsp;&nbsp;&nbsp;
     <%end%>
-    <span class="icon-book"></span><%=q.creator.nickname%></small></h2>
-    <p>&nbsp;&nbsp;&nbsp;&nbsp;<%=short_digest q.content,10%></p>
+    <span class="icon-book"></span><%=" "+q.creator.nickname%></small></h2>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;<%=q.knowledge_digest 15%></p>
     <p class="text-center">
         <small>
             <span class="icon-comment"></span><%=q.getAllReplies.size%>&nbsp;&nbsp;&nbsp;&nbsp;

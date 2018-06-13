@@ -5,8 +5,6 @@ class Knowledge < ApplicationRecord
   # callbacks
   before_create :default_values
   def default_values
-    self.good = 0
-    self.bad = 0
     self.visit_count=0
     self.download_count=0
   end

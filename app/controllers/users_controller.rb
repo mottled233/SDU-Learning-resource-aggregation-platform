@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   before_action :confirm_logged_in, only: [:index, :edit, :update]
   before_action :confirm_access, only: [:edit, :update, :edit_config, :update_config]
-  before_action :confirm_is_admin, only: [:destroy]
+  before_action :confirm_is_admin, only: [:destroy, :ban, :unban]
   
   def new
     @user = User.new
@@ -43,11 +43,36 @@ class UsersController < ApplicationController
   end
   
   def index
-    
+    page = params[:page] || 1
+    per_page = params[:per_page] || 20
+    @users = User.all.paginate(page: page, per_page: per_page)
   end
   
   def destroy
-    
+    @user =  User.find(params[:id])
+    @result = @user.destroy
+    respond_to do |format|
+      format.html { render "show" }
+      format.js
+    end
+  end
+  
+  def ban
+    @user = User.find(params[:id])
+    @result = @user.update_attribute(:ban, true)
+    respond_to do |format|
+      format.html { render "show" }
+      format.js
+    end
+  end
+  
+  def unban
+    @user = User.find(params[:id])
+    @result = @user.update_attribute(:ban, false)
+    respond_to do |format|
+      format.html { render "show" }
+      format.js
+    end
   end
   
   def contents_notify
@@ -177,6 +202,14 @@ class UsersController < ApplicationController
     per_page = params[:per_page] || 10
     query = params[:type] || [TYPE_QUESTION, TYPE_BLOG, TYPE_RESOURCE]
     @creatings = @user.creatings.where(type: query).paginate(page: page, per_page: per_page)
+  end
+  
+  def focuses
+    @user = User.find(params[:id])
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    query = params[:type] || [TYPE_QUESTION, TYPE_BLOG, TYPE_RESOURCE]
+    @creatings = @user.focus_contents.where(type: query).paginate(page: page, per_page: per_page)
   end
   
   def knowledge_graph_demo

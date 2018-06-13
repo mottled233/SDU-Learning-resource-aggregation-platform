@@ -1,0 +1,7 @@
+<%
+  string = "切换至#{@mode}"
+  string+="失败" unless @result
+  string+="。"
+%>
+
+alert("<%=string%>");

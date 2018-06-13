@@ -14,7 +14,8 @@
             <tr>
               <th>序号</th>
               <th>课程名</th>
-              <th colspan="3"></th>
+              <th>审核模式</th>
+              <th colspan="4"></th>
             </tr>
           </thead>
         
@@ -22,8 +23,13 @@
             <% @courses.each do |course| %>
               <tr>
                 <td><%= course.id %></td>
-                <td><%= course.course_name %></td>
-
+                <td><%=link_to course.course_name, course%></td>
+                <% if course.review_strategy %>
+                  <td>自动模式</td>
+                <% else %>
+                  <td>手动模式</td>
+                <% end %>
+                <td><%= link_to "切换审核模式", switch_review_mode_path(course, no_check_notification: :true), remote: true%></td>
                 <td><%= link_to '问答', teachers_questions_manage_path(@teacher.id,course.id) %></td>
                 <td><%= link_to '专栏', teachers_blogs_manage_path(@teacher.id,course.id) %></td>
                 <td><%= link_to '资源', teachers_resources_manage_path(@teacher.id,course.id) %></td>
