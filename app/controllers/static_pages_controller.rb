@@ -51,11 +51,12 @@ class StaticPagesController < ApplicationController
   def home_change
     respond_to do |format|
       @subj=[]
-      
+      @leng=[]
       @reply=[]
       
       if (current_user!=nil and current_user.interest!="")
-        @user_course=current_user.interest.split(";");
+        # @user_course=current_user.interest.split(";");
+        @user_course="rails开发技术;高级程序设计语言;离散数学;python基础;线性代数;高等数学".split(";");
       else
         @user_course=nil
       end
@@ -70,33 +71,44 @@ class StaticPagesController < ApplicationController
           @results = Resource.where(check_state: 1).order('"score" - "score_yesterday"').reverse_order.limit(8)
         when 31 then
           @results = []
-          if (@user_course!=nil)
-            
-            
-            @user_course.each do |c|
-              if (Course.find_by(name: c).knowledges.where(tyle:"Blog").length==0)
-                @user_course[	array.index(c)]=""
-              end
-              a.delete("")
+          @user_course.each do |c|
+            if (Course.find_by(course_name: c).knowledges.where(type:"Blog").length==0)
+              @user_course[@user_course.index(c)]=""
             end
+            @user_course.delete("")
+          end
+          @user_course.each do |c|
+            @leng << Course.find_by(course_name: c).knowledges.where(type:"Blog").length
+          end
+          if (@user_course!=nil)
             @alloc=Array.new(@user_course.length,0)
             @limit=Array.new(@user_course.length)
             @limit[0]=@user_course.length
             (1..@user_course.length-1).each do |i|
               @limit[i]=@limit[i-1]+(@user_course.length-i)
             end
+            @rnd=[]
             (1..8).each do |i|
-              rnd=rand(1..@user_course.length*(@user_course.length-1))
+              @rnd[i-1]=rand(1..@limit[@user_course.length-1])
               (0..@user_course.length-1).each do |j|
-                if (rnd>@limit[j])
+                if (@rnd[i-1]<=@limit[j])
                   @alloc[j]+=1
+                  if (@alloc[j]>@leng[j])
+                    @alloc[j]=@leng[j]
+                    (0..@user_course.length-1).each do |k|
+                      if (@alloc[k]<@leng[k])
+                        @alloc[k]+=1
+                        break
+                      end
+                    end
+                  end
                   break
                 end
               end
             end
             t=0
             @user_course.each do |c|
-              @results = @results + Course.find(c["id"]).knowledges.where(type: "Blog").order('"score" - "score_yesterday"').reverse_order.limit(alloc[t])
+              @results = @results + Course.find_by(course_name: c).knowledges.where(type: "Blog").order('"score" - "score_yesterday"').reverse_order.limit(@alloc[t])
               t+=1
             end
             @results.sort!{ |x,y| y["score"]-y["score_yesterday"]<=>x["score"]-x["score_yesterday"]}
@@ -105,11 +117,46 @@ class StaticPagesController < ApplicationController
             @results = Blog.where(check_state: 1).order('"score" - "score_yesterday"').reverse_order.limit(8)
           end
         when 32 then
-          
+          @results = []
+          @user_course.each do |c|
+            if (Course.find_by(course_name: c).knowledges.where(type:"Resource").length==0)
+              @user_course[@user_course.index(c)]=""
+            end
+            @user_course.delete("")
+          end
+          @user_course.each do |c|
+            @leng << Course.find_by(course_name: c).knowledges.where(type:"Resource").length
+          end
           if (@user_course!=nil)
-            @results = []
+            @alloc=Array.new(@user_course.length,0)
+            @limit=Array.new(@user_course.length)
+            @limit[0]=@user_course.length
+            (1..@user_course.length-1).each do |i|
+              @limit[i]=@limit[i-1]+(@user_course.length-i)
+            end
+            @rnd=[]
+            (1..8).each do |i|
+              @rnd[i-1]=rand(1..@limit[@user_course.length-1])
+              (0..@user_course.length-1).each do |j|
+                if (@rnd[i-1]<=@limit[j])
+                  @alloc[j]+=1
+                  if (@alloc[j]>@leng[j])
+                    @alloc[j]=@leng[j]
+                    (0..@user_course.length-1).each do |k|
+                      if (@alloc[k]<@leng[k])
+                        @alloc[k]+=1
+                        break
+                      end
+                    end
+                  end
+                  break
+                end
+              end
+            end
+            t=0
             @user_course.each do |c|
-              @results = @results + Course.find(c["id"]).knowledges.where(type: "Resource").order('"score" - "score_yesterday"').reverse_order.limit(8)
+              @results = @results + Course.find_by(course_name: c).knowledges.where(type: "Resource").order('"score" - "score_yesterday"').reverse_order.limit(@alloc[t])
+              t+=1
             end
             @results.sort!{ |x,y| y["score"]-y["score_yesterday"]<=>x["score"]-x["score_yesterday"]}
             @results=@results[0,8]
@@ -119,6 +166,7 @@ class StaticPagesController < ApplicationController
       end
       i=0
       @results.each do |res|
+        res["title"]=short_digest(res["title"],11)
         res["content"]=short_digest(res.content_without_html,20)
         @reply[i] = res.getAllReplies.size
         i+=1
