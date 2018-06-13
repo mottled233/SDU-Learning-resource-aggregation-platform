@@ -212,6 +212,13 @@ class UsersController < ApplicationController
     @creatings = @user.focus_contents.where(type: query).paginate(page: page, per_page: per_page)
   end
   
+  def chart
+    @user = User.find(params[:id])
+    
+    @post_count = @user.get_creating_count(rule: params[:post_rule], n: params[:post_n])
+    @type_count = @user.get_type_count
+  end
+  
   def knowledge_graph_demo
     @user = User.find(params[:id])
     if knowledge_graph = @user.calc_knowledge_graph
