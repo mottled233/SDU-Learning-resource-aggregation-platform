@@ -23,6 +23,23 @@ class User < ApplicationRecord
     before_save :before_save
     after_create :after_initial
     
+    def after_initial
+        create_user_config unless !user_config.nil?
+        update_attributes(sex: "保密", grade: "空", user_class: "空",
+                            department: "空", speciality: "空",
+                            self_introduce: "这个人很懒，什么都没有留下")
+    end
+    
+    def before_save
+       self.email.downcase!
+       if d = Department.find_by(name: self.department)
+            self.department_id = d.id
+            if s = Speciality.find_by(name: self.speciality)
+                self.speciality_id = s.id
+            end
+       end
+    end
+    
     # validates
     validates_with DepartmentAndSpecialityValidator
     validates :username, presence: {message: "用户名不能为空"},
@@ -115,22 +132,10 @@ class User < ApplicationRecord
        self.update_attribute(:last_check_time, Time.now) 
     end
     
-    def after_initial
-        create_user_config unless !user_config.nil?
-        update_attributes(sex: "保密", grade: "空", user_class: "空",
-                            department: "空", speciality: "空",
-                            self_introduce: "这个人很懒，什么都没有留下")
-    end
+
     
-    def before_save
-       self.email.downcase!
-       if d = Department.find_by(name: self.department)
-            self.department_id = d.id
-            if s = Speciality.find_by(name: self.speciality)
-                self.speciality_id = s.id
-            end
-       end
-    end
+    
+    
     
     # 返回未检查的notification的数目
     def uncheck_notifications_count
@@ -230,27 +235,50 @@ class User < ApplicationRecord
     end
     
     # get user's config, if it is nil, set all option to default.
-    def course_config
-        if self.user_config
-          if self.user_config.courses_notification_config
-            config = JSON::parse(self.user_config.courses_notification_config)
-          else
-            config = {Resource: true,
-                            Blog: true,
-                            Question: true}
-          end
+  def course_config
+      if self.user_config
+        if self.user_config.courses_notification_config
+          config = JSON::parse(self.user_config.courses_notification_config)
         else
           config = {Resource: true,
                           Blog: true,
                           Question: true}
         end
-        # find all knowledge in user selected course and in user_config
-        config.delete_if {|key, var| var.nil?||var==false}
+      else
+        config = {Resource: true,
+                        Blog: true,
+                        Question: true}
+      end
+      # find all knowledge in user selected course and in user_config
+      config.delete_if {|key, var| var.nil?||var==false}
+  end
+    
+  def to_path
+    "/users/#{self.id}"
+  end
+  
+  def calc_knowledge_graph
+    return unless self.knowledge_graph
+    threshold = 1
+    graph = self.knowledge_graph
+    graph = graph.split(",")
+    num_vetex = graph[0].to_i
+    return unless  graph.size == num_vetex * (num_vetex+1) +1
+    knowledge_vetex = (1..num_vetex).map do |i|
+      graph[i]
+    end
+    knowledge_edge = []
+    graph = graph[num_vetex+1..-1].each_slice(num_vetex).to_a
+    graph.each_with_index do |row, i|
+      row.each_with_index do |ele, j|
+        if ele.to_i>= threshold
+          knowledge_edge.append([knowledge_vetex[i],knowledge_vetex[j]])
+        end
+      end
     end
     
-    def to_path
-      "/users/#{self.id}"
-    end
+    return [knowledge_vetex, knowledge_edge]
+  end
     
     
 end

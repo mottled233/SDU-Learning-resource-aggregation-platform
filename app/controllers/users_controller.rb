@@ -214,6 +214,22 @@ class UsersController < ApplicationController
   
   def knowledge_graph_demo
     @user = User.find(params[:id])
+    if knowledge_graph = @user.calc_knowledge_graph
+      
+      if @user.interest
+        @interest_arr = @user.interest.split(";").map do |string|
+          Course.where(course_name: string)[0]
+        end
+        puts @interest_arr
+      end
+      
+      @knowledge_vetex = knowledge_graph[0]
+      @knowledge_edge = knowledge_graph[1]
+      render "knowledge_graph_demo"
+      
+    else
+      render "knowledge_graph_empty"
+    end
     
   end
   

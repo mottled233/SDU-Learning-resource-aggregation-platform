@@ -60,3 +60,7 @@
   font-size:1.1em;
   color:grey;
 }
+
+#content{
+  height: fit-content;
+}

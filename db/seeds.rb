@@ -48,7 +48,7 @@ network = User.create(username:'network',user_role:'student',nickname:'来自网
 student = 
 {
   student1: User.create(username:'hello',user_role:'student',nickname:'菜鸟一只',email:'123@163.com',phone_number:'17864154809',password:'12345678',sex:"男"),
-  student2: User.create(username:'mottled',user_role:'student',nickname:'梁惠欣',email:'6310@163.com',phone_number:'17864154861',password:'123456',sex:"男"),
+  student2: User.create(username:'mottled',user_role:'student',nickname:'梁惠欣',email:'6310@163.com',phone_number:'17864154861',password:'123456',sex:"男", knowledge_graph:"8,rails开发技术,离散数学,高级程序设计语言,python基础,线性代数,高等数学,机器学习,数据结构与算法基础,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0",interest:"高级程序设计语言;高等数学;线性代数;离散数学;数据结构与算法基础;机器学习"),
   student3: User.create(username:'wzy',user_role:'student',nickname:'王子悦',email:'6311@163.com',phone_number:'17864150001',password:'123456',sex:"男"),
   student4: User.create(username:'scx',user_role:'student',nickname:'邵长旭',email:'6313@163.com',phone_number:'17864150002',password:'123456',sex:"男"),
   student5: User.create(username:'zxm',user_role:'student',nickname:'张晓敏',email:'6312@163.com',phone_number:'17864150003',password:'123456',sex:"男")

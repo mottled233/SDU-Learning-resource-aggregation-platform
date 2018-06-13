@@ -15,31 +15,21 @@
                <hr style="background-color:grey"/> 
             </div>
         </div>
-        
-        <div id="myDiagramDiv" style="border: solid 1px black; width:600px; height:600px"></div>
-        
-        
+        <div class="row-fluid ">
+            <div class="span8" style="padding-bottom:800px">
+                  
+              <p style="font-size:1.3em;margin:10px">
+                对不起，可能由于您的访问量不足或系统还未生成您的知识图谱，系统暂时不能推测出学习路线，请多去逛逛再回来看看吧。
+              </p>
+            </div>
+        </div>
         <div class="row-fluid ">
             <div class="span8">
                <hr style="background-color:grey"/> 
             </div>
         </div>
         
-        <div class="row-fluid ">
-            <div class="span8" style="padding-bottom:100px">
-              <p>系统根据您最近的学习内容，为您推荐的学习路径是：</p>
-                  
-              <p style="font-size:1.3em;margin:10px">
-                <% @interest_arr[0..-2].each do |course|%>
-                  [<%= link_to course.course_name, course%>] ==> 
-                <% end %>
-                [<%= link_to @interest_arr[-1].course_name, @interest_arr[-1]%>]
-              </p>
-              <p>
-                近期将为您推送相关内容。
-              </p>
-            </div>
-        </div>
+        
     </div>
   </div>
 </div>
@@ -117,19 +107,7 @@ function init() {
 			$(go.Shape,{ strokeWidth: 2 }),
 			$(go.Shape, { strokeWidth: 2, stroke: "#555",toArrow: "OpenTriangle" }));
 
-	myDiagram.model = new go.GraphLinksModel([
-	  <% color_arr = ["lightyellow", "lightblue", "orange", "pink", "lightgreen"]%>
-	  <% @knowledge_vetex[0..-2].each do |vetex|%>
-	    {key: "<%= vetex %>", color: "<%= color_arr[rand(0...color_arr.size)]%>"},
-	  <% end %>
-	    {key: "<%= @knowledge_vetex[-1] %>", color: "<%= color_arr[rand(0...color_arr.size)]%>"}
-    
-	], [
-	  <% @knowledge_edge[0..-2].each do |edge|%>
-	    { from: "<%= edge[0] %>", to: "<%= edge[1] %>" },
-	  <% end %>
-    { from: "<%= @knowledge_edge[-1][0] %>", to: "<%= @knowledge_edge[-1][1] %>" }
-	]);
+
 }
 </script>
 
