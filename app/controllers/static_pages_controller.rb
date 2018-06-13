@@ -55,8 +55,8 @@ class StaticPagesController < ApplicationController
       @reply=[]
       
       if (current_user!=nil and !current_user.interest.blank?)
-        # @user_course=current_user.interest.split(";");
-        @user_course="rails开发技术;高级程序设计语言;离散数学;python基础;线性代数;高等数学".split(";");
+        @user_course=current_user.interest.split(";");
+        # @user_course="rails开发技术;高级程序设计语言;离散数学;python基础;线性代数;高等数学".split(";");
       else
         @user_course=nil
       end

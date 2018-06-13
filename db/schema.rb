@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180613074653) do
+ActiveRecord::Schema.define(version: 20180613092449) do
 
   create_table "bad_associations", force: :cascade do |t|
     t.integer  "user_id"
@@ -170,8 +170,8 @@ ActiveRecord::Schema.define(version: 20180613074653) do
     t.integer  "check_state"
     t.string   "label"
     t.text     "content_digest"
-    t.integer  "score"
-    t.integer  "score_yesterday"
+    t.integer  "score",            default: 0
+    t.integer  "score_yesterday",  default: 0
   end
 
   create_table "notifications", force: :cascade do |t|
