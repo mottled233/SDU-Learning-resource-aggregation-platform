@@ -1,0 +1,33 @@
+<% provide(:title, '编辑课程信息') %>
+<div class="container-fluid-full"> 
+
+    <div class="row-fluid">
+      <%= render :partial => "users/aside" %>
+      <div id="content" class="span8">
+        <h1>编辑课程信息</h1>
+        <hr>
+        
+
+        <% if course.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+      
+            <ul>
+            <% course.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
+        
+        
+     
+        
+        <%= link_to '详情', @course %> |
+        <%= link_to '返回', teachers_teachers_space_path(current_user) %>
+      </div> 
+    </div>
+</div> 
+
+<div class="clearfix"></div>

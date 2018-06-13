@@ -126,7 +126,12 @@ Rails.application.routes.draw do
   
   get "courses/:id/course_departments_index", to: "courses#course_departments_index", as: "courses/course_departments_index"
   get "courses/:id/course_teachers_index", to: "courses#course_teachers_index", as: "courses/course_teachers_index"
-
+  
+  get "courses/:id/edit_info", to:"courses#edit_info", as: "edit_course_info"
+  post "courses/:id/edit_info", to:"courses#update_info", as: "update_course_info" 
+  get "courses/:id/switch_review_mode", to:"courses#switch_review_mode", as:"switch_review_mode"
+ 
+ 
   # post "/courses/:id/create_course_association", to: "courses#create_course_association", as: "departments/create_course_association"
   get "/courses/:id/newteacherass", to:"courses#newteacherass", as: "courses/newteacherass"
   get "/courses/:id/newdeptass", to: "courses#newdeptass", as: "courses/newdeptass"
@@ -189,6 +194,7 @@ Rails.application.routes.draw do
   get "/keywords/ajaxkeywordname/:id", to:"keywords#ajaxkeywordname"
   get "/keywords/ajaxkeywordnamelow/:id", to:"keywords#ajaxkeywordnamelow"
   get "/keywords/ajaxkeywordnamehigh/:id", to:"keywords#ajaxkeywordnamehigh"
+  
   
   get '/knowledge_graph_demo/:id', to: 'users#knowledge_graph_demo', as: '/knowledge_graph_demo'
 

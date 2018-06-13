@@ -22,7 +22,7 @@
             <% @courses.each do |course| %>
               <tr>
                 <td><%= course.id %></td>
-                <td><%= course.course_name %></td>
+                <td><%= link_to course.course_name, course%></td>
 
                 <!--<td><%#= link_to '问答', teachers_questions_manage_path(@teacher.id,course.id) %></td>-->
                 <td><%= link_to '专栏', teachers_blogs_check_path(@teacher.id,course.id) %></td>

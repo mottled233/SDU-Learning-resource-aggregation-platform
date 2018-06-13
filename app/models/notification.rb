@@ -55,7 +55,11 @@ class Notification < ApplicationRecord
       else
         str = entity.title
       end
-      %Q{用户"#{User.find(initiator_id).nickname}"回复了您的发表的"#{str}"。}
+      begin
+        %Q{用户"#{User.find(initiator_id).nickname}"回复了您的发表的"#{str}"。}
+      rescue
+        %Q{有用户回复了您的发表的"#{str}"。}
+      end
     else
       %Q{通知类型：#{notify_type}。}
     end

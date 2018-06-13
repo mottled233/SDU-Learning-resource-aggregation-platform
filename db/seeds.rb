@@ -208,10 +208,10 @@ reply =
   reply15: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'很少有人会说自己精通Python',good:32,bad:1),
 
   #回复reply11
-  reply16: reply16=reply11.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
+  reply16: reply16=reply11.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
   reply17: reply11.replies.create(creator: student[:student3], type:'Reply',content:'没有你那么高的境界，不过应该是这么个过程！赞',good:32,bad:1),
   #回复reply14
-  reply18: reply14.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
+  reply18: reply14.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
   reply19: reply14.replies.create(creator: student[:student3], type:'Reply',content:'做为一个不得不学那么多语言的人来说，语言上的差异已经非常小，但是每一种语言都有自己的思想，重要的是思想上的转变。',good:32,bad:1),
   #回复reply16
   reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1),
@@ -284,10 +284,10 @@ reply =
   reply15: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'很少有人会说自己精通Python',good:32,bad:1),
 
   #回复reply11
-  reply16: reply16=reply11.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
+  reply16: reply16=reply11.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
   reply17: reply11.replies.create(creator: student[:student3], type:'Reply',content:'没有你那么高的境界，不过应该是这么个过程！赞',good:32,bad:1),
   #回复reply14
-  reply18: reply14.replies.create(creator: teacher[:teacher_data_structure], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
+  reply18: reply14.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
   reply19: reply14.replies.create(creator: student[:student3], type:'Reply',content:'做为一个不得不学那么多语言的人来说，语言上的差异已经非常小，但是每一种语言都有自己的思想，重要的是思想上的转变。',good:32,bad:1),
   #回复reply16
   reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1)
@@ -309,7 +309,7 @@ file_list.each do |course_file|
   # 转换为json格式，读取文章列表
   file_content = JSON::parse(file_content)
   file_content["arr"].each do |article|
-    blog = Blog.create(creator: network, title: article['title'], type:'Blog', content: article['content'], good: rand(0..200), bad: rand(0..200),check_state: 1)
+    blog = Blog.create(creator: network, title: article['title'], type:'Blog', content: article['content'], good: rand(0..100), bad: rand(0..10),check_state: 1)
     blog.created_at = blog.created_at - rand(0..1000).hours
     blog.save
     course[course_file.to_sym].knowledges<<(blog)
@@ -333,7 +333,7 @@ file_list.each do |course_file|
   # 转换为json格式，读取文章列表
   file_content = JSON::parse(file_content)
   file_content["arr"].each do |article|
-    blog = Resource.create(creator: network, title: article['title'], type:'Resource', content: article['content'], good: rand(0..200), bad: rand(0..200),check_state: 1)
+    blog = Resource.create(creator: network, title: article['title'], type:'Resource', content: article['content'], good: rand(0..50), bad: rand(0..10),check_state: 1)
     blog.created_at = blog.created_at - rand(0..1000).hours
     blog.save
     course[course_file.to_sym].knowledges<<(blog)

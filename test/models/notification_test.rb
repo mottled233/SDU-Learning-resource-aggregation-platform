@@ -37,11 +37,12 @@ class NotificationTest < ActiveSupport::TestCase
     count = @user.notifications.count
     @user.last_check_time = Time.now
     assert @user.save
+    
     @question.updated_at = Time.now + 1.hour
     @question.title = "test"
     assert @question.save
     @user.update_notification
-    assert_equal count+1, @user.notifications.count
+    assert_equal count, @user.notifications.count
     @user.notifications.clear
   end
   
