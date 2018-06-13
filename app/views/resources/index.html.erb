@@ -1,12 +1,18 @@
 <% provide(:resource, 'class=active') %>
+<% provide(:list_size, 'class=span11') %>
 <% provide(:write_path, resource_new_path) %>
 <div class="notice-show">
     <%= render :partial => "knowledges/notice" %> 
 </div>
-<%= render :partial => "knowledges/write" %> 
-
-<div class="span10 offset2">
-    <%= render :partial => "resource_list", :locals => { :resources => @resource } %> 
+<div class="row-fluid">
+    <div class="row-fluid">
+        <%= render :partial => "knowledges/write" %> 
+    </div>
+    <div class="row-fluid">
+        <div class="span8 offset2">
+            <%= render :partial => "resource_list", :locals => { :resources => @resource } %> 
+        </div>
+    </div>
 </div>
 <%= render :partial => "knowledges/script" %> 
 

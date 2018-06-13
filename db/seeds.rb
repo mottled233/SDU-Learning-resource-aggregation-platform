@@ -260,38 +260,38 @@ file_list.each do |course_file|
   end
 end
 # 回复数据
-reply = 
-{
-  relpy1: question[:question3].replies.create(creator: student[:student2], type:'Reply',content:'可能原因有很多，你说的太不具体了！',good:15,bad:1),
-  reply2: question[:question2].replies.create(creator: teacher[:teacher_ml], type:'Reply',content:'因为有很多复杂的函数是无法通过直接求解得到答案的，必须通过梯度下降的方式逐步求解。',good:32,bad:1),
+# reply = 
+# {
+#   relpy1: question[:question3].replies.create(creator: student[:student2], type:'Reply',content:'可能原因有很多，你说的太不具体了！',good:15,bad:1),
+#   reply2: question[:question2].replies.create(creator: teacher[:teacher_ml], type:'Reply',content:'因为有很多复杂的函数是无法通过直接求解得到答案的，必须通过梯度下降的方式逐步求解。',good:32,bad:1),
   
-  #question4-11,一人一条回复
-  reply3: question[:question4].replies.create(creator: student[:student4], type:'Reply',content:'这里强烈推荐Yupeng Jiang博士撰写的《三天搞定Python基本功》，只用三天时间可以了解Python数据分析的广度和所涉及的概念，是诚意之作，十分难得！因原文是用英文写成，给英国伦敦大学学院的本科生、研究生上课用的。我将其翻译成了中文，便于自己将来快速复习用。在征得jiang博士的同意后，分享给大家。',good:32,bad:1),
-  reply4: question[:question5].replies.create(creator: student[:student4], type:'Reply',content:'python能做的有很多，我这里之阐述我自学的数据分析的内容，这也是我学习利用python进行数据分析的过程，如果要看实践可以直接看项目篇数据分析中常用的软件是jupyter notebook，而应用这个软件最方便的方法就是anaconda。具体的anaconda操作方法这篇文章讲述的比较详细就不多加叙述了。',good:32,bad:1),
-  reply5: question[:question6].replies.create(creator: student[:student4], type:'Reply',content:'放心，学Python不会找不到工作。找不到工作的话说明你只学了Python。',good:32,bad:1),
-  reply6: question[:question7].replies.create(creator: student[:student3], type:'Reply',content:'看你是要把 Python 用在什么领域？答主自己做 DevOps，常用的是 Ansible/SaltStack（ansible批量部署的问题？、ansible使用密钥短语的问题? ），有时也会写点爬虫（Python 爬虫进阶？、大家都用python写过哪些有趣的脚本? ）',good:32,bad:1),
-  reply7: question[:question8].replies.create(creator: student[:student3], type:'Reply',content:'Python作为一种应用极为广泛的语言，几乎在任何领域都能派上用场。想做Web有Flask/Django/Tornado；想做分布式有Celery；想做手机App有Kivy；想做数据分析有Pandas；想做可视化有Matplotlib/Seaborn/Plotly/Bokeh；想做机器学习有Tensorflow/PyTorch/MxNet……夸张一点说，几乎没有什么做不了的东西（笔芯）。',good:32,bad:1),
-  reply8: question[:question4].replies.create(creator: student[:student1], type:'Reply',content:'看书啊',good:32,bad:1),
-  reply9: question[:question5].replies.create(creator: student[:student1], type:'Reply',content:'面部识别',good:32,bad:1),
-  reply10: question[:question6].replies.create(creator: student[:student1], type:'Reply',content:'入行!=找工作零基础学Python=零基础学钢琴，难道1个月学会了弹小星星就能找到工作吗？',good:32,bad:1),
-  # #回复question10、11、12 没人回复
+#   #question4-11,一人一条回复
+#   reply3: question[:question4].replies.create(creator: student[:student4], type:'Reply',content:'这里强烈推荐Yupeng Jiang博士撰写的《三天搞定Python基本功》，只用三天时间可以了解Python数据分析的广度和所涉及的概念，是诚意之作，十分难得！因原文是用英文写成，给英国伦敦大学学院的本科生、研究生上课用的。我将其翻译成了中文，便于自己将来快速复习用。在征得jiang博士的同意后，分享给大家。',good:32,bad:1),
+#   reply4: question[:question5].replies.create(creator: student[:student4], type:'Reply',content:'python能做的有很多，我这里之阐述我自学的数据分析的内容，这也是我学习利用python进行数据分析的过程，如果要看实践可以直接看项目篇数据分析中常用的软件是jupyter notebook，而应用这个软件最方便的方法就是anaconda。具体的anaconda操作方法这篇文章讲述的比较详细就不多加叙述了。',good:32,bad:1),
+#   reply5: question[:question6].replies.create(creator: student[:student4], type:'Reply',content:'放心，学Python不会找不到工作。找不到工作的话说明你只学了Python。',good:32,bad:1),
+#   reply6: question[:question7].replies.create(creator: student[:student3], type:'Reply',content:'看你是要把 Python 用在什么领域？答主自己做 DevOps，常用的是 Ansible/SaltStack（ansible批量部署的问题？、ansible使用密钥短语的问题? ），有时也会写点爬虫（Python 爬虫进阶？、大家都用python写过哪些有趣的脚本? ）',good:32,bad:1),
+#   reply7: question[:question8].replies.create(creator: student[:student3], type:'Reply',content:'Python作为一种应用极为广泛的语言，几乎在任何领域都能派上用场。想做Web有Flask/Django/Tornado；想做分布式有Celery；想做手机App有Kivy；想做数据分析有Pandas；想做可视化有Matplotlib/Seaborn/Plotly/Bokeh；想做机器学习有Tensorflow/PyTorch/MxNet……夸张一点说，几乎没有什么做不了的东西（笔芯）。',good:32,bad:1),
+#   reply8: question[:question4].replies.create(creator: student[:student1], type:'Reply',content:'看书啊',good:32,bad:1),
+#   reply9: question[:question5].replies.create(creator: student[:student1], type:'Reply',content:'面部识别',good:32,bad:1),
+#   reply10: question[:question6].replies.create(creator: student[:student1], type:'Reply',content:'入行!=找工作零基础学Python=零基础学钢琴，难道1个月学会了弹小星星就能找到工作吗？',good:32,bad:1),
+#   # #回复question10、11、12 没人回复
   
-  # #回复question13
-  reply11: reply11=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'level 1：了解基本语法<br/>这是最容易的一级，掌握了 Python 的基本语法，可以通过 Python 代码实现常用的需求，不管代码质量怎么样。',good:32,bad:1),
-  reply12: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'熟悉常用 standard library 的使用',good:32,bad:1),
-  reply13: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'阅读 Python 的 C 实现，掌握 Python 中各种对象的本质',good:32,bad:1),
-  reply14: reply14=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'我在以前找工作的时候，曾经用过「精通X」之类的词。随着踩得坑越多，越用越感觉自己懂的太少，要学的太多了',good:32,bad:1),
-  reply15: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'很少有人会说自己精通Python',good:32,bad:1),
+#   # #回复question13
+#   reply11: reply11=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'level 1：了解基本语法<br/>这是最容易的一级，掌握了 Python 的基本语法，可以通过 Python 代码实现常用的需求，不管代码质量怎么样。',good:32,bad:1),
+#   reply12: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'熟悉常用 standard library 的使用',good:32,bad:1),
+#   reply13: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'阅读 Python 的 C 实现，掌握 Python 中各种对象的本质',good:32,bad:1),
+#   reply14: reply14=question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'我在以前找工作的时候，曾经用过「精通X」之类的词。随着踩得坑越多，越用越感觉自己懂的太少，要学的太多了',good:32,bad:1),
+#   reply15: question[:question13].replies.create(creator: student[:student2], type:'Reply',content:'很少有人会说自己精通Python',good:32,bad:1),
 
-  #回复reply11
-  reply16: reply16=reply11.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
-  reply17: reply11.replies.create(creator: student[:student3], type:'Reply',content:'没有你那么高的境界，不过应该是这么个过程！赞',good:32,bad:1),
-  #回复reply14
-  reply18: reply14.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
-  reply19: reply14.replies.create(creator: student[:student3], type:'Reply',content:'做为一个不得不学那么多语言的人来说，语言上的差异已经非常小，但是每一种语言都有自己的思想，重要的是思想上的转变。',good:32,bad:1),
-  #回复reply16
-  reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1)
-}
+#   #回复reply11
+#   reply16: reply16=reply11.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'感觉任何一种技术不去研究它的源码实现都不敢说自己精通了的',good:32,bad:1),
+#   reply17: reply11.replies.create(creator: student[:student3], type:'Reply',content:'没有你那么高的境界，不过应该是这么个过程！赞',good:32,bad:1),
+#   #回复reply14
+#   reply18: reply14.replies.create(creator: teacher[:teacher_java], type:'Reply',content:'哈哈，也对，毕竟现在IT圈的忽悠可不少',good:32,bad:1),
+#   reply19: reply14.replies.create(creator: student[:student3], type:'Reply',content:'做为一个不得不学那么多语言的人来说，语言上的差异已经非常小，但是每一种语言都有自己的思想，重要的是思想上的转变。',good:32,bad:1),
+#   #回复reply16
+#   reply20: reply16.replies.create(creator: student[:student1], type:'Reply',content:'很棒的回答，感觉给我指明了学习的方向，感谢答主！',good:32,bad:1)
+# }
 
 # ==============================================================================
 
@@ -321,7 +321,7 @@ file_list.each do |course_file|
 end
 
 # 添加课程资源
-file_list = ["java", "machine_learning","discrete_math", "python"]
+file_list = ["java", "machine_learning","discrete_math", "python","data_structure"]
 file_list.each do |course_file|
   # 对每一课程，读取相应资源文件
   file_content=""
