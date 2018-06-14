@@ -34,9 +34,10 @@ class BlogsController < KnowledgesController
         @blog = Blog.new(blog_params);
         @blog.check_state = 0
         # src = @blog.content.match("<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>")
-        if(@blog.knowledge_digest.nil?||@blog.knowledge_digest.empty?)
-            @blog.knowledge_digest = short_digest(@blog.content,50) 
-        end
+        # if(@blog.knowledge_digest.nil?||@blog.knowledge_digest.empty?)
+        #     @blog.knowledge_digest = short_digest(@blog.content,50) 
+        # end
+        
         b = true;
         if @blog.save
             keyword_list = params[:keywords];
@@ -50,6 +51,7 @@ class BlogsController < KnowledgesController
                 b = false;
                 flash[:notice] = '无关联关键词'
                 redirect_to :back
+                return 
             end
             course_list = params[:courses];
             if !course_list.nil?
@@ -62,13 +64,19 @@ class BlogsController < KnowledgesController
                 b = false;
                 flash[:notice] = '无关联课程'
                 redirect_to :back
+                return
             end
             if b
+                if(params[:autoGenerate].to_s=="YES")
+                    DigestJob.perform_later @blog.content_without_html
+                end
                 redirect_to blog_path(@blog)
+                return
             end
         else
             flash[:notice] = '不合法的参数'
             redirect_to :back
+            return
         end
     end
    def update
@@ -120,6 +128,9 @@ class BlogsController < KnowledgesController
                     end
                 end
             else
+                  if(params[:autoGenerate].to_s=="YES")
+                    DigestJob.perform_later @blog.content_without_html
+                  end
                   render :edit 
                   return
             end
@@ -133,6 +144,6 @@ class BlogsController < KnowledgesController
 private
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.require(:blog).permit(:user_id,:title, :type,:content, :good, :bad,:knowledge_digest,:label)
+      params.require(:blog).permit(:user_id,:title, :type,:content, :good, :bad,:knowledge_digest,:label,:autoGenerate)
     end
 end

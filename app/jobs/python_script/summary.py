@@ -199,9 +199,9 @@ def summarize(text, n):
         sents.append([word for word in jieba.cut(sent) if word])  
   
     # sents = filter_symbols(sents)
-    
-    sents = filter_model(sents)
-    sents = filter_model(sents)
+    old = len(sents[0])
+    while(len(filter_model(sents)[0])!=old):
+        old = len(filter_model(sents)[0])
     print(len(sents))
     graph = create_graph(sents)  
   
@@ -213,6 +213,7 @@ def summarize(text, n):
     return [sentences[i] for i in sent_index]  
 
 
+
 if __name__ == '__main__':  
     with open("文档.txt", "r") as myfile:  
         text = myfile.read().replace('\n', '').decode('utf-8')
@@ -221,7 +222,7 @@ if __name__ == '__main__':
             print(res.encode('utf-8'))
 			
 def summary_interface(text, n=3):
-    result = summarize(text, 3)
+    result = summarize(text, n)
     encoding_result = []
     for res in result:
         encoding_result.append(res.encode('utf-8'))

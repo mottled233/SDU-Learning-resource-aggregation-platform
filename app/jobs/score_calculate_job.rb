@@ -14,9 +14,9 @@ class ScoreCalculateJob < ApplicationJob
       
       score = visit*visit_cor+focus*focus_cor+comments*comment_cor
       
-      k.score_yesterday = (k.score==nil ? 0 : k.score)
-      k.score = score
-      k.save
+      score_yesterday = (k.score==nil ? 0 : k.score)
+      k.update_attribute(:score_yesterday, score_yesterday)
+      k.update_attribute(:score, score)
     end
     ScoreCalculateJob.set(wait_until:Date.tomorrow.midnight).perform_later
   end
