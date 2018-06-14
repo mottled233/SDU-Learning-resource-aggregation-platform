@@ -164,6 +164,7 @@ var piechart = new CanvasJS.Chart("pieChartContainer", {
 		toolTipContent: "{name}: <strong>{y}%</strong>",
 		indexLabel: "{name} - {y}%",
 		dataPoints: [
+			<% @type_count[:total]=1 if @type_count[:total]==0%>
 			{ y: <%= @type_count[:Blog]*100/@type_count[:total]%>, name: "专栏", exploded: true },
 			{ y: <%= @type_count[:Question]*100/@type_count[:total]%>, name: "讨论" },
 			{ y: <%= @type_count[:Resource]*100/@type_count[:total]%>, name: "资源" },

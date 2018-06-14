@@ -5,7 +5,9 @@ class Knowledge < ApplicationRecord
   # callbacks
   before_create :default_values
   def default_values
-    self.visit_count=0
+    self.good = rand(20..100)
+    self.bad = rand(0..20)
+    self.visit_count=rand(1..200)
     self.download_count=0
   end
   

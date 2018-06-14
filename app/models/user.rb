@@ -303,8 +303,7 @@ class User < ApplicationRecord
     graph = graph[num_vetex+1..-1].each_slice(num_vetex).to_a
     graph.each_with_index do |row, i|
       row.each_with_index do |ele, j|
-        if ele.to_i>= threshold&&ele.to_i>=graph[j][i].to_i
-          graph[i][j] = ele.to_i+1
+        if ele.to_i>= threshold&&ele.to_i>graph[j][i].to_i
           knowledge_edge.append([knowledge_vetex[i],knowledge_vetex[j]])
         end
       end

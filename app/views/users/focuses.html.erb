@@ -18,32 +18,45 @@
         
         <% @creatings.each_with_index do |creating, index|%>
         <div class="row-fluid" data-index="<%= index%>">
-            <div class="row-fluid span7 offset1">
-              <div class="span4">
+            <div class="row-fluid span8 offset1">
+              <div class="span8">
                 <%=link_to "[#{creating.chinese_type}]", creatings_user_path(current_user, type: creating.type), class: "creating-title"%>
                 
                 <%=link_to "《#{creating.title}》", creating.to_path, class: "creating-title"%>
                 
               </div>
-              <div class="span2" >
-                <strong>所属课程：</strong>
-                <% creating.courses.each do |course|%>
-                  <%=link_to course.course_name, course.to_path, class: ""%>
-                  <span> </span>
-                <% end %>
-              </div>
-              <div class="span2" style="">
-                  <strong>浏览量：</strong>
-                  <span><%= creating.visit_count%></span>
-              </div>
-              
             </div>
+            
             
         </div>
         <div class="row-fluid span5 offset1">
           <%=link_to creating.to_path do%>
             <p class="digest"><%= creating.knowledge_digest 100%></p>
           <% end %>
+        </div>
+        <div class="row-fluid span7 offset1">
+          <div class="span3" >
+            <strong>所属课程：</strong>
+            <% creating.courses.each do |course|%>
+              <%=link_to course.course_name, course.to_path, class: ""%>
+              <span> </span>
+            <% end %>
+          </div>
+          <div class="span2" style="">
+              <strong>浏览量：</strong>
+              <span><%= creating.visit_count%></span>
+          </div>
+          
+          <div class="span2" style="">
+              <strong>关注：</strong>
+              <span><%= creating.followers.count%></span>
+          </div>
+          
+          <div class="span2" style="">
+              <strong>回复：</strong>
+              <span><%= creating.replies.count%></span>
+          </div>
+          
         </div>
         <div class="row-fluid span7">
             <hr style="background-color:grey"/>

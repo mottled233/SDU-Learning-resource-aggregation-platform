@@ -3,7 +3,7 @@
 	<div class="nav-collapse sidebar-nav">
 		<ul class="nav nav-tabs nav-stacked main-menu">
 			<li><div style="height:50px"/></li>
-			<% if @user.id == current_user.id %>
+			<% if log_in?&&@user.id == current_user.id %>
 				<%= render 'users/my_aside' %>
 			<% else %>
 				<%= render 'users/others_aside' %>

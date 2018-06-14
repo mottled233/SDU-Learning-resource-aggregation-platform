@@ -26,7 +26,7 @@ module NotificationsHelper
   def notify_type_group(notify_type)
     case notify_type.to_s
     when "focus_contents"
-        [NOTIFY_TYPE_UPDATE, NOTIFY_TYPE_ANSWER, NOTIFY_TYPE_FOCUS_USER_NEW]
+        [NOTIFY_TYPE_UPDATE, NOTIFY_TYPE_ANSWER, NOTIFY_TYPE_FOCUS_USER_NEW,NOTIFY_TYPE_NEW]
     when "my"
         [NOTIFY_TYPE_REPLY, NOTIFY_TYPE_BOUTIQUED, NOTIFY_TYPE_GOOD,
           NOTIFY_TYPE_BAD, NOTIFY_TYPE_PASS, NOTIFY_TYPE_REFUSE, NOTIFY_TYPE_NEW_FOLLOWED]
@@ -80,7 +80,7 @@ module NotificationsHelper
     concat(
       content_tag(:p, style:"font-size:1.4em") do
         concat "您关注的课程"
-        concat(link_to "《#{entity.name}》", entity.to_path, class:"underline")
+        concat(link_to "《#{entity.course_name}》", entity.to_path, class:"underline")
         concat " 更新了新的资源： "
         concat(link_to "《#{with_entity.title}》", with_entity.to_path, class:"underline")
       end
