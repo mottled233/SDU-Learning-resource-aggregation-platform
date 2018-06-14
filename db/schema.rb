@@ -84,10 +84,9 @@ ActiveRecord::Schema.define(version: 20180613092449) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.text     "introduction"
-    t.boolean  "review_strategy", default: false
   end
 
   create_table "departments", force: :cascade do |t|
@@ -246,6 +245,7 @@ ActiveRecord::Schema.define(version: 20180613092449) do
     t.text     "self_introduce"
     t.string   "department"
     t.string   "speciality"
+    t.string   "recommend"
     t.string   "recommend"
     t.boolean  "ban",             default: false
     t.text     "interest"
