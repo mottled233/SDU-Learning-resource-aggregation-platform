@@ -311,6 +311,7 @@ class User < ApplicationRecord
     
     return [knowledge_vetex, knowledge_edge]
   end
-    
+  
+
     
 end

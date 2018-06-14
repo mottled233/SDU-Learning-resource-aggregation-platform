@@ -145,7 +145,7 @@ module NotificationsHelper
       end
     )
     concat(
-      content_tag(:p, style:"font-size:1.2em;padding-left:50px;color:grey") do
+      content_tag(:p,style:"font-size:1.2em;padding-left:50px;color:grey") do
         concat "“"
         content = with_entity.knowledge_digest
         concat content

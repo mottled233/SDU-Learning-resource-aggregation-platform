@@ -3,7 +3,7 @@
 
     <div class="row-fluid">
       <%= render :partial => "users/aside" %>
-      <div id="content" class="span8">
+      <div id="content" class="span8 min-height-control" data-min-height="850">
         <p id="notice"><%= notice %></p>
         
         <h1><%=@course.course_name%>—全部专栏</h1>
@@ -18,6 +18,7 @@
         <hr>
         <%= link_to '返回',  teachers_upload_check_path(@teacher.id) %>
       </div>
+      
     </div>
     
     
